@@ -15,6 +15,8 @@ import {
   type InsertExcessLiabilityQuote,
   type CyberLiabilityQuote,
   type InsertCyberLiabilityQuote,
+  type TransportQuote,
+  type InsertTransportQuote,
   limoQuotes,
   tncQuotes,
   nemtQuotes,
@@ -23,9 +25,10 @@ import {
   workersCompQuotes,
   excessLiabilityQuotes,
   cyberLiabilityQuotes,
+  transportQuotes,
 } from "@shared/schema";
 import { db } from "./db";
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 export interface IStorage {
   // Limo Quotes
@@ -59,6 +62,11 @@ export interface IStorage {
   // Cyber Liability Quotes
   createCyberLiabilityQuote(quote: InsertCyberLiabilityQuote): Promise<CyberLiabilityQuote>;
   getAllCyberLiabilityQuotes(): Promise<CyberLiabilityQuote[]>;
+  
+  // Transport Quotes (comprehensive)
+  createTransportQuote(quote: InsertTransportQuote): Promise<TransportQuote>;
+  getAllTransportQuotes(): Promise<TransportQuote[]>;
+  getTransportQuotesByType(type: string): Promise<TransportQuote[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -140,6 +148,20 @@ export class DatabaseStorage implements IStorage {
 
   async getAllCyberLiabilityQuotes(): Promise<CyberLiabilityQuote[]> {
     return db.select().from(cyberLiabilityQuotes).orderBy(desc(cyberLiabilityQuotes.createdAt));
+  }
+
+  // Transport Quotes
+  async createTransportQuote(quote: InsertTransportQuote): Promise<TransportQuote> {
+    const [result] = await db.insert(transportQuotes).values(quote).returning();
+    return result;
+  }
+
+  async getAllTransportQuotes(): Promise<TransportQuote[]> {
+    return db.select().from(transportQuotes).orderBy(desc(transportQuotes.createdAt));
+  }
+
+  async getTransportQuotesByType(type: string): Promise<TransportQuote[]> {
+    return db.select().from(transportQuotes).where(eq(transportQuotes.quoteType, type)).orderBy(desc(transportQuotes.createdAt));
   }
 }
 

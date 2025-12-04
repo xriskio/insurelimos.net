@@ -3,7 +3,64 @@ import { pgTable, text, varchar, timestamp, boolean } from "drizzle-orm/pg-core"
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// Limousine Quote Submissions
+// Comprehensive Transportation Quote Submissions (Limo, TNC, NEMT, Public Auto)
+export const transportQuotes = pgTable("transport_quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  quoteType: text("quote_type").notNull(),
+  
+  // Insured Information
+  insuredName: text("insured_name").notNull(),
+  dba: text("dba"),
+  contactName: text("contact_name").notNull(),
+  contactEmail: text("contact_email").notNull(),
+  contactPhone: text("contact_phone").notNull(),
+  businessWebsite: text("business_website"),
+  yearsInBusiness: text("years_in_business"),
+  businessType: text("business_type"),
+  mailingAddress: text("mailing_address").notNull(),
+  city: text("city").notNull(),
+  state: text("state").notNull(),
+  zipCode: text("zip_code").notNull(),
+  cpucNumber: text("cpuc_number"),
+  tcpNumber: text("tcp_number"),
+  
+  // Coverage Information
+  effectiveDate: text("effective_date"),
+  liabilityLimit: text("liability_limit"),
+  currentCarrier: text("current_carrier"),
+  currentPremium: text("current_premium"),
+  expirationDate: text("expiration_date"),
+  operatingRadius: text("operating_radius"),
+  statesOfOperation: text("states_of_operation"),
+  filingsNeeded: text("filings_needed").array(),
+  
+  // Vehicle Information (JSON array)
+  vehicles: text("vehicles"),
+  
+  // Driver Information (JSON array)
+  drivers: text("drivers"),
+  
+  // Loss History
+  lossHistory: text("loss_history"),
+  
+  // Uploaded Documents
+  uploadedDocuments: text("uploaded_documents").array(),
+  
+  // Additional Info
+  additionalInfo: text("additional_info"),
+  
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertTransportQuoteSchema = createInsertSchema(transportQuotes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertTransportQuote = z.infer<typeof insertTransportQuoteSchema>;
+export type TransportQuote = typeof transportQuotes.$inferSelect;
+
+// Keep legacy table for backwards compatibility
 export const limoQuotes = pgTable("limo_quotes", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   businessName: text("business_name").notNull(),

@@ -10,6 +10,7 @@ import {
   insertWorkersCompQuoteSchema,
   insertExcessLiabilityQuoteSchema,
   insertCyberLiabilityQuoteSchema,
+  insertTransportQuoteSchema,
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
@@ -272,6 +273,38 @@ export async function registerRoutes(
       res.json({ success: true, quotes });
     } catch (error) {
       console.error("Error fetching cyber liability quotes:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // Comprehensive Transport Quote Submission
+  app.post("/api/quotes/transport", async (req, res) => {
+    try {
+      const validatedData = insertTransportQuoteSchema.parse(req.body);
+      const quote = await storage.createTransportQuote(validatedData);
+      res.status(201).json({ success: true, quote });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating transport quote:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit quote" 
+      });
+    }
+  });
+
+  app.get("/api/quotes/transport", async (req, res) => {
+    try {
+      const quotes = await storage.getAllTransportQuotes();
+      res.json({ success: true, quotes });
+    } catch (error) {
+      console.error("Error fetching transport quotes:", error);
       res.status(500).json({ success: false, error: "Failed to fetch quotes" });
     }
   });
