@@ -14,7 +14,7 @@ export default function QuotePage() {
   const [match, params] = useRoute("/quote/:type?");
   const type = params?.type || "limousine";
 
-  const activeTab = ["limousine", "tnc", "nemt", "public-auto", "workers-comp", "excess-liability", "cyber-liability", "transportation"].includes(type) 
+  const activeTab = ["limousine", "rideshare", "tnc", "nemt", "public-auto", "workers-comp", "excess-liability", "cyber-liability", "transportation"].includes(type) 
     ? type 
     : "limousine";
 
@@ -51,7 +51,8 @@ export default function QuotePage() {
                   <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
                     <TabsList className="flex flex-wrap justify-start gap-2 h-auto mb-8 bg-muted p-2 rounded-lg">
                       <TabsTrigger value="limousine" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-limo">Limousine</TabsTrigger>
-                      <TabsTrigger value="tnc" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-tnc">TNC / Rideshare</TabsTrigger>
+                      <TabsTrigger value="rideshare" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-rideshare">Rideshare</TabsTrigger>
+                      <TabsTrigger value="tnc" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-tnc">TNC</TabsTrigger>
                       <TabsTrigger value="nemt" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-nemt">NEMT</TabsTrigger>
                       <TabsTrigger value="public-auto" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-public-auto">Public Auto</TabsTrigger>
                       <TabsTrigger value="workers-comp" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-workers-comp">Workers Comp</TabsTrigger>
@@ -67,11 +68,19 @@ export default function QuotePage() {
                       />
                     </TabsContent>
                     
+                    <TabsContent value="rideshare" className="mt-0">
+                      <TransportQuoteForm 
+                        quoteType="rideshare"
+                        title="Rideshare Insurance Quote"
+                        description="For Uber, Lyft, and other app-based rideshare drivers."
+                      />
+                    </TabsContent>
+                    
                     <TabsContent value="tnc" className="mt-0">
                       <TransportQuoteForm 
                         quoteType="tnc"
-                        title="TNC & Rideshare Quote"
-                        description="For Uber, Lyft, and other app-based transportation drivers."
+                        title="TNC Insurance Quote"
+                        description="For Transportation Network Companies, platforms, and fleet operators."
                       />
                     </TabsContent>
                     

@@ -75,7 +75,7 @@ const formSchema = z.object({
 });
 
 interface TransportQuoteFormProps {
-  quoteType: "limousine" | "tnc" | "nemt" | "public-auto";
+  quoteType: "limousine" | "rideshare" | "tnc" | "nemt" | "public-auto";
   title: string;
   description: string;
 }
@@ -89,11 +89,19 @@ const BUSINESS_TYPES: Record<string, { value: string; label: string }[]> = {
     { value: "sprinter", label: "Sprinter/Van" },
     { value: "mixed", label: "Mixed Fleet" },
   ],
-  tnc: [
+  rideshare: [
     { value: "uber", label: "Uber Driver" },
     { value: "lyft", label: "Lyft Driver" },
-    { value: "both", label: "Multiple Platforms" },
-    { value: "delivery", label: "Delivery Service" },
+    { value: "both", label: "Multiple Platforms (Uber + Lyft)" },
+    { value: "other", label: "Other Rideshare Platform" },
+  ],
+  tnc: [
+    { value: "platform", label: "TNC Platform Operator" },
+    { value: "fleet", label: "Fleet Operator" },
+    { value: "delivery", label: "Delivery Network Company" },
+    { value: "p2p", label: "P2P Rental Platform" },
+    { value: "subscription", label: "Vehicle Subscription Service" },
+    { value: "autonomous", label: "Autonomous Vehicle Service" },
   ],
   nemt: [
     { value: "wheelchair", label: "Wheelchair Transport" },
