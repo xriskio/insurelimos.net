@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location, setLocation] = useLocation();
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -47,9 +48,11 @@ export function Header() {
               <Phone className="h-3 w-3" /> 888-254-0089
             </a>
           </div>
-          <Button className="bg-accent hover:bg-accent/90 text-white font-semibold shadow-md">
-            Get a Quote
-          </Button>
+          <Link href="/quote">
+            <Button className="bg-accent hover:bg-accent/90 text-white font-semibold shadow-md">
+              Get a Quote
+            </Button>
+          </Link>
         </div>
 
         {/* Mobile Nav */}
@@ -73,9 +76,11 @@ export function Header() {
                   </Link>
                 ))}
                 <div className="mt-4">
-                  <Button className="w-full bg-accent hover:bg-accent/90 text-white mb-4">
-                    Get a Quote
-                  </Button>
+                  <Link href="/quote" onClick={() => setIsOpen(false)}>
+                    <Button className="w-full bg-accent hover:bg-accent/90 text-white mb-4">
+                      Get a Quote
+                    </Button>
+                  </Link>
                   <a href="tel:888-254-0089" className="flex items-center justify-center gap-2 text-primary font-bold">
                     <Phone className="h-4 w-4" /> 888-254-0089
                   </a>

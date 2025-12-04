@@ -2,6 +2,7 @@ import heroImage from "@assets/generated_images/luxury_limousine_city_street_dus
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import { Link } from "wouter";
 
 export function Hero() {
   return (
@@ -35,12 +36,16 @@ export function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold text-lg h-14 px-8 shadow-lg shadow-black/20">
-              Get a Free Quote
-            </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/40 font-semibold text-lg h-14 px-8 backdrop-blur-sm">
-              Explore Services <ChevronRight className="ml-2 h-5 w-5" />
-            </Button>
+            <Link href="/quote">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold text-lg h-14 px-8 shadow-lg shadow-black/20">
+                Get a Free Quote
+              </Button>
+            </Link>
+            <Link href="/services">
+              <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/40 font-semibold text-lg h-14 px-8 backdrop-blur-sm">
+                Explore Services <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </div>

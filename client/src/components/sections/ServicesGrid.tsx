@@ -1,37 +1,44 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Car, Bus, Smartphone, Truck, Ambulance, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 const services = [
   {
     title: "Limousine Insurance",
     description: "Comprehensive coverage for luxury transportation services including sedans, stretch limos, and SUVs.",
     icon: Car,
+    href: "/quote/limousine",
   },
   {
     title: "Taxi & Cab Insurance",
     description: "Specialized protection for taxi fleets and individual owner-operators with competitive rates.",
     icon: Car,
+    href: "/quote/public-auto",
   },
   {
     title: "TNC & Mobility",
     description: "Tailored solutions for Transportation Network Companies like Uber/Lyft fleets and mobility services.",
     icon: Smartphone,
+    href: "/quote/tnc",
   },
   {
     title: "NEMT Insurance",
     description: "Specialized coverage for Non-Emergency Medical Transportation vehicles and liability needs.",
     icon: Ambulance,
+    href: "/quote/nemt",
   },
   {
     title: "Bus & Motorcoach",
     description: "Protection for charter buses, tour buses, and motorcoach operators of all fleet sizes.",
     icon: Bus,
+    href: "/quote/public-auto",
   },
   {
     title: "Sprinter & Van",
     description: "Commercial auto insurance for Sprinter vans, cargo vans, and passenger shuttle services.",
     icon: Truck,
+    href: "/quote/public-auto",
   },
 ];
 
@@ -60,9 +67,11 @@ export function ServicesGrid() {
                 <CardDescription className="text-base text-muted-foreground mb-6 leading-relaxed">
                   {service.description}
                 </CardDescription>
-                <Button variant="link" className="p-0 h-auto text-primary font-semibold group-hover:text-accent transition-colors">
-                  Learn More <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
+                <Link href={service.href}>
+                  <Button variant="link" className="p-0 h-auto text-primary font-semibold group-hover:text-accent transition-colors">
+                    Get a Quote <ArrowRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           ))}

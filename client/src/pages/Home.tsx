@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { CoverageList } from "@/components/sections/CoverageList";
+import { Link } from "wouter";
 
 export default function Home() {
   return (
@@ -22,12 +23,16 @@ export default function Home() {
               Get a customized quote today. Our independent agents are ready to find the perfect coverage for your fleet at the best price.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-bold text-lg shadow-lg transition-transform hover:scale-105">
-                Get Your Free Quote
-              </button>
-              <button className="bg-white text-primary px-8 py-4 rounded-md font-bold text-lg shadow-lg hover:bg-gray-100 transition-transform hover:scale-105">
-                Call 888-254-0089
-              </button>
+              <Link href="/quote">
+                <button className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-bold text-lg shadow-lg transition-transform hover:scale-105">
+                  Get Your Free Quote
+                </button>
+              </Link>
+              <a href="tel:888-254-0089">
+                <button className="bg-white text-primary px-8 py-4 rounded-md font-bold text-lg shadow-lg hover:bg-gray-100 transition-transform hover:scale-105">
+                  Call 888-254-0089
+                </button>
+              </a>
             </div>
           </div>
         </section>
