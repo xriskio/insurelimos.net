@@ -10,6 +10,7 @@ import Services from "@/pages/Services";
 import Coverage from "@/pages/Coverage";
 import TncCoverage from "@/pages/TncCoverage";
 import NemtCoverage from "@/pages/NemtCoverage";
+import TaxiCoverage from "@/pages/TaxiCoverage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/coverage" component={Coverage} />
       <Route path="/coverage/tnc" component={TncCoverage} />
       <Route path="/coverage/nemt" component={NemtCoverage} />
+      <Route path="/coverage/taxi" component={TaxiCoverage} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       

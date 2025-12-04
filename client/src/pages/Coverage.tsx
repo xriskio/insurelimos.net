@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility } from "lucide-react";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Seo } from "@/components/seo/Seo";
@@ -24,6 +24,15 @@ const coverages = [
     details: "Coverage for wheelchair lifts, ramps, patient loading/unloading, and medical equipment transport. Policies that meet healthcare facility contract requirements.",
     hasPage: true,
     pageUrl: "/coverage/nemt"
+  },
+  {
+    id: "taxi",
+    title: "Taxi Insurance",
+    icon: Car,
+    description: "Comprehensive insurance coverage for taxi operators, from independent drivers to large fleet owners.",
+    details: "Coverage meeting state and municipal requirements. Hybrid policies available for drivers who operate both taxi and rideshare services.",
+    hasPage: true,
+    pageUrl: "/coverage/taxi"
   },
   {
     id: "auto-liability",
