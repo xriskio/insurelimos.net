@@ -7,6 +7,9 @@ import {
   insertNEMTQuoteSchema,
   insertPublicAutoQuoteSchema,
   insertContactMessageSchema,
+  insertWorkersCompQuoteSchema,
+  insertExcessLiabilityQuoteSchema,
+  insertCyberLiabilityQuoteSchema,
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 
@@ -173,6 +176,102 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error fetching contact messages:", error);
       res.status(500).json({ success: false, error: "Failed to fetch messages" });
+    }
+  });
+
+  // Workers Compensation Quote Submission
+  app.post("/api/quotes/workers-comp", async (req, res) => {
+    try {
+      const validatedData = insertWorkersCompQuoteSchema.parse(req.body);
+      const quote = await storage.createWorkersCompQuote(validatedData);
+      res.status(201).json({ success: true, quote });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating workers comp quote:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit quote" 
+      });
+    }
+  });
+
+  app.get("/api/quotes/workers-comp", async (req, res) => {
+    try {
+      const quotes = await storage.getAllWorkersCompQuotes();
+      res.json({ success: true, quotes });
+    } catch (error) {
+      console.error("Error fetching workers comp quotes:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // Excess Liability Quote Submission
+  app.post("/api/quotes/excess-liability", async (req, res) => {
+    try {
+      const validatedData = insertExcessLiabilityQuoteSchema.parse(req.body);
+      const quote = await storage.createExcessLiabilityQuote(validatedData);
+      res.status(201).json({ success: true, quote });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating excess liability quote:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit quote" 
+      });
+    }
+  });
+
+  app.get("/api/quotes/excess-liability", async (req, res) => {
+    try {
+      const quotes = await storage.getAllExcessLiabilityQuotes();
+      res.json({ success: true, quotes });
+    } catch (error) {
+      console.error("Error fetching excess liability quotes:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // Cyber Liability Quote Submission
+  app.post("/api/quotes/cyber-liability", async (req, res) => {
+    try {
+      const validatedData = insertCyberLiabilityQuoteSchema.parse(req.body);
+      const quote = await storage.createCyberLiabilityQuote(validatedData);
+      res.status(201).json({ success: true, quote });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating cyber liability quote:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit quote" 
+      });
+    }
+  });
+
+  app.get("/api/quotes/cyber-liability", async (req, res) => {
+    try {
+      const quotes = await storage.getAllCyberLiabilityQuotes();
+      res.json({ success: true, quotes });
+    } catch (error) {
+      console.error("Error fetching cyber liability quotes:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch quotes" });
     }
   });
 

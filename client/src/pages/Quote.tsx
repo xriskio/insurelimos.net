@@ -5,6 +5,9 @@ import { LimoQuoteForm } from "@/components/forms/LimoForm";
 import { TNCForm } from "@/components/forms/TNCForm";
 import { NEMTForm } from "@/components/forms/NEMTForm";
 import { PublicAutoForm } from "@/components/forms/PublicAutoForm";
+import { WorkersCompForm } from "@/components/forms/WorkersCompForm";
+import { ExcessLiabilityForm } from "@/components/forms/ExcessLiabilityForm";
+import { CyberLiabilityForm } from "@/components/forms/CyberLiabilityForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
@@ -15,7 +18,7 @@ export default function QuotePage() {
   const type = params?.type || "limousine";
 
   // Helper to determine active tab based on route or default
-  const activeTab = ["limousine", "tnc", "nemt", "public-auto", "transportation"].includes(type) 
+  const activeTab = ["limousine", "tnc", "nemt", "public-auto", "workers-comp", "excess-liability", "cyber-liability", "transportation"].includes(type) 
     ? type 
     : "limousine";
 
@@ -51,11 +54,14 @@ export default function QuotePage() {
                 </CardHeader>
                 <CardContent className="p-6">
                   <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-                    <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto mb-8 bg-muted p-1">
-                      <TabsTrigger value="limousine" className="py-3">Limousine</TabsTrigger>
-                      <TabsTrigger value="tnc" className="py-3">TNC / Rideshare</TabsTrigger>
-                      <TabsTrigger value="nemt" className="py-3">NEMT</TabsTrigger>
-                      <TabsTrigger value="public-auto" className="py-3">Public Auto</TabsTrigger>
+                    <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-7 h-auto mb-8 bg-muted p-1 gap-1">
+                      <TabsTrigger value="limousine" className="py-2 text-xs sm:text-sm">Limousine</TabsTrigger>
+                      <TabsTrigger value="tnc" className="py-2 text-xs sm:text-sm">TNC</TabsTrigger>
+                      <TabsTrigger value="nemt" className="py-2 text-xs sm:text-sm">NEMT</TabsTrigger>
+                      <TabsTrigger value="public-auto" className="py-2 text-xs sm:text-sm">Public Auto</TabsTrigger>
+                      <TabsTrigger value="workers-comp" className="py-2 text-xs sm:text-sm">Workers Comp</TabsTrigger>
+                      <TabsTrigger value="excess-liability" className="py-2 text-xs sm:text-sm">Excess</TabsTrigger>
+                      <TabsTrigger value="cyber-liability" className="py-2 text-xs sm:text-sm">Cyber</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="limousine" className="mt-0">
@@ -88,6 +94,30 @@ export default function QuotePage() {
                         <p className="text-muted-foreground">For buses, shuttles, taxis, and general public transportation.</p>
                       </div>
                       <PublicAutoForm />
+                    </TabsContent>
+
+                    <TabsContent value="workers-comp" className="mt-0">
+                      <div className="mb-6">
+                        <h2 className="text-2xl font-bold text-foreground mb-2">Workers Compensation Insurance</h2>
+                        <p className="text-muted-foreground">Protect your employees with comprehensive workers comp coverage.</p>
+                      </div>
+                      <WorkersCompForm />
+                    </TabsContent>
+
+                    <TabsContent value="excess-liability" className="mt-0">
+                      <div className="mb-6">
+                        <h2 className="text-2xl font-bold text-foreground mb-2">Excess & Umbrella Liability</h2>
+                        <p className="text-muted-foreground">Additional protection above your primary liability limits.</p>
+                      </div>
+                      <ExcessLiabilityForm />
+                    </TabsContent>
+
+                    <TabsContent value="cyber-liability" className="mt-0">
+                      <div className="mb-6">
+                        <h2 className="text-2xl font-bold text-foreground mb-2">Cyber Liability Insurance</h2>
+                        <p className="text-muted-foreground">Protect your business from data breaches and cyber threats.</p>
+                      </div>
+                      <CyberLiabilityForm />
                     </TabsContent>
 
                     <TabsContent value="transportation" className="mt-0">

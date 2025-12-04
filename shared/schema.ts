@@ -122,3 +122,78 @@ export const insertContactMessageSchema = createInsertSchema(contactMessages).om
 
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
+
+// Workers Compensation Quote Submissions
+export const workersCompQuotes = pgTable("workers_comp_quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  businessName: text("business_name").notNull(),
+  contactName: text("contact_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  address: text("address").notNull(),
+  numberOfEmployees: text("number_of_employees").notNull(),
+  annualPayroll: text("annual_payroll").notNull(),
+  businessType: text("business_type").notNull(),
+  hasCurrentCoverage: boolean("has_current_coverage").default(false),
+  currentCarrier: text("current_carrier"),
+  experienceModifier: text("experience_modifier"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertWorkersCompQuoteSchema = createInsertSchema(workersCompQuotes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertWorkersCompQuote = z.infer<typeof insertWorkersCompQuoteSchema>;
+export type WorkersCompQuote = typeof workersCompQuotes.$inferSelect;
+
+// Excess Liability Quote Submissions
+export const excessLiabilityQuotes = pgTable("excess_liability_quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  businessName: text("business_name").notNull(),
+  contactName: text("contact_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  currentLiabilityLimit: text("current_liability_limit").notNull(),
+  desiredExcessLimit: text("desired_excess_limit").notNull(),
+  businessType: text("business_type").notNull(),
+  fleetSize: text("fleet_size"),
+  underlyingCarrier: text("underlying_carrier"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertExcessLiabilityQuoteSchema = createInsertSchema(excessLiabilityQuotes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertExcessLiabilityQuote = z.infer<typeof insertExcessLiabilityQuoteSchema>;
+export type ExcessLiabilityQuote = typeof excessLiabilityQuotes.$inferSelect;
+
+// Cyber Liability Quote Submissions
+export const cyberLiabilityQuotes = pgTable("cyber_liability_quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  businessName: text("business_name").notNull(),
+  contactName: text("contact_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  annualRevenue: text("annual_revenue").notNull(),
+  numberOfRecords: text("number_of_records").notNull(),
+  hasCurrentCoverage: boolean("has_current_coverage").default(false),
+  acceptsCreditCards: boolean("accepts_credit_cards").default(false),
+  storesCustomerData: boolean("stores_customer_data").default(false),
+  desiredLimit: text("desired_limit"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertCyberLiabilityQuoteSchema = createInsertSchema(cyberLiabilityQuotes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertCyberLiabilityQuote = z.infer<typeof insertCyberLiabilityQuoteSchema>;
+export type CyberLiabilityQuote = typeof cyberLiabilityQuotes.$inferSelect;
