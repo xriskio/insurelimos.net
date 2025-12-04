@@ -1,0 +1,129 @@
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+
+const coverages = [
+  {
+    id: "auto-liability",
+    title: "Auto Liability",
+    icon: Shield,
+    description: "The foundation of any commercial auto policy. It protects against financial loss if you or your drivers are found at fault for an accident that injures others or damages their property.",
+    details: "Required by law for all commercial vehicles. Limits typically range from $750,000 to $5 Million depending on vehicle capacity and regulatory requirements (PUC/DOT)."
+  },
+  {
+    id: "physical-damage",
+    title: "Auto Physical Damage",
+    icon: AlertTriangle,
+    description: "Covers the cost to repair or replace your vehicle if it's damaged in an accident, stolen, vandalized, or damaged by fire or weather.",
+    details: "Includes Collision (accidents) and Comprehensive (theft, fire, glass, etc.) coverage. Essential for protecting your fleet investment."
+  },
+  {
+    id: "workers-comp",
+    title: "Workers' Compensation",
+    icon: Users,
+    description: "Provides medical benefits and wage replacement to employees injured on the job. Mandatory for businesses with employees in California.",
+    details: "Protects your business from lawsuits related to workplace injuries. Covers medical bills, rehabilitation costs, and lost wages."
+  },
+  {
+    id: "general-liability",
+    title: "General Liability",
+    icon: Briefcase,
+    description: "Protects your business from third-party claims of bodily injury or property damage that occur on your premises or as a result of your business operations (non-driving).",
+    details: "Crucial for slip-and-fall accidents at your office, advertising injury, or customer property damage not involving the vehicle itself."
+  },
+  {
+    id: "excess",
+    title: "Excess Insurance",
+    icon: Layers,
+    description: "Provides higher liability limits beyond your primary policy. Often required for high-profile contracts, airports, or municipal bids.",
+    details: "Can extend coverage limits to $10 Million, $20 Million or more. Acts as a safety net for catastrophic claims."
+  },
+  {
+    id: "property",
+    title: "Commercial Property",
+    icon: Building,
+    description: "Protects your physical business assets, including your office building, furniture, computers, and tools.",
+    details: "Can be bundled with General Liability in a Business Owners Policy (BOP) for cost savings."
+  },
+  {
+    id: "cyber",
+    title: "Cyber Liability",
+    icon: Lock,
+    description: "Protection against data breaches and cyber attacks. Essential for transportation companies handling sensitive client data and payment information.",
+    details: "Covers notification costs, credit monitoring, legal fees, and fines associated with data breaches."
+  }
+];
+
+export default function Coverage() {
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
+      
+      <main className="flex-1">
+        {/* Hero Header */}
+        <section className="bg-accent text-white py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/10 z-0" />
+          <div className="container mx-auto px-4 relative z-10">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Coverage Options</h1>
+            <p className="text-xl text-white/90 max-w-2xl">
+              Comprehensive protection for your transportation business. 
+              Understand your policy and ensure you have the right limits.
+            </p>
+          </div>
+        </section>
+
+        {/* Main Content */}
+        <section className="py-16 container mx-auto px-4">
+          <div className="grid gap-8 max-w-5xl mx-auto">
+            {coverages.map((item) => (
+              <div key={item.id} className="flex flex-col md:flex-row gap-6 bg-white p-8 rounded-xl border border-border/60 shadow-sm hover:shadow-md transition-shadow">
+                <div className="shrink-0">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                    <item.icon className="h-8 w-8" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-primary mb-3">{item.title}</h3>
+                  <p className="text-lg text-foreground/90 mb-4 font-medium">
+                    {item.description}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {item.details}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="bg-primary text-primary-foreground py-24">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-6">Unsure What You Need?</h2>
+            <p className="text-xl opacity-90 max-w-2xl mx-auto mb-8">
+              Our agents are experts in California transportation regulations. 
+              We'll review your operations and recommend the exact coverage to keep you compliant and protected.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <Button size="lg" variant="secondary" className="font-bold">
+                  Speak with an Agent
+                </Button>
+              </Link>
+              <Link href="/quote">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold">
+                  Start a Quote
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
