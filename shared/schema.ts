@@ -7,6 +7,8 @@ import { z } from "zod";
 export const transportQuotes = pgTable("transport_quotes", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   quoteType: text("quote_type").notNull(),
+  status: text("status").default("new").notNull(),
+  notes: text("notes"),
   
   // Insured Information
   insuredName: text("insured_name").notNull(),
@@ -55,6 +57,8 @@ export const transportQuotes = pgTable("transport_quotes", {
 export const insertTransportQuoteSchema = createInsertSchema(transportQuotes).omit({
   id: true,
   createdAt: true,
+  status: true,
+  notes: true,
 });
 
 export type InsertTransportQuote = z.infer<typeof insertTransportQuoteSchema>;
@@ -173,16 +177,44 @@ export const contactMessages = pgTable("contact_messages", {
   email: text("email").notNull(),
   phone: text("phone").notNull(),
   message: text("message").notNull(),
+  status: text("status").default("new").notNull(),
+  notes: text("notes"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const insertContactMessageSchema = createInsertSchema(contactMessages).omit({
   id: true,
   createdAt: true,
+  status: true,
+  notes: true,
 });
 
 export type InsertContactMessage = z.infer<typeof insertContactMessageSchema>;
 export type ContactMessage = typeof contactMessages.$inferSelect;
+
+// Service Requests
+export const serviceRequests = pgTable("service_requests", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  serviceType: text("service_type").notNull(),
+  businessName: text("business_name").notNull(),
+  contactName: text("contact_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  description: text("description"),
+  status: text("status").default("new").notNull(),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertServiceRequestSchema = createInsertSchema(serviceRequests).omit({
+  id: true,
+  createdAt: true,
+  status: true,
+  notes: true,
+});
+
+export type InsertServiceRequest = z.infer<typeof insertServiceRequestSchema>;
+export type ServiceRequest = typeof serviceRequests.$inferSelect;
 
 // Workers Compensation Quote Submissions
 export const workersCompQuotes = pgTable("workers_comp_quotes", {

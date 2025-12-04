@@ -9,6 +9,8 @@ import {
   type InsertPublicAutoQuote,
   type ContactMessage,
   type InsertContactMessage,
+  type ServiceRequest,
+  type InsertServiceRequest,
   type WorkersCompQuote,
   type InsertWorkersCompQuote,
   type ExcessLiabilityQuote,
@@ -22,13 +24,14 @@ import {
   nemtQuotes,
   publicAutoQuotes,
   contactMessages,
+  serviceRequests,
   workersCompQuotes,
   excessLiabilityQuotes,
   cyberLiabilityQuotes,
   transportQuotes,
 } from "@shared/schema";
 import { db } from "./db";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, sql } from "drizzle-orm";
 
 export interface IStorage {
   // Limo Quotes
@@ -50,6 +53,12 @@ export interface IStorage {
   // Contact Messages
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
   getAllContactMessages(): Promise<ContactMessage[]>;
+  updateContactMessageStatus(id: string, status: string, notes?: string): Promise<ContactMessage | null>;
+  
+  // Service Requests
+  createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest>;
+  getAllServiceRequests(): Promise<ServiceRequest[]>;
+  updateServiceRequestStatus(id: string, status: string, notes?: string): Promise<ServiceRequest | null>;
   
   // Workers Comp Quotes
   createWorkersCompQuote(quote: InsertWorkersCompQuote): Promise<WorkersCompQuote>;
@@ -67,6 +76,17 @@ export interface IStorage {
   createTransportQuote(quote: InsertTransportQuote): Promise<TransportQuote>;
   getAllTransportQuotes(): Promise<TransportQuote[]>;
   getTransportQuotesByType(type: string): Promise<TransportQuote[]>;
+  updateTransportQuoteStatus(id: string, status: string, notes?: string): Promise<TransportQuote | null>;
+  
+  // Dashboard Stats
+  getDashboardStats(): Promise<{
+    totalQuotes: number;
+    newQuotes: number;
+    totalContacts: number;
+    newContacts: number;
+    totalServiceRequests: number;
+    newServiceRequests: number;
+  }>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -120,6 +140,30 @@ export class DatabaseStorage implements IStorage {
     return db.select().from(contactMessages).orderBy(desc(contactMessages.createdAt));
   }
 
+  async updateContactMessageStatus(id: string, status: string, notes?: string): Promise<ContactMessage | null> {
+    const updateData: any = { status };
+    if (notes !== undefined) updateData.notes = notes;
+    const [result] = await db.update(contactMessages).set(updateData).where(eq(contactMessages.id, id)).returning();
+    return result || null;
+  }
+
+  // Service Requests
+  async createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest> {
+    const [result] = await db.insert(serviceRequests).values(request).returning();
+    return result;
+  }
+
+  async getAllServiceRequests(): Promise<ServiceRequest[]> {
+    return db.select().from(serviceRequests).orderBy(desc(serviceRequests.createdAt));
+  }
+
+  async updateServiceRequestStatus(id: string, status: string, notes?: string): Promise<ServiceRequest | null> {
+    const updateData: any = { status };
+    if (notes !== undefined) updateData.notes = notes;
+    const [result] = await db.update(serviceRequests).set(updateData).where(eq(serviceRequests.id, id)).returning();
+    return result || null;
+  }
+
   // Workers Comp Quotes
   async createWorkersCompQuote(quote: InsertWorkersCompQuote): Promise<WorkersCompQuote> {
     const [result] = await db.insert(workersCompQuotes).values(quote).returning();
@@ -162,6 +206,47 @@ export class DatabaseStorage implements IStorage {
 
   async getTransportQuotesByType(type: string): Promise<TransportQuote[]> {
     return db.select().from(transportQuotes).where(eq(transportQuotes.quoteType, type)).orderBy(desc(transportQuotes.createdAt));
+  }
+
+  async updateTransportQuoteStatus(id: string, status: string, notes?: string): Promise<TransportQuote | null> {
+    const updateData: any = { status };
+    if (notes !== undefined) updateData.notes = notes;
+    const [result] = await db.update(transportQuotes).set(updateData).where(eq(transportQuotes.id, id)).returning();
+    return result || null;
+  }
+
+  // Dashboard Stats
+  async getDashboardStats(): Promise<{
+    totalQuotes: number;
+    newQuotes: number;
+    totalContacts: number;
+    newContacts: number;
+    totalServiceRequests: number;
+    newServiceRequests: number;
+  }> {
+    const [quoteStats] = await db.select({
+      total: sql<number>`count(*)`,
+      new: sql<number>`count(*) filter (where ${transportQuotes.status} = 'new')`
+    }).from(transportQuotes);
+    
+    const [contactStats] = await db.select({
+      total: sql<number>`count(*)`,
+      new: sql<number>`count(*) filter (where ${contactMessages.status} = 'new')`
+    }).from(contactMessages);
+    
+    const [serviceStats] = await db.select({
+      total: sql<number>`count(*)`,
+      new: sql<number>`count(*) filter (where ${serviceRequests.status} = 'new')`
+    }).from(serviceRequests);
+    
+    return {
+      totalQuotes: Number(quoteStats?.total || 0),
+      newQuotes: Number(quoteStats?.new || 0),
+      totalContacts: Number(contactStats?.total || 0),
+      newContacts: Number(contactStats?.new || 0),
+      totalServiceRequests: Number(serviceStats?.total || 0),
+      newServiceRequests: Number(serviceStats?.new || 0),
+    };
   }
 }
 

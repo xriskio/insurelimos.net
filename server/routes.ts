@@ -7,6 +7,7 @@ import {
   insertNEMTQuoteSchema,
   insertPublicAutoQuoteSchema,
   insertContactMessageSchema,
+  insertServiceRequestSchema,
   insertWorkersCompQuoteSchema,
   insertExcessLiabilityQuoteSchema,
   insertCyberLiabilityQuoteSchema,
@@ -181,6 +182,70 @@ export async function registerRoutes(
     }
   });
 
+  // Update contact message status
+  app.patch("/api/contact/:id/status", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status, notes } = req.body;
+      const message = await storage.updateContactMessageStatus(id, status, notes);
+      if (!message) {
+        return res.status(404).json({ success: false, error: "Message not found" });
+      }
+      res.json({ success: true, message });
+    } catch (error) {
+      console.error("Error updating contact message:", error);
+      res.status(500).json({ success: false, error: "Failed to update message" });
+    }
+  });
+
+  // Service Request Submission
+  app.post("/api/service-requests", async (req, res) => {
+    try {
+      const validatedData = insertServiceRequestSchema.parse(req.body);
+      const request = await storage.createServiceRequest(validatedData);
+      res.status(201).json({ success: true, request });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating service request:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit service request" 
+      });
+    }
+  });
+
+  app.get("/api/service-requests", async (req, res) => {
+    try {
+      const requests = await storage.getAllServiceRequests();
+      res.json({ success: true, requests });
+    } catch (error) {
+      console.error("Error fetching service requests:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch service requests" });
+    }
+  });
+
+  // Update service request status
+  app.patch("/api/service-requests/:id/status", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status, notes } = req.body;
+      const request = await storage.updateServiceRequestStatus(id, status, notes);
+      if (!request) {
+        return res.status(404).json({ success: false, error: "Service request not found" });
+      }
+      res.json({ success: true, request });
+    } catch (error) {
+      console.error("Error updating service request:", error);
+      res.status(500).json({ success: false, error: "Failed to update service request" });
+    }
+  });
+
   // Workers Compensation Quote Submission
   app.post("/api/quotes/workers-comp", async (req, res) => {
     try {
@@ -306,6 +371,55 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error fetching transport quotes:", error);
       res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // Update transport quote status
+  app.patch("/api/quotes/transport/:id/status", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status, notes } = req.body;
+      const quote = await storage.updateTransportQuoteStatus(id, status, notes);
+      if (!quote) {
+        return res.status(404).json({ success: false, error: "Quote not found" });
+      }
+      res.json({ success: true, quote });
+    } catch (error) {
+      console.error("Error updating transport quote:", error);
+      res.status(500).json({ success: false, error: "Failed to update quote" });
+    }
+  });
+
+  // Dashboard Stats
+  app.get("/api/dashboard/stats", async (req, res) => {
+    try {
+      const stats = await storage.getDashboardStats();
+      res.json({ success: true, stats });
+    } catch (error) {
+      console.error("Error fetching dashboard stats:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch stats" });
+    }
+  });
+
+  // Get all submissions (for admin dashboard)
+  app.get("/api/dashboard/all", async (req, res) => {
+    try {
+      const [quotes, contacts, serviceRequests] = await Promise.all([
+        storage.getAllTransportQuotes(),
+        storage.getAllContactMessages(),
+        storage.getAllServiceRequests(),
+      ]);
+      res.json({ 
+        success: true, 
+        data: {
+          quotes,
+          contacts,
+          serviceRequests,
+        }
+      });
+    } catch (error) {
+      console.error("Error fetching all submissions:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch submissions" });
     }
   });
 
