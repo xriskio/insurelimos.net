@@ -12,6 +12,7 @@ import {
   insertCyberLiabilityQuoteSchema,
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
+import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -272,6 +273,46 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error fetching cyber liability quotes:", error);
       res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // File upload endpoints for quote documents
+  app.post("/api/objects/upload", async (req, res) => {
+    try {
+      const objectStorageService = new ObjectStorageService();
+      const uploadURL = await objectStorageService.getObjectEntityUploadURL();
+      res.json({ uploadURL });
+    } catch (error) {
+      console.error("Error getting upload URL:", error);
+      res.status(500).json({ error: "Failed to get upload URL" });
+    }
+  });
+
+  app.get("/objects/:objectPath(*)", async (req, res) => {
+    const objectStorageService = new ObjectStorageService();
+    try {
+      const objectFile = await objectStorageService.getObjectEntityFile(req.path);
+      objectStorageService.downloadObject(objectFile, res);
+    } catch (error) {
+      console.error("Error accessing object:", error);
+      if (error instanceof ObjectNotFoundError) {
+        return res.sendStatus(404);
+      }
+      return res.sendStatus(500);
+    }
+  });
+
+  app.put("/api/objects/finalize", async (req, res) => {
+    if (!req.body.uploadURL) {
+      return res.status(400).json({ error: "uploadURL is required" });
+    }
+    try {
+      const objectStorageService = new ObjectStorageService();
+      const objectPath = objectStorageService.normalizeObjectEntityPath(req.body.uploadURL);
+      res.status(200).json({ objectPath });
+    } catch (error) {
+      console.error("Error finalizing upload:", error);
+      res.status(500).json({ error: "Internal server error" });
     }
   });
 

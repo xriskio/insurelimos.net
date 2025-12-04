@@ -19,6 +19,7 @@ export const limoQuotes = pgTable("limo_quotes", {
   hasCurrentInsurance: boolean("has_current_insurance").default(false),
   currentCarrier: text("current_carrier"),
   additionalDetails: text("additional_details"),
+  uploadedDocuments: text("uploaded_documents").array(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -44,6 +45,7 @@ export const tncQuotes = pgTable("tnc_quotes", {
   vehicleModel: text("vehicle_model").notNull(),
   coverageType: text("coverage_type"),
   comments: text("comments"),
+  uploadedDocuments: text("uploaded_documents").array(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -69,6 +71,7 @@ export const nemtQuotes = pgTable("nemt_quotes", {
   contractType: text("contract_type").notNull(),
   radius: text("radius"),
   notes: text("notes"),
+  uploadedDocuments: text("uploaded_documents").array(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -94,6 +97,7 @@ export const publicAutoQuotes = pgTable("public_auto_quotes", {
   dotNumber: text("dot_number"),
   mcNumber: text("mc_number"),
   coverageNeeds: text("coverage_needs"),
+  uploadedDocuments: text("uploaded_documents").array(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -138,6 +142,7 @@ export const workersCompQuotes = pgTable("workers_comp_quotes", {
   currentCarrier: text("current_carrier"),
   experienceModifier: text("experience_modifier"),
   notes: text("notes"),
+  uploadedDocuments: text("uploaded_documents").array(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -162,6 +167,7 @@ export const excessLiabilityQuotes = pgTable("excess_liability_quotes", {
   fleetSize: text("fleet_size"),
   underlyingCarrier: text("underlying_carrier"),
   notes: text("notes"),
+  uploadedDocuments: text("uploaded_documents").array(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -187,6 +193,7 @@ export const cyberLiabilityQuotes = pgTable("cyber_liability_quotes", {
   storesCustomerData: boolean("stores_customer_data").default(false),
   desiredLimit: text("desired_limit"),
   notes: text("notes"),
+  uploadedDocuments: text("uploaded_documents").array(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

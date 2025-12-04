@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -21,33 +22,30 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { ObjectUploader } from "@/components/ObjectUploader";
+import { Upload, FileText, X } from "lucide-react";
 
 const formSchema = z.object({
-  // Contact Info
   businessName: z.string().min(2, "Business name is required"),
   contactName: z.string().min(2, "Contact name is required"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number is required"),
   zipCode: z.string().min(5, "Zip code is required"),
-  
-  // Operations
   yearsInBusiness: z.string(),
   radiusOfOperation: z.string(),
-  
-  // Fleet
   vehicleCount: z.string().min(1, "Vehicle count is required"),
   vehicleType: z.enum(["sedan", "suv", "stretch", "sprinter", "bus", "mixed"]),
-  
-  // Coverage
   liabilityLimit: z.string(),
   hasCurrentInsurance: z.boolean().default(false),
   currentCarrier: z.string().optional(),
-  
   additionalDetails: z.string().optional(),
+  uploadedDocuments: z.array(z.string()).optional(),
 });
 
 export function LimoQuoteForm() {
   const { toast } = useToast();
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,17 +56,62 @@ export function LimoQuoteForm() {
       zipCode: "",
       hasCurrentInsurance: false,
       vehicleCount: "1",
+      uploadedDocuments: [],
     },
   });
 
+  const handleGetUploadParameters = async () => {
+    const response = await fetch('/api/objects/upload', {
+      method: 'POST',
+    });
+    const data = await response.json();
+    return {
+      method: 'PUT' as const,
+      url: data.uploadURL,
+    };
+  };
+
+  const handleUploadComplete = async (result: any) => {
+    if (result.successful && result.successful.length > 0) {
+      const newFiles: string[] = [];
+      for (const file of result.successful) {
+        try {
+          const response = await fetch('/api/objects/finalize', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ uploadURL: file.uploadURL }),
+          });
+          const data = await response.json();
+          newFiles.push(data.objectPath);
+        } catch (error) {
+          console.error('Error finalizing upload:', error);
+        }
+      }
+      setUploadedFiles(prev => [...prev, ...newFiles]);
+      toast({
+        title: "Documents Uploaded",
+        description: `${newFiles.length} document(s) uploaded successfully.`,
+      });
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      const submitData = {
+        ...values,
+        uploadedDocuments: uploadedFiles.length > 0 ? uploadedFiles : null,
+      };
+
       const response = await fetch('/api/quotes/limo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(submitData),
       });
 
       const data = await response.json();
@@ -83,6 +126,7 @@ export function LimoQuoteForm() {
       });
       
       form.reset();
+      setUploadedFiles([]);
     } catch (error: any) {
       toast({
         title: "Submission Failed",
@@ -96,7 +140,6 @@ export function LimoQuoteForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Contact Section */}
           <div className="md:col-span-2 space-y-4">
             <h3 className="text-lg font-semibold border-b pb-2 text-primary">Contact Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -107,7 +150,7 @@ export function LimoQuoteForm() {
                   <FormItem>
                     <FormLabel>Business Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Luxury Transport LLC" {...field} />
+                      <Input placeholder="Luxury Transport LLC" data-testid="input-business-name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -120,7 +163,7 @@ export function LimoQuoteForm() {
                   <FormItem>
                     <FormLabel>Contact Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} />
+                      <Input placeholder="John Doe" data-testid="input-contact-name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -133,7 +176,7 @@ export function LimoQuoteForm() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="john@example.com" {...field} />
+                      <Input placeholder="john@example.com" data-testid="input-email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -146,7 +189,7 @@ export function LimoQuoteForm() {
                   <FormItem>
                     <FormLabel>Phone</FormLabel>
                     <FormControl>
-                      <Input placeholder="(555) 123-4567" {...field} />
+                      <Input placeholder="(555) 123-4567" data-testid="input-phone" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -159,7 +202,7 @@ export function LimoQuoteForm() {
                   <FormItem>
                     <FormLabel>Garaging Zip Code</FormLabel>
                     <FormControl>
-                      <Input placeholder="90015" {...field} />
+                      <Input placeholder="90015" data-testid="input-zipcode" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -168,7 +211,6 @@ export function LimoQuoteForm() {
             </div>
           </div>
 
-          {/* Operations Section */}
           <div className="md:col-span-2 space-y-4">
             <h3 className="text-lg font-semibold border-b pb-2 text-primary">Operation Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -180,7 +222,7 @@ export function LimoQuoteForm() {
                     <FormLabel>Years in Business</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger data-testid="select-years-in-business">
                           <SelectValue placeholder="Select duration" />
                         </SelectTrigger>
                       </FormControl>
@@ -203,7 +245,7 @@ export function LimoQuoteForm() {
                     <FormLabel>Radius of Operation</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger data-testid="select-radius">
                           <SelectValue placeholder="Select radius" />
                         </SelectTrigger>
                       </FormControl>
@@ -221,7 +263,6 @@ export function LimoQuoteForm() {
             </div>
           </div>
 
-          {/* Fleet Section */}
           <div className="md:col-span-2 space-y-4">
             <h3 className="text-lg font-semibold border-b pb-2 text-primary">Fleet Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -232,7 +273,7 @@ export function LimoQuoteForm() {
                   <FormItem>
                     <FormLabel>Number of Vehicles</FormLabel>
                     <FormControl>
-                      <Input type="number" min="1" {...field} />
+                      <Input type="number" min="1" data-testid="input-vehicle-count" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -246,7 +287,7 @@ export function LimoQuoteForm() {
                     <FormLabel>Primary Vehicle Type</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger data-testid="select-vehicle-type">
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                       </FormControl>
@@ -266,7 +307,6 @@ export function LimoQuoteForm() {
             </div>
           </div>
 
-          {/* Insurance Section */}
           <div className="md:col-span-2 space-y-4">
             <h3 className="text-lg font-semibold border-b pb-2 text-primary">Insurance Preferences</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -278,7 +318,7 @@ export function LimoQuoteForm() {
                     <FormLabel>Desired Liability Limit</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger data-testid="select-liability-limit">
                           <SelectValue placeholder="Select limit" />
                         </SelectTrigger>
                       </FormControl>
@@ -302,12 +342,11 @@ export function LimoQuoteForm() {
                       <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
+                        data-testid="checkbox-current-insurance"
                       />
                     </FormControl>
                     <div className="space-y-1 leading-none">
-                      <FormLabel>
-                        Currently Insured?
-                      </FormLabel>
+                      <FormLabel>Currently Insured?</FormLabel>
                     </div>
                   </FormItem>
                 )}
@@ -322,6 +361,7 @@ export function LimoQuoteForm() {
                       <Textarea 
                         placeholder="Any specific requirements or details about your fleet..." 
                         className="resize-none" 
+                        data-testid="textarea-additional-details"
                         {...field} 
                       />
                     </FormControl>
@@ -331,9 +371,55 @@ export function LimoQuoteForm() {
               />
             </div>
           </div>
+
+          <div className="md:col-span-2 space-y-4">
+            <h3 className="text-lg font-semibold border-b pb-2 text-primary">Upload Documents (Optional)</h3>
+            <p className="text-sm text-muted-foreground">
+              Upload current policy dec pages, vehicle registrations, driver's licenses, or loss history reports to help us provide a more accurate quote.
+            </p>
+            
+            <div className="flex flex-wrap gap-3 items-center">
+              <ObjectUploader
+                maxNumberOfFiles={10}
+                maxFileSize={20971520}
+                allowedFileTypes={[".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx", ".xls", ".xlsx"]}
+                onGetUploadParameters={handleGetUploadParameters}
+                onComplete={handleUploadComplete}
+                buttonClassName="flex items-center gap-2"
+              >
+                <Upload className="h-4 w-4" />
+                Upload Documents
+              </ObjectUploader>
+            </div>
+
+            {uploadedFiles.length > 0 && (
+              <div className="space-y-2">
+                <p className="text-sm font-medium">Uploaded Documents ({uploadedFiles.length}):</p>
+                <div className="flex flex-wrap gap-2">
+                  {uploadedFiles.map((file, index) => (
+                    <div 
+                      key={index} 
+                      className="flex items-center gap-2 bg-muted px-3 py-2 rounded-md text-sm"
+                    >
+                      <FileText className="h-4 w-4 text-primary" />
+                      <span className="truncate max-w-[200px]">Document {index + 1}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeFile(index)}
+                        className="text-muted-foreground hover:text-destructive transition-colors"
+                        data-testid={`button-remove-file-${index}`}
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
-        <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-white font-bold py-6 text-lg">
+        <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-white font-bold py-6 text-lg" data-testid="button-submit-quote">
           Request Limo Quote
         </Button>
       </form>
