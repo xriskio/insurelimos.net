@@ -58,12 +58,35 @@ export function TNCForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "TNC Quote Request Received",
-      description: "We'll assist you with your rideshare insurance needs shortly.",
-    });
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch('/api/quotes/tnc', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to submit quote');
+      }
+
+      toast({
+        title: "TNC Quote Request Received",
+        description: "We'll assist you with your rideshare insurance needs shortly.",
+      });
+      
+      form.reset();
+    } catch (error: any) {
+      toast({
+        title: "Submission Failed",
+        description: error.message || "Please try again or call us directly.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
