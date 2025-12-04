@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Car, Bus, Smartphone, Truck, Ambulance, ShieldCheck, GraduationCap, Stethoscope, Check } from "lucide-react";
 import { Link } from "wouter";
+import { Seo } from "@/components/seo/Seo";
 
 const services = [
   {
@@ -74,9 +75,14 @@ const services = [
 export default function Services() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <Seo 
+        title="Transportation Insurance Services - Limo, Taxi, NEMT, Trucking"
+        description="Explore our specialized insurance services for limousines, taxis, rideshare, NEMT, buses, and more. Tailored coverage for your fleet."
+        canonical="https://insurelimos.net/services"
+      />
       <Header />
       
-      <main className="flex-1">
+      <main className="flex-1" id="main-content">
         {/* Hero Header */}
         <section className="bg-primary text-white py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-black/20 z-0" />

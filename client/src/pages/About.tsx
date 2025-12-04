@@ -4,13 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { CheckCircle2 } from "lucide-react";
 import teamImage from "@assets/generated_images/modern_insurance_agency_office_team.png";
+import { Seo } from "@/components/seo/Seo";
 
 export default function About() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <Seo 
+        title="About Us - Specialized Transportation Insurance"
+        description="InsureLimos is a Casurance Company specializing in public auto insurance across California, Nevada, Arizona, Texas, and more."
+        canonical="https://insurelimos.net/about"
+      />
       <Header />
       
-      <main className="flex-1">
+      <main className="flex-1" id="main-content">
         {/* Hero */}
         <section className="bg-secondary/30 py-20">
           <div className="container mx-auto px-4 text-center">
@@ -40,7 +46,7 @@ export default function About() {
                   Welcome to InsureLimos.com. We are an Independent Insurance Agency, which means we work for you, not the insurance carriers. This independence allows us to search the market and find the right insurance company for your specific needs and budget.
                 </p>
                 <p>
-                  Located in <strong>Los Angeles</strong>, we service the entire state of California, including San Diego, Sacramento, San Francisco, and San Jose. Our deep understanding of the local market and California's strict transportation regulations sets us apart.
+                  Located in <strong>Los Angeles</strong>, we service the entire state of California, as well as <strong>Nevada, Arizona, Texas, Washington, Oregon, Colorado, Ohio, and Illinois</strong>. Our deep understanding of the local market and strict transportation regulations sets us apart.
                 </p>
                 <p>
                   At InsureLimos.com, each one of our clients is given a dedicated team that works together to proficiently address all your concerns. We don't just sell policies; we build long-term partnerships with our clients to ensure their businesses thrive.

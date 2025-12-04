@@ -17,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { Seo } from "@/components/seo/Seo";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -48,9 +49,14 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <Seo 
+        title="Contact InsureLimos - Los Angeles Transportation Insurance"
+        description="Get in touch with our specialized insurance agents. Located in Los Angeles, serving the entire nation."
+        canonical="https://insurelimos.net/contact"
+      />
       <Header />
       
-      <main className="flex-1">
+      <main className="flex-1" id="main-content">
         {/* Hero */}
         <section className="bg-primary text-white py-16">
           <div className="container mx-auto px-4 text-center">

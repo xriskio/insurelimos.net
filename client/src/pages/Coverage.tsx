@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { Seo } from "@/components/seo/Seo";
 
 const coverages = [
   {
@@ -60,9 +61,14 @@ const coverages = [
 export default function Coverage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <Seo 
+        title="Commercial Auto Coverage Options - Liability, Physical Damage"
+        description="Understanding your commercial auto insurance coverage. From General Liability to Workers Compensation and Cyber Liability."
+        canonical="https://insurelimos.net/coverage"
+      />
       <Header />
       
-      <main className="flex-1">
+      <main className="flex-1" id="main-content">
         {/* Hero Header */}
         <section className="bg-accent text-white py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-black/10 z-0" />

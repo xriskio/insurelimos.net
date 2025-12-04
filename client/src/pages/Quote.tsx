@@ -8,6 +8,7 @@ import { PublicAutoForm } from "@/components/forms/PublicAutoForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
+import { Seo } from "@/components/seo/Seo";
 
 export default function QuotePage() {
   const [match, params] = useRoute("/quote/:type?");
@@ -24,9 +25,14 @@ export default function QuotePage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <Seo 
+        title="Get a Transportation Insurance Quote - Limo, Taxi, NEMT"
+        description="Request a free, no-obligation quote for your transportation business. Specialized forms for Limousines, Rideshare, and Medical Transport."
+        canonical="https://insurelimos.net/quote"
+      />
       <Header />
       
-      <main className="flex-1 py-12 bg-secondary/20">
+      <main className="flex-1 py-12 bg-secondary/20" id="main-content">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">

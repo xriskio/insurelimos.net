@@ -4,12 +4,18 @@ import { Hero } from "@/components/sections/Hero";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { CoverageList } from "@/components/sections/CoverageList";
 import { Link } from "wouter";
+import { Seo } from "@/components/seo/Seo";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <Seo 
+        title="Specialized Insurance for Transportation Companies"
+        description="Comprehensive coverage solutions for limousines, taxis, TNC, buses, and more. Serving CA, NV, AZ, TX, WA, OR, CO, OH, IL."
+        canonical="https://insurelimos.net/"
+      />
       <Header />
-      <main className="flex-1">
+      <main className="flex-1" id="main-content">
         <Hero />
         <ServicesGrid />
         <CoverageList />

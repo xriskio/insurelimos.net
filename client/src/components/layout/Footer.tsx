@@ -121,9 +121,14 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-            <Button className="mt-6 w-full bg-accent hover:bg-accent/90 text-white">
-              Request a Quote
-            </Button>
+            <div className="mt-6 text-xs text-primary-foreground/60">
+              Serving: CA, NV, AZ, TX, WA, OR, CO, OH, IL
+            </div>
+            <Link href="/quote">
+              <Button className="mt-4 w-full bg-accent hover:bg-accent/90 text-white">
+                Request a Quote
+              </Button>
+            </Link>
           </div>
         </div>
 
