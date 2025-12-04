@@ -1,10 +1,7 @@
 import { useRoute } from "wouter";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { LimoQuoteForm } from "@/components/forms/LimoForm";
-import { TNCForm } from "@/components/forms/TNCForm";
-import { NEMTForm } from "@/components/forms/NEMTForm";
-import { PublicAutoForm } from "@/components/forms/PublicAutoForm";
+import { TransportQuoteForm } from "@/components/forms/TransportQuoteForm";
 import { WorkersCompForm } from "@/components/forms/WorkersCompForm";
 import { ExcessLiabilityForm } from "@/components/forms/ExcessLiabilityForm";
 import { CyberLiabilityForm } from "@/components/forms/CyberLiabilityForm";
@@ -17,7 +14,6 @@ export default function QuotePage() {
   const [match, params] = useRoute("/quote/:type?");
   const type = params?.type || "limousine";
 
-  // Helper to determine active tab based on route or default
   const activeTab = ["limousine", "tnc", "nemt", "public-auto", "workers-comp", "excess-liability", "cyber-liability", "transportation"].includes(type) 
     ? type 
     : "limousine";
@@ -41,12 +37,11 @@ export default function QuotePage() {
             <div className="text-center mb-10">
               <h1 className="text-3xl md:text-5xl font-bold text-primary mb-4">Get Your Free Quote</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Fill out the form below and one of our California transportation insurance specialists will get back to you within 24 hours.
+                Fill out the form below and one of our transportation insurance specialists will get back to you within 24 hours.
               </p>
             </div>
 
             <div className="grid gap-8 xl:grid-cols-[1fr_300px]">
-              {/* Main Form Area */}
               <Card className="border-border/60 shadow-lg w-full">
                 <CardHeader className="bg-primary/5 border-b border-border/50">
                   <CardTitle className="text-xl font-bold text-primary">Request a Quote</CardTitle>
@@ -55,45 +50,45 @@ export default function QuotePage() {
                 <CardContent className="p-6">
                   <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
                     <TabsList className="flex flex-wrap justify-start gap-2 h-auto mb-8 bg-muted p-2 rounded-lg">
-                      <TabsTrigger value="limousine" className="py-2 px-4 text-sm whitespace-nowrap">Limousine</TabsTrigger>
-                      <TabsTrigger value="tnc" className="py-2 px-4 text-sm whitespace-nowrap">TNC / Rideshare</TabsTrigger>
-                      <TabsTrigger value="nemt" className="py-2 px-4 text-sm whitespace-nowrap">NEMT</TabsTrigger>
-                      <TabsTrigger value="public-auto" className="py-2 px-4 text-sm whitespace-nowrap">Public Auto</TabsTrigger>
-                      <TabsTrigger value="workers-comp" className="py-2 px-4 text-sm whitespace-nowrap">Workers Comp</TabsTrigger>
-                      <TabsTrigger value="excess-liability" className="py-2 px-4 text-sm whitespace-nowrap">Excess Liability</TabsTrigger>
-                      <TabsTrigger value="cyber-liability" className="py-2 px-4 text-sm whitespace-nowrap">Cyber Liability</TabsTrigger>
+                      <TabsTrigger value="limousine" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-limo">Limousine</TabsTrigger>
+                      <TabsTrigger value="tnc" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-tnc">TNC / Rideshare</TabsTrigger>
+                      <TabsTrigger value="nemt" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-nemt">NEMT</TabsTrigger>
+                      <TabsTrigger value="public-auto" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-public-auto">Public Auto</TabsTrigger>
+                      <TabsTrigger value="workers-comp" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-workers-comp">Workers Comp</TabsTrigger>
+                      <TabsTrigger value="excess-liability" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-excess">Excess Liability</TabsTrigger>
+                      <TabsTrigger value="cyber-liability" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-cyber">Cyber Liability</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="limousine" className="mt-0">
-                      <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-foreground mb-2">Limousine Insurance Quote</h2>
-                        <p className="text-muted-foreground">For sedans, stretch limos, party buses, and luxury fleets.</p>
-                      </div>
-                      <LimoQuoteForm />
+                      <TransportQuoteForm 
+                        quoteType="limousine"
+                        title="Limousine Insurance Quote"
+                        description="For sedans, stretch limos, party buses, and luxury fleets."
+                      />
                     </TabsContent>
                     
                     <TabsContent value="tnc" className="mt-0">
-                      <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-foreground mb-2">TNC & Rideshare Quote</h2>
-                        <p className="text-muted-foreground">For Uber, Lyft, and other app-based transportation drivers.</p>
-                      </div>
-                      <TNCForm />
+                      <TransportQuoteForm 
+                        quoteType="tnc"
+                        title="TNC & Rideshare Quote"
+                        description="For Uber, Lyft, and other app-based transportation drivers."
+                      />
                     </TabsContent>
                     
                     <TabsContent value="nemt" className="mt-0">
-                      <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-foreground mb-2">NEMT Insurance Quote</h2>
-                        <p className="text-muted-foreground">For Non-Emergency Medical Transportation providers.</p>
-                      </div>
-                      <NEMTForm />
+                      <TransportQuoteForm 
+                        quoteType="nemt"
+                        title="NEMT Insurance Quote"
+                        description="For Non-Emergency Medical Transportation providers."
+                      />
                     </TabsContent>
                     
                     <TabsContent value="public-auto" className="mt-0">
-                      <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-foreground mb-2">Public Auto & Transportation</h2>
-                        <p className="text-muted-foreground">For buses, shuttles, taxis, and general public transportation.</p>
-                      </div>
-                      <PublicAutoForm />
+                      <TransportQuoteForm 
+                        quoteType="public-auto"
+                        title="Public Auto & Transportation"
+                        description="For buses, shuttles, taxis, and general public transportation."
+                      />
                     </TabsContent>
 
                     <TabsContent value="workers-comp" className="mt-0">
@@ -121,17 +116,16 @@ export default function QuotePage() {
                     </TabsContent>
 
                     <TabsContent value="transportation" className="mt-0">
-                      <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-foreground mb-2">Public Transportation Quote</h2>
-                        <p className="text-muted-foreground">For municipal and private mass transit solutions.</p>
-                      </div>
-                      <PublicAutoForm />
+                      <TransportQuoteForm 
+                        quoteType="public-auto"
+                        title="Public Transportation Quote"
+                        description="For municipal and private mass transit solutions."
+                      />
                     </TabsContent>
                   </Tabs>
                 </CardContent>
               </Card>
 
-              {/* Sidebar Info */}
               <div className="space-y-6 hidden lg:block">
                 <Card>
                   <CardHeader>
@@ -160,7 +154,7 @@ export default function QuotePage() {
                 <div className="bg-primary text-white p-6 rounded-lg shadow-md">
                   <h3 className="font-bold text-lg mb-2">Need Help?</h3>
                   <p className="text-sm opacity-90 mb-4">Prefer to speak with an agent directly?</p>
-                  <a href="tel:888-254-0089" className="block w-full text-center bg-white text-primary font-bold py-3 rounded-md hover:bg-gray-100 transition-colors">
+                  <a href="tel:888-254-0089" className="block w-full text-center bg-white text-primary font-bold py-3 rounded-md hover:bg-gray-100 transition-colors" data-testid="link-call">
                     Call 888-254-0089
                   </a>
                 </div>
