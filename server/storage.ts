@@ -195,8 +195,19 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Transport Quotes
+  private generateReferenceNumber(quoteType: string): string {
+    const prefix = quoteType.toUpperCase().substring(0, 3);
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return `IL-${prefix}-${timestamp}${random}`;
+  }
+
   async createTransportQuote(quote: InsertTransportQuote): Promise<TransportQuote> {
-    const [result] = await db.insert(transportQuotes).values(quote).returning();
+    const referenceNumber = this.generateReferenceNumber(quote.quoteType);
+    const [result] = await db.insert(transportQuotes).values({
+      ...quote,
+      referenceNumber,
+    }).returning();
     return result;
   }
 

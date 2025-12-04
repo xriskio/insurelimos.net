@@ -6,6 +6,7 @@ import { z } from "zod";
 // Comprehensive Transportation Quote Submissions (Limo, TNC, NEMT, Public Auto)
 export const transportQuotes = pgTable("transport_quotes", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  referenceNumber: text("reference_number").notNull(),
   quoteType: text("quote_type").notNull(),
   status: text("status").default("new").notNull(),
   notes: text("notes"),
@@ -56,6 +57,7 @@ export const transportQuotes = pgTable("transport_quotes", {
 
 export const insertTransportQuoteSchema = createInsertSchema(transportQuotes).omit({
   id: true,
+  referenceNumber: true,
   createdAt: true,
   status: true,
   notes: true,

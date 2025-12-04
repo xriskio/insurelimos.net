@@ -221,9 +221,12 @@ export function TransportQuoteForm({ quoteType, title, description }: TransportQ
         throw new Error(data.error || 'Failed to submit quote');
       }
 
+      const referenceNumber = data.quote?.referenceNumber || 'N/A';
+      
       toast({
-        title: "Quote Request Received!",
-        description: "Our team will review your information and contact you within 24 hours.",
+        title: "Quote Request Submitted Successfully!",
+        description: `Your reference number is: ${referenceNumber}. Our team will review your information and contact you within 24 hours. Please save this reference number for your records.`,
+        duration: 10000,
       });
       
       form.reset();
