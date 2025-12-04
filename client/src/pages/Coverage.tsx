@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight } from "lucide-react";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Seo } from "@/components/seo/Seo";
@@ -15,6 +15,15 @@ const coverages = [
     details: "Coverage for Uber, Lyft, delivery services, micro-mobility, and on-demand transportation. Period-specific protection for all operational phases.",
     hasPage: true,
     pageUrl: "/coverage/tnc"
+  },
+  {
+    id: "nemt",
+    title: "NEMT Insurance",
+    icon: Accessibility,
+    description: "Specialized insurance solutions for Non-Emergency Medical Transportation providers, ensuring your patients and business are protected.",
+    details: "Coverage for wheelchair lifts, ramps, patient loading/unloading, and medical equipment transport. Policies that meet healthcare facility contract requirements.",
+    hasPage: true,
+    pageUrl: "/coverage/nemt"
   },
   {
     id: "auto-liability",
