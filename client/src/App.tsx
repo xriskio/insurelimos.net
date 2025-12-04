@@ -12,6 +12,7 @@ import TncCoverage from "@/pages/TncCoverage";
 import NemtCoverage from "@/pages/NemtCoverage";
 import TaxiCoverage from "@/pages/TaxiCoverage";
 import SchoolBusCoverage from "@/pages/SchoolBusCoverage";
+import LimoCoverage from "@/pages/LimoCoverage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/coverage/nemt" component={NemtCoverage} />
       <Route path="/coverage/taxi" component={TaxiCoverage} />
       <Route path="/coverage/school-bus" component={SchoolBusCoverage} />
+      <Route path="/coverage/limo" component={LimoCoverage} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       

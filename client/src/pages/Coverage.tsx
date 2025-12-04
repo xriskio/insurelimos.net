@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility, Car, Bus } from "lucide-react";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility, Car, Bus, Gem } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Seo } from "@/components/seo/Seo";
@@ -42,6 +42,15 @@ const coverages = [
     details: "Coverage for school district fleets, independent contractors, private schools, and special needs transportation. Risk management focused on student safety.",
     hasPage: true,
     pageUrl: "/coverage/school-bus"
+  },
+  {
+    id: "limo",
+    title: "Limousine & Chauffeured",
+    icon: Gem,
+    description: "Specialized insurance for limousine fleets, luxury transportation, and chauffeured services.",
+    details: "Coverage for luxury sedans, Mercedes Sprinters, stretch limousines, party buses, and executive transportation. Partnership with PHLY and other A-rated carriers.",
+    hasPage: true,
+    pageUrl: "/coverage/limo"
   },
   {
     id: "auto-liability",
