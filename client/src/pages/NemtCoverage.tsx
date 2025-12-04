@@ -26,6 +26,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import nemtHeroImage from "@assets/stock_images/medical_transportati_bedcf76d.jpg";
 
 export default function NemtCoverage() {
   return (
@@ -38,25 +39,23 @@ export default function NemtCoverage() {
       <Header />
       
       <main className="flex-1" id="main-content">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-primary via-primary/95 to-primary/90 py-20 md:py-28 overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAzMHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30" />
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-white/10 rounded-full">
-                  <Accessibility className="h-8 w-8 text-white" />
-                </div>
-                <span className="text-white/80 font-medium">Specialized Coverage</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                NEMT and Paratransit Insurance
-              </h1>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+        {/* Hero Section with Image */}
+        <section className="relative h-[400px] md:h-[500px] overflow-hidden">
+          <img 
+            src={nemtHeroImage} 
+            alt="NEMT medical transportation vehicle" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
+          <div className="container mx-auto px-4 h-full flex items-center relative z-10">
+            <div className="max-w-2xl text-white">
+              <p className="text-white/80 mb-2 font-medium">Specialized Coverage</p>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">NEMT and Paratransit Insurance</h1>
+              <p className="text-xl text-white/90 mb-6">
                 Specialized insurance coverage for Non-Emergency Medical Transportation and Paratransit operators.
               </p>
               <Link href="/quote/nemt">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold shadow-lg">
+                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold">
                   Get a NEMT Insurance Quote
                 </Button>
               </Link>
