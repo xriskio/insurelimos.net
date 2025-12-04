@@ -15,6 +15,7 @@ import {
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
+import { sendQuoteNotificationToAdmin, sendQuoteConfirmationToCustomer } from "./email";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -347,6 +348,24 @@ export async function registerRoutes(
     try {
       const validatedData = insertTransportQuoteSchema.parse(req.body);
       const quote = await storage.createTransportQuote(validatedData);
+      
+      // Send email notifications asynchronously (don't block the response)
+      const emailData = {
+        referenceNumber: quote.referenceNumber,
+        quoteType: quote.quoteType,
+        businessName: quote.insuredName,
+        contactName: quote.contactName,
+        contactEmail: quote.contactEmail,
+        contactPhone: quote.contactPhone,
+        state: quote.state,
+      };
+      
+      // Send emails in the background
+      Promise.all([
+        sendQuoteNotificationToAdmin(emailData),
+        sendQuoteConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
       res.status(201).json({ success: true, quote });
     } catch (error: any) {
       if (error.name === "ZodError") {

@@ -16,6 +16,7 @@ import SchoolBusCoverage from "@/pages/SchoolBusCoverage";
 import LimoCoverage from "@/pages/LimoCoverage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import Admin from "@/pages/Admin";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -43,6 +44,7 @@ function Router() {
       <Route path="/coverage/limo" component={LimoCoverage} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+      <Route path="/admin" component={Admin} />
       
       <Route component={NotFound} />
     </Switch>
