@@ -121,8 +121,8 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-            <div className="mt-6 text-xs text-primary-foreground/60">
-              Serving: CA, NV, AZ, TX, WA, OR, CO, OH, IL
+            <div className="mt-6 text-xs text-primary-foreground/60 leading-relaxed">
+              Serving: CA, AZ, CO, ID, IL, KS, KY, MN, MO, NV, OH, OK, PA, TN, TX, UT, VA, WI
             </div>
             <Link href="/quote">
               <Button className="mt-4 w-full bg-accent hover:bg-accent/90 text-white">

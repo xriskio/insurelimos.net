@@ -46,7 +46,7 @@ export default function About() {
                   Welcome to InsureLimos.com. We are an Independent Insurance Agency, which means we work for you, not the insurance carriers. This independence allows us to search the market and find the right insurance company for your specific needs and budget.
                 </p>
                 <p>
-                  Located in <strong>Los Angeles</strong>, we service the entire state of California, as well as <strong>Nevada, Arizona, Texas, Washington, Oregon, Colorado, Ohio, and Illinois</strong>. Our deep understanding of the local market and strict transportation regulations sets us apart.
+                  Located in <strong>Los Angeles</strong>, we service the entire state of California, as well as <strong>Arizona, Colorado, Idaho, Illinois, Kansas, Kentucky, Minnesota, Missouri, Nevada, Ohio, Oklahoma, Pennsylvania, Tennessee, Texas, Utah, Virginia, and Wisconsin</strong>. Our deep understanding of the local market and strict transportation regulations sets us apart.
                 </p>
                 <p>
                   At InsureLimos.com, each one of our clients is given a dedicated team that works together to proficiently address all your concerns. We don't just sell policies; we build long-term partnerships with our clients to ensure their businesses thrive.

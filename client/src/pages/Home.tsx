@@ -11,7 +11,7 @@ export default function Home() {
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
         title="Specialized Insurance for Transportation Companies"
-        description="Comprehensive coverage solutions for limousines, taxis, TNC, buses, and more. Serving CA, NV, AZ, TX, WA, OR, CO, OH, IL."
+        description="Comprehensive coverage solutions for limousines, taxis, TNC, buses, and more. Serving CA, AZ, CO, ID, IL, KS, KY, MN, MO, NV, OH, OK, PA, TN, TX, UT, VA, WI."
         canonical="https://insurelimos.net/"
       />
       <Header />
