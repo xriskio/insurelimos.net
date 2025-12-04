@@ -1,0 +1,110 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Open Sans",
+      "role": "body"
+    },
+    {
+      "family": "Montserrat",
+      "role": "heading"
+    },
+    {
+      "family": "Arial",
+      "role": "body"
+    }
+  ],
+  "colors": {
+    "primary": "#0047AB",
+    "accent": "#1D3557",
+    "background": "#FFFFFF",
+    "textPrimary": "#1D3557",
+    "link": "#1D3557"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Open Sans",
+      "heading": "Montserrat"
+    },
+    "fontStacks": {
+      "heading": [
+        "Montserrat",
+        "sans-serif"
+      ],
+      "body": [
+        "Open Sans",
+        "sans-serif"
+      ],
+      "paragraph": [
+        "Open Sans",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "36px",
+      "h2": "32px",
+      "body": "18px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "0px"
+  },
+  "components": {
+    "input": {
+      "borderColor": "#CCCCCC",
+      "borderRadius": "0px"
+    },
+    "buttonPrimary": {
+      "background": "#0047AB",
+      "textColor": "#FFFFFF",
+      "borderRadius": "4px",
+      "shadow": "none"
+    },
+    "buttonSecondary": {
+      "background": "#F8F9FA",
+      "textColor": "#0047AB",
+      "borderColor": "#0047AB",
+      "borderRadius": "4px",
+      "shadow": "none"
+    }
+  },
+  "images": {
+    "logo": "https://insurelimos.net/images/logo.png",
+    "favicon": null,
+    "ogImage": null
+  },
+  "__framework_hints": [],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "The logo matches the brand name 'InsureLimos.net' and is located in the header, making it the main brand logo.",
+    "confidence": 0.98
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": 2,
+      "text": "Get a Quote",
+      "reasoning": "Button #2 has a vibrant blue background (#0047AB), which is the brand color, and the text 'Get a Quote' is action-oriented, making it the primary CTA."
+    },
+    "secondary": {
+      "index": 4,
+      "text": "Explore Services",
+      "reasoning": "Button #4 has a different background color (#F8F9FA) and is an outline style button with the text 'Explore Services', making it a suitable secondary option."
+    },
+    "confidence": 0.95
+  },
+  "personality": {
+    "tone": "professional",
+    "energy": "medium",
+    "targetAudience": "individuals and businesses seeking transportation insurance"
+  },
+  "designSystem": {
+    "framework": "unknown",
+    "componentLibrary": null
+  },
+  "confidence": {
+    "buttons": 0.95,
+    "colors": 0.9,
+    "overall": 0.925
+  }
+}
