@@ -1,12 +1,21 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building } from "lucide-react";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Seo } from "@/components/seo/Seo";
 
 const coverages = [
+  {
+    id: "tnc-mobility",
+    title: "TNC & Mobility",
+    icon: Smartphone,
+    description: "Specialized insurance solutions for transportation network companies (TNCs), rideshare platforms, and modern mobility services.",
+    details: "Coverage for Uber, Lyft, delivery services, micro-mobility, and on-demand transportation. Period-specific protection for all operational phases.",
+    hasPage: true,
+    pageUrl: "/coverage/tnc"
+  },
   {
     id: "auto-liability",
     title: "Auto Liability",
@@ -91,14 +100,22 @@ export default function Coverage() {
                     <item.icon className="h-8 w-8" />
                   </div>
                 </div>
-                <div>
+                <div className="flex-1">
                   <h3 className="text-2xl font-bold text-primary mb-3">{item.title}</h3>
                   <p className="text-lg text-foreground/90 mb-4 font-medium">
                     {item.description}
                   </p>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed mb-4">
                     {item.details}
                   </p>
+                  {item.hasPage && item.pageUrl && (
+                    <Link href={item.pageUrl}>
+                      <Button variant="outline" className="group">
+                        Learn More
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}

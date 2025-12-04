@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import QuotePage from "@/pages/Quote";
 import Services from "@/pages/Services";
 import Coverage from "@/pages/Coverage";
+import TncCoverage from "@/pages/TncCoverage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 
@@ -20,6 +21,7 @@ function Router() {
       
       <Route path="/services" component={Services} />
       <Route path="/coverage" component={Coverage} />
+      <Route path="/coverage/tnc" component={TncCoverage} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       
