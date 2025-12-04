@@ -37,7 +37,7 @@ export default function QuotePage() {
       
       <main className="flex-1 py-12 bg-secondary/20" id="main-content">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
               <h1 className="text-3xl md:text-5xl font-bold text-primary mb-4">Get Your Free Quote</h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -45,23 +45,23 @@ export default function QuotePage() {
               </p>
             </div>
 
-            <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
+            <div className="grid gap-8 xl:grid-cols-[1fr_300px]">
               {/* Main Form Area */}
-              <Card className="border-border/60 shadow-lg">
+              <Card className="border-border/60 shadow-lg w-full">
                 <CardHeader className="bg-primary/5 border-b border-border/50">
                   <CardTitle className="text-xl font-bold text-primary">Request a Quote</CardTitle>
                   <CardDescription>Select your business type to get started</CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
                   <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-                    <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-7 h-auto mb-8 bg-muted p-1 gap-1">
-                      <TabsTrigger value="limousine" className="py-2 text-xs sm:text-sm">Limousine</TabsTrigger>
-                      <TabsTrigger value="tnc" className="py-2 text-xs sm:text-sm">TNC</TabsTrigger>
-                      <TabsTrigger value="nemt" className="py-2 text-xs sm:text-sm">NEMT</TabsTrigger>
-                      <TabsTrigger value="public-auto" className="py-2 text-xs sm:text-sm">Public Auto</TabsTrigger>
-                      <TabsTrigger value="workers-comp" className="py-2 text-xs sm:text-sm">Workers Comp</TabsTrigger>
-                      <TabsTrigger value="excess-liability" className="py-2 text-xs sm:text-sm">Excess</TabsTrigger>
-                      <TabsTrigger value="cyber-liability" className="py-2 text-xs sm:text-sm">Cyber</TabsTrigger>
+                    <TabsList className="flex flex-wrap justify-start gap-2 h-auto mb-8 bg-muted p-2 rounded-lg">
+                      <TabsTrigger value="limousine" className="py-2 px-4 text-sm whitespace-nowrap">Limousine</TabsTrigger>
+                      <TabsTrigger value="tnc" className="py-2 px-4 text-sm whitespace-nowrap">TNC / Rideshare</TabsTrigger>
+                      <TabsTrigger value="nemt" className="py-2 px-4 text-sm whitespace-nowrap">NEMT</TabsTrigger>
+                      <TabsTrigger value="public-auto" className="py-2 px-4 text-sm whitespace-nowrap">Public Auto</TabsTrigger>
+                      <TabsTrigger value="workers-comp" className="py-2 px-4 text-sm whitespace-nowrap">Workers Comp</TabsTrigger>
+                      <TabsTrigger value="excess-liability" className="py-2 px-4 text-sm whitespace-nowrap">Excess Liability</TabsTrigger>
+                      <TabsTrigger value="cyber-liability" className="py-2 px-4 text-sm whitespace-nowrap">Cyber Liability</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="limousine" className="mt-0">
