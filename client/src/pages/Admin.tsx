@@ -51,7 +51,8 @@ import {
   Newspaper,
   BookOpen,
   Settings,
-  Save
+  Save,
+  Wrench
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -75,6 +76,22 @@ interface ContactMessage {
   email: string;
   phone: string;
   message: string;
+  status: string;
+  notes: string | null;
+  createdAt: string;
+}
+
+interface ServiceRequest {
+  id: string;
+  requestType: string;
+  policyNumber: string;
+  insuredName: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  effectiveDate: string | null;
+  details: string;
+  additionalInfo: string | null;
   status: string;
   notes: string | null;
   createdAt: string;
@@ -210,6 +227,7 @@ export default function Admin() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [contacts, setContacts] = useState<ContactMessage[]>([]);
+  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [newsReleases, setNewsReleases] = useState<NewsRelease[]>([]);
   const [siteContent, setSiteContent] = useState<SiteContent[]>([]);
@@ -266,9 +284,10 @@ export default function Admin() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [statsRes, allRes, blogRes, newsRes, contentRes] = await Promise.all([
+      const [statsRes, allRes, serviceRes, blogRes, newsRes, contentRes] = await Promise.all([
         fetch("/api/dashboard/stats"),
         fetch("/api/dashboard/all"),
+        fetch("/api/service-requests"),
         fetch("/api/blog/all"),
         fetch("/api/news/all"),
         fetch("/api/site-content"),
@@ -276,6 +295,7 @@ export default function Admin() {
       
       const statsData = await statsRes.json();
       const allData = await allRes.json();
+      const serviceData = await serviceRes.json();
       const blogData = await blogRes.json();
       const newsData = await newsRes.json();
       const contentData = await contentRes.json();
@@ -285,6 +305,7 @@ export default function Admin() {
         setQuotes(allData.data.quotes);
         setContacts(allData.data.contacts);
       }
+      if (serviceData.success) setServiceRequests(serviceData.requests);
       if (blogData.success) setBlogPosts(blogData.posts);
       if (newsData.success) setNewsReleases(newsData.releases);
       if (contentData.success) setSiteContent(contentData.content);
@@ -331,6 +352,23 @@ export default function Admin() {
       
       if (response.ok) {
         toast({ title: "Status Updated", description: "Contact status has been updated." });
+        fetchData();
+      }
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to update status", variant: "destructive" });
+    }
+  };
+
+  const updateServiceRequestStatus = async (id: string, status: string, notes?: string) => {
+    try {
+      const response = await fetch(`/api/service-requests/${id}/status`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status, notes }),
+      });
+      
+      if (response.ok) {
+        toast({ title: "Status Updated", description: "Service request status has been updated." });
         fetchData();
       }
     } catch (error) {
@@ -624,7 +662,7 @@ export default function Admin() {
 
         {/* Stats Cards */}
         {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Quote Requests</CardTitle>
@@ -634,6 +672,19 @@ export default function Admin() {
                   <span className="text-3xl font-bold" data-testid="text-total-quotes">{stats.totalQuotes}</span>
                   {stats.newQuotes > 0 && (
                     <Badge className="bg-blue-500" data-testid="badge-new-quotes">{stats.newQuotes} new</Badge>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">Service Requests</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <span className="text-3xl font-bold" data-testid="text-total-services">{stats.totalServiceRequests}</span>
+                  {stats.newServiceRequests > 0 && (
+                    <Badge className="bg-blue-500" data-testid="badge-new-services">{stats.newServiceRequests} new</Badge>
                   )}
                 </div>
               </CardContent>
@@ -678,10 +729,14 @@ export default function Admin() {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="quotes" className="space-y-4">
-          <TabsList>
+          <TabsList className="flex-wrap">
             <TabsTrigger value="quotes" data-testid="tab-quotes">
               <FileText className="w-4 h-4 mr-2" />
               Quotes
+            </TabsTrigger>
+            <TabsTrigger value="services" data-testid="tab-services">
+              <Wrench className="w-4 h-4 mr-2" />
+              Service Requests
             </TabsTrigger>
             <TabsTrigger value="contacts" data-testid="tab-contacts">
               <Mail className="w-4 h-4 mr-2" />
@@ -763,6 +818,97 @@ export default function Admin() {
                               <Select
                                 value={quote.status}
                                 onValueChange={(value) => updateQuoteStatus(quote.id, value)}
+                              >
+                                <SelectTrigger className="w-32">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {STATUS_OPTIONS.map((option) => (
+                                    <SelectItem key={option.value} value={option.value}>
+                                      {option.label}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Service Requests Tab */}
+          <TabsContent value="services">
+            <Card>
+              <CardHeader>
+                <CardTitle>Client Service Requests</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {serviceRequests.length === 0 ? (
+                  <p className="text-center text-muted-foreground py-8">No service requests yet</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Request Type</TableHead>
+                          <TableHead>Policy #</TableHead>
+                          <TableHead>Insured</TableHead>
+                          <TableHead>Contact</TableHead>
+                          <TableHead>Details</TableHead>
+                          <TableHead>Status</TableHead>
+                          <TableHead>Date</TableHead>
+                          <TableHead>Actions</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {serviceRequests.map((request) => (
+                          <TableRow key={request.id} data-testid={`row-service-${request.id}`}>
+                            <TableCell>
+                              <Badge variant="outline" className="capitalize">
+                                {request.requestType?.replace(/-/g, ' ') || 'General'}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="font-mono font-bold text-primary">
+                              {request.policyNumber}
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-2">
+                                <Building2 className="w-4 h-4 text-muted-foreground" />
+                                {request.insuredName}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="space-y-1">
+                                <div className="font-medium">{request.contactName}</div>
+                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                  <Mail className="w-3 h-3" />
+                                  <a href={`mailto:${request.email}`}>{request.email}</a>
+                                </div>
+                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                  <Phone className="w-3 h-3" />
+                                  {request.phone}
+                                </div>
+                              </div>
+                            </TableCell>
+                            <TableCell className="max-w-xs">
+                              <p className="truncate" title={request.details}>{request.details}</p>
+                            </TableCell>
+                            <TableCell>{getStatusBadge(request.status)}</TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-1 text-sm">
+                                <Calendar className="w-3 h-3" />
+                                {format(new Date(request.createdAt), "MMM d, yyyy")}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <Select
+                                value={request.status}
+                                onValueChange={(value) => updateServiceRequestStatus(request.id, value)}
                               >
                                 <SelectTrigger className="w-32">
                                   <SelectValue />
