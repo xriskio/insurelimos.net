@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility, Car, Bus, Gem, Building2, Ambulance } from "lucide-react";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility, Car, Bus, Gem, Building2, Ambulance, HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Seo } from "@/components/seo/Seo";
@@ -69,6 +69,15 @@ const coverages = [
     details: "Coverage for BLS, ALS, and critical care transport. Auto liability, professional liability, inland marine for medical equipment, workers' compensation, and umbrella policies.",
     hasPage: true,
     pageUrl: "/coverage/ambulance"
+  },
+  {
+    id: "paratransit",
+    title: "Paratransit Insurance",
+    icon: HeartHandshake,
+    description: "Specialized insurance for paratransit companies transporting passengers with disabilities and special needs.",
+    details: "Coverage for wheelchair-accessible vehicles, medicars, ambulettes, and demand-response transportation. Liability up to $5M CSL with excess up to $20M available.",
+    hasPage: true,
+    pageUrl: "/coverage/paratransit"
   },
   {
     id: "auto-liability",
