@@ -218,6 +218,56 @@ export const insertServiceRequestSchema = createInsertSchema(serviceRequests).om
 export type InsertServiceRequest = z.infer<typeof insertServiceRequestSchema>;
 export type ServiceRequest = typeof serviceRequests.$inferSelect;
 
+// Blog Posts
+export const blogPosts = pgTable("blog_posts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  excerpt: text("excerpt").notNull(),
+  content: text("content").notNull(),
+  category: text("category").notNull(),
+  author: text("author").default("InsureLimos Team").notNull(),
+  imageUrl: text("image_url"),
+  readTime: text("read_time"),
+  published: boolean("published").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type BlogPost = typeof blogPosts.$inferSelect;
+
+// News Releases
+export const newsReleases = pgTable("news_releases", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  summary: text("summary").notNull(),
+  content: text("content").notNull(),
+  category: text("category").notNull(),
+  author: text("author").default("InsureLimos").notNull(),
+  imageUrl: text("image_url"),
+  published: boolean("published").default(false).notNull(),
+  publishDate: timestamp("publish_date").defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertNewsReleaseSchema = createInsertSchema(newsReleases).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertNewsRelease = z.infer<typeof insertNewsReleaseSchema>;
+export type NewsRelease = typeof newsReleases.$inferSelect;
+
 // Workers Compensation Quote Submissions
 export const workersCompQuotes = pgTable("workers_comp_quotes", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),

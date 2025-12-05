@@ -23,6 +23,8 @@ import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
+import News from "@/pages/News";
+import NewsPost from "@/pages/NewsPost";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -55,6 +57,8 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
+      <Route path="/news" component={News} />
+      <Route path="/news/:slug" component={NewsPost} />
       
       <Route component={NotFound} />
     </Switch>

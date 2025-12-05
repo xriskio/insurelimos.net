@@ -11,6 +11,10 @@ import {
   type InsertContactMessage,
   type ServiceRequest,
   type InsertServiceRequest,
+  type BlogPost,
+  type InsertBlogPost,
+  type NewsRelease,
+  type InsertNewsRelease,
   type WorkersCompQuote,
   type InsertWorkersCompQuote,
   type ExcessLiabilityQuote,
@@ -25,6 +29,8 @@ import {
   publicAutoQuotes,
   contactMessages,
   serviceRequests,
+  blogPosts,
+  newsReleases,
   workersCompQuotes,
   excessLiabilityQuotes,
   cyberLiabilityQuotes,
@@ -59,6 +65,22 @@ export interface IStorage {
   createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest>;
   getAllServiceRequests(): Promise<ServiceRequest[]>;
   updateServiceRequestStatus(id: string, status: string, notes?: string): Promise<ServiceRequest | null>;
+  
+  // Blog Posts
+  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+  getAllBlogPosts(): Promise<BlogPost[]>;
+  getPublishedBlogPosts(): Promise<BlogPost[]>;
+  getBlogPostBySlug(slug: string): Promise<BlogPost | null>;
+  updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost | null>;
+  deleteBlogPost(id: string): Promise<boolean>;
+  
+  // News Releases
+  createNewsRelease(release: InsertNewsRelease): Promise<NewsRelease>;
+  getAllNewsReleases(): Promise<NewsRelease[]>;
+  getPublishedNewsReleases(): Promise<NewsRelease[]>;
+  getNewsReleaseBySlug(slug: string): Promise<NewsRelease | null>;
+  updateNewsRelease(id: string, release: Partial<InsertNewsRelease>): Promise<NewsRelease | null>;
+  deleteNewsRelease(id: string): Promise<boolean>;
   
   // Workers Comp Quotes
   createWorkersCompQuote(quote: InsertWorkersCompQuote): Promise<WorkersCompQuote>;
@@ -162,6 +184,64 @@ export class DatabaseStorage implements IStorage {
     if (notes !== undefined) updateData.notes = notes;
     const [result] = await db.update(serviceRequests).set(updateData).where(eq(serviceRequests.id, id)).returning();
     return result || null;
+  }
+
+  // Blog Posts
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
+    const [result] = await db.insert(blogPosts).values(post).returning();
+    return result;
+  }
+
+  async getAllBlogPosts(): Promise<BlogPost[]> {
+    return db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
+  }
+
+  async getPublishedBlogPosts(): Promise<BlogPost[]> {
+    return db.select().from(blogPosts).where(eq(blogPosts.published, true)).orderBy(desc(blogPosts.createdAt));
+  }
+
+  async getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+    const [result] = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug));
+    return result || null;
+  }
+
+  async updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost | null> {
+    const [result] = await db.update(blogPosts).set({ ...post, updatedAt: new Date() }).where(eq(blogPosts.id, id)).returning();
+    return result || null;
+  }
+
+  async deleteBlogPost(id: string): Promise<boolean> {
+    const result = await db.delete(blogPosts).where(eq(blogPosts.id, id));
+    return true;
+  }
+
+  // News Releases
+  async createNewsRelease(release: InsertNewsRelease): Promise<NewsRelease> {
+    const [result] = await db.insert(newsReleases).values(release).returning();
+    return result;
+  }
+
+  async getAllNewsReleases(): Promise<NewsRelease[]> {
+    return db.select().from(newsReleases).orderBy(desc(newsReleases.publishDate));
+  }
+
+  async getPublishedNewsReleases(): Promise<NewsRelease[]> {
+    return db.select().from(newsReleases).where(eq(newsReleases.published, true)).orderBy(desc(newsReleases.publishDate));
+  }
+
+  async getNewsReleaseBySlug(slug: string): Promise<NewsRelease | null> {
+    const [result] = await db.select().from(newsReleases).where(eq(newsReleases.slug, slug));
+    return result || null;
+  }
+
+  async updateNewsRelease(id: string, release: Partial<InsertNewsRelease>): Promise<NewsRelease | null> {
+    const [result] = await db.update(newsReleases).set({ ...release, updatedAt: new Date() }).where(eq(newsReleases.id, id)).returning();
+    return result || null;
+  }
+
+  async deleteNewsRelease(id: string): Promise<boolean> {
+    const result = await db.delete(newsReleases).where(eq(newsReleases.id, id));
+    return true;
   }
 
   // Workers Comp Quotes

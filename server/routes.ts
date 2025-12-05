@@ -8,6 +8,8 @@ import {
   insertPublicAutoQuoteSchema,
   insertContactMessageSchema,
   insertServiceRequestSchema,
+  insertBlogPostSchema,
+  insertNewsReleaseSchema,
   insertWorkersCompQuoteSchema,
   insertExcessLiabilityQuoteSchema,
   insertCyberLiabilityQuoteSchema,
@@ -16,6 +18,7 @@ import {
 import { fromZodError } from "zod-validation-error";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
 import { sendQuoteNotificationToAdmin, sendQuoteConfirmationToCustomer } from "./email";
+import { generateBlogPost, generateNewsRelease, improveContent } from "./perplexity";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -479,6 +482,209 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error finalizing upload:", error);
       res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // ============== BLOG POSTS ==============
+  
+  // Get all blog posts (admin)
+  app.get("/api/blog/all", async (req, res) => {
+    try {
+      const posts = await storage.getAllBlogPosts();
+      res.json({ success: true, posts });
+    } catch (error) {
+      console.error("Error fetching blog posts:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch posts" });
+    }
+  });
+
+  // Get published blog posts (public)
+  app.get("/api/blog", async (req, res) => {
+    try {
+      const posts = await storage.getPublishedBlogPosts();
+      res.json({ success: true, posts });
+    } catch (error) {
+      console.error("Error fetching published blog posts:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch posts" });
+    }
+  });
+
+  // Get single blog post by slug
+  app.get("/api/blog/:slug", async (req, res) => {
+    try {
+      const post = await storage.getBlogPostBySlug(req.params.slug);
+      if (!post) {
+        return res.status(404).json({ success: false, error: "Post not found" });
+      }
+      res.json({ success: true, post });
+    } catch (error) {
+      console.error("Error fetching blog post:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch post" });
+    }
+  });
+
+  // Create blog post
+  app.post("/api/blog", async (req, res) => {
+    try {
+      const validatedData = insertBlogPostSchema.parse(req.body);
+      const post = await storage.createBlogPost(validatedData);
+      res.status(201).json({ success: true, post });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ success: false, error: validationError.message });
+      }
+      console.error("Error creating blog post:", error);
+      res.status(500).json({ success: false, error: "Failed to create post" });
+    }
+  });
+
+  // Update blog post
+  app.patch("/api/blog/:id", async (req, res) => {
+    try {
+      const post = await storage.updateBlogPost(req.params.id, req.body);
+      if (!post) {
+        return res.status(404).json({ success: false, error: "Post not found" });
+      }
+      res.json({ success: true, post });
+    } catch (error) {
+      console.error("Error updating blog post:", error);
+      res.status(500).json({ success: false, error: "Failed to update post" });
+    }
+  });
+
+  // Delete blog post
+  app.delete("/api/blog/:id", async (req, res) => {
+    try {
+      await storage.deleteBlogPost(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting blog post:", error);
+      res.status(500).json({ success: false, error: "Failed to delete post" });
+    }
+  });
+
+  // Generate blog post with AI
+  app.post("/api/blog/generate", async (req, res) => {
+    try {
+      const { topic, category } = req.body;
+      if (!topic || !category) {
+        return res.status(400).json({ success: false, error: "Topic and category are required" });
+      }
+      const generated = await generateBlogPost(topic, category);
+      res.json({ success: true, generated });
+    } catch (error: any) {
+      console.error("Error generating blog post:", error);
+      res.status(500).json({ success: false, error: error.message || "Failed to generate content" });
+    }
+  });
+
+  // ============== NEWS RELEASES ==============
+  
+  // Get all news releases (admin)
+  app.get("/api/news/all", async (req, res) => {
+    try {
+      const releases = await storage.getAllNewsReleases();
+      res.json({ success: true, releases });
+    } catch (error) {
+      console.error("Error fetching news releases:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch releases" });
+    }
+  });
+
+  // Get published news releases (public)
+  app.get("/api/news", async (req, res) => {
+    try {
+      const releases = await storage.getPublishedNewsReleases();
+      res.json({ success: true, releases });
+    } catch (error) {
+      console.error("Error fetching published news releases:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch releases" });
+    }
+  });
+
+  // Get single news release by slug
+  app.get("/api/news/:slug", async (req, res) => {
+    try {
+      const release = await storage.getNewsReleaseBySlug(req.params.slug);
+      if (!release) {
+        return res.status(404).json({ success: false, error: "Release not found" });
+      }
+      res.json({ success: true, release });
+    } catch (error) {
+      console.error("Error fetching news release:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch release" });
+    }
+  });
+
+  // Create news release
+  app.post("/api/news", async (req, res) => {
+    try {
+      const validatedData = insertNewsReleaseSchema.parse(req.body);
+      const release = await storage.createNewsRelease(validatedData);
+      res.status(201).json({ success: true, release });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ success: false, error: validationError.message });
+      }
+      console.error("Error creating news release:", error);
+      res.status(500).json({ success: false, error: "Failed to create release" });
+    }
+  });
+
+  // Update news release
+  app.patch("/api/news/:id", async (req, res) => {
+    try {
+      const release = await storage.updateNewsRelease(req.params.id, req.body);
+      if (!release) {
+        return res.status(404).json({ success: false, error: "Release not found" });
+      }
+      res.json({ success: true, release });
+    } catch (error) {
+      console.error("Error updating news release:", error);
+      res.status(500).json({ success: false, error: "Failed to update release" });
+    }
+  });
+
+  // Delete news release
+  app.delete("/api/news/:id", async (req, res) => {
+    try {
+      await storage.deleteNewsRelease(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting news release:", error);
+      res.status(500).json({ success: false, error: "Failed to delete release" });
+    }
+  });
+
+  // Generate news release with AI
+  app.post("/api/news/generate", async (req, res) => {
+    try {
+      const { topic, category } = req.body;
+      if (!topic || !category) {
+        return res.status(400).json({ success: false, error: "Topic and category are required" });
+      }
+      const generated = await generateNewsRelease(topic, category);
+      res.json({ success: true, generated });
+    } catch (error: any) {
+      console.error("Error generating news release:", error);
+      res.status(500).json({ success: false, error: error.message || "Failed to generate content" });
+    }
+  });
+
+  // Improve content with AI
+  app.post("/api/content/improve", async (req, res) => {
+    try {
+      const { content, contentType } = req.body;
+      if (!content || !contentType) {
+        return res.status(400).json({ success: false, error: "Content and type are required" });
+      }
+      const improved = await improveContent(content, contentType);
+      res.json({ success: true, content: improved });
+    } catch (error: any) {
+      console.error("Error improving content:", error);
+      res.status(500).json({ success: false, error: error.message || "Failed to improve content" });
     }
   });
 
