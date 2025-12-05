@@ -451,9 +451,15 @@ export function TransportQuoteForm({ quoteType, title, description }: TransportQ
                 name="tcpNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>TCP Number (if applicable)</FormLabel>
+                    <FormLabel>
+                      {quoteType === "nemt" ? "NPI Number (if applicable)" : "TCP Number (if applicable)"}
+                    </FormLabel>
                     <FormControl>
-                      <Input placeholder="TCP License Number" data-testid="input-tcp" {...field} />
+                      <Input 
+                        placeholder={quoteType === "nemt" ? "National Provider Identifier" : "TCP License Number"} 
+                        data-testid="input-tcp" 
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
