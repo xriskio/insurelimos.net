@@ -20,7 +20,14 @@ import {
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
-import { sendQuoteNotificationToAdmin, sendQuoteConfirmationToCustomer } from "./email";
+import { 
+  sendQuoteNotificationToAdmin, 
+  sendQuoteConfirmationToCustomer,
+  sendServiceRequestNotificationToAdmin,
+  sendServiceRequestConfirmationToCustomer,
+  sendContactNotificationToAdmin,
+  sendContactConfirmationToCustomer
+} from "./email";
 import { generateBlogPost, generateNewsRelease, improveContent } from "./perplexity";
 
 export async function registerRoutes(
@@ -121,7 +128,26 @@ export async function registerRoutes(
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
       const message = await storage.createContactMessage(validatedData);
-      res.status(201).json({ success: true, message });
+      
+      // Generate a message ID
+      const messageId = `MSG-${Date.now().toString(36).toUpperCase()}`;
+      
+      // Send email notifications asynchronously
+      const emailData = {
+        messageId,
+        name: message.name,
+        email: message.email,
+        phone: message.phone || undefined,
+        subject: message.subject,
+        message: message.message,
+      };
+      
+      Promise.all([
+        sendContactNotificationToAdmin(emailData),
+        sendContactConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, message, messageId });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromZodError(error);
@@ -210,7 +236,28 @@ export async function registerRoutes(
     try {
       const validatedData = insertServiceRequestSchema.parse(req.body);
       const request = await storage.createServiceRequest(validatedData);
-      res.status(201).json({ success: true, request });
+      
+      // Generate a request ID
+      const requestId = `SR-${Date.now().toString(36).toUpperCase()}`;
+      
+      // Send email notifications asynchronously
+      const emailData = {
+        requestId,
+        requestType: request.requestType,
+        policyNumber: request.policyNumber,
+        insuredName: request.insuredName,
+        contactName: request.contactName,
+        email: request.email,
+        phone: request.phone,
+        details: request.details,
+      };
+      
+      Promise.all([
+        sendServiceRequestNotificationToAdmin(emailData),
+        sendServiceRequestConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, request, requestId });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromZodError(error);
