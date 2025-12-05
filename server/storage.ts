@@ -25,6 +25,10 @@ import {
   type InsertCyberLiabilityQuote,
   type TransportQuote,
   type InsertTransportQuote,
+  type AmbulanceQuote,
+  type InsertAmbulanceQuote,
+  type CaptiveQuote,
+  type InsertCaptiveQuote,
   limoQuotes,
   tncQuotes,
   nemtQuotes,
@@ -38,6 +42,8 @@ import {
   excessLiabilityQuotes,
   cyberLiabilityQuotes,
   transportQuotes,
+  ambulanceQuotes,
+  captiveQuotes,
 } from "@shared/schema";
 import { db } from "./db";
 import { desc, eq, sql } from "drizzle-orm";
@@ -101,6 +107,14 @@ export interface IStorage {
   // Cyber Liability Quotes
   createCyberLiabilityQuote(quote: InsertCyberLiabilityQuote): Promise<CyberLiabilityQuote>;
   getAllCyberLiabilityQuotes(): Promise<CyberLiabilityQuote[]>;
+  
+  // Ambulance Quotes
+  createAmbulanceQuote(quote: InsertAmbulanceQuote): Promise<AmbulanceQuote>;
+  getAllAmbulanceQuotes(): Promise<AmbulanceQuote[]>;
+  
+  // Captive Quotes
+  createCaptiveQuote(quote: InsertCaptiveQuote): Promise<CaptiveQuote>;
+  getAllCaptiveQuotes(): Promise<CaptiveQuote[]>;
   
   // Transport Quotes (comprehensive)
   createTransportQuote(quote: InsertTransportQuote): Promise<TransportQuote>;
@@ -304,6 +318,26 @@ export class DatabaseStorage implements IStorage {
 
   async getAllCyberLiabilityQuotes(): Promise<CyberLiabilityQuote[]> {
     return db.select().from(cyberLiabilityQuotes).orderBy(desc(cyberLiabilityQuotes.createdAt));
+  }
+
+  // Ambulance Quotes
+  async createAmbulanceQuote(quote: InsertAmbulanceQuote): Promise<AmbulanceQuote> {
+    const [result] = await db.insert(ambulanceQuotes).values(quote).returning();
+    return result;
+  }
+
+  async getAllAmbulanceQuotes(): Promise<AmbulanceQuote[]> {
+    return db.select().from(ambulanceQuotes).orderBy(desc(ambulanceQuotes.createdAt));
+  }
+
+  // Captive Quotes
+  async createCaptiveQuote(quote: InsertCaptiveQuote): Promise<CaptiveQuote> {
+    const [result] = await db.insert(captiveQuotes).values(quote).returning();
+    return result;
+  }
+
+  async getAllCaptiveQuotes(): Promise<CaptiveQuote[]> {
+    return db.select().from(captiveQuotes).orderBy(desc(captiveQuotes.createdAt));
   }
 
   // Transport Quotes

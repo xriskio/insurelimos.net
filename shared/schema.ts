@@ -346,6 +346,72 @@ export const insertCyberLiabilityQuoteSchema = createInsertSchema(cyberLiability
 export type InsertCyberLiabilityQuote = z.infer<typeof insertCyberLiabilityQuoteSchema>;
 export type CyberLiabilityQuote = typeof cyberLiabilityQuotes.$inferSelect;
 
+// Ambulance Quote Submissions
+export const ambulanceQuotes = pgTable("ambulance_quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  businessName: text("business_name").notNull(),
+  contactName: text("contact_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  address: text("address").notNull(),
+  serviceType: text("service_type").notNull(),
+  numberOfAmbulances: text("number_of_ambulances").notNull(),
+  serviceArea: text("service_area"),
+  annualCalls: text("annual_calls"),
+  hasAutoLiability: boolean("has_auto_liability").default(false),
+  hasPhysicalDamage: boolean("has_physical_damage").default(false),
+  hasWorkersComp: boolean("has_workers_comp").default(false),
+  hasInlandMarine: boolean("has_inland_marine").default(false),
+  hasGeneralLiability: boolean("has_general_liability").default(false),
+  hasProfessionalLiability: boolean("has_professional_liability").default(false),
+  hasProperty: boolean("has_property").default(false),
+  hasUmbrella: boolean("has_umbrella").default(false),
+  hasEbl: boolean("has_ebl").default(false),
+  currentCarrier: text("current_carrier"),
+  currentPremium: text("current_premium"),
+  notes: text("notes"),
+  uploadedDocuments: text("uploaded_documents").array(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertAmbulanceQuoteSchema = createInsertSchema(ambulanceQuotes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertAmbulanceQuote = z.infer<typeof insertAmbulanceQuoteSchema>;
+export type AmbulanceQuote = typeof ambulanceQuotes.$inferSelect;
+
+// Captive Program Quote Submissions
+export const captiveQuotes = pgTable("captive_quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  businessName: text("business_name").notNull(),
+  contactName: text("contact_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  address: text("address").notNull(),
+  businessType: text("business_type").notNull(),
+  fleetSize: text("fleet_size").notNull(),
+  annualPremium: text("annual_premium").notNull(),
+  yearsInBusiness: text("years_in_business"),
+  captiveType: text("captive_type").notNull(),
+  currentCarrier: text("current_carrier"),
+  lossRatio: text("loss_ratio"),
+  safetyProgram: text("safety_program"),
+  riskManagement: text("risk_management"),
+  notes: text("notes"),
+  uploadedDocuments: text("uploaded_documents").array(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertCaptiveQuoteSchema = createInsertSchema(captiveQuotes).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertCaptiveQuote = z.infer<typeof insertCaptiveQuoteSchema>;
+export type CaptiveQuote = typeof captiveQuotes.$inferSelect;
+
 // Site Content Management
 export const siteContent = pgTable("site_content", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),

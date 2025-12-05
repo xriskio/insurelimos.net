@@ -15,6 +15,8 @@ import {
   insertExcessLiabilityQuoteSchema,
   insertCyberLiabilityQuoteSchema,
   insertTransportQuoteSchema,
+  insertAmbulanceQuoteSchema,
+  insertCaptiveQuoteSchema,
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
@@ -343,6 +345,70 @@ export async function registerRoutes(
       res.json({ success: true, quotes });
     } catch (error) {
       console.error("Error fetching cyber liability quotes:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // Ambulance Quote Submission
+  app.post("/api/quotes/ambulance", async (req, res) => {
+    try {
+      const validatedData = insertAmbulanceQuoteSchema.parse(req.body);
+      const quote = await storage.createAmbulanceQuote(validatedData);
+      res.status(201).json({ success: true, quote });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating ambulance quote:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit quote" 
+      });
+    }
+  });
+
+  app.get("/api/quotes/ambulance", async (req, res) => {
+    try {
+      const quotes = await storage.getAllAmbulanceQuotes();
+      res.json({ success: true, quotes });
+    } catch (error) {
+      console.error("Error fetching ambulance quotes:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // Captive Program Quote Submission
+  app.post("/api/quotes/captive", async (req, res) => {
+    try {
+      const validatedData = insertCaptiveQuoteSchema.parse(req.body);
+      const quote = await storage.createCaptiveQuote(validatedData);
+      res.status(201).json({ success: true, quote });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating captive quote:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit quote" 
+      });
+    }
+  });
+
+  app.get("/api/quotes/captive", async (req, res) => {
+    try {
+      const quotes = await storage.getAllCaptiveQuotes();
+      res.json({ success: true, quotes });
+    } catch (error) {
+      console.error("Error fetching captive quotes:", error);
       res.status(500).json({ success: false, error: "Failed to fetch quotes" });
     }
   });

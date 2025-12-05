@@ -5,6 +5,8 @@ import { TransportQuoteForm } from "@/components/forms/TransportQuoteForm";
 import { WorkersCompForm } from "@/components/forms/WorkersCompForm";
 import { ExcessLiabilityForm } from "@/components/forms/ExcessLiabilityForm";
 import { CyberLiabilityForm } from "@/components/forms/CyberLiabilityForm";
+import { AmbulanceForm } from "@/components/forms/AmbulanceForm";
+import { CaptiveForm } from "@/components/forms/CaptiveForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2 } from "lucide-react";
@@ -14,7 +16,7 @@ export default function QuotePage() {
   const [match, params] = useRoute("/quote/:type?");
   const type = params?.type || "limousine";
 
-  const activeTab = ["limousine", "rideshare", "tnc", "nemt", "public-auto", "workers-comp", "excess-liability", "cyber-liability", "transportation"].includes(type) 
+  const activeTab = ["limousine", "rideshare", "tnc", "nemt", "public-auto", "workers-comp", "excess-liability", "cyber-liability", "ambulance", "captive", "transportation"].includes(type) 
     ? type 
     : "limousine";
 
@@ -58,6 +60,8 @@ export default function QuotePage() {
                       <TabsTrigger value="workers-comp" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-workers-comp">Workers Comp</TabsTrigger>
                       <TabsTrigger value="excess-liability" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-excess">Excess Liability</TabsTrigger>
                       <TabsTrigger value="cyber-liability" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-cyber">Cyber Liability</TabsTrigger>
+                      <TabsTrigger value="ambulance" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-ambulance">Ambulance</TabsTrigger>
+                      <TabsTrigger value="captive" className="py-2 px-4 text-sm whitespace-nowrap" data-testid="tab-captive">Captive Programs</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="limousine" className="mt-0">
@@ -122,6 +126,22 @@ export default function QuotePage() {
                         <p className="text-muted-foreground">Protect your business from data breaches and cyber threats.</p>
                       </div>
                       <CyberLiabilityForm />
+                    </TabsContent>
+
+                    <TabsContent value="ambulance" className="mt-0">
+                      <div className="mb-6">
+                        <h2 className="text-2xl font-bold text-foreground mb-2">Ambulance & EMS Insurance</h2>
+                        <p className="text-muted-foreground">Comprehensive coverage for ambulance services and emergency medical transportation.</p>
+                      </div>
+                      <AmbulanceForm />
+                    </TabsContent>
+
+                    <TabsContent value="captive" className="mt-0">
+                      <div className="mb-6">
+                        <h2 className="text-2xl font-bold text-foreground mb-2">Captive Insurance Programs</h2>
+                        <p className="text-muted-foreground">Alternative risk solutions for larger fleets seeking greater control and cost savings.</p>
+                      </div>
+                      <CaptiveForm />
                     </TabsContent>
 
                     <TabsContent value="transportation" className="mt-0">
