@@ -132,8 +132,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 pt-8 text-center text-sm text-primary-foreground/50">
-          <p>&copy; {new Date().getFullYear()} Casurance Agency Insurance Services, LLC. All rights reserved.</p>
+        <div className="border-t border-primary-foreground/10 pt-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-primary-foreground/50">
+              &copy; {new Date().getFullYear()} Casurance Agency Insurance Services, LLC. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6 text-sm">
+              <Link href="/privacy" className="text-primary-foreground/50 hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-primary-foreground/50 hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/blog" className="text-primary-foreground/50 hover:text-white transition-colors">
+                Blog
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
