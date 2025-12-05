@@ -1,6 +1,7 @@
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -21,6 +22,27 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { ObjectUploader } from "@/components/ObjectUploader";
+import { Plus, Trash2, FileText, X } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const vehicleSchema = z.object({
+  year: z.string().optional(),
+  make: z.string().optional(),
+  model: z.string().optional(),
+  vin: z.string().optional(),
+  seatingCapacity: z.string().optional(),
+  value: z.string().optional(),
+});
+
+const driverSchema = z.object({
+  fullName: z.string().optional(),
+  dateOfBirth: z.string().optional(),
+  licenseNumber: z.string().optional(),
+  licenseState: z.string().optional(),
+  yearsExperience: z.string().optional(),
+  dateOfHire: z.string().optional(),
+});
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
@@ -32,6 +54,14 @@ const formSchema = z.object({
   numberOfAmbulances: z.string().min(1, "Number of ambulances is required"),
   serviceArea: z.string().optional(),
   annualCalls: z.string().optional(),
+  effectiveDate: z.string().optional(),
+  liabilityLimit: z.string().optional(),
+  currentCarrier: z.string().optional(),
+  currentPremium: z.string().optional(),
+  expirationDate: z.string().optional(),
+  operatingRadius: z.string().optional(),
+  statesOfOperation: z.string().optional(),
+  filingsNeeded: z.array(z.string()).optional(),
   hasAutoLiability: z.boolean().default(false),
   hasPhysicalDamage: z.boolean().default(false),
   hasWorkersComp: z.boolean().default(false),
@@ -41,13 +71,25 @@ const formSchema = z.object({
   hasProperty: z.boolean().default(false),
   hasUmbrella: z.boolean().default(false),
   hasEbl: z.boolean().default(false),
-  currentCarrier: z.string().optional(),
-  currentPremium: z.string().optional(),
+  vehicles: z.array(vehicleSchema).optional(),
+  drivers: z.array(driverSchema).optional(),
+  lossHistory: z.string().optional(),
   notes: z.string().optional(),
+  uploadedDocuments: z.array(z.string()).optional(),
 });
+
+const US_STATES = [
+  "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+];
 
 export function AmbulanceForm() {
   const { toast } = useToast();
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -60,6 +102,14 @@ export function AmbulanceForm() {
       numberOfAmbulances: "",
       serviceArea: "",
       annualCalls: "",
+      effectiveDate: "",
+      liabilityLimit: "",
+      currentCarrier: "",
+      currentPremium: "",
+      expirationDate: "",
+      operatingRadius: "",
+      statesOfOperation: "",
+      filingsNeeded: [],
       hasAutoLiability: false,
       hasPhysicalDamage: false,
       hasWorkersComp: false,
@@ -69,20 +119,73 @@ export function AmbulanceForm() {
       hasProperty: false,
       hasUmbrella: false,
       hasEbl: false,
-      currentCarrier: "",
-      currentPremium: "",
+      vehicles: [{ year: "", make: "", model: "", vin: "", seatingCapacity: "", value: "" }],
+      drivers: [{ fullName: "", dateOfBirth: "", licenseNumber: "", licenseState: "", yearsExperience: "", dateOfHire: "" }],
+      lossHistory: "",
       notes: "",
+      uploadedDocuments: [],
     },
   });
 
+  const { fields: vehicleFields, append: appendVehicle, remove: removeVehicle } = useFieldArray({
+    control: form.control,
+    name: "vehicles",
+  });
+
+  const { fields: driverFields, append: appendDriver, remove: removeDriver } = useFieldArray({
+    control: form.control,
+    name: "drivers",
+  });
+
+  const handleGetUploadParameters = async () => {
+    const response = await fetch('/api/objects/upload', { method: 'POST' });
+    const data = await response.json();
+    return { method: 'PUT' as const, url: data.uploadURL };
+  };
+
+  const handleUploadComplete = async (result: any) => {
+    if (result.successful && result.successful.length > 0) {
+      const newFiles: string[] = [];
+      for (const file of result.successful) {
+        try {
+          const response = await fetch('/api/objects/finalize', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ uploadURL: file.uploadURL }),
+          });
+          const data = await response.json();
+          newFiles.push(data.objectPath);
+        } catch (error) {
+          console.error('Error finalizing upload:', error);
+        }
+      }
+      setUploadedFiles(prev => [...prev, ...newFiles]);
+      toast({
+        title: "Documents Uploaded",
+        description: `${newFiles.length} document(s) uploaded successfully.`,
+      });
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      const submitData = {
+        ...values,
+        vehicles: JSON.stringify(values.vehicles),
+        drivers: JSON.stringify(values.drivers),
+        uploadedDocuments: uploadedFiles.length > 0 ? uploadedFiles : null,
+      };
+
       const response = await fetch('/api/quotes/ambulance', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(submitData),
       });
 
       const data = await response.json();
@@ -97,6 +200,7 @@ export function AmbulanceForm() {
       });
       
       form.reset();
+      setUploadedFiles([]);
     } catch (error: any) {
       toast({
         title: "Submission Failed",
@@ -277,6 +381,169 @@ export function AmbulanceForm() {
             </div>
           </div>
 
+          {/* Coverage Information */}
+          <div className="md:col-span-2 space-y-4">
+            <h3 className="text-lg font-semibold border-b pb-2 text-primary">Coverage Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="effectiveDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Requested Effective Date</FormLabel>
+                    <FormControl>
+                      <Input type="date" {...field} data-testid="input-effectiveDate" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="liabilityLimit"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Requested Liability Limit</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger data-testid="select-liabilityLimit">
+                          <SelectValue placeholder="Select Liability Limit" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="500000">$500,000</SelectItem>
+                        <SelectItem value="750000">$750,000</SelectItem>
+                        <SelectItem value="1000000">$1,000,000</SelectItem>
+                        <SelectItem value="1500000">$1,500,000</SelectItem>
+                        <SelectItem value="2000000">$2,000,000</SelectItem>
+                        <SelectItem value="5000000">$5,000,000</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="currentCarrier"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Current Insurance Carrier</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Current carrier name" {...field} data-testid="input-currentCarrier" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="currentPremium"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Current Annual Premium</FormLabel>
+                    <FormControl>
+                      <Input placeholder="$" {...field} data-testid="input-currentPremium" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="expirationDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Current Policy Expiration</FormLabel>
+                    <FormControl>
+                      <Input type="date" {...field} data-testid="input-expirationDate" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="operatingRadius"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Operating Radius (miles)</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger data-testid="select-operatingRadius">
+                          <SelectValue placeholder="Select Operating Radius" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="25">Up to 25 miles</SelectItem>
+                        <SelectItem value="50">Up to 50 miles</SelectItem>
+                        <SelectItem value="100">Up to 100 miles</SelectItem>
+                        <SelectItem value="150">Up to 150 miles</SelectItem>
+                        <SelectItem value="200">Up to 200 miles</SelectItem>
+                        <SelectItem value="unlimited">Unlimited</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="statesOfOperation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>States of Operation</FormLabel>
+                    <FormControl>
+                      <Input placeholder="CA, NV, AZ, etc." {...field} data-testid="input-statesOfOperation" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="filingsNeeded"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Filings Needed</FormLabel>
+                    <Select 
+                      onValueChange={(value) => {
+                        const current = field.value || [];
+                        if (!current.includes(value)) {
+                          field.onChange([...current, value]);
+                        }
+                      }} 
+                      value=""
+                    >
+                      <FormControl>
+                        <SelectTrigger data-testid="select-filingsNeeded">
+                          <SelectValue placeholder="Select filings" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="DOT">DOT Filing</SelectItem>
+                        <SelectItem value="CPUC">CPUC Filing</SelectItem>
+                        <SelectItem value="State">State Filing</SelectItem>
+                        <SelectItem value="Medicare">Medicare/Medicaid</SelectItem>
+                        <SelectItem value="None">None Required</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {field.value && field.value.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {field.value.map((filing, idx) => (
+                          <span key={idx} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">
+                            {filing}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+
           <div className="md:col-span-2 space-y-4">
             <h3 className="text-lg font-semibold border-b pb-2 text-primary">Coverage Needs (Select All That Apply)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -409,35 +676,298 @@ export function AmbulanceForm() {
             </div>
           </div>
 
+          {/* Vehicle Information */}
           <div className="md:col-span-2 space-y-4">
-            <h3 className="text-lg font-semibold border-b pb-2 text-primary">Current Insurance (if applicable)</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="currentCarrier"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Current Insurance Carrier</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., PHLY, Hartford" {...field} data-testid="input-currentCarrier" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="currentPremium"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Current Annual Premium (Est.)</FormLabel>
-                    <FormControl>
-                      <Input placeholder="$50,000" {...field} data-testid="input-currentPremium" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <h3 className="text-lg font-semibold border-b pb-2 text-primary">Vehicle Information</h3>
+            {vehicleFields.map((field, index) => (
+              <Card key={field.id} className="bg-muted/30">
+                <CardHeader className="py-3">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-base font-medium text-primary">Vehicle {index + 1}</CardTitle>
+                    {vehicleFields.length > 1 && (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeVehicle(index)}
+                        className="text-destructive hover:text-destructive"
+                        data-testid={`button-removeVehicle-${index}`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <FormField
+                      control={form.control}
+                      name={`vehicles.${index}.year`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Year</FormLabel>
+                          <FormControl>
+                            <Input placeholder="2024" {...field} data-testid={`input-vehicle-year-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`vehicles.${index}.make`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Make</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Ford" {...field} data-testid={`input-vehicle-make-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`vehicles.${index}.model`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Model</FormLabel>
+                          <FormControl>
+                            <Input placeholder="E-450" {...field} data-testid={`input-vehicle-model-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`vehicles.${index}.vin`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>VIN</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Vehicle Identification Number" {...field} data-testid={`input-vehicle-vin-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`vehicles.${index}.seatingCapacity`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Seating Capacity</FormLabel>
+                          <FormControl>
+                            <Input placeholder="4" {...field} data-testid={`input-vehicle-seating-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`vehicles.${index}.value`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Value ($)</FormLabel>
+                          <FormControl>
+                            <Input placeholder="175000" {...field} data-testid={`input-vehicle-value-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full border-dashed"
+              onClick={() => appendVehicle({ year: "", make: "", model: "", vin: "", seatingCapacity: "", value: "" })}
+              data-testid="button-addVehicle"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Add Another Vehicle
+            </Button>
+          </div>
+
+          {/* Driver Information */}
+          <div className="md:col-span-2 space-y-4">
+            <h3 className="text-lg font-semibold border-b pb-2 text-primary">Driver Information</h3>
+            {driverFields.map((field, index) => (
+              <Card key={field.id} className="bg-muted/30">
+                <CardHeader className="py-3">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-base font-medium text-primary">Driver {index + 1}</CardTitle>
+                    {driverFields.length > 1 && (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeDriver(index)}
+                        className="text-destructive hover:text-destructive"
+                        data-testid={`button-removeDriver-${index}`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <FormField
+                      control={form.control}
+                      name={`drivers.${index}.fullName`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Smith" {...field} data-testid={`input-driver-name-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`drivers.${index}.dateOfBirth`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Date of Birth</FormLabel>
+                          <FormControl>
+                            <Input type="date" {...field} data-testid={`input-driver-dob-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`drivers.${index}.licenseNumber`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>License Number</FormLabel>
+                          <FormControl>
+                            <Input placeholder="DL01234576" {...field} data-testid={`input-driver-license-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`drivers.${index}.licenseState`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>License State</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid={`select-driver-licenseState-${index}`}>
+                                <SelectValue placeholder="State" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {US_STATES.map((state) => (
+                                <SelectItem key={state} value={state}>{state}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`drivers.${index}.yearsExperience`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Years Experience</FormLabel>
+                          <FormControl>
+                            <Input placeholder="5" {...field} data-testid={`input-driver-experience-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name={`drivers.${index}.dateOfHire`}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Date of Hire</FormLabel>
+                          <FormControl>
+                            <Input type="date" {...field} data-testid={`input-driver-hire-${index}`} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full border-dashed"
+              onClick={() => appendDriver({ fullName: "", dateOfBirth: "", licenseNumber: "", licenseState: "", yearsExperience: "", dateOfHire: "" })}
+              data-testid="button-addDriver"
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Add Another Driver
+            </Button>
+          </div>
+
+          {/* Loss History & Documents */}
+          <div className="md:col-span-2 space-y-4">
+            <h3 className="text-lg font-semibold border-b pb-2 text-primary">Loss History & Documents</h3>
+            <FormField
+              control={form.control}
+              name="lossHistory"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Loss History (Last 3 Years)</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="Please provide details of any claims or losses in the past 3 years..." 
+                      className="min-h-[100px]"
+                      {...field} 
+                      data-testid="textarea-lossHistory"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <div className="space-y-3">
+              <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                Upload Documents (Loss Runs, MVRs, Dec Pages, etc.)
+              </label>
+              <ObjectUploader
+                onGetUploadParameters={handleGetUploadParameters}
+                onComplete={handleUploadComplete}
+                allowedFileTypes={['.pdf', '.doc', '.docx', '.jpg', '.jpeg', '.png']}
+                maxFileSize={10 * 1024 * 1024}
+                maxNumberOfFiles={10}
+                buttonClassName="flex items-center gap-2"
+              >
+                <FileText className="h-4 w-4" />
+                Upload Documents
+              </ObjectUploader>
+              
+              {uploadedFiles.length > 0 && (
+                <div className="mt-3 space-y-2">
+                  <p className="text-sm text-muted-foreground">Uploaded documents:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {uploadedFiles.map((file, index) => (
+                      <div key={index} className="flex items-center gap-1 bg-muted px-2 py-1 rounded text-sm">
+                        <FileText className="h-3 w-3" />
+                        <span className="truncate max-w-[150px]">{file.split('/').pop()}</span>
+                        <button
+                          type="button"
+                          onClick={() => removeFile(index)}
+                          className="ml-1 text-muted-foreground hover:text-destructive"
+                          data-testid={`button-removeFile-${index}`}
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -450,7 +980,7 @@ export function AmbulanceForm() {
                   <FormLabel>Additional Notes</FormLabel>
                   <FormControl>
                     <Textarea 
-                      placeholder="Any additional information about your operation, claims history, or specific coverage needs..." 
+                      placeholder="Any additional information about your operation or specific coverage needs..." 
                       className="min-h-[100px]"
                       {...field} 
                       data-testid="textarea-notes"
