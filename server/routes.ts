@@ -10,6 +10,7 @@ import {
   insertServiceRequestSchema,
   insertBlogPostSchema,
   insertNewsReleaseSchema,
+  insertSiteContentSchema,
   insertWorkersCompQuoteSchema,
   insertExcessLiabilityQuoteSchema,
   insertCyberLiabilityQuoteSchema,
@@ -685,6 +686,49 @@ export async function registerRoutes(
     } catch (error: any) {
       console.error("Error improving content:", error);
       res.status(500).json({ success: false, error: error.message || "Failed to improve content" });
+    }
+  });
+
+  // ============== SITE CONTENT ==============
+  
+  // Get all site content (admin)
+  app.get("/api/site-content", async (req, res) => {
+    try {
+      const content = await storage.getAllSiteContent();
+      res.json({ success: true, content });
+    } catch (error) {
+      console.error("Error fetching site content:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch content" });
+    }
+  });
+
+  // Get specific section content (public)
+  app.get("/api/site-content/:section", async (req, res) => {
+    try {
+      const content = await storage.getSiteContent(req.params.section);
+      if (!content) {
+        return res.status(404).json({ success: false, error: "Content not found" });
+      }
+      res.json({ success: true, content });
+    } catch (error) {
+      console.error("Error fetching site content:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch content" });
+    }
+  });
+
+  // Upsert site content
+  app.post("/api/site-content", async (req, res) => {
+    try {
+      const validatedData = insertSiteContentSchema.parse(req.body);
+      const content = await storage.upsertSiteContent(validatedData);
+      res.json({ success: true, content });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ success: false, error: validationError.message });
+      }
+      console.error("Error saving site content:", error);
+      res.status(500).json({ success: false, error: "Failed to save content" });
     }
   });
 

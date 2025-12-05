@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, boolean, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -345,3 +345,25 @@ export const insertCyberLiabilityQuoteSchema = createInsertSchema(cyberLiability
 
 export type InsertCyberLiabilityQuote = z.infer<typeof insertCyberLiabilityQuoteSchema>;
 export type CyberLiabilityQuote = typeof cyberLiabilityQuotes.$inferSelect;
+
+// Site Content Management
+export const siteContent = pgTable("site_content", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  section: text("section").notNull().unique(),
+  title: text("title"),
+  subtitle: text("subtitle"),
+  content: text("content"),
+  buttonText: text("button_text"),
+  buttonLink: text("button_link"),
+  imageUrl: text("image_url"),
+  metadata: jsonb("metadata"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertSiteContentSchema = createInsertSchema(siteContent).omit({
+  id: true,
+  updatedAt: true,
+});
+
+export type InsertSiteContent = z.infer<typeof insertSiteContentSchema>;
+export type SiteContent = typeof siteContent.$inferSelect;

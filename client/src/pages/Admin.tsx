@@ -25,6 +25,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -48,7 +49,9 @@ import {
   Trash2,
   Edit,
   Newspaper,
-  BookOpen
+  BookOpen,
+  Settings,
+  Save
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -107,6 +110,19 @@ interface NewsRelease {
   updatedAt: string;
 }
 
+interface SiteContent {
+  id: string;
+  section: string;
+  title: string | null;
+  subtitle: string | null;
+  content: string | null;
+  buttonText: string | null;
+  buttonLink: string | null;
+  imageUrl: string | null;
+  metadata: any;
+  updatedAt: string;
+}
+
 interface DashboardStats {
   totalQuotes: number;
   newQuotes: number;
@@ -141,6 +157,17 @@ const NEWS_CATEGORIES = [
   "Industry Update",
   "Award",
   "Event",
+];
+
+const CONTENT_SECTIONS = [
+  { id: "homepage_hero", label: "Homepage Hero", description: "Main banner section on homepage" },
+  { id: "homepage_about", label: "Homepage About", description: "About section on homepage" },
+  { id: "homepage_cta", label: "Homepage CTA", description: "Call to action section" },
+  { id: "about_intro", label: "About Page Intro", description: "Introduction on about page" },
+  { id: "about_mission", label: "About Page Mission", description: "Mission statement" },
+  { id: "services_intro", label: "Services Intro", description: "Services page introduction" },
+  { id: "contact_info", label: "Contact Information", description: "Company contact details" },
+  { id: "footer_tagline", label: "Footer Tagline", description: "Tagline in footer" },
 ];
 
 const QUOTE_TYPE_LABELS: Record<string, string> = {
@@ -185,6 +212,7 @@ export default function Admin() {
   const [contacts, setContacts] = useState<ContactMessage[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [newsReleases, setNewsReleases] = useState<NewsRelease[]>([]);
+  const [siteContent, setSiteContent] = useState<SiteContent[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
   const [noteText, setNoteText] = useState("");
@@ -222,20 +250,35 @@ export default function Admin() {
     publishDate: new Date().toISOString().split('T')[0],
   });
 
+  // Content form state
+  const [contentDialogOpen, setContentDialogOpen] = useState(false);
+  const [editingContent, setEditingContent] = useState<string | null>(null);
+  const [contentForm, setContentForm] = useState({
+    section: "",
+    title: "",
+    subtitle: "",
+    content: "",
+    buttonText: "",
+    buttonLink: "",
+    imageUrl: "",
+  });
+
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [statsRes, allRes, blogRes, newsRes] = await Promise.all([
+      const [statsRes, allRes, blogRes, newsRes, contentRes] = await Promise.all([
         fetch("/api/dashboard/stats"),
         fetch("/api/dashboard/all"),
         fetch("/api/blog/all"),
         fetch("/api/news/all"),
+        fetch("/api/site-content"),
       ]);
       
       const statsData = await statsRes.json();
       const allData = await allRes.json();
       const blogData = await blogRes.json();
       const newsData = await newsRes.json();
+      const contentData = await contentRes.json();
       
       if (statsData.success) setStats(statsData.stats);
       if (allData.success) {
@@ -244,6 +287,7 @@ export default function Admin() {
       }
       if (blogData.success) setBlogPosts(blogData.posts);
       if (newsData.success) setNewsReleases(newsData.releases);
+      if (contentData.success) setSiteContent(contentData.content);
     } catch (error) {
       console.error("Failed to fetch data:", error);
       toast({
@@ -509,6 +553,61 @@ export default function Admin() {
     setNewsDialogOpen(true);
   };
 
+  // Content functions
+  const resetContentForm = () => {
+    setContentForm({
+      section: "",
+      title: "",
+      subtitle: "",
+      content: "",
+      buttonText: "",
+      buttonLink: "",
+      imageUrl: "",
+    });
+    setEditingContent(null);
+  };
+
+  const editContent = (sectionId: string) => {
+    const existing = siteContent.find(c => c.section === sectionId);
+    setEditingContent(sectionId);
+    setContentForm({
+      section: sectionId,
+      title: existing?.title || "",
+      subtitle: existing?.subtitle || "",
+      content: existing?.content || "",
+      buttonText: existing?.buttonText || "",
+      buttonLink: existing?.buttonLink || "",
+      imageUrl: existing?.imageUrl || "",
+    });
+    setContentDialogOpen(true);
+  };
+
+  const saveContent = async () => {
+    try {
+      const response = await fetch("/api/site-content", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contentForm),
+      });
+      
+      const data = await response.json();
+      if (data.success) {
+        toast({ title: "Success", description: "Content saved successfully" });
+        setContentDialogOpen(false);
+        resetContentForm();
+        fetchData();
+      } else {
+        throw new Error(data.error);
+      }
+    } catch (error: any) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    }
+  };
+
+  const getContentForSection = (sectionId: string) => {
+    return siteContent.find(c => c.section === sectionId);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
@@ -587,6 +686,10 @@ export default function Admin() {
             <TabsTrigger value="contacts" data-testid="tab-contacts">
               <Mail className="w-4 h-4 mr-2" />
               Contacts
+            </TabsTrigger>
+            <TabsTrigger value="content" data-testid="tab-content">
+              <Settings className="w-4 h-4 mr-2" />
+              Site Content
             </TabsTrigger>
             <TabsTrigger value="blog" data-testid="tab-blog">
               <BookOpen className="w-4 h-4 mr-2" />
@@ -746,6 +849,136 @@ export default function Admin() {
             </Card>
           </TabsContent>
 
+          {/* Site Content Tab */}
+          <TabsContent value="content">
+            <Card>
+              <CardHeader>
+                <CardTitle>Site Content Management</CardTitle>
+                <p className="text-sm text-muted-foreground">Edit the text and content that appears across your website</p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {CONTENT_SECTIONS.map((section) => {
+                    const content = getContentForSection(section.id);
+                    return (
+                      <Card key={section.id} className="border">
+                        <CardHeader className="pb-2">
+                          <div className="flex items-center justify-between">
+                            <CardTitle className="text-base">{section.label}</CardTitle>
+                            <Button variant="outline" size="sm" onClick={() => editContent(section.id)}>
+                              <Edit className="w-4 h-4 mr-1" />
+                              Edit
+                            </Button>
+                          </div>
+                          <p className="text-xs text-muted-foreground">{section.description}</p>
+                        </CardHeader>
+                        <CardContent>
+                          {content ? (
+                            <div className="space-y-1 text-sm">
+                              {content.title && <p><strong>Title:</strong> {content.title}</p>}
+                              {content.subtitle && <p><strong>Subtitle:</strong> {content.subtitle}</p>}
+                              {content.content && (
+                                <p className="text-muted-foreground line-clamp-2">{content.content.replace(/<[^>]*>/g, '').slice(0, 100)}...</p>
+                              )}
+                              <p className="text-xs text-muted-foreground mt-2">
+                                Last updated: {format(new Date(content.updatedAt), "MMM d, yyyy")}
+                              </p>
+                            </div>
+                          ) : (
+                            <p className="text-sm text-muted-foreground italic">No content set yet</p>
+                          )}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+
+                {/* Content Edit Dialog */}
+                <Dialog open={contentDialogOpen} onOpenChange={(open) => {
+                  setContentDialogOpen(open);
+                  if (!open) resetContentForm();
+                }}>
+                  <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                      <DialogTitle>
+                        Edit {CONTENT_SECTIONS.find(s => s.id === editingContent)?.label}
+                      </DialogTitle>
+                      <DialogDescription>
+                        Update the content for this section of your website
+                      </DialogDescription>
+                    </DialogHeader>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <Label>Title</Label>
+                        <Input
+                          value={contentForm.title}
+                          onChange={(e) => setContentForm({ ...contentForm, title: e.target.value })}
+                          placeholder="Section title"
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label>Subtitle</Label>
+                        <Input
+                          value={contentForm.subtitle}
+                          onChange={(e) => setContentForm({ ...contentForm, subtitle: e.target.value })}
+                          placeholder="Section subtitle"
+                        />
+                      </div>
+
+                      <div>
+                        <Label>Content (HTML supported)</Label>
+                        <Textarea
+                          value={contentForm.content}
+                          onChange={(e) => setContentForm({ ...contentForm, content: e.target.value })}
+                          placeholder="Main content..."
+                          rows={6}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <Label>Button Text</Label>
+                          <Input
+                            value={contentForm.buttonText}
+                            onChange={(e) => setContentForm({ ...contentForm, buttonText: e.target.value })}
+                            placeholder="Get a Quote"
+                          />
+                        </div>
+                        <div>
+                          <Label>Button Link</Label>
+                          <Input
+                            value={contentForm.buttonLink}
+                            onChange={(e) => setContentForm({ ...contentForm, buttonLink: e.target.value })}
+                            placeholder="/quote"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label>Image URL</Label>
+                        <Input
+                          value={contentForm.imageUrl}
+                          onChange={(e) => setContentForm({ ...contentForm, imageUrl: e.target.value })}
+                          placeholder="https://..."
+                        />
+                      </div>
+                    </div>
+
+                    <DialogFooter>
+                      <Button variant="outline" onClick={() => setContentDialogOpen(false)}>Cancel</Button>
+                      <Button onClick={saveContent}>
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Content
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           {/* Blog Tab */}
           <TabsContent value="blog">
             <Card>
@@ -764,6 +997,7 @@ export default function Admin() {
                   <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle>{editingBlog ? "Edit Blog Post" : "Create Blog Post"}</DialogTitle>
+                      <DialogDescription>Create or edit a blog post for your website</DialogDescription>
                     </DialogHeader>
                     
                     {/* AI Generation Section */}
@@ -969,6 +1203,7 @@ export default function Admin() {
                   <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                       <DialogTitle>{editingNews ? "Edit News Release" : "Create News Release"}</DialogTitle>
+                      <DialogDescription>Create or edit a news release for your website</DialogDescription>
                     </DialogHeader>
                     
                     {/* AI Generation Section */}

@@ -15,6 +15,8 @@ import {
   type InsertBlogPost,
   type NewsRelease,
   type InsertNewsRelease,
+  type SiteContent,
+  type InsertSiteContent,
   type WorkersCompQuote,
   type InsertWorkersCompQuote,
   type ExcessLiabilityQuote,
@@ -31,6 +33,7 @@ import {
   serviceRequests,
   blogPosts,
   newsReleases,
+  siteContent,
   workersCompQuotes,
   excessLiabilityQuotes,
   cyberLiabilityQuotes,
@@ -81,6 +84,11 @@ export interface IStorage {
   getNewsReleaseBySlug(slug: string): Promise<NewsRelease | null>;
   updateNewsRelease(id: string, release: Partial<InsertNewsRelease>): Promise<NewsRelease | null>;
   deleteNewsRelease(id: string): Promise<boolean>;
+  
+  // Site Content
+  getSiteContent(section: string): Promise<SiteContent | null>;
+  getAllSiteContent(): Promise<SiteContent[]>;
+  upsertSiteContent(content: InsertSiteContent): Promise<SiteContent>;
   
   // Workers Comp Quotes
   createWorkersCompQuote(quote: InsertWorkersCompQuote): Promise<WorkersCompQuote>;
@@ -242,6 +250,30 @@ export class DatabaseStorage implements IStorage {
   async deleteNewsRelease(id: string): Promise<boolean> {
     const result = await db.delete(newsReleases).where(eq(newsReleases.id, id));
     return true;
+  }
+
+  // Site Content
+  async getSiteContent(section: string): Promise<SiteContent | null> {
+    const [result] = await db.select().from(siteContent).where(eq(siteContent.section, section));
+    return result || null;
+  }
+
+  async getAllSiteContent(): Promise<SiteContent[]> {
+    return db.select().from(siteContent).orderBy(siteContent.section);
+  }
+
+  async upsertSiteContent(content: InsertSiteContent): Promise<SiteContent> {
+    const existing = await this.getSiteContent(content.section);
+    if (existing) {
+      const [result] = await db.update(siteContent)
+        .set({ ...content, updatedAt: new Date() })
+        .where(eq(siteContent.section, content.section))
+        .returning();
+      return result;
+    } else {
+      const [result] = await db.insert(siteContent).values(content).returning();
+      return result;
+    }
   }
 
   // Workers Comp Quotes
