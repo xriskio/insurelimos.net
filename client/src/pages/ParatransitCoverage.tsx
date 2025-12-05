@@ -28,6 +28,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import paratransitHeroImage from "@assets/stock_images/wheelchair_accessibl_1c26c45e.jpg";
 
 export default function ParatransitCoverage() {
   return (
@@ -40,9 +41,14 @@ export default function ParatransitCoverage() {
       <Header />
       
       <main className="flex-1" id="main-content">
-        {/* Hero Section */}
-        <section className="relative h-[400px] md:h-[500px] overflow-hidden bg-gradient-to-br from-primary via-primary to-primary/90">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMtOS45NDEgMC0xOCA4LjA1OS0xOCAxOHM4LjA1OSAxOCAxOCAxOCAxOC04LjA1OSAxOC0xOC04LjA1OS0xOC0xOC0xOHptMCAzMmMtNy43MzIgMC0xNC02LjI2OC0xNC0xNHM2LjI2OC0xNCAxNC0xNCAxNCA2LjI2OCAxNCAxNC02LjI2OCAxNC0xNCAxNHoiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iLjAzIi8+PC9nPjwvc3ZnPg==')] opacity-30" />
+        {/* Hero Section with Image */}
+        <section className="relative h-[400px] md:h-[500px] overflow-hidden">
+          <img 
+            src={paratransitHeroImage} 
+            alt="Wheelchair accessible paratransit van" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
           <div className="container mx-auto px-4 h-full flex items-center relative z-10">
             <div className="max-w-2xl text-white">
               <p className="text-white/80 mb-2 font-medium flex items-center gap-2">
