@@ -305,7 +305,25 @@ export async function registerRoutes(
     try {
       const validatedData = insertWorkersCompQuoteSchema.parse(req.body);
       const quote = await storage.createWorkersCompQuote(validatedData);
-      res.status(201).json({ success: true, quote });
+      
+      // Generate reference number and send emails
+      const referenceNumber = `WC-${Date.now().toString(36).toUpperCase()}`;
+      const emailData = {
+        referenceNumber,
+        quoteType: "Workers Compensation",
+        businessName: quote.businessName,
+        contactName: quote.contactName,
+        contactEmail: quote.email,
+        contactPhone: quote.phone,
+        state: "N/A",
+      };
+      
+      Promise.all([
+        sendQuoteNotificationToAdmin(emailData),
+        sendQuoteConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, quote, referenceNumber });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromZodError(error);
@@ -337,7 +355,25 @@ export async function registerRoutes(
     try {
       const validatedData = insertExcessLiabilityQuoteSchema.parse(req.body);
       const quote = await storage.createExcessLiabilityQuote(validatedData);
-      res.status(201).json({ success: true, quote });
+      
+      // Generate reference number and send emails
+      const referenceNumber = `EL-${Date.now().toString(36).toUpperCase()}`;
+      const emailData = {
+        referenceNumber,
+        quoteType: "Excess Liability",
+        businessName: quote.businessName,
+        contactName: quote.contactName,
+        contactEmail: quote.email,
+        contactPhone: quote.phone,
+        state: "N/A",
+      };
+      
+      Promise.all([
+        sendQuoteNotificationToAdmin(emailData),
+        sendQuoteConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, quote, referenceNumber });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromZodError(error);
@@ -369,7 +405,25 @@ export async function registerRoutes(
     try {
       const validatedData = insertCyberLiabilityQuoteSchema.parse(req.body);
       const quote = await storage.createCyberLiabilityQuote(validatedData);
-      res.status(201).json({ success: true, quote });
+      
+      // Generate reference number and send emails
+      const referenceNumber = `CL-${Date.now().toString(36).toUpperCase()}`;
+      const emailData = {
+        referenceNumber,
+        quoteType: "Cyber Liability",
+        businessName: quote.businessName,
+        contactName: quote.contactName,
+        contactEmail: quote.email,
+        contactPhone: quote.phone,
+        state: "N/A",
+      };
+      
+      Promise.all([
+        sendQuoteNotificationToAdmin(emailData),
+        sendQuoteConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, quote, referenceNumber });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromZodError(error);
@@ -401,7 +455,25 @@ export async function registerRoutes(
     try {
       const validatedData = insertAmbulanceQuoteSchema.parse(req.body);
       const quote = await storage.createAmbulanceQuote(validatedData);
-      res.status(201).json({ success: true, quote });
+      
+      // Generate reference number and send emails
+      const referenceNumber = `AMB-${Date.now().toString(36).toUpperCase()}`;
+      const emailData = {
+        referenceNumber,
+        quoteType: "Ambulance",
+        businessName: quote.businessName,
+        contactName: quote.contactName,
+        contactEmail: quote.email,
+        contactPhone: quote.phone,
+        state: "N/A",
+      };
+      
+      Promise.all([
+        sendQuoteNotificationToAdmin(emailData),
+        sendQuoteConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, quote, referenceNumber });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromZodError(error);
@@ -433,7 +505,25 @@ export async function registerRoutes(
     try {
       const validatedData = insertCaptiveQuoteSchema.parse(req.body);
       const quote = await storage.createCaptiveQuote(validatedData);
-      res.status(201).json({ success: true, quote });
+      
+      // Generate reference number and send emails
+      const referenceNumber = `CAP-${Date.now().toString(36).toUpperCase()}`;
+      const emailData = {
+        referenceNumber,
+        quoteType: "Captive Program",
+        businessName: quote.businessName,
+        contactName: quote.contactName,
+        contactEmail: quote.email,
+        contactPhone: quote.phone,
+        state: "N/A",
+      };
+      
+      Promise.all([
+        sendQuoteNotificationToAdmin(emailData),
+        sendQuoteConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, quote, referenceNumber });
     } catch (error: any) {
       if (error.name === "ZodError") {
         const validationError = fromZodError(error);
