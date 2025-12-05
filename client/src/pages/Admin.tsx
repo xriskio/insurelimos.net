@@ -1674,9 +1674,14 @@ export default function Admin() {
                   )}
                 </div>
 
-                {selectedQuote.vehicles && selectedQuote.vehicles.length > 0 && (
+                {selectedQuote.vehicles && (
+                  (() => {
+                    const vehiclesArr = typeof selectedQuote.vehicles === 'string' 
+                      ? JSON.parse(selectedQuote.vehicles) 
+                      : selectedQuote.vehicles;
+                    return vehiclesArr && vehiclesArr.length > 0 ? (
                   <div className="space-y-4">
-                    <h3 className="font-semibold text-lg border-b pb-2">Vehicles ({selectedQuote.vehicles.length})</h3>
+                    <h3 className="font-semibold text-lg border-b pb-2">Vehicles ({vehiclesArr.length})</h3>
                     <div className="overflow-x-auto">
                       <Table>
                         <TableHeader>
@@ -1691,7 +1696,7 @@ export default function Admin() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {selectedQuote.vehicles.map((v: any, i: number) => (
+                          {vehiclesArr.map((v: any, i: number) => (
                             <TableRow key={i}>
                               <TableCell>{i + 1}</TableCell>
                               <TableCell>{v.year || '-'}</TableCell>
@@ -1706,11 +1711,18 @@ export default function Admin() {
                       </Table>
                     </div>
                   </div>
+                    ) : null;
+                  })()
                 )}
 
-                {selectedQuote.drivers && selectedQuote.drivers.length > 0 && (
+                {selectedQuote.drivers && (
+                  (() => {
+                    const driversArr = typeof selectedQuote.drivers === 'string' 
+                      ? JSON.parse(selectedQuote.drivers) 
+                      : selectedQuote.drivers;
+                    return driversArr && driversArr.length > 0 ? (
                   <div className="space-y-4">
-                    <h3 className="font-semibold text-lg border-b pb-2">Drivers ({selectedQuote.drivers.length})</h3>
+                    <h3 className="font-semibold text-lg border-b pb-2">Drivers ({driversArr.length})</h3>
                     <div className="overflow-x-auto">
                       <Table>
                         <TableHeader>
@@ -1725,12 +1737,12 @@ export default function Admin() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {selectedQuote.drivers.map((d: any, i: number) => (
+                          {driversArr.map((d: any, i: number) => (
                             <TableRow key={i}>
                               <TableCell>{i + 1}</TableCell>
                               <TableCell>{d.name || `${d.firstName || ''} ${d.lastName || ''}`.trim() || '-'}</TableCell>
                               <TableCell>{d.dateOfBirth || d.dob || '-'}</TableCell>
-                              <TableCell className="font-mono text-xs">{d.licenseNumber || '-'}</TableCell>
+                              <TableCell className="font-mono text-xs">{d.licenseNumber || d.license || '-'}</TableCell>
                               <TableCell>{d.licenseState || d.state || '-'}</TableCell>
                               <TableCell>{d.yearsExperience || d.experience || '-'} yrs</TableCell>
                               <TableCell>{d.violations || d.accidents || '0'}</TableCell>
@@ -1740,9 +1752,16 @@ export default function Admin() {
                       </Table>
                     </div>
                   </div>
+                    ) : null;
+                  })()
                 )}
 
-                {selectedQuote.lossHistory && selectedQuote.lossHistory.length > 0 && (
+                {selectedQuote.lossHistory && (
+                  (() => {
+                    const lossArr = typeof selectedQuote.lossHistory === 'string' 
+                      ? JSON.parse(selectedQuote.lossHistory) 
+                      : selectedQuote.lossHistory;
+                    return lossArr && lossArr.length > 0 ? (
                   <div className="space-y-4">
                     <h3 className="font-semibold text-lg border-b pb-2 text-red-600">Loss History</h3>
                     <div className="overflow-x-auto">
@@ -1757,7 +1776,7 @@ export default function Admin() {
                           </TableRow>
                         </TableHeader>
                         <TableBody>
-                          {selectedQuote.lossHistory.map((l: any, i: number) => (
+                          {lossArr.map((l: any, i: number) => (
                             <TableRow key={i}>
                               <TableCell>{l.date || l.lossDate || '-'}</TableCell>
                               <TableCell>{l.type || l.lossType || '-'}</TableCell>
@@ -1770,6 +1789,8 @@ export default function Admin() {
                       </Table>
                     </div>
                   </div>
+                    ) : null;
+                  })()
                 )}
 
                 {selectedQuote.notes && (
