@@ -68,6 +68,31 @@ interface Quote {
   contactPhone: string;
   state: string;
   createdAt: string;
+  address?: string;
+  garagingAddress?: string;
+  dotNumber?: string;
+  mcNumber?: string;
+  yearsInBusiness?: string;
+  effectiveDate?: string;
+  expirationDate?: string;
+  currentCarrier?: string;
+  currentPremium?: string;
+  liabilityLimit?: string;
+  operatingRadius?: string;
+  statesOfOperation?: string[];
+  filingsNeeded?: string[];
+  hasAutoLiability?: boolean;
+  hasPhysicalDamage?: boolean;
+  hasWorkersComp?: boolean;
+  hasGeneralLiability?: boolean;
+  hasUmbrella?: boolean;
+  hasInlandMarine?: boolean;
+  hasMedPay?: boolean;
+  vehicles?: any[];
+  drivers?: any[];
+  lossHistory?: any[];
+  uploadedDocuments?: string[];
+  [key: string]: any;
 }
 
 interface ContactMessage {
@@ -233,6 +258,11 @@ export default function Admin() {
   const [siteContent, setSiteContent] = useState<SiteContent[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null);
+  const [quoteDetailsOpen, setQuoteDetailsOpen] = useState(false);
+  const [selectedServiceRequest, setSelectedServiceRequest] = useState<ServiceRequest | null>(null);
+  const [serviceDetailsOpen, setServiceDetailsOpen] = useState(false);
+  const [selectedContact, setSelectedContact] = useState<ContactMessage | null>(null);
+  const [contactDetailsOpen, setContactDetailsOpen] = useState(false);
   const [noteText, setNoteText] = useState("");
   
   // Blog form state
@@ -815,21 +845,35 @@ export default function Admin() {
                               </div>
                             </TableCell>
                             <TableCell>
-                              <Select
-                                value={quote.status}
-                                onValueChange={(value) => updateQuoteStatus(quote.id, value)}
-                              >
-                                <SelectTrigger className="w-32">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {STATUS_OPTIONS.map((option) => (
-                                    <SelectItem key={option.value} value={option.value}>
-                                      {option.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => {
+                                    setSelectedQuote(quote);
+                                    setQuoteDetailsOpen(true);
+                                  }}
+                                  data-testid={`button-view-quote-${quote.id}`}
+                                >
+                                  <Eye className="w-4 h-4 mr-1" />
+                                  View
+                                </Button>
+                                <Select
+                                  value={quote.status}
+                                  onValueChange={(value) => updateQuoteStatus(quote.id, value)}
+                                >
+                                  <SelectTrigger className="w-28">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {STATUS_OPTIONS.map((option) => (
+                                      <SelectItem key={option.value} value={option.value}>
+                                        {option.label}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </div>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -906,21 +950,35 @@ export default function Admin() {
                               </div>
                             </TableCell>
                             <TableCell>
-                              <Select
-                                value={request.status}
-                                onValueChange={(value) => updateServiceRequestStatus(request.id, value)}
-                              >
-                                <SelectTrigger className="w-32">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {STATUS_OPTIONS.map((option) => (
-                                    <SelectItem key={option.value} value={option.value}>
-                                      {option.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => {
+                                    setSelectedServiceRequest(request);
+                                    setServiceDetailsOpen(true);
+                                  }}
+                                  data-testid={`button-view-service-${request.id}`}
+                                >
+                                  <Eye className="w-4 h-4 mr-1" />
+                                  View
+                                </Button>
+                                <Select
+                                  value={request.status}
+                                  onValueChange={(value) => updateServiceRequestStatus(request.id, value)}
+                                >
+                                  <SelectTrigger className="w-28">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {STATUS_OPTIONS.map((option) => (
+                                      <SelectItem key={option.value} value={option.value}>
+                                        {option.label}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </div>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -969,21 +1027,35 @@ export default function Admin() {
                             <TableCell>{getStatusBadge(contact.status)}</TableCell>
                             <TableCell>{format(new Date(contact.createdAt), "MMM d, yyyy")}</TableCell>
                             <TableCell>
-                              <Select
-                                value={contact.status}
-                                onValueChange={(value) => updateContactStatus(contact.id, value)}
-                              >
-                                <SelectTrigger className="w-32">
-                                  <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {STATUS_OPTIONS.map((option) => (
-                                    <SelectItem key={option.value} value={option.value}>
-                                      {option.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => {
+                                    setSelectedContact(contact);
+                                    setContactDetailsOpen(true);
+                                  }}
+                                  data-testid={`button-view-contact-${contact.id}`}
+                                >
+                                  <Eye className="w-4 h-4 mr-1" />
+                                  View
+                                </Button>
+                                <Select
+                                  value={contact.status}
+                                  onValueChange={(value) => updateContactStatus(contact.id, value)}
+                                >
+                                  <SelectTrigger className="w-28">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {STATUS_OPTIONS.map((option) => (
+                                      <SelectItem key={option.value} value={option.value}>
+                                        {option.label}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </div>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -1537,7 +1609,389 @@ export default function Admin() {
             </Card>
           </TabsContent>
         </Tabs>
+
+        {/* Quote Details Dialog */}
+        <Dialog open={quoteDetailsOpen} onOpenChange={setQuoteDetailsOpen}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-xl">
+                Quote Details - {selectedQuote?.referenceNumber}
+              </DialogTitle>
+              <DialogDescription>
+                {QUOTE_TYPE_LABELS[selectedQuote?.quoteType || ''] || selectedQuote?.quoteType} | 
+                Submitted {selectedQuote?.createdAt && format(new Date(selectedQuote.createdAt), "MMMM d, yyyy 'at' h:mm a")}
+              </DialogDescription>
+            </DialogHeader>
+            {selectedQuote && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg border-b pb-2">Business Information</h3>
+                    <DetailRow label="Business Name" value={selectedQuote.insuredName} />
+                    <DetailRow label="Address" value={selectedQuote.address} />
+                    <DetailRow label="Garaging Address" value={selectedQuote.garagingAddress} />
+                    <DetailRow label="State" value={selectedQuote.state} />
+                    <DetailRow label="Years in Business" value={selectedQuote.yearsInBusiness} />
+                    <DetailRow label="DOT Number" value={selectedQuote.dotNumber} />
+                    <DetailRow label="MC Number" value={selectedQuote.mcNumber} />
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg border-b pb-2">Contact Information</h3>
+                    <DetailRow label="Contact Name" value={selectedQuote.contactName} />
+                    <DetailRow label="Email" value={selectedQuote.contactEmail} isEmail />
+                    <DetailRow label="Phone" value={selectedQuote.contactPhone} isPhone />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg border-b pb-2">Policy Details</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <DetailRow label="Effective Date" value={selectedQuote.effectiveDate} />
+                    <DetailRow label="Expiration Date" value={selectedQuote.expirationDate} />
+                    <DetailRow label="Current Carrier" value={selectedQuote.currentCarrier} />
+                    <DetailRow label="Current Premium" value={selectedQuote.currentPremium} />
+                    <DetailRow label="Liability Limit" value={selectedQuote.liabilityLimit} />
+                    <DetailRow label="Operating Radius" value={selectedQuote.operatingRadius} />
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg border-b pb-2">Coverage Requirements</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <CoverageItem label="Auto Liability" checked={selectedQuote.hasAutoLiability} />
+                    <CoverageItem label="Physical Damage" checked={selectedQuote.hasPhysicalDamage} />
+                    <CoverageItem label="Workers Comp" checked={selectedQuote.hasWorkersComp} />
+                    <CoverageItem label="General Liability" checked={selectedQuote.hasGeneralLiability} />
+                    <CoverageItem label="Umbrella" checked={selectedQuote.hasUmbrella} />
+                    <CoverageItem label="Inland Marine" checked={selectedQuote.hasInlandMarine} />
+                    <CoverageItem label="Med Pay" checked={selectedQuote.hasMedPay} />
+                  </div>
+                  {selectedQuote.statesOfOperation && selectedQuote.statesOfOperation.length > 0 && (
+                    <DetailRow label="States of Operation" value={selectedQuote.statesOfOperation.join(', ')} />
+                  )}
+                  {selectedQuote.filingsNeeded && selectedQuote.filingsNeeded.length > 0 && (
+                    <DetailRow label="Filings Needed" value={selectedQuote.filingsNeeded.join(', ')} />
+                  )}
+                </div>
+
+                {selectedQuote.vehicles && selectedQuote.vehicles.length > 0 && (
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg border-b pb-2">Vehicles ({selectedQuote.vehicles.length})</h3>
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>#</TableHead>
+                            <TableHead>Year</TableHead>
+                            <TableHead>Make</TableHead>
+                            <TableHead>Model</TableHead>
+                            <TableHead>VIN</TableHead>
+                            <TableHead>Value</TableHead>
+                            <TableHead>Seating</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {selectedQuote.vehicles.map((v: any, i: number) => (
+                            <TableRow key={i}>
+                              <TableCell>{i + 1}</TableCell>
+                              <TableCell>{v.year || '-'}</TableCell>
+                              <TableCell>{v.make || '-'}</TableCell>
+                              <TableCell>{v.model || '-'}</TableCell>
+                              <TableCell className="font-mono text-xs">{v.vin || '-'}</TableCell>
+                              <TableCell>{v.value ? `$${v.value}` : '-'}</TableCell>
+                              <TableCell>{v.seatingCapacity || v.passengers || '-'}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </div>
+                )}
+
+                {selectedQuote.drivers && selectedQuote.drivers.length > 0 && (
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg border-b pb-2">Drivers ({selectedQuote.drivers.length})</h3>
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>#</TableHead>
+                            <TableHead>Name</TableHead>
+                            <TableHead>DOB</TableHead>
+                            <TableHead>License #</TableHead>
+                            <TableHead>State</TableHead>
+                            <TableHead>Experience</TableHead>
+                            <TableHead>Violations</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {selectedQuote.drivers.map((d: any, i: number) => (
+                            <TableRow key={i}>
+                              <TableCell>{i + 1}</TableCell>
+                              <TableCell>{d.name || `${d.firstName || ''} ${d.lastName || ''}`.trim() || '-'}</TableCell>
+                              <TableCell>{d.dateOfBirth || d.dob || '-'}</TableCell>
+                              <TableCell className="font-mono text-xs">{d.licenseNumber || '-'}</TableCell>
+                              <TableCell>{d.licenseState || d.state || '-'}</TableCell>
+                              <TableCell>{d.yearsExperience || d.experience || '-'} yrs</TableCell>
+                              <TableCell>{d.violations || d.accidents || '0'}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </div>
+                )}
+
+                {selectedQuote.lossHistory && selectedQuote.lossHistory.length > 0 && (
+                  <div className="space-y-4">
+                    <h3 className="font-semibold text-lg border-b pb-2 text-red-600">Loss History</h3>
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow className="bg-red-50">
+                            <TableHead>Date</TableHead>
+                            <TableHead>Type</TableHead>
+                            <TableHead>Description</TableHead>
+                            <TableHead>Amount</TableHead>
+                            <TableHead>Status</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {selectedQuote.lossHistory.map((l: any, i: number) => (
+                            <TableRow key={i}>
+                              <TableCell>{l.date || l.lossDate || '-'}</TableCell>
+                              <TableCell>{l.type || l.lossType || '-'}</TableCell>
+                              <TableCell>{l.description || '-'}</TableCell>
+                              <TableCell>{l.amount ? `$${l.amount}` : '-'}</TableCell>
+                              <TableCell>{l.status || 'Closed'}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </div>
+                )}
+
+                {selectedQuote.notes && (
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg border-b pb-2">Additional Notes</h3>
+                    <p className="text-muted-foreground whitespace-pre-wrap">{selectedQuote.notes}</p>
+                  </div>
+                )}
+
+                {selectedQuote.uploadedDocuments && selectedQuote.uploadedDocuments.length > 0 && (
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg border-b pb-2">Uploaded Documents</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedQuote.uploadedDocuments.map((doc: string, i: number) => (
+                        <Badge key={i} variant="outline" className="text-sm">
+                          {doc}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between pt-4 border-t">
+                  <div>
+                    <span className="text-sm text-muted-foreground">Status: </span>
+                    {getStatusBadge(selectedQuote.status)}
+                  </div>
+                  <Select
+                    value={selectedQuote.status}
+                    onValueChange={(value) => {
+                      updateQuoteStatus(selectedQuote.id, value);
+                      setSelectedQuote({ ...selectedQuote, status: value });
+                    }}
+                  >
+                    <SelectTrigger className="w-40">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {STATUS_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Service Request Details Dialog */}
+        <Dialog open={serviceDetailsOpen} onOpenChange={setServiceDetailsOpen}>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="text-xl">
+                Service Request Details
+              </DialogTitle>
+              <DialogDescription>
+                {selectedServiceRequest?.requestType?.replace(/-/g, ' ').replace(/_/g, ' ')} | 
+                Submitted {selectedServiceRequest?.createdAt && format(new Date(selectedServiceRequest.createdAt), "MMMM d, yyyy 'at' h:mm a")}
+              </DialogDescription>
+            </DialogHeader>
+            {selectedServiceRequest && (
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg border-b pb-2">Policy Information</h3>
+                  <DetailRow label="Policy Number" value={selectedServiceRequest.policyNumber} />
+                  <DetailRow label="Named Insured" value={selectedServiceRequest.insuredName} />
+                  <DetailRow label="Effective Date" value={selectedServiceRequest.effectiveDate} />
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg border-b pb-2">Contact Information</h3>
+                  <DetailRow label="Contact Name" value={selectedServiceRequest.contactName} />
+                  <DetailRow label="Email" value={selectedServiceRequest.email} isEmail />
+                  <DetailRow label="Phone" value={selectedServiceRequest.phone} isPhone />
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg border-b pb-2">Request Details</h3>
+                  <div className="bg-muted p-4 rounded-lg">
+                    <p className="whitespace-pre-wrap">{selectedServiceRequest.details}</p>
+                  </div>
+                </div>
+
+                {selectedServiceRequest.additionalInfo && (
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg border-b pb-2">Additional Information</h3>
+                    <p className="text-muted-foreground whitespace-pre-wrap">{selectedServiceRequest.additionalInfo}</p>
+                  </div>
+                )}
+
+                {selectedServiceRequest.notes && (
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg border-b pb-2">Admin Notes</h3>
+                    <p className="text-muted-foreground whitespace-pre-wrap">{selectedServiceRequest.notes}</p>
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between pt-4 border-t">
+                  <div>
+                    <span className="text-sm text-muted-foreground">Status: </span>
+                    {getStatusBadge(selectedServiceRequest.status)}
+                  </div>
+                  <Select
+                    value={selectedServiceRequest.status}
+                    onValueChange={(value) => {
+                      updateServiceRequestStatus(selectedServiceRequest.id, value);
+                      setSelectedServiceRequest({ ...selectedServiceRequest, status: value });
+                    }}
+                  >
+                    <SelectTrigger className="w-40">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {STATUS_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+
+        {/* Contact Message Details Dialog */}
+        <Dialog open={contactDetailsOpen} onOpenChange={setContactDetailsOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle className="text-xl">
+                Contact Message Details
+              </DialogTitle>
+              <DialogDescription>
+                Submitted {selectedContact?.createdAt && format(new Date(selectedContact.createdAt), "MMMM d, yyyy 'at' h:mm a")}
+              </DialogDescription>
+            </DialogHeader>
+            {selectedContact && (
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg border-b pb-2">Contact Information</h3>
+                  <DetailRow label="Name" value={selectedContact.name} />
+                  <DetailRow label="Email" value={selectedContact.email} isEmail />
+                  <DetailRow label="Phone" value={selectedContact.phone} isPhone />
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="font-semibold text-lg border-b pb-2">Message</h3>
+                  <div className="bg-muted p-4 rounded-lg">
+                    <p className="whitespace-pre-wrap">{selectedContact.message}</p>
+                  </div>
+                </div>
+
+                {selectedContact.notes && (
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-lg border-b pb-2">Admin Notes</h3>
+                    <p className="text-muted-foreground whitespace-pre-wrap">{selectedContact.notes}</p>
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between pt-4 border-t">
+                  <div>
+                    <span className="text-sm text-muted-foreground">Status: </span>
+                    {getStatusBadge(selectedContact.status)}
+                  </div>
+                  <Select
+                    value={selectedContact.status}
+                    onValueChange={(value) => {
+                      updateContactStatus(selectedContact.id, value);
+                      setSelectedContact({ ...selectedContact, status: value });
+                    }}
+                  >
+                    <SelectTrigger className="w-40">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {STATUS_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
       </div>
+    </div>
+  );
+}
+
+function DetailRow({ label, value, isEmail, isPhone }: { label: string; value: any; isEmail?: boolean; isPhone?: boolean }) {
+  if (!value) return null;
+  
+  return (
+    <div className="flex flex-col gap-1">
+      <span className="text-sm font-medium text-muted-foreground">{label}</span>
+      {isEmail ? (
+        <a href={`mailto:${value}`} className="text-primary hover:underline">{value}</a>
+      ) : isPhone ? (
+        <a href={`tel:${value}`} className="text-primary hover:underline">{value}</a>
+      ) : (
+        <span>{value}</span>
+      )}
+    </div>
+  );
+}
+
+function CoverageItem({ label, checked }: { label: string; checked?: boolean }) {
+  return (
+    <div className="flex items-center gap-2">
+      {checked ? (
+        <CheckCircle className="w-4 h-4 text-green-500" />
+      ) : (
+        <XCircle className="w-4 h-4 text-gray-300" />
+      )}
+      <span className={checked ? "font-medium" : "text-muted-foreground"}>{label}</span>
     </div>
   );
 }
