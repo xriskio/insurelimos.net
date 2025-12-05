@@ -103,6 +103,11 @@ export function Footer() {
                   Captive Programs
                 </Link>
               </li>
+              <li>
+                <Link href="/coverage/ambulance" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Ambulance & EMS
+                </Link>
+              </li>
             </ul>
           </div>
 
