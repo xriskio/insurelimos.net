@@ -13,7 +13,12 @@ import {
   CheckCircle2,
   HelpCircle,
   Landmark,
-  UserCheck
+  UserCheck,
+  Wrench,
+  AlertTriangle,
+  DollarSign,
+  Clock,
+  MapPin
 } from "lucide-react";
 import {
   Accordion,
@@ -27,8 +32,8 @@ export default function TaxiCoverage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
-        title="Taxi Insurance Solutions - Coverage for Taxi Operators"
-        description="Specialized taxi insurance for independent drivers, small fleets, and large taxi companies. Comprehensive coverage meeting state and municipal requirements."
+        title="Taxi & Cab Insurance - Coverage for Taxi Operators | InsureLimos"
+        description="Specialized taxi cab insurance for independent drivers and fleets. Comprehensive auto liability, physical damage, and general liability coverage for taxi operations."
         canonical="https://insurelimos.net/coverage/taxi"
       />
       <Header />
@@ -45,49 +50,218 @@ export default function TaxiCoverage() {
           <div className="container mx-auto px-4 h-full flex items-center relative z-10">
             <div className="max-w-2xl text-white">
               <p className="text-white/80 mb-2 font-medium">Specialized Coverage</p>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Taxi Insurance Solutions</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Taxi & Cab Insurance</h1>
               <p className="text-xl text-white/90 mb-6">
                 Comprehensive insurance coverage for taxi operators, from independent drivers to large fleet owners.
               </p>
-              <Link href="/quote/public-auto">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold">
-                  Get a Taxi Insurance Quote
-                </Button>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/quote/public-auto">
+                  <Button size="lg" className="bg-accent hover:bg-accent/90 text-white font-bold">
+                    Get a Taxi Insurance Quote
+                  </Button>
+                </Link>
+                <a href="tel:888-254-0089">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-bold">
+                    Call 888-254-0089
+                  </Button>
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Introduction */}
+        {/* Overview */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <div className="flex items-start gap-6 mb-8">
-                <div className="hidden md:block shrink-0">
-                  <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center">
-                    <Landmark className="h-10 w-10 text-accent" />
-                  </div>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-primary mb-4">Specialized Coverage for Taxi Operators</h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    At InsureLimos.net, we understand the unique challenges faced by taxi operators in today's competitive transportation market. Your business requires specialized insurance that addresses the specific risks associated with transporting passengers for hire.
-                  </p>
-                </div>
-              </div>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our taxi insurance packages are tailored to meet the needs of your operation, whether you're an independent driver, a small fleet owner, or manage a large taxi company.
+              <h2 className="text-3xl font-bold text-primary mb-6">Overview</h2>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                Operating a Taxi or Cab service requires specialized insurance. You are responsible for the safety of your passengers. You will also need insurance that covers your vehicle(s) from damage or theft. You also need to take into consideration how many drivers you have or plan to have.
               </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Anyone who's owned this type of business can tell you that it's very competitive and complex. We can help. You will want to talk to an insurance professional who can help evaluate all of the moving parts and not only help you cover the necessary risks but also find where the discounts are.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Lines of Business */}
+        <section className="py-16 bg-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-primary mb-4">Lines of Business</h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Comprehensive protection designed specifically for taxi and cab operations.
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-4">
+                {[
+                  { icon: Shield, label: "Automobile Liability" },
+                  { icon: Car, label: "Physical Damage" },
+                  { icon: Building, label: "General Liability" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 p-5 bg-white rounded-lg shadow-sm border">
+                    <item.icon className="h-8 w-8 text-primary shrink-0" />
+                    <span className="text-lg font-medium">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Coverage Details */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-primary mb-4">Coverage Details</h2>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="border-2 hover:border-primary/30 transition-colors">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <Shield className="h-6 w-6 text-primary" />
+                      Liability Coverage/Limits
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Up to <strong>$1,000,000 CSL</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Higher limits available at Underwriter's discretion</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 hover:border-primary/30 transition-colors">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <Car className="h-6 w-6 text-primary" />
+                      Physical Damage
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Minimum <strong>$500 deductible</strong> for comp/collision</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Minimum stated value: <strong>$3,000</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Units older than 10 years require Underwriting approval</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Mechanic's statement and photograph may be required</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 hover:border-primary/30 transition-colors">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <Car className="h-6 w-6 text-primary" />
+                      Eligible Vehicles
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Sedans and minivans</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Capacity up to <strong>7 passengers</strong> (excluding driver)</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-2 hover:border-primary/30 transition-colors">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <UserCheck className="h-6 w-6 text-accent" />
+                      Eligible Operations
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>For-Hire passenger transportation</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Must be dispatched from a radio group/association or possess a medallion</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                        <span>Demand-response units with less than 24-hour prearranged pickups</span>
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Eligibility Requirements */}
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-primary mb-8 text-center">Eligibility & Requirements</h2>
+              
+              <div className="space-y-4">
+                {[
+                  {
+                    icon: CheckCircle2,
+                    text: "New venture individuals and partnerships are acceptable with résumé or letter of experience indicating years operating similar vehicle types"
+                  },
+                  {
+                    icon: CheckCircle2,
+                    text: "In jurisdictions where owner-operators receive a discount, refer to state-specific filing for eligibility and credit allowed"
+                  },
+                  {
+                    icon: CheckCircle2,
+                    text: "Double shifts are eligible with proof of a current formal maintenance program"
+                  },
+                  {
+                    icon: AlertTriangle,
+                    text: "Units older than 10 years require Underwriting approval with current mechanic's statement and photograph"
+                  },
+                ].map((item, i) => (
+                  <div key={i} className={`flex items-start gap-3 p-4 rounded-lg ${item.icon === AlertTriangle ? 'bg-amber-50 border border-amber-200' : 'bg-white shadow-sm border'}`}>
+                    <item.icon className={`h-6 w-6 shrink-0 mt-0.5 ${item.icon === AlertTriangle ? 'text-amber-500' : 'text-accent'}`} />
+                    <span className="text-muted-foreground">{item.text}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Coverage Options */}
-        <section className="py-16 bg-secondary/20">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">Taxi Insurance Coverage Options</h2>
+                <h2 className="text-3xl font-bold text-primary mb-4">Additional Coverage Options</h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                   Comprehensive protection for your taxi business and the passengers you serve.
                 </p>
@@ -97,55 +271,13 @@ export default function TaxiCoverage() {
                 <Card className="border-2 hover:border-accent/30 transition-colors">
                   <CardHeader>
                     <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Shield className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">Auto Liability</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Coverage for bodily injury and property damage caused to others in an accident involving your taxi. We offer limits that meet or exceed state and municipal requirements.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-accent/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Car className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">Physical Damage</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Protection for your taxi vehicles, including comprehensive and collision coverage to repair or replace your vehicle after an accident, theft, vandalism, or weather damage.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-accent/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mb-4">
-                      <UserCheck className="h-7 w-7 text-accent" />
+                      <UserCheck className="h-7 w-7 text-primary" />
                     </div>
                     <CardTitle className="text-xl">Passenger Liability</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">
                       Enhanced coverage for passenger injuries that may occur during taxi operations, providing protection beyond standard auto liability coverage.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-accent/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Building className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">General Liability</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Coverage for non-auto related incidents that may occur during your operations, including slips and falls or other accidents on your premises or at taxi stands.
                     </p>
                   </CardContent>
                 </Card>
@@ -198,11 +330,33 @@ export default function TaxiCoverage() {
                   "Competitive rates with flexible payment options",
                   "Expert guidance on medallion insurance requirements",
                   "Dedicated claims support for taxi operators",
+                  "Owner-operator discounts where available",
+                  "Double shift coverage with maintenance program proof",
                 ].map((benefit, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="h-6 w-6 text-accent shrink-0 mt-0.5" />
                     <p className="text-white/90">{benefit}</p>
                   </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Service Areas */}
+        <section className="py-16 bg-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-primary mb-4">Serving California & Beyond</h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Whether your Taxi business is located in the Los Angeles or San Diego area, or Northern California near Fresno or the San Francisco Bay Area, give us a call for a free consultation.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                {["Los Angeles", "San Diego", "San Francisco", "Fresno", "Sacramento", "Oakland"].map((city) => (
+                  <span key={city} className="px-4 py-2 bg-white rounded-full shadow-sm border text-muted-foreground font-medium">
+                    {city}
+                  </span>
                 ))}
               </div>
             </div>
@@ -220,48 +374,57 @@ export default function TaxiCoverage() {
               </div>
               
               <Accordion type="single" collapsible className="space-y-4">
-                <AccordionItem value="limits" className="border rounded-lg px-6">
+                <AccordionItem value="limits" className="border rounded-lg px-6 bg-muted/20">
                   <AccordionTrigger className="text-left font-semibold">
                     What insurance limits do I need for my taxi business?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
-                    Insurance limits for taxi operators typically depend on several factors, including state and municipal requirements, the size of your operation, and your risk tolerance. Most taxi operators need at least $1,000,000 in auto liability coverage, though requirements can vary significantly by location. Our team can help you determine the appropriate coverage limits based on your specific situation and local regulations.
+                    We offer liability coverage up to $1,000,000 CSL (Combined Single Limit). Higher limits are available at the Underwriter's discretion. Most taxi operators need at least $1,000,000 in auto liability coverage, though requirements can vary by location and municipal regulations.
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem value="off-duty" className="border rounded-lg px-6">
+                <AccordionItem value="vehicles" className="border rounded-lg px-6 bg-muted/20">
                   <AccordionTrigger className="text-left font-semibold">
-                    Does my taxi insurance cover me when I'm not carrying passengers?
+                    What types of vehicles are eligible for taxi insurance?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
-                    Yes, our taxi insurance policies provide coverage whether you're carrying passengers, en route to pick up a fare, or off-duty. However, it's important to note that some policies may have different coverage limits or deductibles depending on whether you're carrying passengers at the time of an incident.
+                    We cover sedans and minivans with capacity up to 7 passengers, excluding the driver. Vehicles older than 10 years may require underwriting approval, including a current mechanic's statement and photograph.
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem value="premiums" className="border rounded-lg px-6">
+                <AccordionItem value="new-venture" className="border rounded-lg px-6 bg-muted/20">
                   <AccordionTrigger className="text-left font-semibold">
-                    How can I reduce my taxi insurance premiums?
+                    Can I get insurance if I'm just starting my taxi business?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
-                    Several factors can help reduce your taxi insurance costs, including implementing comprehensive driver training programs, maintaining a clean claims history, installing vehicle safety features like dash cams and GPS tracking, and considering higher deductibles. Our team can work with you to develop a risk management strategy that may help lower your premiums over time.
+                    Yes! New venture individuals and partnerships are acceptable with a résumé or letter of experience indicating how many years you have experience operating a similar vehicle type. We work with new operators to help them get started.
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem value="rideshare" className="border rounded-lg px-6">
+                <AccordionItem value="medallion" className="border rounded-lg px-6 bg-muted/20">
+                  <AccordionTrigger className="text-left font-semibold">
+                    Do I need a medallion to get taxi insurance?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    Insured must be dispatched from or be a member of a radio group or association, or possess a medallion. This ensures your operation meets the for-hire transportation requirements for eligibility.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="double-shifts" className="border rounded-lg px-6 bg-muted/20">
+                  <AccordionTrigger className="text-left font-semibold">
+                    Can I run double shifts with my taxi?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    Yes, double shifts are eligible with proof of a current formal maintenance program. This ensures your vehicles are properly maintained for the increased usage.
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="rideshare" className="border rounded-lg px-6 bg-muted/20">
                   <AccordionTrigger className="text-left font-semibold">
                     Do I need special insurance if I operate both as a taxi and for rideshare platforms?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground">
-                    Yes, if you operate both as a traditional taxi and through rideshare platforms, you'll need insurance that covers both types of operations. Standard taxi insurance may not cover you while you're operating through a rideshare app, and rideshare insurance typically doesn't cover traditional taxi operations. We offer hybrid policies designed specifically for drivers who operate in multiple capacities.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="proof" className="border rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold">
-                    How quickly can I get proof of insurance for my taxi license or medallion renewal?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    Once your policy is bound, we can typically provide proof of insurance immediately. For license or medallion renewals, we understand the time-sensitive nature of these requirements and prioritize providing the necessary documentation quickly. Our team can also work directly with your licensing authority if needed to ensure a smooth renewal process.
+                    Yes, if you operate both as a traditional taxi and through rideshare platforms, you'll need insurance that covers both types of operations. We offer hybrid policies designed specifically for drivers who operate in multiple capacities.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
@@ -275,7 +438,7 @@ export default function TaxiCoverage() {
             <Car className="h-16 w-16 mx-auto mb-6 opacity-80" />
             <h2 className="text-3xl font-bold mb-4">Protect Your Taxi Business Today</h2>
             <p className="text-xl opacity-90 max-w-2xl mx-auto mb-8">
-              Get specialized coverage designed for the unique needs of taxi operators, from independent drivers to large fleets.
+              Get specialized coverage designed for the unique needs of taxi operators. Our team can help you evaluate your risks, find discounts, and get the right coverage at the right price.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/quote/public-auto">
@@ -283,11 +446,11 @@ export default function TaxiCoverage() {
                   Get a Taxi Quote
                 </Button>
               </Link>
-              <Link href="/contact">
+              <a href="tel:888-254-0089">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-bold">
-                  Speak with a Specialist
+                  Call 888-254-0089
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         </section>
