@@ -98,6 +98,11 @@ export function Footer() {
                   Bus & Motorcoach
                 </Link>
               </li>
+              <li>
+                <Link href="/coverage/captive" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Captive Programs
+                </Link>
+              </li>
             </ul>
           </div>
 
