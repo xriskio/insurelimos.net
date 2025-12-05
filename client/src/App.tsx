@@ -27,6 +27,19 @@ import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import News from "@/pages/News";
 import NewsPost from "@/pages/NewsPost";
+import ClientSupport from "@/pages/ClientSupport";
+import PaymentsClaims from "@/pages/support/PaymentsClaims";
+import QuestionsComments from "@/pages/support/QuestionsComments";
+import ChangeAddress from "@/pages/support/ChangeAddress";
+import AddVehicle from "@/pages/support/AddVehicle";
+import AddDriver from "@/pages/support/AddDriver";
+import IdCardRequest from "@/pages/support/IdCardRequest";
+import CertificateRequest from "@/pages/support/CertificateRequest";
+import ClaimForm from "@/pages/support/ClaimForm";
+import RemoveDriver from "@/pages/support/RemoveDriver";
+import RemoveVehicle from "@/pages/support/RemoveVehicle";
+import PolicyChange from "@/pages/support/PolicyChange";
+import RenewalReview from "@/pages/support/RenewalReview";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -63,6 +76,20 @@ function Router() {
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/news" component={News} />
       <Route path="/news/:slug" component={NewsPost} />
+      
+      <Route path="/client-support" component={ClientSupport} />
+      <Route path="/client-support/payments-claims" component={PaymentsClaims} />
+      <Route path="/client-support/questions" component={QuestionsComments} />
+      <Route path="/client-support/change-address" component={ChangeAddress} />
+      <Route path="/client-support/add-vehicle" component={AddVehicle} />
+      <Route path="/client-support/add-driver" component={AddDriver} />
+      <Route path="/client-support/id-card-request" component={IdCardRequest} />
+      <Route path="/client-support/certificate-request" component={CertificateRequest} />
+      <Route path="/client-support/claim-form" component={ClaimForm} />
+      <Route path="/client-support/remove-driver" component={RemoveDriver} />
+      <Route path="/client-support/remove-vehicle" component={RemoveVehicle} />
+      <Route path="/client-support/policy-change" component={PolicyChange} />
+      <Route path="/client-support/renewal-review" component={RenewalReview} />
       
       <Route component={NotFound} />
     </Switch>

@@ -1,0 +1,108 @@
+{
+  "colorScheme": "dark",
+  "fonts": [
+    {
+      "family": "Helvetica",
+      "role": "body"
+    },
+    {
+      "family": "Yanone Kaffeesatz",
+      "role": "display"
+    }
+  ],
+  "colors": {
+    "primary": "#E11A2C",
+    "accent": "#FFFFFF",
+    "background": "#555555",
+    "textPrimary": "#013E7B",
+    "link": "#013E7B"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Helvetica",
+      "heading": "Yanone Kaffeesatz"
+    },
+    "fontStacks": {
+      "heading": [
+        "Yanone Kaffeesatz"
+      ],
+      "body": [
+        "Helvetica",
+        "sans-serif"
+      ],
+      "paragraph": [
+        "Helvetica",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "40px",
+      "h2": "40px",
+      "body": "16px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 10,
+    "borderRadius": "5px"
+  },
+  "components": {
+    "input": {
+      "borderColor": "#CCCCCC",
+      "borderRadius": "5px"
+    },
+    "buttonPrimary": {
+      "background": "#FFFFFF",
+      "textColor": "#FFFFFF",
+      "borderColor": "#B31523",
+      "borderRadius": "6px",
+      "shadow": "rgba(255, 255, 255, 0.15) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.075) 0px 1px 1px 0px"
+    },
+    "buttonSecondary": {
+      "background": "transparent",
+      "textColor": "#FFFFFF",
+      "borderColor": "#B31523",
+      "borderRadius": "4px",
+      "shadow": "rgba(255, 255, 255, 0.15) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.075) 0px 1px 1px 0px"
+    }
+  },
+  "images": {
+    "logo": "https://insurelimos.com/files/logo.png",
+    "favicon": "https://insurelimos.com/files/icon-144.png",
+    "ogImage": "https://files.alicor.net/insurelimos.com/_page/california-paratransit-insurance.jpg"
+  },
+  "__framework_hints": [
+    "bootstrap"
+  ],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Logo #0 is the only one that visually represents the brand name 'Paratransit Insurance' and is located in the header, linking to the homepage, making it the main brand logo.",
+    "confidence": 0.9
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": 2,
+      "text": "Request a Quote!",
+      "reasoning": "Button #2 ('Request a Quote!') has a vibrant background color (#FFFFFF) with action-oriented text, making it the most prominent call-to-action on the page."
+    },
+    "secondary": {
+      "index": 0,
+      "text": "Learn More",
+      "reasoning": "Button #0 ('Learn More') has a transparent background, making it less prominent than the primary button, and it is from a different color group, fulfilling the requirement for a secondary button."
+    },
+    "confidence": 0.95
+  },
+  "personality": {
+    "tone": "professional",
+    "energy": "medium",
+    "targetAudience": "business owners seeking insurance solutions"
+  },
+  "designSystem": {
+    "framework": "bootstrap",
+    "componentLibrary": null
+  },
+  "confidence": {
+    "buttons": 0.95,
+    "colors": 0.9,
+    "overall": 0.925
+  }
+}
