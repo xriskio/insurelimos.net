@@ -250,6 +250,7 @@ export async function registerRoutes(
         email: request.email,
         phone: request.phone,
         details: request.details,
+        allFields: request,
       };
       
       Promise.all([
@@ -316,6 +317,7 @@ export async function registerRoutes(
         contactEmail: quote.email,
         contactPhone: quote.phone,
         state: "N/A",
+        allFields: quote,
       };
       
       Promise.all([
@@ -366,6 +368,7 @@ export async function registerRoutes(
         contactEmail: quote.email,
         contactPhone: quote.phone,
         state: "N/A",
+        allFields: quote,
       };
       
       Promise.all([
@@ -416,6 +419,7 @@ export async function registerRoutes(
         contactEmail: quote.email,
         contactPhone: quote.phone,
         state: "N/A",
+        allFields: quote,
       };
       
       Promise.all([
@@ -466,6 +470,7 @@ export async function registerRoutes(
         contactEmail: quote.email,
         contactPhone: quote.phone,
         state: "N/A",
+        allFields: quote,
       };
       
       Promise.all([
@@ -516,6 +521,7 @@ export async function registerRoutes(
         contactEmail: quote.email,
         contactPhone: quote.phone,
         state: "N/A",
+        allFields: quote,
       };
       
       Promise.all([
@@ -565,6 +571,7 @@ export async function registerRoutes(
         contactEmail: quote.contactEmail,
         contactPhone: quote.contactPhone,
         state: quote.state,
+        allFields: quote,
       };
       
       // Send emails in the background
