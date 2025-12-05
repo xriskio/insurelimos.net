@@ -52,7 +52,10 @@ import {
   BookOpen,
   Settings,
   Save,
-  Wrench
+  Wrench,
+  Lock,
+  LogOut,
+  Shield
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -249,6 +252,15 @@ function slugify(text: string): string {
 
 export default function Admin() {
   const { toast } = useToast();
+  
+  // Authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [contacts, setContacts] = useState<ContactMessage[]>([]);
@@ -311,6 +323,65 @@ export default function Admin() {
     imageUrl: "",
   });
 
+  // Check authentication status
+  const checkAuth = async () => {
+    try {
+      const res = await fetch("/api/admin/status");
+      const data = await res.json();
+      setIsAuthenticated(data.isAuthenticated);
+    } catch (error) {
+      setIsAuthenticated(false);
+    } finally {
+      setAuthChecking(false);
+    }
+  };
+
+  // Login handler
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginLoading(true);
+    setLoginError("");
+    
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+      });
+      
+      const data = await res.json();
+      
+      if (data.success) {
+        setIsAuthenticated(true);
+        setLoginEmail("");
+        setLoginPassword("");
+        toast({ title: "Welcome!", description: "You have successfully logged in." });
+        fetchData();
+      } else {
+        setLoginError(data.error || "Invalid credentials");
+      }
+    } catch (error) {
+      setLoginError("Login failed. Please try again.");
+    } finally {
+      setLoginLoading(false);
+    }
+  };
+
+  // Logout handler
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      setIsAuthenticated(false);
+      setStats(null);
+      setQuotes([]);
+      setContacts([]);
+      setServiceRequests([]);
+      toast({ title: "Logged out", description: "You have been logged out successfully." });
+    } catch (error) {
+      toast({ title: "Error", description: "Logout failed", variant: "destructive" });
+    }
+  };
+
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -322,6 +393,12 @@ export default function Admin() {
         fetch("/api/news/all"),
         fetch("/api/site-content"),
       ]);
+      
+      // Check if any response is 401 (unauthorized)
+      if (statsRes.status === 401 || allRes.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
       
       const statsData = await statsRes.json();
       const allData = await allRes.json();
@@ -351,9 +428,17 @@ export default function Admin() {
     }
   };
 
+  // Check auth on mount
   useEffect(() => {
-    fetchData();
+    checkAuth();
   }, []);
+
+  // Fetch data when authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchData();
+    }
+  }, [isAuthenticated]);
 
   const updateQuoteStatus = async (id: string, status: string, notes?: string) => {
     try {
@@ -676,6 +761,94 @@ export default function Admin() {
     return siteContent.find(c => c.section === sectionId);
   };
 
+  // Show loading while checking auth
+  if (authChecking) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <RefreshCw className="w-8 h-8 animate-spin mx-auto text-primary mb-4" />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login form when not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md shadow-2xl border-0">
+          <CardHeader className="text-center pb-2">
+            <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <Shield className="w-8 h-8 text-primary" />
+            </div>
+            <CardTitle className="text-2xl font-bold text-primary">Admin Portal</CardTitle>
+            <p className="text-muted-foreground mt-2">Sign in to access the admin dashboard</p>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleLogin} className="space-y-4">
+              {loginError && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm" data-testid="text-login-error">
+                  {loginError}
+                </div>
+              )}
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="admin@insurelimos.net"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    className="pl-10"
+                    required
+                    data-testid="input-login-email"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    className="pl-10"
+                    required
+                    data-testid="input-login-password"
+                  />
+                </div>
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full bg-primary hover:bg-primary/90"
+                disabled={loginLoading}
+                data-testid="button-login-submit"
+              >
+                {loginLoading ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                    Signing in...
+                  </>
+                ) : (
+                  <>
+                    <Lock className="w-4 h-4 mr-2" />
+                    Sign In
+                  </>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
@@ -684,10 +857,16 @@ export default function Admin() {
             <h1 className="text-3xl font-bold text-primary" data-testid="text-admin-title">Admin Portal</h1>
             <p className="text-muted-foreground">Manage quotes, content, and communications</p>
           </div>
-          <Button onClick={fetchData} variant="outline" data-testid="button-refresh">
-            <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-            Refresh
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button onClick={fetchData} variant="outline" data-testid="button-refresh">
+              <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+              Refresh
+            </Button>
+            <Button onClick={handleLogout} variant="outline" className="text-red-600 hover:text-red-700 hover:bg-red-50" data-testid="button-logout">
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
+          </div>
         </div>
 
         {/* Stats Cards */}

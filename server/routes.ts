@@ -1,6 +1,7 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { type Server } from "http";
 import { storage } from "./storage";
+import session from "express-session";
 import { 
   insertLimoQuoteSchema,
   insertTNCQuoteSchema,
@@ -30,10 +31,57 @@ import {
 } from "./email";
 import { generateBlogPost, generateNewsRelease, improveContent } from "./perplexity";
 
+// Admin credentials
+const ADMIN_EMAIL = "admin@insurelimos.net";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+
+// Middleware to check if user is authenticated as admin
+function requireAdminAuth(req: Request, res: Response, next: NextFunction) {
+  if (req.session && (req.session as any).isAdmin) {
+    next();
+  } else {
+    res.status(401).json({ success: false, error: "Unauthorized - Admin login required" });
+  }
+}
+
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+
+  // ============== ADMIN AUTHENTICATION ==============
+
+  // Admin login
+  app.post("/api/admin/login", (req, res) => {
+    const { email, password } = req.body;
+    
+    if (!email || !password) {
+      return res.status(400).json({ success: false, error: "Email and password required" });
+    }
+
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      (req.session as any).isAdmin = true;
+      res.json({ success: true, message: "Login successful" });
+    } else {
+      res.status(401).json({ success: false, error: "Invalid credentials" });
+    }
+  });
+
+  // Admin logout
+  app.post("/api/admin/logout", (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).json({ success: false, error: "Logout failed" });
+      }
+      res.json({ success: true, message: "Logged out successfully" });
+    });
+  });
+
+  // Check admin auth status
+  app.get("/api/admin/status", (req, res) => {
+    const isAdmin = req.session && (req.session as any).isAdmin;
+    res.json({ success: true, isAuthenticated: !!isAdmin });
+  });
   
   // Limousine Quote Submission
   app.post("/api/quotes/limo", async (req, res) => {
@@ -275,7 +323,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/service-requests", async (req, res) => {
+  app.get("/api/service-requests", requireAdminAuth, async (req, res) => {
     try {
       const requests = await storage.getAllServiceRequests();
       res.json({ success: true, requests });
@@ -285,8 +333,8 @@ export async function registerRoutes(
     }
   });
 
-  // Update service request status
-  app.patch("/api/service-requests/:id/status", async (req, res) => {
+  // Update service request status (protected)
+  app.patch("/api/service-requests/:id/status", requireAdminAuth, async (req, res) => {
     try {
       const { id } = req.params;
       const { status, notes } = req.body;
@@ -607,8 +655,8 @@ export async function registerRoutes(
     }
   });
 
-  // Update transport quote status
-  app.patch("/api/quotes/transport/:id/status", async (req, res) => {
+  // Update transport quote status (protected)
+  app.patch("/api/quotes/transport/:id/status", requireAdminAuth, async (req, res) => {
     try {
       const { id } = req.params;
       const { status, notes } = req.body;
@@ -623,8 +671,8 @@ export async function registerRoutes(
     }
   });
 
-  // Dashboard Stats
-  app.get("/api/dashboard/stats", async (req, res) => {
+  // Dashboard Stats (protected)
+  app.get("/api/dashboard/stats", requireAdminAuth, async (req, res) => {
     try {
       const stats = await storage.getDashboardStats();
       res.json({ success: true, stats });
@@ -634,8 +682,8 @@ export async function registerRoutes(
     }
   });
 
-  // Get all submissions (for admin dashboard)
-  app.get("/api/dashboard/all", async (req, res) => {
+  // Get all submissions (for admin dashboard - protected)
+  app.get("/api/dashboard/all", requireAdminAuth, async (req, res) => {
     try {
       const [quotes, contacts, serviceRequests] = await Promise.all([
         storage.getAllTransportQuotes(),
@@ -734,8 +782,8 @@ export async function registerRoutes(
     }
   });
 
-  // Create blog post
-  app.post("/api/blog", async (req, res) => {
+  // Create blog post (protected)
+  app.post("/api/blog", requireAdminAuth, async (req, res) => {
     try {
       const validatedData = insertBlogPostSchema.parse(req.body);
       const post = await storage.createBlogPost(validatedData);
@@ -750,8 +798,8 @@ export async function registerRoutes(
     }
   });
 
-  // Update blog post
-  app.patch("/api/blog/:id", async (req, res) => {
+  // Update blog post (protected)
+  app.patch("/api/blog/:id", requireAdminAuth, async (req, res) => {
     try {
       const post = await storage.updateBlogPost(req.params.id, req.body);
       if (!post) {
@@ -764,8 +812,8 @@ export async function registerRoutes(
     }
   });
 
-  // Delete blog post
-  app.delete("/api/blog/:id", async (req, res) => {
+  // Delete blog post (protected)
+  app.delete("/api/blog/:id", requireAdminAuth, async (req, res) => {
     try {
       await storage.deleteBlogPost(req.params.id);
       res.json({ success: true });
@@ -775,8 +823,8 @@ export async function registerRoutes(
     }
   });
 
-  // Generate blog post with AI
-  app.post("/api/blog/generate", async (req, res) => {
+  // Generate blog post with AI (protected)
+  app.post("/api/blog/generate", requireAdminAuth, async (req, res) => {
     try {
       const { topic, category } = req.body;
       if (!topic || !category) {
@@ -828,8 +876,8 @@ export async function registerRoutes(
     }
   });
 
-  // Create news release
-  app.post("/api/news", async (req, res) => {
+  // Create news release (protected)
+  app.post("/api/news", requireAdminAuth, async (req, res) => {
     try {
       const validatedData = insertNewsReleaseSchema.parse(req.body);
       const release = await storage.createNewsRelease(validatedData);
@@ -844,8 +892,8 @@ export async function registerRoutes(
     }
   });
 
-  // Update news release
-  app.patch("/api/news/:id", async (req, res) => {
+  // Update news release (protected)
+  app.patch("/api/news/:id", requireAdminAuth, async (req, res) => {
     try {
       const release = await storage.updateNewsRelease(req.params.id, req.body);
       if (!release) {
@@ -858,8 +906,8 @@ export async function registerRoutes(
     }
   });
 
-  // Delete news release
-  app.delete("/api/news/:id", async (req, res) => {
+  // Delete news release (protected)
+  app.delete("/api/news/:id", requireAdminAuth, async (req, res) => {
     try {
       await storage.deleteNewsRelease(req.params.id);
       res.json({ success: true });
@@ -869,8 +917,8 @@ export async function registerRoutes(
     }
   });
 
-  // Generate news release with AI
-  app.post("/api/news/generate", async (req, res) => {
+  // Generate news release with AI (protected)
+  app.post("/api/news/generate", requireAdminAuth, async (req, res) => {
     try {
       const { topic, category } = req.body;
       if (!topic || !category) {
@@ -884,8 +932,8 @@ export async function registerRoutes(
     }
   });
 
-  // Improve content with AI
-  app.post("/api/content/improve", async (req, res) => {
+  // Improve content with AI (protected)
+  app.post("/api/content/improve", requireAdminAuth, async (req, res) => {
     try {
       const { content, contentType } = req.body;
       if (!content || !contentType) {
@@ -901,8 +949,8 @@ export async function registerRoutes(
 
   // ============== SITE CONTENT ==============
   
-  // Get all site content (admin)
-  app.get("/api/site-content", async (req, res) => {
+  // Get all site content (admin - protected)
+  app.get("/api/site-content", requireAdminAuth, async (req, res) => {
     try {
       const content = await storage.getAllSiteContent();
       res.json({ success: true, content });
@@ -926,8 +974,8 @@ export async function registerRoutes(
     }
   });
 
-  // Upsert site content
-  app.post("/api/site-content", async (req, res) => {
+  // Upsert site content (protected)
+  app.post("/api/site-content", requireAdminAuth, async (req, res) => {
     try {
       const validatedData = insertSiteContentSchema.parse(req.body);
       const content = await storage.upsertSiteContent(validatedData);
