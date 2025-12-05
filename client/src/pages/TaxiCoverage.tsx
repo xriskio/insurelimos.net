@@ -346,18 +346,39 @@ export default function TaxiCoverage() {
         {/* Service Areas */}
         <section className="py-16 bg-secondary/20">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-5xl mx-auto text-center">
               <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-primary mb-4">Serving California & Beyond</h2>
+              <h2 className="text-3xl font-bold text-primary mb-4">Nationwide Coverage</h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Whether your Taxi business is located in the Los Angeles or San Diego area, or Northern California near Fresno or the San Francisco Bay Area, give us a call for a free consultation.
+                We provide taxi insurance coverage across 18 states. Whether you operate in California, Texas, or anywhere in between, give us a call for a free consultation.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                {["Los Angeles", "San Diego", "San Francisco", "Fresno", "Sacramento", "Oakland"].map((city) => (
-                  <span key={city} className="px-4 py-2 bg-white rounded-full shadow-sm border text-muted-foreground font-medium">
-                    {city}
-                  </span>
-                ))}
+              
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold text-primary mb-4">States We Serve</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {["CA", "AZ", "CO", "ID", "IL", "KS", "KY", "MN", "MO", "NV", "OH", "OK", "PA", "TN", "TX", "UT", "VA", "WI"].map((state) => (
+                    <span key={state} className="px-4 py-2 bg-primary text-white rounded-full shadow-sm font-bold">
+                      {state}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold text-primary mb-4">Major Cities</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {[
+                    "Los Angeles", "San Diego", "San Francisco", "Sacramento",
+                    "Las Vegas", "Denver", "Boise", "Chicago",
+                    "Cleveland", "Columbus", "Pittsburgh", "Memphis",
+                    "Milwaukee", "Phoenix", "Dallas", "Houston",
+                    "Salt Lake City", "Minneapolis", "Kansas City", "Louisville"
+                  ].map((city) => (
+                    <span key={city} className="px-4 py-2 bg-white rounded-full shadow-sm border text-muted-foreground font-medium">
+                      {city}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
