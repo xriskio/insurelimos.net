@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import logoImage from "@assets/logo_1764906983091.png";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,11 +25,12 @@ export function Header() {
       </a>
       <div className="container mx-auto flex h-20 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 cursor-pointer">
-          <div className="flex flex-col">
-            <span className="font-heading text-2xl font-bold text-primary tracking-tight">InsureLimos</span>
-            <span className="text-[10px] font-medium text-muted-foreground tracking-widest uppercase">A Casurance Company</span>
-          </div>
+        <Link href="/" className="flex items-center cursor-pointer">
+          <img 
+            src={logoImage} 
+            alt="InsureLimos.com - A Casurance Company" 
+            className="h-14 w-auto"
+          />
         </Link>
 
         {/* Desktop Nav */}
