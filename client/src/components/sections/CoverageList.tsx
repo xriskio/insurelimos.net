@@ -1,4 +1,10 @@
-import { Shield, AlertCircle, Users, Zap, Lock, Briefcase } from "lucide-react";
+import { Shield, AlertCircle, Users, Zap, Lock, Briefcase, Phone, Mail } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 const coverages = [
   {
@@ -51,9 +57,40 @@ export function CoverageList() {
             <div className="p-6 bg-primary rounded-xl text-white shadow-lg">
               <h3 className="font-bold text-xl mb-2">Need Help Deciding?</h3>
               <p className="text-primary-foreground/80 mb-4">Our agents are specialists in California transportation regulations.</p>
-              <button className="w-full py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-colors">
-                Talk to an Agent
-              </button>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button className="w-full py-3 bg-white text-primary font-bold rounded-lg hover:bg-gray-100 transition-colors" data-testid="button-talk-agent">
+                    Talk to an Agent
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-64 p-4" align="center">
+                  <div className="space-y-3">
+                    <p className="text-sm font-medium text-center mb-3">Choose how to reach us:</p>
+                    <a 
+                      href="tel:888-254-0089" 
+                      className="flex items-center gap-3 p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors text-primary font-medium"
+                      data-testid="link-call-agent"
+                    >
+                      <Phone className="h-5 w-5" />
+                      <div>
+                        <div className="font-bold">Call Us</div>
+                        <div className="text-sm text-muted-foreground">888-254-0089</div>
+                      </div>
+                    </a>
+                    <a 
+                      href="mailto:info@insurelimos.net" 
+                      className="flex items-center gap-3 p-3 rounded-lg bg-accent/10 hover:bg-accent/20 transition-colors text-accent font-medium"
+                      data-testid="link-email-agent"
+                    >
+                      <Mail className="h-5 w-5" />
+                      <div>
+                        <div className="font-bold">Email Us</div>
+                        <div className="text-sm text-muted-foreground">info@insurelimos.net</div>
+                      </div>
+                    </a>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
 
