@@ -29,6 +29,8 @@ import {
   type InsertAmbulanceQuote,
   type CaptiveQuote,
   type InsertCaptiveQuote,
+  type AdminUser,
+  type InsertAdminUser,
   limoQuotes,
   tncQuotes,
   nemtQuotes,
@@ -44,6 +46,7 @@ import {
   transportQuotes,
   ambulanceQuotes,
   captiveQuotes,
+  adminUsers,
 } from "@shared/schema";
 import { db } from "./db";
 import { desc, eq, sql } from "drizzle-orm";
@@ -131,6 +134,15 @@ export interface IStorage {
     totalServiceRequests: number;
     newServiceRequests: number;
   }>;
+  
+  // Admin Users
+  createAdminUser(user: InsertAdminUser): Promise<AdminUser>;
+  getAllAdminUsers(): Promise<AdminUser[]>;
+  getAdminUserByEmail(email: string): Promise<AdminUser | null>;
+  getAdminUserById(id: string): Promise<AdminUser | null>;
+  updateAdminUser(id: string, data: Partial<InsertAdminUser>): Promise<AdminUser | null>;
+  deleteAdminUser(id: string): Promise<boolean>;
+  updateAdminUserLastLogin(id: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -404,6 +416,43 @@ export class DatabaseStorage implements IStorage {
       totalServiceRequests: Number(serviceStats?.total || 0),
       newServiceRequests: Number(serviceStats?.new || 0),
     };
+  }
+
+  // Admin Users
+  async createAdminUser(user: InsertAdminUser): Promise<AdminUser> {
+    const [result] = await db.insert(adminUsers).values(user).returning();
+    return result;
+  }
+
+  async getAllAdminUsers(): Promise<AdminUser[]> {
+    return db.select().from(adminUsers).orderBy(desc(adminUsers.createdAt));
+  }
+
+  async getAdminUserByEmail(email: string): Promise<AdminUser | null> {
+    const [result] = await db.select().from(adminUsers).where(eq(adminUsers.email, email));
+    return result || null;
+  }
+
+  async getAdminUserById(id: string): Promise<AdminUser | null> {
+    const [result] = await db.select().from(adminUsers).where(eq(adminUsers.id, id));
+    return result || null;
+  }
+
+  async updateAdminUser(id: string, data: Partial<InsertAdminUser>): Promise<AdminUser | null> {
+    const [result] = await db.update(adminUsers).set({
+      ...data,
+      updatedAt: new Date(),
+    }).where(eq(adminUsers.id, id)).returning();
+    return result || null;
+  }
+
+  async deleteAdminUser(id: string): Promise<boolean> {
+    const result = await db.delete(adminUsers).where(eq(adminUsers.id, id));
+    return true;
+  }
+
+  async updateAdminUserLastLogin(id: string): Promise<void> {
+    await db.update(adminUsers).set({ lastLogin: new Date() }).where(eq(adminUsers.id, id));
   }
 }
 

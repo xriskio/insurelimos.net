@@ -30,10 +30,21 @@ import {
   sendContactConfirmationToCustomer
 } from "./email";
 import { generateBlogPost, generateNewsRelease, improveContent } from "./perplexity";
+import { insertAdminUserSchema } from "@shared/schema";
+import crypto from "crypto";
 
-// Admin credentials
-const ADMIN_EMAIL = "admin@insurelimos.net";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+// Super Admin credentials (from environment)
+const SUPER_ADMIN_EMAIL = "admin@insurelimos.net";
+const SUPER_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
+
+// Simple password hashing
+function hashPassword(password: string): string {
+  return crypto.createHash('sha256').update(password).digest('hex');
+}
+
+function verifyPassword(password: string, hash: string): boolean {
+  return hashPassword(password) === hash;
+}
 
 // Middleware to check if user is authenticated as admin
 function requireAdminAuth(req: Request, res: Response, next: NextFunction) {
@@ -41,6 +52,15 @@ function requireAdminAuth(req: Request, res: Response, next: NextFunction) {
     next();
   } else {
     res.status(401).json({ success: false, error: "Unauthorized - Admin login required" });
+  }
+}
+
+// Middleware to check if user is super admin
+function requireSuperAdmin(req: Request, res: Response, next: NextFunction) {
+  if (req.session && (req.session as any).isAdmin && (req.session as any).isSuperAdmin) {
+    next();
+  } else {
+    res.status(403).json({ success: false, error: "Super admin access required" });
   }
 }
 
@@ -52,19 +72,44 @@ export async function registerRoutes(
   // ============== ADMIN AUTHENTICATION ==============
 
   // Admin login
-  app.post("/api/admin/login", (req, res) => {
+  app.post("/api/admin/login", async (req, res) => {
     const { email, password } = req.body;
     
     if (!email || !password) {
       return res.status(400).json({ success: false, error: "Email and password required" });
     }
 
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    // Check super admin first
+    if (email === SUPER_ADMIN_EMAIL && password === SUPER_ADMIN_PASSWORD) {
       (req.session as any).isAdmin = true;
-      res.json({ success: true, message: "Login successful" });
-    } else {
-      res.status(401).json({ success: false, error: "Invalid credentials" });
+      (req.session as any).isSuperAdmin = true;
+      (req.session as any).adminEmail = email;
+      (req.session as any).adminName = "Super Admin";
+      (req.session as any).adminRole = "super_admin";
+      return res.json({ success: true, message: "Login successful", role: "super_admin" });
     }
+
+    // Check database users
+    try {
+      const user = await storage.getAdminUserByEmail(email);
+      if (user && user.active && verifyPassword(password, user.password)) {
+        (req.session as any).isAdmin = true;
+        (req.session as any).isSuperAdmin = false;
+        (req.session as any).adminEmail = user.email;
+        (req.session as any).adminName = user.name;
+        (req.session as any).adminRole = user.role;
+        (req.session as any).adminId = user.id;
+        
+        // Update last login
+        await storage.updateAdminUserLastLogin(user.id);
+        
+        return res.json({ success: true, message: "Login successful", role: user.role });
+      }
+    } catch (error) {
+      console.error("Database login check error:", error);
+    }
+
+    res.status(401).json({ success: false, error: "Invalid credentials" });
   });
 
   // Admin logout
@@ -80,7 +125,113 @@ export async function registerRoutes(
   // Check admin auth status
   app.get("/api/admin/status", (req, res) => {
     const isAdmin = req.session && (req.session as any).isAdmin;
-    res.json({ success: true, isAuthenticated: !!isAdmin });
+    const isSuperAdmin = req.session && (req.session as any).isSuperAdmin;
+    const adminName = (req.session as any)?.adminName || "";
+    const adminRole = (req.session as any)?.adminRole || "";
+    res.json({ 
+      success: true, 
+      isAuthenticated: !!isAdmin,
+      isSuperAdmin: !!isSuperAdmin,
+      name: adminName,
+      role: adminRole
+    });
+  });
+
+  // ============== ADMIN USER MANAGEMENT (Super Admin Only) ==============
+
+  // Get all admin users
+  app.get("/api/admin/users", requireAdminAuth, async (req, res) => {
+    // Only super admin can view all users
+    if (!(req.session as any).isSuperAdmin) {
+      return res.status(403).json({ success: false, error: "Super admin access required" });
+    }
+    try {
+      const users = await storage.getAllAdminUsers();
+      // Don't send passwords
+      const safeUsers = users.map(({ password, ...user }) => user);
+      res.json({ success: true, users: safeUsers });
+    } catch (error) {
+      console.error("Error fetching admin users:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch users" });
+    }
+  });
+
+  // Create admin user
+  app.post("/api/admin/users", requireAdminAuth, async (req, res) => {
+    if (!(req.session as any).isSuperAdmin) {
+      return res.status(403).json({ success: false, error: "Super admin access required" });
+    }
+    try {
+      const { email, password, name, role, active } = req.body;
+      
+      if (!email || !password || !name) {
+        return res.status(400).json({ success: false, error: "Email, password, and name are required" });
+      }
+
+      // Check if email already exists
+      const existing = await storage.getAdminUserByEmail(email);
+      if (existing) {
+        return res.status(400).json({ success: false, error: "Email already exists" });
+      }
+
+      const hashedPassword = hashPassword(password);
+      const user = await storage.createAdminUser({
+        email,
+        password: hashedPassword,
+        name,
+        role: role || "agent",
+        active: active !== false,
+      });
+      
+      const { password: _, ...safeUser } = user;
+      res.status(201).json({ success: true, user: safeUser });
+    } catch (error: any) {
+      console.error("Error creating admin user:", error);
+      res.status(500).json({ success: false, error: error.message || "Failed to create user" });
+    }
+  });
+
+  // Update admin user
+  app.patch("/api/admin/users/:id", requireAdminAuth, async (req, res) => {
+    if (!(req.session as any).isSuperAdmin) {
+      return res.status(403).json({ success: false, error: "Super admin access required" });
+    }
+    try {
+      const { id } = req.params;
+      const { email, password, name, role, active } = req.body;
+      
+      const updateData: any = {};
+      if (email) updateData.email = email;
+      if (name) updateData.name = name;
+      if (role) updateData.role = role;
+      if (active !== undefined) updateData.active = active;
+      if (password) updateData.password = hashPassword(password);
+
+      const user = await storage.updateAdminUser(id, updateData);
+      if (!user) {
+        return res.status(404).json({ success: false, error: "User not found" });
+      }
+      
+      const { password: _, ...safeUser } = user;
+      res.json({ success: true, user: safeUser });
+    } catch (error) {
+      console.error("Error updating admin user:", error);
+      res.status(500).json({ success: false, error: "Failed to update user" });
+    }
+  });
+
+  // Delete admin user
+  app.delete("/api/admin/users/:id", requireAdminAuth, async (req, res) => {
+    if (!(req.session as any).isSuperAdmin) {
+      return res.status(403).json({ success: false, error: "Super admin access required" });
+    }
+    try {
+      await storage.deleteAdminUser(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting admin user:", error);
+      res.status(500).json({ success: false, error: "Failed to delete user" });
+    }
   });
   
   // Limousine Quote Submission

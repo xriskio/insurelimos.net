@@ -55,7 +55,10 @@ import {
   Wrench,
   Lock,
   LogOut,
-  Shield
+  Shield,
+  Users,
+  UserPlus,
+  User
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -138,6 +141,16 @@ interface BlogPost {
   published: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+interface AdminUser {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  active: boolean;
+  lastLogin: string | null;
+  createdAt: string;
 }
 
 interface NewsRelease {
@@ -255,11 +268,25 @@ export default function Admin() {
   
   // Authentication state
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+  const [adminName, setAdminName] = useState("");
   const [authChecking, setAuthChecking] = useState(true);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
+  
+  // Admin users state
+  const [adminUsers, setAdminUsers] = useState<AdminUser[]>([]);
+  const [showUserForm, setShowUserForm] = useState(false);
+  const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
+  const [userFormData, setUserFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    role: "agent",
+    active: true,
+  });
   
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [quotes, setQuotes] = useState<Quote[]>([]);
