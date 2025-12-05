@@ -41,7 +41,7 @@ Focus on providing valuable, accurate information about commercial transportatio
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'llama-3.1-sonar-large-128k-online',
+      model: 'sonar',
       messages: [
         {
           role: 'system',
@@ -113,7 +113,7 @@ The news release should be written in standard press release format and cover to
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'llama-3.1-sonar-large-128k-online',
+      model: 'sonar',
       messages: [
         {
           role: 'system',
@@ -180,7 +180,7 @@ Return ONLY the improved HTML content, no explanations or JSON wrapper.`;
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'llama-3.1-sonar-large-128k-online',
+      model: 'sonar',
       messages: [
         {
           role: 'system',
