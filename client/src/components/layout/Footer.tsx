@@ -66,6 +66,11 @@ export function Footer() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link href="/get-quote" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Quick Quote
+                </Link>
+              </li>
             </ul>
           </div>
 
