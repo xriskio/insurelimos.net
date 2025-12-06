@@ -316,9 +316,18 @@ export default function LandingPage() {
             transition={{ duration: 0.5 }}
             className="text-white"
           >
-            <div className="flex items-center gap-2 mb-6">
+            <a href="/" className="flex items-center gap-2 mb-6 hover:opacity-80 transition-opacity cursor-pointer">
               <Shield className="w-10 h-10 text-red-500" />
               <span className="text-2xl font-bold">InsureLimos</span>
+            </a>
+            
+            <div className="mb-4">
+              <a 
+                href="/" 
+                className="text-sm text-gray-400 hover:text-white transition-colors underline"
+              >
+                ← Back to InsureLimos.net
+              </a>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
