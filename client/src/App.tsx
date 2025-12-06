@@ -41,6 +41,7 @@ import RemoveDriver from "@/pages/support/RemoveDriver";
 import RemoveVehicle from "@/pages/support/RemoveVehicle";
 import PolicyChange from "@/pages/support/PolicyChange";
 import RenewalReview from "@/pages/support/RenewalReview";
+import LandingPage from "@/pages/LandingPage";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -72,6 +73,8 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/admin" component={Admin} />
+      <Route path="/get-quote" component={LandingPage} />
+      <Route path="/lp" component={LandingPage} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />
       <Route path="/blog" component={Blog} />
