@@ -322,7 +322,7 @@ export default function LandingPage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Save Up To <span className="text-red-500">40%</span> On Commercial Transportation Insurance
+              Save Up To <span className="text-red-500">20%</span> On Commercial Transportation Insurance
             </h1>
 
             <p className="text-xl text-gray-300 mb-8">
