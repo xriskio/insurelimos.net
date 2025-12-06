@@ -164,6 +164,17 @@ The codebase follows a monorepo structure with three main directories:
 - External account credentials with subject token exchange
 - ACL policy management for access control
 
+**Search Engine Indexing:**
+- **IndexNow API** - Automatic URL submission for Google, Bing, Yandex
+  - Key: `b84008cb48a94a9fb067ae2b2481c1bc`
+  - Automatically submits new blog/news posts when published
+- **Bing Webmaster URL Submission API** - Direct Bing indexing
+  - Uses `BING_WEBMASTER_API_KEY` environment variable
+  - Allows up to 10,000 URLs per day
+  - Admin portal has "SEO" tab for manual bulk submission
+- Both APIs are called simultaneously via `submitToAllSearchEngines()` in `server/indexnow.ts`
+- Sitemap available at `/sitemap.xml`, robots.txt at `/robots.txt`
+
 **PostgreSQL Database:**
 - Primary data store via `DATABASE_URL` environment variable
 - Connection pooling via `pg` library

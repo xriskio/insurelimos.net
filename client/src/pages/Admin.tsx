@@ -58,7 +58,11 @@ import {
   Shield,
   Users,
   UserPlus,
-  User
+  User,
+  Globe,
+  Search,
+  Send,
+  ExternalLink
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -990,6 +994,10 @@ export default function Admin() {
               <Newspaper className="w-4 h-4 mr-2" />
               News
             </TabsTrigger>
+            <TabsTrigger value="seo" data-testid="tab-seo">
+              <Globe className="w-4 h-4 mr-2" />
+              SEO
+            </TabsTrigger>
           </TabsList>
 
           {/* Quotes Tab */}
@@ -1818,6 +1826,142 @@ export default function Admin() {
                     </Table>
                   </div>
                 )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* SEO Tab */}
+          <TabsContent value="seo">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Globe className="w-5 h-5" />
+                  Search Engine Optimization
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-blue-900 mb-2">URL Submission APIs</h3>
+                  <p className="text-blue-800 text-sm mb-4">
+                    Submit your pages to search engines for faster indexing. This uses both IndexNow (for Google, Yandex, Bing) 
+                    and Bing's direct URL Submission API for maximum coverage.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Button
+                      onClick={async () => {
+                        try {
+                          const response = await fetch("/api/admin/submit-urls", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            credentials: "include",
+                          });
+                          const data = await response.json();
+                          if (data.success) {
+                            toast({
+                              title: "URLs Submitted",
+                              description: `All site pages submitted. IndexNow: ${data.indexNow ? '✓' : '✗'}, Bing: ${data.bing ? '✓' : '✗'}`,
+                            });
+                          } else {
+                            throw new Error(data.error);
+                          }
+                        } catch (error: any) {
+                          toast({
+                            title: "Submission Failed",
+                            description: error.message || "Failed to submit URLs",
+                            variant: "destructive",
+                          });
+                        }
+                      }}
+                      className="bg-blue-600 hover:bg-blue-700"
+                      data-testid="button-submit-all-urls"
+                    >
+                      <Send className="w-4 h-4 mr-2" />
+                      Submit All Site Pages
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        <Search className="w-4 h-4" />
+                        IndexNow
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        IndexNow is supported by Google, Bing, Yandex, and others. New blog/news posts are 
+                        automatically submitted when published.
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <Badge className="bg-green-500">Active</Badge>
+                        <span className="text-xs text-muted-foreground">Auto-submits new content</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        <Globe className="w-4 h-4" />
+                        Bing Webmaster API
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Direct URL submission to Bing's index. Allows up to 10,000 URLs per day for faster 
+                        Bing indexing.
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <Badge className="bg-green-500">Active</Badge>
+                        <span className="text-xs text-muted-foreground">API key configured</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="bg-gray-50 border rounded-lg p-4">
+                  <h3 className="font-semibold mb-3">Quick Links</h3>
+                  <div className="flex flex-wrap gap-3">
+                    <a 
+                      href="https://www.bing.com/webmasters" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Bing Webmaster Tools
+                    </a>
+                    <a 
+                      href="https://search.google.com/search-console" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Google Search Console
+                    </a>
+                    <a 
+                      href="/sitemap.xml" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View Sitemap
+                    </a>
+                    <a 
+                      href="/robots.txt" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View Robots.txt
+                    </a>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>

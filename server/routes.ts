@@ -32,7 +32,7 @@ import {
 import { generateBlogPost, generateNewsRelease, improveContent } from "./perplexity";
 import { insertAdminUserSchema } from "@shared/schema";
 import crypto from "crypto";
-import { submitBlogPost, submitNewsPost, submitSingleUrl } from "./indexnow";
+import { submitBlogPost, submitNewsPost, submitSingleUrl, submitAllSitePages, submitToAllSearchEngines } from "./indexnow";
 
 // Super Admin credentials (from environment)
 const SUPER_ADMIN_EMAIL = "admin@insurelimos.net";
@@ -232,6 +232,34 @@ export async function registerRoutes(
     } catch (error) {
       console.error("Error deleting admin user:", error);
       res.status(500).json({ success: false, error: "Failed to delete user" });
+    }
+  });
+
+  // Submit all site URLs to search engines (IndexNow + Bing)
+  app.post("/api/admin/submit-urls", requireAdminAuth, async (req, res) => {
+    try {
+      const { urls } = req.body;
+      
+      if (urls && Array.isArray(urls) && urls.length > 0) {
+        const result = await submitToAllSearchEngines(urls);
+        res.json({ 
+          success: true, 
+          message: `Submitted ${urls.length} URL(s) to search engines`,
+          indexNow: result.indexNow,
+          bing: result.bing
+        });
+      } else {
+        const result = await submitAllSitePages();
+        res.json({ 
+          success: true, 
+          message: "Submitted all site pages to search engines",
+          indexNow: result.indexNow,
+          bing: result.bing
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting URLs to search engines:", error);
+      res.status(500).json({ success: false, error: "Failed to submit URLs" });
     }
   });
   

@@ -1,5 +1,6 @@
 const INDEXNOW_KEY = "b84008cb48a94a9fb067ae2b2481c1bc";
 const SITE_HOST = "insurelimos.net";
+const SITE_URL = "https://insurelimos.net";
 
 export async function submitToIndexNow(urls: string[]): Promise<boolean> {
   try {
@@ -29,15 +30,107 @@ export async function submitToIndexNow(urls: string[]): Promise<boolean> {
   }
 }
 
-export async function submitSingleUrl(path: string): Promise<boolean> {
-  const fullUrl = `https://${SITE_HOST}${path.startsWith("/") ? path : "/" + path}`;
-  return submitToIndexNow([fullUrl]);
+export async function submitToBingWebmaster(urls: string[]): Promise<boolean> {
+  const apiKey = process.env.BING_WEBMASTER_API_KEY;
+  
+  if (!apiKey) {
+    console.error("Bing Webmaster API: No API key configured");
+    return false;
+  }
+
+  try {
+    const urlListXml = urls
+      .map(url => `<string xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">${url}</string>`)
+      .join("\n");
+
+    const xmlBody = `<?xml version="1.0" encoding="utf-8"?>
+<SubmitUrlBatch xmlns="http://schemas.datacontract.org/2004/07/Microsoft.Bing.Webmaster.Api">
+<siteUrl>${SITE_URL}</siteUrl>
+<urlList>
+${urlListXml}
+</urlList>
+</SubmitUrlBatch>`;
+
+    const response = await fetch(
+      `https://ssl.bing.com/webmaster/api.svc/pox/SubmitUrlBatch?apikey=${apiKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/xml; charset=utf-8",
+        },
+        body: xmlBody,
+      }
+    );
+
+    if (response.status === 200) {
+      console.log(`Bing Webmaster API: Successfully submitted ${urls.length} URL(s)`);
+      return true;
+    } else {
+      const errorText = await response.text();
+      console.error(`Bing Webmaster API: Failed with status ${response.status}`, errorText);
+      return false;
+    }
+  } catch (error) {
+    console.error("Bing Webmaster API submission error:", error);
+    return false;
+  }
 }
 
-export async function submitBlogPost(slug: string): Promise<boolean> {
+export async function submitToAllSearchEngines(urls: string[]): Promise<{ indexNow: boolean; bing: boolean }> {
+  const [indexNowResult, bingResult] = await Promise.all([
+    submitToIndexNow(urls),
+    submitToBingWebmaster(urls),
+  ]);
+
+  return {
+    indexNow: indexNowResult,
+    bing: bingResult,
+  };
+}
+
+export async function submitSingleUrl(path: string): Promise<{ indexNow: boolean; bing: boolean }> {
+  const fullUrl = `https://${SITE_HOST}${path.startsWith("/") ? path : "/" + path}`;
+  return submitToAllSearchEngines([fullUrl]);
+}
+
+export async function submitBlogPost(slug: string): Promise<{ indexNow: boolean; bing: boolean }> {
   return submitSingleUrl(`/blog/${slug}`);
 }
 
-export async function submitNewsPost(slug: string): Promise<boolean> {
+export async function submitNewsPost(slug: string): Promise<{ indexNow: boolean; bing: boolean }> {
   return submitSingleUrl(`/news/${slug}`);
+}
+
+export async function submitAllSitePages(): Promise<{ indexNow: boolean; bing: boolean }> {
+  const allPages = [
+    "/",
+    "/services",
+    "/coverage",
+    "/about",
+    "/contact",
+    "/blog",
+    "/news",
+    "/get-quote",
+    "/quote/limo",
+    "/quote/tnc",
+    "/quote/nemt",
+    "/quote/taxi",
+    "/quote/paratransit",
+    "/quote/public-auto",
+    "/quote/ambulance",
+    "/coverage/limo",
+    "/coverage/tnc",
+    "/coverage/nemt",
+    "/coverage/taxi",
+    "/coverage/paratransit",
+    "/coverage/public-auto",
+    "/coverage/workers-comp",
+    "/coverage/excess-liability",
+    "/coverage/cyber-liability",
+    "/privacy",
+    "/terms",
+  ];
+
+  const fullUrls = allPages.map(page => `https://${SITE_HOST}${page}`);
+  return submitToAllSearchEngines(fullUrls);
 }
