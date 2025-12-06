@@ -356,7 +356,7 @@ export default function LandingPage() {
                 <div>
                   <p className="text-yellow-100 font-medium">Limited Time Offer</p>
                   <p className="text-yellow-200/80 text-sm">
-                    Get a $50 Amazon gift card when you bind a policy this month!
+                    Get a $25.00 Amazon gift card when you bind a policy!
                   </p>
                 </div>
               </div>
