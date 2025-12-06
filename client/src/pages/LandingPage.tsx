@@ -376,17 +376,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="mt-8 p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-xl">
-              <div className="flex items-start gap-3">
-                <Star className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-yellow-100 font-medium">Limited Time Offer</p>
-                  <p className="text-yellow-200/80 text-sm">
-                    Get a $25.00 Amazon gift card when you bind a policy!
-                  </p>
-                </div>
-              </div>
-            </div>
           </motion.div>
 
           <motion.div 
