@@ -1023,9 +1023,16 @@ export default function Admin() {
                               {quote.referenceNumber}
                             </TableCell>
                             <TableCell>
-                              <Badge variant="outline">
-                                {QUOTE_TYPE_LABELS[quote.quoteType] || quote.quoteType}
-                              </Badge>
+                              <div className="flex flex-col gap-1">
+                                <Badge variant="outline">
+                                  {QUOTE_TYPE_LABELS[quote.quoteType] || quote.quoteType}
+                                </Badge>
+                                {quote.additionalInfo?.includes("advertising landing page") && (
+                                  <Badge className="bg-purple-500 text-white text-xs">
+                                    Ad Lead
+                                  </Badge>
+                                )}
+                              </div>
                             </TableCell>
                             <TableCell>
                               <div className="flex items-center gap-2">
