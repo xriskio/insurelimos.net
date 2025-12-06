@@ -266,7 +266,7 @@ export default function LandingPage() {
                   <div>
                     <p className="font-semibold text-yellow-800">Need Immediate Assistance?</p>
                     <p className="text-sm text-yellow-700">
-                      Call us now: <a href="tel:+18885551234" className="font-bold hover:underline">(888) 555-1234</a>
+                      Call us now: <a href="tel:+18882540089" className="font-bold hover:underline">1-888-254-0089</a>
                     </p>
                   </div>
                 </div>
@@ -599,7 +599,7 @@ export default function LandingPage() {
 
         <div className="mt-8 text-center">
           <p className="text-gray-400 text-sm">
-            Questions? Call us directly: <a href="tel:+18885551234" className="text-white font-semibold hover:text-red-400">(888) 555-1234</a>
+            Questions? Call us directly: <a href="tel:+18882540089" className="text-white font-semibold hover:text-red-400">1-888-254-0089</a>
           </p>
         </div>
       </div>
