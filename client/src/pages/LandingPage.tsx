@@ -279,7 +279,19 @@ export default function LandingPage() {
                   Return to Homepage
                 </Button>
                 <Button 
-                  onClick={() => window.location.href = `/coverage/${submissionData.insuranceType === "rideshare" ? "tnc" : submissionData.insuranceType}`}
+                  onClick={() => {
+                    const coverageRoutes: Record<string, string> = {
+                      limousine: "limo",
+                      rideshare: "tnc",
+                      tnc: "tnc",
+                      nemt: "nemt",
+                      taxi: "taxi",
+                      bus: "paratransit",
+                      delivery: "tnc",
+                      other: "limo",
+                    };
+                    window.location.href = `/coverage/${coverageRoutes[submissionData.insuranceType] || "limo"}`;
+                  }}
                   variant="outline"
                   className="flex-1"
                 >
