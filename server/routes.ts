@@ -87,7 +87,15 @@ export async function registerRoutes(
       (req.session as any).adminEmail = email;
       (req.session as any).adminName = "Super Admin";
       (req.session as any).adminRole = "super_admin";
-      return res.json({ success: true, message: "Login successful", role: "super_admin" });
+      
+      // Save session before responding
+      return req.session.save((err) => {
+        if (err) {
+          console.error("Session save error:", err);
+          return res.status(500).json({ success: false, error: "Session error" });
+        }
+        res.json({ success: true, message: "Login successful", role: "super_admin" });
+      });
     }
 
     // Check database users
@@ -104,7 +112,14 @@ export async function registerRoutes(
         // Update last login
         await storage.updateAdminUserLastLogin(user.id);
         
-        return res.json({ success: true, message: "Login successful", role: user.role });
+        // Save session before responding
+        return req.session.save((err) => {
+          if (err) {
+            console.error("Session save error:", err);
+            return res.status(500).json({ success: false, error: "Session error" });
+          }
+          res.json({ success: true, message: "Login successful", role: user.role });
+        });
       }
     } catch (error) {
       console.error("Database login check error:", error);
