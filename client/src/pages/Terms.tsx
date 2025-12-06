@@ -1,10 +1,15 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { Seo } from "@/components/seo/Seo";
 
 export default function Terms() {
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo 
+        title="Terms of Service"
+        description="InsureLimos Terms of Service. Read our terms and conditions for using our transportation insurance quote and services platform."
+      />
       <Header />
       <main id="main-content" className="flex-1">
         <div className="bg-primary py-12">

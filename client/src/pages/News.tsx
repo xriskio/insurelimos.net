@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Seo } from "@/components/seo/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -50,6 +51,10 @@ export default function News() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo 
+        title="News & Press Releases"
+        description="Stay updated with the latest news and press releases from InsureLimos. Company announcements, partnerships, and transportation insurance industry updates."
+      />
       <Header />
       <main id="main-content" className="flex-1">
         {/* Hero Section */}

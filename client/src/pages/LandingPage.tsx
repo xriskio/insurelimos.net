@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Seo } from "@/components/seo/Seo";
 import {
   Form,
   FormControl,
@@ -307,6 +308,10 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a1628] via-[#1a2744] to-[#0a1628]">
+      <Seo 
+        title="Get Your Free Quote - Save 20% on Transportation Insurance"
+        description="Get a free, no-obligation commercial transportation insurance quote in under 2 minutes. Limousines, rideshare, NEMT, taxis, and more. Licensed in 18 states."
+      />
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           

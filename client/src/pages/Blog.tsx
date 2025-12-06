@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Seo } from "@/components/seo/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -53,6 +54,10 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo 
+        title="Insurance Blog"
+        description="Read the latest insights on transportation insurance, including tips for limousine, TNC, NEMT, taxi, and commercial auto coverage. Expert advice from InsureLimos."
+      />
       <Header />
       <main id="main-content" className="flex-1">
         {/* Hero Section */}

@@ -1,10 +1,15 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { Seo } from "@/components/seo/Seo";
 
 export default function Privacy() {
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo 
+        title="Privacy Policy"
+        description="InsureLimos Privacy Policy. Learn how we collect, use, and protect your personal information when you use our transportation insurance services."
+      />
       <Header />
       <main id="main-content" className="flex-1">
         <div className="bg-primary py-12">
