@@ -73,10 +73,59 @@ const STATES = [
   "SC", "TN", "TX", "VA", "WA"
 ];
 
+const INSURANCE_INFO: Record<string, { title: string; description: string; features: string[] }> = {
+  limousine: {
+    title: "Limousine / Black Car Insurance",
+    description: "Premium coverage designed for luxury ground transportation services.",
+    features: ["Hired & Non-Owned Auto", "General Liability", "Excess Liability Options", "Garage Keepers Coverage"],
+  },
+  rideshare: {
+    title: "Rideshare Insurance",
+    description: "Specialized coverage for Uber, Lyft, and other rideshare drivers.",
+    features: ["Gap Coverage (Periods 1, 2, 3)", "Personal Injury Protection", "Uninsured Motorist", "Medical Payments"],
+  },
+  tnc: {
+    title: "TNC / App-Based Insurance",
+    description: "Fleet coverage for Transportation Network Companies and app-based services.",
+    features: ["Commercial Auto Liability", "Fleet Discounts", "Driver Coverage", "Platform Compliance"],
+  },
+  nemt: {
+    title: "NEMT / Medical Transport Insurance",
+    description: "Comprehensive coverage for Non-Emergency Medical Transportation providers.",
+    features: ["Professional Liability", "Patient Transport Coverage", "Wheelchair Lift Coverage", "Medicaid Compliance"],
+  },
+  taxi: {
+    title: "Taxi / For-Hire Insurance",
+    description: "Traditional taxi and for-hire vehicle coverage solutions.",
+    features: ["Commercial Liability", "Physical Damage", "Uninsured Motorist", "Medical Payments"],
+  },
+  bus: {
+    title: "Bus / Motorcoach Insurance",
+    description: "Large vehicle coverage for buses, shuttles, and motorcoach operations.",
+    features: ["High-Limit Liability", "Passenger Coverage", "Charter Operations", "DOT Compliance"],
+  },
+  delivery: {
+    title: "Delivery Service Insurance",
+    description: "Coverage for food delivery, package delivery, and courier services.",
+    features: ["Hired Auto Coverage", "Cargo Coverage", "General Liability", "Workers Comp Options"],
+  },
+  other: {
+    title: "Transportation Insurance",
+    description: "Custom coverage solutions for your unique transportation needs.",
+    features: ["Tailored Coverage", "Competitive Rates", "Multiple Carrier Options", "Expert Guidance"],
+  },
+};
+
 export default function LandingPage() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submissionData, setSubmissionData] = useState<{
+    referenceNumber: string;
+    insuranceType: string;
+    businessName: string;
+    email: string;
+  } | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -111,14 +160,22 @@ export default function LandingPage() {
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmissionData({
+          referenceNumber: result.quote?.referenceNumber || "Pending",
+          insuranceType: data.insuranceType,
+          businessName: data.businessName,
+          email: data.email,
+        });
         setSubmitted(true);
         toast({
           title: "Quote Request Received!",
-          description: "Our team will contact you within 24 hours.",
+          description: "Check your email for confirmation.",
         });
       } else {
-        throw new Error("Submission failed");
+        throw new Error(result.error || "Submission failed");
       }
     } catch (error) {
       toast({
@@ -131,34 +188,107 @@ export default function LandingPage() {
     }
   };
 
-  if (submitted) {
+  if (submitted && submissionData) {
+    const insuranceInfo = INSURANCE_INFO[submissionData.insuranceType] || INSURANCE_INFO.other;
+    
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0a1628] via-[#1a2744] to-[#0a1628] flex items-center justify-center p-4">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl p-8 md:p-12 max-w-lg text-center shadow-2xl"
-        >
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-12 h-12 text-green-600" />
-          </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h2>
-          <p className="text-lg text-gray-600 mb-6">
-            Your quote request has been received. One of our licensed insurance specialists will contact you within 24 hours.
-          </p>
-          <div className="bg-blue-50 rounded-xl p-4 mb-6">
-            <p className="text-sm text-blue-800">
-              <strong>Need immediate assistance?</strong><br />
-              Call us now: <a href="tel:+18885551234" className="font-bold">(888) 555-1234</a>
-            </p>
-          </div>
-          <Button 
-            onClick={() => window.location.href = "/"}
-            className="bg-[#0a2351] hover:bg-[#0a2351]/90"
+      <div className="min-h-screen bg-gradient-to-br from-[#0a1628] via-[#1a2744] to-[#0a1628] py-12 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-2xl shadow-2xl overflow-hidden"
           >
-            Return to Homepage
-          </Button>
-        </motion.div>
+            <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-8 text-center">
+              <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-12 h-12" />
+              </div>
+              <h2 className="text-3xl font-bold mb-2">Quote Request Submitted!</h2>
+              <p className="text-green-100">A confirmation email has been sent to {submissionData.email}</p>
+            </div>
+
+            <div className="p-8">
+              <div className="bg-gray-50 rounded-xl p-6 mb-6">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500">Reference Number</p>
+                    <p className="text-2xl font-bold text-[#0a2351] font-mono">{submissionData.referenceNumber}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm text-gray-500">Business Name</p>
+                    <p className="text-lg font-semibold text-gray-800">{submissionData.businessName}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-gray-200 rounded-xl p-6 mb-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-[#0a2351]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-[#0a2351]" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{insuranceInfo.title}</h3>
+                    <p className="text-gray-600 mb-4">{insuranceInfo.description}</p>
+                    <div className="grid sm:grid-cols-2 gap-2">
+                      {insuranceInfo.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-sm">
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          <span className="text-gray-700">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-6">
+                <h4 className="font-semibold text-blue-900 mb-2">What Happens Next?</h4>
+                <ol className="space-y-2 text-sm text-blue-800">
+                  <li className="flex items-start gap-2">
+                    <span className="w-5 h-5 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">1</span>
+                    <span>Our underwriting team will review your request within 24 hours</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-5 h-5 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">2</span>
+                    <span>A licensed specialist will contact you to discuss your specific needs</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-5 h-5 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">3</span>
+                    <span>Receive competitive quotes from multiple A-rated carriers</span>
+                  </li>
+                </ol>
+              </div>
+
+              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-6 h-6 text-yellow-600" />
+                  <div>
+                    <p className="font-semibold text-yellow-800">Need Immediate Assistance?</p>
+                    <p className="text-sm text-yellow-700">
+                      Call us now: <a href="tel:+18885551234" className="font-bold hover:underline">(888) 555-1234</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  onClick={() => window.location.href = "/"}
+                  className="flex-1 bg-[#0a2351] hover:bg-[#0a2351]/90"
+                >
+                  Return to Homepage
+                </Button>
+                <Button 
+                  onClick={() => window.location.href = `/coverage/${submissionData.insuranceType === "rideshare" ? "tnc" : submissionData.insuranceType}`}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  Learn More About {insuranceInfo.title.split(" ")[0]} Coverage
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     );
   }
