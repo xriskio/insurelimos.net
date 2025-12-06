@@ -32,6 +32,7 @@ import {
 import { generateBlogPost, generateNewsRelease, improveContent } from "./perplexity";
 import { insertAdminUserSchema } from "@shared/schema";
 import crypto from "crypto";
+import { submitBlogPost, submitNewsPost, submitSingleUrl } from "./indexnow";
 
 // Super Admin credentials (from environment)
 const SUPER_ADMIN_EMAIL = "admin@insurelimos.net";
@@ -938,6 +939,12 @@ export async function registerRoutes(
     try {
       const validatedData = insertBlogPostSchema.parse(req.body);
       const post = await storage.createBlogPost(validatedData);
+      
+      // Submit to IndexNow if published
+      if (post.published && post.slug) {
+        submitBlogPost(post.slug).catch(err => console.error("IndexNow blog error:", err));
+      }
+      
       res.status(201).json({ success: true, post });
     } catch (error: any) {
       if (error.name === "ZodError") {
@@ -1032,6 +1039,12 @@ export async function registerRoutes(
     try {
       const validatedData = insertNewsReleaseSchema.parse(req.body);
       const release = await storage.createNewsRelease(validatedData);
+      
+      // Submit to IndexNow if published
+      if (release.published && release.slug) {
+        submitNewsPost(release.slug).catch(err => console.error("IndexNow news error:", err));
+      }
+      
       res.status(201).json({ success: true, release });
     } catch (error: any) {
       if (error.name === "ZodError") {
