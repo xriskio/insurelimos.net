@@ -2,6 +2,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -120,6 +121,7 @@ const BUSINESS_TYPES: Record<string, { value: string; label: string }[]> = {
 
 export function TransportQuoteForm({ quoteType, title, description }: TransportQuoteFormProps) {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -223,14 +225,10 @@ export function TransportQuoteForm({ quoteType, title, description }: TransportQ
 
       const referenceNumber = data.quote?.referenceNumber || 'N/A';
       
-      toast({
-        title: "Quote Request Submitted Successfully!",
-        description: `Your reference number is: ${referenceNumber}. Our team will review your information and contact you within 24 hours. Please save this reference number for your records.`,
-        duration: 10000,
-      });
-      
       form.reset();
       setUploadedFiles([]);
+      
+      setLocation(`/quote-confirmation?ref=${encodeURIComponent(referenceNumber)}&business=${encodeURIComponent(values.insuredName)}&email=${encodeURIComponent(values.contactEmail)}&type=${encodeURIComponent(quoteType)}`);
     } catch (error: any) {
       toast({
         title: "Submission Failed",

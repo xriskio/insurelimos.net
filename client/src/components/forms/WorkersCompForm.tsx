@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -39,6 +40,7 @@ const formSchema = z.object({
 
 export function WorkersCompForm() {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -70,12 +72,10 @@ export function WorkersCompForm() {
         throw new Error(data.error || 'Failed to submit quote');
       }
 
-      toast({
-        title: "Workers Comp Quote Request Received",
-        description: "Our team will review your information and contact you shortly.",
-      });
-      
+      const referenceNumber = data.quote?.referenceNumber || 'Pending';
       form.reset();
+      
+      setLocation(`/quote-confirmation?ref=${encodeURIComponent(referenceNumber)}&business=${encodeURIComponent(values.businessName)}&email=${encodeURIComponent(values.email)}&type=workers-comp`);
     } catch (error: any) {
       toast({
         title: "Submission Failed",

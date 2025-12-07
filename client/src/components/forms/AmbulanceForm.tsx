@@ -2,6 +2,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -88,6 +89,7 @@ const US_STATES = [
 
 export function AmbulanceForm() {
   const { toast } = useToast();
+  const [, setLocation] = useLocation();
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -194,13 +196,11 @@ export function AmbulanceForm() {
         throw new Error(data.error || 'Failed to submit quote');
       }
 
-      toast({
-        title: "Ambulance Quote Request Received",
-        description: "Our EMS insurance specialists will review your information and contact you shortly.",
-      });
-      
+      const referenceNumber = data.quote?.referenceNumber || 'Pending';
       form.reset();
       setUploadedFiles([]);
+      
+      setLocation(`/quote-confirmation?ref=${encodeURIComponent(referenceNumber)}&business=${encodeURIComponent(values.businessName)}&email=${encodeURIComponent(values.email)}&type=ambulance`);
     } catch (error: any) {
       toast({
         title: "Submission Failed",
