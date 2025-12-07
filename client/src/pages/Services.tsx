@@ -82,7 +82,7 @@ export default function Services() {
       />
       <Header />
       
-      <main className="flex-1" id="main-content">
+      <main className="flex-1" id="main-content" role="main">
         {/* Hero Header */}
         <section className="bg-primary text-white py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-black/20 z-0" />

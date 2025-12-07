@@ -33,7 +33,7 @@ export default function QuotePage() {
       />
       <Header />
       
-      <main className="flex-1 py-12 bg-secondary/20" id="main-content">
+      <main className="flex-1 py-12 bg-secondary/20" id="main-content" role="main" aria-label="Quote request form">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">

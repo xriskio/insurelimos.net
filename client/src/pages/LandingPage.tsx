@@ -312,7 +312,10 @@ export default function LandingPage() {
         title="Get Your Free Quote - Save 20% on Transportation Insurance"
         description="Get a free, no-obligation commercial transportation insurance quote in under 2 minutes. Limousines, rideshare, NEMT, taxis, and more. Licensed in 18 states."
       />
-      <div className="container mx-auto px-4 py-8 md:py-12">
+      <a href="#quote-form" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-primary focus:rounded-md">
+        Skip to quote form
+      </a>
+      <main id="main-content" role="main" className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           
           <motion.div 
@@ -599,10 +602,10 @@ export default function LandingPage() {
 
         <div className="mt-8 text-center">
           <p className="text-gray-400 text-sm">
-            Questions? Call us directly: <a href="tel:+18882540089" className="text-white font-semibold hover:text-red-400">1-888-254-0089</a>
+            Questions? Call us directly: <a href="tel:+18882540089" className="text-white font-semibold hover:text-red-400" aria-label="Call us at 1-888-254-0089">1-888-254-0089</a>
           </p>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

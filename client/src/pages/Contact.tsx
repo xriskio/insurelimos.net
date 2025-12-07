@@ -78,11 +78,11 @@ export default function Contact() {
       />
       <Header />
       
-      <main className="flex-1" id="main-content">
+      <main className="flex-1" id="main-content" role="main">
         {/* Hero */}
-        <section className="bg-primary text-white py-16">
+        <section className="bg-primary text-white py-16" aria-labelledby="contact-heading">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+            <h1 id="contact-heading" className="text-4xl font-bold mb-4">Contact Us</h1>
             <p className="text-xl text-primary-foreground/80">
               We're here to help with all your transportation insurance needs.
             </p>
@@ -98,7 +98,7 @@ export default function Contact() {
                   <h3 className="text-xl font-bold text-primary mb-4">Get In Touch</h3>
                   
                   <div className="flex items-start gap-4">
-                    <MapPin className="h-6 w-6 text-accent shrink-0 mt-1" />
+                    <MapPin className="h-6 w-6 text-accent shrink-0 mt-1" aria-hidden="true" />
                     <div>
                       <h4 className="font-semibold">Office Location</h4>
                       <p className="text-muted-foreground">
@@ -110,7 +110,7 @@ export default function Contact() {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <Phone className="h-6 w-6 text-accent shrink-0 mt-1" />
+                    <Phone className="h-6 w-6 text-accent shrink-0 mt-1" aria-hidden="true" />
                     <div>
                       <h4 className="font-semibold">Phone Numbers</h4>
                       <p className="text-muted-foreground">
@@ -122,7 +122,7 @@ export default function Contact() {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <Mail className="h-6 w-6 text-accent shrink-0 mt-1" />
+                    <Mail className="h-6 w-6 text-accent shrink-0 mt-1" aria-hidden="true" />
                     <div>
                       <h4 className="font-semibold">Email</h4>
                       <p className="text-muted-foreground">
@@ -132,7 +132,7 @@ export default function Contact() {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <Clock className="h-6 w-6 text-accent shrink-0 mt-1" />
+                    <Clock className="h-6 w-6 text-accent shrink-0 mt-1" aria-hidden="true" />
                     <div>
                       <h4 className="font-semibold">Business Hours</h4>
                       <p className="text-muted-foreground">

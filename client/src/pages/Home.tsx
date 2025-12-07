@@ -15,26 +15,26 @@ export default function Home() {
         canonical="https://insurelimos.net/"
       />
       <Header />
-      <main className="flex-1" id="main-content">
+      <main className="flex-1" id="main-content" role="main">
         <Hero />
         <ServicesGrid />
         <CoverageList />
         
         {/* Trust/CTA Section */}
-        <section className="py-24 bg-primary text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
+        <section className="py-24 bg-primary text-white relative overflow-hidden" aria-labelledby="cta-heading">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop')] opacity-10 bg-cover bg-center mix-blend-overlay" aria-hidden="true"></div>
           <div className="container mx-auto px-4 relative z-10 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Save on Your Commercial Auto Insurance?</h2>
+            <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold mb-6">Ready to Save on Your Commercial Auto Insurance?</h2>
             <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10">
               Get a customized quote today. Our independent agents are ready to find the perfect coverage for your fleet at the best price.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/quote">
-                <button className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-bold text-lg shadow-lg transition-transform hover:scale-105">
+                <button className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-bold text-lg shadow-lg transition-transform hover:scale-105" aria-label="Get your free insurance quote">
                   Get Your Free Quote
                 </button>
               </Link>
-              <a href="tel:888-254-0089">
+              <a href="tel:888-254-0089" aria-label="Call us at 888-254-0089">
                 <button className="bg-white text-primary px-8 py-4 rounded-md font-bold text-lg shadow-lg hover:bg-gray-100 transition-transform hover:scale-105">
                   Call 888-254-0089
                 </button>
