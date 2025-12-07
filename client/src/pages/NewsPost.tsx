@@ -52,7 +52,7 @@ export default function NewsPost() {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main id="main-content" className="flex-1 flex items-center justify-center">
+        <main id="main-content" role="main" className="flex-1 flex items-center justify-center">
           <p className="text-muted-foreground">Loading...</p>
         </main>
         <Footer />
@@ -64,7 +64,7 @@ export default function NewsPost() {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main id="main-content" className="flex-1 flex items-center justify-center">
+        <main id="main-content" role="main" className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">News Release Not Found</h1>
             <p className="text-muted-foreground mb-6">The news release you're looking for doesn't exist.</p>
@@ -84,7 +84,7 @@ export default function NewsPost() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" role="main" className="flex-1">
         {/* Header */}
         <div className="bg-primary py-12">
           <div className="container mx-auto px-4">

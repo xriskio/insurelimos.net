@@ -11,7 +11,7 @@ export default function Terms() {
         description="InsureLimos Terms of Service. Read our terms and conditions for using our transportation insurance quote and services platform."
       />
       <Header />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" role="main" className="flex-1">
         <div className="bg-primary py-12">
           <div className="container mx-auto px-4">
             <h1 className="text-3xl md:text-4xl font-bold text-white text-center">Terms of Service</h1>

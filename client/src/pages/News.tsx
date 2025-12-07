@@ -56,7 +56,7 @@ export default function News() {
         description="Stay updated with the latest news and press releases from InsureLimos. Company announcements, partnerships, and transportation insurance industry updates."
       />
       <Header />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" role="main" className="flex-1">
         {/* Hero Section */}
         <section className="bg-primary py-16">
           <div className="container mx-auto px-4 text-center">

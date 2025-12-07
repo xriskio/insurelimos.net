@@ -110,7 +110,7 @@ export function ServiceRequestForm({
       <div className="min-h-screen bg-background flex flex-col">
         <Seo title={`${title} - InsureLimos`} description={description} />
         <Header />
-        <main className="flex-1 py-16" id="main-content">
+        <main className="flex-1 py-16" id="main-content" role="main">
           <div className="container mx-auto px-4">
             <Card className="max-w-2xl mx-auto">
               <CardContent className="pt-12 pb-12 text-center">
@@ -143,7 +143,7 @@ export function ServiceRequestForm({
       <Seo title={`${title} - InsureLimos`} description={description} />
       <Header />
       
-      <main className="flex-1 py-12" id="main-content">
+      <main className="flex-1 py-12" id="main-content" role="main">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <Link href="/client-support" className="inline-flex items-center text-primary hover:underline mb-6">

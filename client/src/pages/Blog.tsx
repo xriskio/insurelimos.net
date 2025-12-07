@@ -59,7 +59,7 @@ export default function Blog() {
         description="Read the latest insights on transportation insurance, including tips for limousine, TNC, NEMT, taxi, and commercial auto coverage. Expert advice from InsureLimos."
       />
       <Header />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" role="main" className="flex-1">
         {/* Hero Section */}
         <section className="bg-primary py-16">
           <div className="container mx-auto px-4 text-center">

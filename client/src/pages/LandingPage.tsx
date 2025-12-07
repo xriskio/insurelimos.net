@@ -393,7 +393,7 @@ export default function LandingPage() {
             </div>
 
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 space-y-4">
+              <form id="quote-form" onSubmit={form.handleSubmit(onSubmit)} className="p-6 space-y-4" aria-label="Request a free quote">
                 <FormField
                   control={form.control}
                   name="businessName"

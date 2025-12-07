@@ -55,7 +55,7 @@ export default function BlogPost() {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main id="main-content" className="flex-1 flex items-center justify-center">
+        <main id="main-content" role="main" className="flex-1 flex items-center justify-center">
           <p className="text-muted-foreground">Loading...</p>
         </main>
         <Footer />
@@ -67,7 +67,7 @@ export default function BlogPost() {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main id="main-content" className="flex-1 flex items-center justify-center">
+        <main id="main-content" role="main" className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Article Not Found</h1>
             <p className="text-muted-foreground mb-6">The article you're looking for doesn't exist.</p>
@@ -87,7 +87,7 @@ export default function BlogPost() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" role="main" className="flex-1">
         {/* Hero Image */}
         <div className="relative h-64 md:h-96 overflow-hidden">
           <img

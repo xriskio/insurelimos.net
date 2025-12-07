@@ -38,7 +38,7 @@ export default function NemtCoverage() {
       />
       <Header />
       
-      <main className="flex-1" id="main-content">
+      <main className="flex-1" id="main-content" role="main">
         {/* Hero Section with Image */}
         <section className="relative h-[400px] md:h-[500px] overflow-hidden">
           <img 

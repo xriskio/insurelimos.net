@@ -117,7 +117,7 @@ export default function ClientSupport() {
       />
       <Header />
       
-      <main className="flex-1" id="main-content">
+      <main className="flex-1" id="main-content" role="main">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary via-primary to-primary/90 text-white py-16">
           <div className="container mx-auto px-4">

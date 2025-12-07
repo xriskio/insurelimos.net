@@ -16,7 +16,7 @@ export default function About() {
       />
       <Header />
       
-      <main className="flex-1" id="main-content">
+      <main className="flex-1" id="main-content" role="main">
         {/* Hero */}
         <section className="bg-secondary/30 py-20">
           <div className="container mx-auto px-4 text-center">

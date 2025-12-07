@@ -11,7 +11,7 @@ export default function Privacy() {
         description="InsureLimos Privacy Policy. Learn how we collect, use, and protect your personal information when you use our transportation insurance services."
       />
       <Header />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" role="main" className="flex-1">
         <div className="bg-primary py-12">
           <div className="container mx-auto px-4">
             <h1 className="text-3xl md:text-4xl font-bold text-white text-center">Privacy Policy</h1>
