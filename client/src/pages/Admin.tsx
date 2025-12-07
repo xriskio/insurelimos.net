@@ -62,7 +62,13 @@ import {
   Globe,
   Search,
   Send,
-  ExternalLink
+  ExternalLink,
+  LayoutDashboard,
+  Headphones,
+  FileEdit,
+  TrendingUp,
+  ChevronRight,
+  Key
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -279,6 +285,9 @@ export default function Admin() {
   const [loginPassword, setLoginPassword] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
+  
+  // Sidebar navigation state
+  const [activeSection, setActiveSection] = useState("dashboard");
   
   // Admin users state
   const [adminUsers, setAdminUsers] = useState<AdminUser[]>([]);
@@ -880,129 +889,242 @@ export default function Admin() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-primary" data-testid="text-admin-title">Admin Portal</h1>
-            <p className="text-muted-foreground">Manage quotes, content, and communications</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button onClick={fetchData} variant="outline" data-testid="button-refresh">
-              <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-              Refresh
-            </Button>
-            <Button onClick={handleLogout} variant="outline" className="text-red-600 hover:text-red-700 hover:bg-red-50" data-testid="button-logout">
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </Button>
-          </div>
-        </div>
+  const sidebarItems = [
+    { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { id: "leads", label: "Leads", icon: FileText },
+    { id: "support", label: "Support", icon: Headphones },
+    { id: "cms", label: "CMS", icon: FileEdit },
+    { id: "blog", label: "Blog", icon: BookOpen },
+    { id: "press", label: "Press", icon: Newspaper },
+    { id: "users", label: "Users", icon: Users },
+    { id: "seo", label: "SEO", icon: Globe },
+  ];
 
-        {/* Stats Cards */}
-        {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Quote Requests</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold" data-testid="text-total-quotes">{stats.totalQuotes}</span>
-                  {stats.newQuotes > 0 && (
-                    <Badge className="bg-blue-500" data-testid="badge-new-quotes">{stats.newQuotes} new</Badge>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Service Requests</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold" data-testid="text-total-services">{stats.totalServiceRequests}</span>
-                  {stats.newServiceRequests > 0 && (
-                    <Badge className="bg-blue-500" data-testid="badge-new-services">{stats.newServiceRequests} new</Badge>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Contact Messages</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold" data-testid="text-total-contacts">{stats.totalContacts}</span>
-                  {stats.newContacts > 0 && (
-                    <Badge className="bg-blue-500" data-testid="badge-new-contacts">{stats.newContacts} new</Badge>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">Blog Posts</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold">{blogPosts.length}</span>
-                  <Badge variant="outline">{blogPosts.filter(p => p.published).length} published</Badge>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">News Releases</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold">{newsReleases.length}</span>
-                  <Badge variant="outline">{newsReleases.filter(n => n.published).length} published</Badge>
-                </div>
-              </CardContent>
-            </Card>
+  const getLeadStatusCounts = () => {
+    const counts = { new: 0, contacted: 0, inProgress: 0, converted: 0, lost: 0 };
+    quotes.forEach(q => {
+      if (q.status === "new") counts.new++;
+      else if (q.status === "contacted") counts.contacted++;
+      else if (q.status === "in-progress") counts.inProgress++;
+      else if (q.status === "quoted" || q.status === "converted") counts.converted++;
+      else if (q.status === "closed" || q.status === "lost") counts.lost++;
+    });
+    return counts;
+  };
+
+  const leadStatusCounts = getLeadStatusCounts();
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex">
+      {/* Sidebar */}
+      <aside className="w-64 bg-[#1a2744] text-white flex flex-col fixed h-screen">
+        <div className="p-6 border-b border-white/10">
+          <h1 className="text-xl font-bold text-white">InsureLimos</h1>
+          <p className="text-sm text-blue-300">Admin Portal</p>
+        </div>
+        
+        <nav className="flex-1 py-4">
+          {sidebarItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveSection(item.id)}
+              className={`w-full flex items-center gap-3 px-6 py-3 text-left transition-colors ${
+                activeSection === item.id 
+                  ? "bg-orange-500 text-white" 
+                  : "text-gray-300 hover:bg-white/10 hover:text-white"
+              }`}
+              data-testid={`nav-${item.id}`}
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="border-t border-white/10 p-4 space-y-1">
+          <p className="text-xs text-gray-400 px-2 mb-2">Admin</p>
+          <button className="w-full flex items-center gap-3 px-2 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded transition-colors text-sm">
+            <Key className="w-4 h-4" />
+            <span>Change Password</span>
+          </button>
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-2 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded transition-colors text-sm"
+            data-testid="button-logout"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 ml-64 p-8">
+        {/* Dashboard View */}
+        {activeSection === "dashboard" && (
+          <div>
+            <div className="mb-8">
+              <h1 className="text-2xl font-bold text-gray-800 uppercase tracking-wide" data-testid="text-admin-title">
+                Welcome Back, {adminName || "Admin"}
+              </h1>
+              <p className="text-muted-foreground">Here's what's happening with your leads today.</p>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Total Leads</p>
+                      <p className="text-4xl font-bold text-gray-800" data-testid="text-total-quotes">{stats?.totalQuotes || 0}</p>
+                    </div>
+                    <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                      <Users className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">This Week</p>
+                      <p className="text-4xl font-bold text-gray-800">{stats?.newQuotes || 0}</p>
+                    </div>
+                    <div className="w-12 h-12 bg-pink-500 rounded-lg flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">This Month</p>
+                      <p className="text-4xl font-bold text-gray-800">{stats?.totalQuotes || 0}</p>
+                    </div>
+                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <Clock className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Converted</p>
+                      <p className="text-4xl font-bold text-gray-800">{leadStatusCounts.converted}</p>
+                    </div>
+                    <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Lead Status Breakdown and Quick Actions */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <Card className="lg:col-span-2 bg-white border-0 shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold">Lead Status Breakdown</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between py-3 border-b">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-blue-500" />
+                      <span className="text-gray-700">New</span>
+                    </div>
+                    <span className="font-semibold text-gray-800">{leadStatusCounts.new}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-3 border-b">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-orange-500" />
+                      <span className="text-gray-700">Contacted</span>
+                    </div>
+                    <span className="font-semibold text-gray-800">{leadStatusCounts.contacted}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-3 border-b">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-pink-500" />
+                      <span className="text-gray-700">In Progress</span>
+                    </div>
+                    <span className="font-semibold text-gray-800">{leadStatusCounts.inProgress}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-3 border-b">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-green-500" />
+                      <span className="text-gray-700">Converted</span>
+                    </div>
+                    <span className="font-semibold text-gray-800">{leadStatusCounts.converted}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-red-500" />
+                      <span className="text-gray-700">Lost</span>
+                    </div>
+                    <span className="font-semibold text-gray-800">{leadStatusCounts.lost}</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white border-0 shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold">Quick Actions</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <Button 
+                    onClick={() => setActiveSection("leads")} 
+                    className="w-full justify-start bg-[#1a2744] hover:bg-[#243352] text-white"
+                  >
+                    View All Leads
+                  </Button>
+                  <Button 
+                    onClick={() => setActiveSection("leads")} 
+                    variant="ghost" 
+                    className="w-full justify-start text-orange-500 hover:text-orange-600 hover:bg-orange-50"
+                  >
+                    View New Leads ({stats?.newQuotes || 0})
+                  </Button>
+                  <Button 
+                    onClick={() => setActiveSection("cms")} 
+                    variant="ghost" 
+                    className="w-full justify-start text-gray-700 hover:bg-gray-100"
+                  >
+                    Manage Website Content
+                  </Button>
+                  <Button 
+                    onClick={fetchData} 
+                    variant="outline" 
+                    className="w-full justify-start"
+                    data-testid="button-refresh"
+                  >
+                    <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                    Refresh Data
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         )}
 
-        {/* Main Content Tabs */}
-        <Tabs defaultValue="quotes" className="space-y-4">
-          <TabsList className="flex-wrap">
-            <TabsTrigger value="quotes" data-testid="tab-quotes">
-              <FileText className="w-4 h-4 mr-2" />
-              Quotes
-            </TabsTrigger>
-            <TabsTrigger value="services" data-testid="tab-services">
-              <Wrench className="w-4 h-4 mr-2" />
-              Service Requests
-            </TabsTrigger>
-            <TabsTrigger value="contacts" data-testid="tab-contacts">
-              <Mail className="w-4 h-4 mr-2" />
-              Contacts
-            </TabsTrigger>
-            <TabsTrigger value="content" data-testid="tab-content">
-              <Settings className="w-4 h-4 mr-2" />
-              Site Content
-            </TabsTrigger>
-            <TabsTrigger value="blog" data-testid="tab-blog">
-              <BookOpen className="w-4 h-4 mr-2" />
-              Blog
-            </TabsTrigger>
-            <TabsTrigger value="news" data-testid="tab-news">
-              <Newspaper className="w-4 h-4 mr-2" />
-              News
-            </TabsTrigger>
-            <TabsTrigger value="seo" data-testid="tab-seo">
-              <Globe className="w-4 h-4 mr-2" />
-              SEO
-            </TabsTrigger>
-          </TabsList>
-
-          {/* Quotes Tab */}
-          <TabsContent value="quotes">
-            <Card>
+        {/* Leads Section (formerly Quotes) */}
+        {activeSection === "leads" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">Leads Management</h1>
+                <p className="text-muted-foreground">View and manage all quote submissions</p>
+              </div>
+              <Button onClick={fetchData} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+            <Card className="bg-white border-0 shadow-sm">
               <CardHeader>
                 <CardTitle>Quote Submissions</CardTitle>
               </CardHeader>
@@ -1049,52 +1171,48 @@ export default function Admin() {
                               </div>
                             </TableCell>
                             <TableCell>
-                              <div className="space-y-1">
-                                <div className="font-medium">{quote.contactName}</div>
-                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                              <div className="flex flex-col gap-1 text-sm">
+                                <span>{quote.contactName}</span>
+                                <a href={`mailto:${quote.contactEmail}`} className="text-primary hover:underline flex items-center gap-1">
                                   <Mail className="w-3 h-3" />
-                                  <a href={`mailto:${quote.contactEmail}`}>{quote.contactEmail}</a>
-                                </div>
+                                  {quote.contactEmail}
+                                </a>
                               </div>
                             </TableCell>
                             <TableCell>{quote.state}</TableCell>
-                            <TableCell>{getStatusBadge(quote.status)}</TableCell>
                             <TableCell>
-                              <div className="flex items-center gap-1 text-sm">
-                                <Calendar className="w-3 h-3" />
-                                {format(new Date(quote.createdAt), "MMM d, yyyy")}
-                              </div>
+                              <Select
+                                defaultValue={quote.status}
+                                onValueChange={(value) => updateQuoteStatus(quote.id, value)}
+                              >
+                                <SelectTrigger className="w-32">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  {STATUS_OPTIONS.map((opt) => (
+                                    <SelectItem key={opt.value} value={opt.value}>
+                                      <div className="flex items-center gap-2">
+                                        <div className={`w-2 h-2 rounded-full ${opt.color}`} />
+                                        {opt.label}
+                                      </div>
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            </TableCell>
+                            <TableCell className="text-sm text-muted-foreground">
+                              {format(new Date(quote.createdAt), "MMM d, yyyy")}
                             </TableCell>
                             <TableCell>
-                              <div className="flex items-center gap-2">
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => {
-                                    setSelectedQuote(quote);
-                                    setQuoteDetailsOpen(true);
-                                  }}
-                                  data-testid={`button-view-quote-${quote.id}`}
-                                >
-                                  <Eye className="w-4 h-4 mr-1" />
-                                  View
-                                </Button>
-                                <Select
-                                  value={quote.status}
-                                  onValueChange={(value) => updateQuoteStatus(quote.id, value)}
-                                >
-                                  <SelectTrigger className="w-28">
-                                    <SelectValue />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {STATUS_OPTIONS.map((option) => (
-                                      <SelectItem key={option.value} value={option.value}>
-                                        {option.label}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
-                              </div>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => { setSelectedQuote(quote); setQuoteDetailsOpen(true); }}
+                                data-testid={`button-view-quote-${quote.id}`}
+                              >
+                                <Eye className="w-4 h-4 mr-1" />
+                                View
+                              </Button>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -1104,10 +1222,36 @@ export default function Admin() {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </div>
+        )}
 
-          {/* Service Requests Tab */}
-          <TabsContent value="services">
+        {/* Support Section (Service Requests + Contacts) */}
+        {activeSection === "support" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">Support Center</h1>
+                <p className="text-muted-foreground">Manage service requests and contact messages</p>
+              </div>
+              <Button onClick={fetchData} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+            
+            <Tabs defaultValue="services" className="space-y-4">
+              <TabsList>
+                <TabsTrigger value="services">
+                  <Wrench className="w-4 h-4 mr-2" />
+                  Service Requests ({serviceRequests.length})
+                </TabsTrigger>
+                <TabsTrigger value="contacts">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Contact Messages ({contacts.length})
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="services">
             <Card>
               <CardHeader>
                 <CardTitle>Client Service Requests</CardTitle>
@@ -1287,13 +1431,26 @@ export default function Admin() {
               </CardContent>
             </Card>
           </TabsContent>
+            </Tabs>
+          </div>
+        )}
 
-          {/* Site Content Tab */}
-          <TabsContent value="content">
-            <Card>
+        {/* CMS Section */}
+        {activeSection === "cms" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">Content Management</h1>
+                <p className="text-muted-foreground">Edit the text and content that appears across your website</p>
+              </div>
+              <Button onClick={fetchData} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+            <Card className="bg-white border-0 shadow-sm">
               <CardHeader>
                 <CardTitle>Site Content Management</CardTitle>
-                <p className="text-sm text-muted-foreground">Edit the text and content that appears across your website</p>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1331,95 +1488,24 @@ export default function Admin() {
                     );
                   })}
                 </div>
-
-                {/* Content Edit Dialog */}
-                <Dialog open={contentDialogOpen} onOpenChange={(open) => {
-                  setContentDialogOpen(open);
-                  if (!open) resetContentForm();
-                }}>
-                  <DialogContent className="max-w-2xl">
-                    <DialogHeader>
-                      <DialogTitle>
-                        Edit {CONTENT_SECTIONS.find(s => s.id === editingContent)?.label}
-                      </DialogTitle>
-                      <DialogDescription>
-                        Update the content for this section of your website
-                      </DialogDescription>
-                    </DialogHeader>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <Label>Title</Label>
-                        <Input
-                          value={contentForm.title}
-                          onChange={(e) => setContentForm({ ...contentForm, title: e.target.value })}
-                          placeholder="Section title"
-                        />
-                      </div>
-                      
-                      <div>
-                        <Label>Subtitle</Label>
-                        <Input
-                          value={contentForm.subtitle}
-                          onChange={(e) => setContentForm({ ...contentForm, subtitle: e.target.value })}
-                          placeholder="Section subtitle"
-                        />
-                      </div>
-
-                      <div>
-                        <Label>Content (HTML supported)</Label>
-                        <Textarea
-                          value={contentForm.content}
-                          onChange={(e) => setContentForm({ ...contentForm, content: e.target.value })}
-                          placeholder="Main content..."
-                          rows={6}
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label>Button Text</Label>
-                          <Input
-                            value={contentForm.buttonText}
-                            onChange={(e) => setContentForm({ ...contentForm, buttonText: e.target.value })}
-                            placeholder="Get a Quote"
-                          />
-                        </div>
-                        <div>
-                          <Label>Button Link</Label>
-                          <Input
-                            value={contentForm.buttonLink}
-                            onChange={(e) => setContentForm({ ...contentForm, buttonLink: e.target.value })}
-                            placeholder="/quote"
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <Label>Image URL</Label>
-                        <Input
-                          value={contentForm.imageUrl}
-                          onChange={(e) => setContentForm({ ...contentForm, imageUrl: e.target.value })}
-                          placeholder="https://..."
-                        />
-                      </div>
-                    </div>
-
-                    <DialogFooter>
-                      <Button variant="outline" onClick={() => setContentDialogOpen(false)}>Cancel</Button>
-                      <Button onClick={saveContent}>
-                        <Save className="w-4 h-4 mr-2" />
-                        Save Content
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
               </CardContent>
             </Card>
-          </TabsContent>
+          </div>
+        )}
 
-          {/* Blog Tab */}
-          <TabsContent value="blog">
+        {/* Blog Section */}
+        {activeSection === "blog" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">Blog Management</h1>
+                <p className="text-muted-foreground">Create and manage blog posts for your website</p>
+              </div>
+              <Button onClick={fetchData} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Blog Posts</CardTitle>
@@ -1622,11 +1708,23 @@ export default function Admin() {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </div>
+        )}
 
-          {/* News Tab */}
-          <TabsContent value="news">
-            <Card>
+        {/* Press Section */}
+        {activeSection === "press" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">Press & News</h1>
+                <p className="text-muted-foreground">Manage news releases and press announcements</p>
+              </div>
+              <Button onClick={fetchData} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+            <Card className="bg-white border-0 shadow-sm">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>News Releases</CardTitle>
                 <Dialog open={newsDialogOpen} onOpenChange={(open) => {
@@ -1645,7 +1743,6 @@ export default function Admin() {
                       <DialogDescription>Create or edit a news release for your website</DialogDescription>
                     </DialogHeader>
                     
-                    {/* AI Generation Section */}
                     <div className="border rounded-lg p-4 bg-gradient-to-r from-purple-50 to-blue-50">
                       <h4 className="font-semibold flex items-center gap-2 mb-3">
                         <Sparkles className="w-4 h-4 text-purple-600" />
@@ -1828,11 +1925,98 @@ export default function Admin() {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </div>
+        )}
 
-          {/* SEO Tab */}
-          <TabsContent value="seo">
-            <Card>
+        {/* Users Section */}
+        {activeSection === "users" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">User Management</h1>
+                <p className="text-muted-foreground">Manage admin users and access permissions</p>
+              </div>
+              <Button onClick={fetchData} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+            <Card className="bg-white border-0 shadow-sm">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle>Admin Users</CardTitle>
+                <Button data-testid="button-new-user">
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Add User
+                </Button>
+              </CardHeader>
+              <CardContent>
+                {adminUsers.length === 0 ? (
+                  <div className="text-center py-8">
+                    <Users className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
+                    <p className="text-muted-foreground">No admin users configured yet.</p>
+                    <p className="text-sm text-muted-foreground mt-2">Add users to manage access to the admin portal.</p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Name</TableHead>
+                          <TableHead>Email</TableHead>
+                          <TableHead>Role</TableHead>
+                          <TableHead>Status</TableHead>
+                          <TableHead>Last Login</TableHead>
+                          <TableHead>Actions</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {adminUsers.map((user) => (
+                          <TableRow key={user.id}>
+                            <TableCell className="font-medium">{user.name}</TableCell>
+                            <TableCell>{user.email}</TableCell>
+                            <TableCell>
+                              <Badge variant="outline" className="capitalize">{user.role}</Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Badge className={user.active ? "bg-green-500" : "bg-gray-400"}>
+                                {user.active ? "Active" : "Inactive"}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              {user.lastLogin ? format(new Date(user.lastLogin), "MMM d, yyyy") : "Never"}
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex gap-2">
+                                <Button variant="outline" size="sm">
+                                  <Edit className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* SEO Section */}
+        {activeSection === "seo" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">SEO Tools</h1>
+                <p className="text-muted-foreground">Manage search engine optimization and indexing</p>
+              </div>
+              <Button onClick={fetchData} variant="outline">
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+            <Card className="bg-white border-0 shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Globe className="w-5 h-5" />
@@ -1964,8 +2148,8 @@ export default function Admin() {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-        </Tabs>
+          </div>
+        )}
 
         {/* Quote Details Dialog */}
         <Dialog open={quoteDetailsOpen} onOpenChange={setQuoteDetailsOpen}>
@@ -2339,7 +2523,90 @@ export default function Admin() {
             )}
           </DialogContent>
         </Dialog>
-      </div>
+
+        {/* Content Edit Dialog */}
+        <Dialog open={contentDialogOpen} onOpenChange={(open) => {
+          setContentDialogOpen(open);
+          if (!open) resetContentForm();
+        }}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>
+                Edit {CONTENT_SECTIONS.find(s => s.id === editingContent)?.label}
+              </DialogTitle>
+              <DialogDescription>
+                Update the content for this section of your website
+              </DialogDescription>
+            </DialogHeader>
+            
+            <div className="space-y-4">
+              <div>
+                <Label>Title</Label>
+                <Input
+                  value={contentForm.title}
+                  onChange={(e) => setContentForm({ ...contentForm, title: e.target.value })}
+                  placeholder="Section title"
+                />
+              </div>
+              
+              <div>
+                <Label>Subtitle</Label>
+                <Input
+                  value={contentForm.subtitle}
+                  onChange={(e) => setContentForm({ ...contentForm, subtitle: e.target.value })}
+                  placeholder="Section subtitle"
+                />
+              </div>
+
+              <div>
+                <Label>Content (HTML supported)</Label>
+                <Textarea
+                  value={contentForm.content}
+                  onChange={(e) => setContentForm({ ...contentForm, content: e.target.value })}
+                  placeholder="Main content..."
+                  rows={6}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Button Text</Label>
+                  <Input
+                    value={contentForm.buttonText}
+                    onChange={(e) => setContentForm({ ...contentForm, buttonText: e.target.value })}
+                    placeholder="Get a Quote"
+                  />
+                </div>
+                <div>
+                  <Label>Button Link</Label>
+                  <Input
+                    value={contentForm.buttonLink}
+                    onChange={(e) => setContentForm({ ...contentForm, buttonLink: e.target.value })}
+                    placeholder="/quote"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <Label>Image URL</Label>
+                <Input
+                  value={contentForm.imageUrl}
+                  onChange={(e) => setContentForm({ ...contentForm, imageUrl: e.target.value })}
+                  placeholder="https://..."
+                />
+              </div>
+            </div>
+
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setContentDialogOpen(false)}>Cancel</Button>
+              <Button onClick={saveContent}>
+                <Save className="w-4 h-4 mr-2" />
+                Save Content
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </main>
     </div>
   );
 }
