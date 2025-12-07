@@ -4,32 +4,32 @@ import { Button } from "@/components/ui/button";
 
 export function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground pt-16 pb-8">
+    <footer className="bg-primary text-primary-foreground pt-16 pb-8" role="contentinfo" aria-label="Site footer">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           
           {/* Company Info */}
           <div>
-            <h3 className="font-heading text-2xl font-bold mb-4">InsureLimos</h3>
+            <h3 className="font-heading text-2xl font-bold mb-4" id="footer-company">InsureLimos</h3>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               A Casurance Company. We are an Independent Insurance Agency dedicated to finding the best rates for transportation companies in California and beyond.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors">
-                <Facebook className="h-5 w-5" />
+            <div className="flex gap-4" role="group" aria-label="Social media links">
+              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors" aria-label="Visit our Facebook page">
+                <Facebook className="h-5 w-5" aria-hidden="true" />
               </a>
-              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors" aria-label="Visit our Twitter page">
+                <Twitter className="h-5 w-5" aria-hidden="true" />
               </a>
-              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors">
-                <Instagram className="h-5 w-5" />
+              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors" aria-label="Visit our Instagram page">
+                <Instagram className="h-5 w-5" aria-hidden="true" />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-bold text-lg mb-6">Quick Links</h4>
+          <nav aria-labelledby="footer-quick-links">
+            <h4 className="font-bold text-lg mb-6" id="footer-quick-links">Quick Links</h4>
             <ul className="space-y-3">
               <li>
                 <Link href="/" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
@@ -72,11 +72,11 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Services */}
-          <div>
-            <h4 className="font-bold text-lg mb-6">Insurance Programs</h4>
+          <nav aria-labelledby="footer-programs">
+            <h4 className="font-bold text-lg mb-6" id="footer-programs">Insurance Programs</h4>
             <ul className="space-y-3">
               <li>
                 <Link href="/services/limo" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
@@ -114,34 +114,34 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Contact */}
-          <div>
-            <h4 className="font-bold text-lg mb-6">Contact Us</h4>
+          <div aria-labelledby="footer-contact">
+            <h4 className="font-bold text-lg mb-6" id="footer-contact">Contact Us</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 shrink-0 mt-1 text-accent" />
+                <MapPin className="h-5 w-5 shrink-0 mt-1 text-accent" aria-hidden="true" />
                 <span className="text-primary-foreground/80">
                   714 W Olympic Blvd, Ste 906<br />
                   Los Angeles, CA 90015
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 shrink-0 text-accent" />
-                <a href="tel:323-546-3030" className="text-primary-foreground/80 hover:text-white">
+                <Phone className="h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+                <a href="tel:323-546-3030" className="text-primary-foreground/80 hover:text-white" aria-label="Call local number 323-546-3030">
                   323-546-3030
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="font-bold text-accent text-sm w-5 text-center">TF</span>
-                <a href="tel:888-254-0089" className="text-primary-foreground/80 hover:text-white">
+                <span className="font-bold text-accent text-sm w-5 text-center" aria-hidden="true">TF</span>
+                <a href="tel:888-254-0089" className="text-primary-foreground/80 hover:text-white" aria-label="Call toll-free number 888-254-0089">
                   888-254-0089
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-5 w-5 shrink-0 text-accent" />
-                <a href="mailto:info@insurelimos.com" className="text-primary-foreground/80 hover:text-white">
+                <Mail className="h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+                <a href="mailto:info@insurelimos.com" className="text-primary-foreground/80 hover:text-white" aria-label="Email us at info@insurelimos.com">
                   info@insurelimos.com
                 </a>
               </li>
@@ -150,7 +150,7 @@ export function Footer() {
               Serving: CA, AZ, CO, ID, IL, KS, KY, MN, MO, NV, OH, OK, PA, TN, TX, UT, VA, WI
             </div>
             <Link href="/quote">
-              <Button className="mt-4 w-full bg-accent hover:bg-accent/90 text-white">
+              <Button className="mt-4 w-full bg-accent hover:bg-accent/90 text-white" aria-label="Request a free insurance quote">
                 Request a Quote
               </Button>
             </Link>
