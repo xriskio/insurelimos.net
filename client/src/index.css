@@ -133,3 +133,111 @@
     @apply font-heading font-bold tracking-tight;
   }
 }
+
+/* ============================================
+   ADA ACCESSIBILITY STYLES (WCAG 2.1 AA)
+   ============================================ */
+
+/* Enhanced Focus Indicators - visible on all interactive elements */
+*:focus-visible {
+  outline: 3px solid hsl(215 100% 34%);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* High contrast focus for buttons */
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible {
+  outline: 3px solid hsl(354 79% 49%);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(225, 26, 44, 0.25);
+}
+
+/* Focus styles for form inputs */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid hsl(215 100% 34%);
+  outline-offset: 0;
+  border-color: hsl(215 100% 34%);
+}
+
+/* Skip to content link styling */
+.sr-only.focus\:not-sr-only:focus {
+  position: absolute !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 1rem !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  background: hsl(215 100% 34%);
+  color: white;
+  font-weight: 600;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  text-decoration: underline;
+}
+
+/* Ensure minimum touch target size (44x44px) for mobile */
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: 215 100% 25%;
+    --accent: 354 100% 40%;
+    --muted-foreground: 215 50% 30%;
+  }
+  
+  button,
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Ensure text is readable when zoomed to 200% */
+html {
+  font-size: 100%;
+}
+
+/* Visible text selection for better readability */
+::selection {
+  background: hsl(215 100% 34%);
+  color: white;
+}
+
+/* Ensure links are distinguishable from regular text */
+a:not([class]) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:not([class]):hover {
+  text-decoration-thickness: 2px;
+}
