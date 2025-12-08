@@ -13,7 +13,7 @@ import taxiImage from "@assets/generated_images/modern_yellow_taxi_cab.png";
 import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
 import nemtImage from "@assets/generated_images/medical_transport_van.png";
 import busImage from "@assets/generated_images/modern_charter_bus.png";
-import sprinterImage from "@assets/generated_images/mercedes_sprinter_van.png";
+import sprinterImage from "@assets/generated_images/black_luxury_sprinter_van.png";
 import {
   Form,
   FormControl,
