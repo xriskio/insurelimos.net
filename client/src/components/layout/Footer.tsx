@@ -149,8 +149,12 @@ export function Footer() {
             <div className="mt-6 text-xs text-primary-foreground/60 leading-relaxed">
               Serving: CA, AZ, CO, ID, IL, KS, KY, MN, MO, NV, OH, OK, PA, TN, TX, UT, VA, WI
             </div>
-            <Link href="/quote">
-              <Button className="mt-4 w-full bg-accent hover:bg-accent/90 text-white" aria-label="Request a free insurance quote">
+            <Link href="/quote" className="block cursor-pointer">
+              <Button 
+                className="mt-4 w-full bg-accent hover:bg-accent/90 text-white cursor-pointer" 
+                aria-label="Request a free insurance quote"
+                data-testid="button-footer-get-quote"
+              >
                 Request a Quote
               </Button>
             </Link>

@@ -28,13 +28,20 @@ export default function Home() {
               Get a customized quote today. Our independent agents are ready to find the perfect coverage for your fleet at the best price.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/quote">
-                <button className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-bold text-lg shadow-lg transition-transform hover:scale-105" aria-label="Get your free insurance quote">
+              <Link href="/quote" className="cursor-pointer">
+                <button 
+                  className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-md font-bold text-lg shadow-lg transition-transform hover:scale-105 cursor-pointer" 
+                  aria-label="Get your free insurance quote"
+                  data-testid="button-cta-get-quote"
+                >
                   Get Your Free Quote
                 </button>
               </Link>
               <a href="tel:888-254-0089" aria-label="Call us at 888-254-0089">
-                <button className="bg-white text-primary px-8 py-4 rounded-md font-bold text-lg shadow-lg hover:bg-gray-100 transition-transform hover:scale-105">
+                <button 
+                  className="bg-white text-primary px-8 py-4 rounded-md font-bold text-lg shadow-lg hover:bg-gray-100 transition-transform hover:scale-105 cursor-pointer"
+                  data-testid="button-cta-call"
+                >
                   Call 888-254-0089
                 </button>
               </a>

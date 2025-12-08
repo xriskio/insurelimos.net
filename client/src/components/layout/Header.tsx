@@ -53,8 +53,12 @@ export function Header() {
               <Phone className="h-3 w-3" aria-hidden="true" /> 888-254-0089
             </a>
           </div>
-          <Link href="/quote">
-            <Button className="bg-accent hover:bg-accent/90 text-white font-semibold shadow-md" aria-label="Get a free insurance quote">
+          <Link href="/quote" className="cursor-pointer">
+            <Button 
+              className="bg-accent hover:bg-accent/90 text-white font-semibold shadow-md cursor-pointer" 
+              aria-label="Get a free insurance quote"
+              data-testid="button-header-get-quote"
+            >
               Get a Quote
             </Button>
           </Link>
@@ -82,8 +86,12 @@ export function Header() {
                   </Link>
                 ))}
                 <div className="mt-4">
-                  <Link href="/quote" onClick={() => setIsOpen(false)}>
-                    <Button className="w-full bg-accent hover:bg-accent/90 text-white mb-4" aria-label="Get a free insurance quote">
+                  <Link href="/quote" onClick={() => setIsOpen(false)} className="cursor-pointer block">
+                    <Button 
+                      className="w-full bg-accent hover:bg-accent/90 text-white mb-4 cursor-pointer" 
+                      aria-label="Get a free insurance quote"
+                      data-testid="button-mobile-get-quote"
+                    >
                       Get a Quote
                     </Button>
                   </Link>
