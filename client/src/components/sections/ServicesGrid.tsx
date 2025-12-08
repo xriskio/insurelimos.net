@@ -175,11 +175,11 @@ export function ServicesGrid() {
               <Card key={index} className="group relative overflow-hidden border-border/60 bg-white transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
                 <div className="absolute top-0 left-0 h-1 w-full bg-transparent group-hover:bg-accent transition-colors duration-300" />
                 <CardHeader className="pb-4">
-                  <div className="mb-4 h-48 w-full rounded-lg overflow-hidden bg-slate-100">
+                  <div className="mb-4 h-44 w-full rounded-lg overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100">
                     <img 
                       src={service.image} 
                       alt={service.title}
-                      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain object-center p-2"
                       loading="lazy"
                     />
                   </div>
