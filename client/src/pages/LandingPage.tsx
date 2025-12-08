@@ -36,7 +36,7 @@ import { motion } from "framer-motion";
 
 import limoImage from "@assets/generated_images/modern_luxury_suv_limo.png";
 import taxiImage from "@assets/generated_images/modern_yellow_taxi_cab.png";
-import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
+import rideshareImage from "@assets/generated_images/uber_lyft_rideshare_car.png";
 import nemtImage from "@assets/generated_images/medical_transport_van.png";
 import busImage from "@assets/generated_images/modern_charter_bus.png";
 import sprinterImage from "@assets/generated_images/black_luxury_sprinter_van.png";
@@ -368,13 +368,16 @@ export default function LandingPage() {
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { image: limoImage, label: "Limousines" },
-                  { image: tncImage, label: "Rideshare" },
-                  { image: nemtImage, label: "NEMT" },
-                  { image: sprinterImage, label: "TNC Fleets" },
-                  { image: busImage, label: "Buses" },
+                  { image: rideshareImage, label: "Uber / Lyft" },
+                  { image: nemtImage, label: "NEMT / Paratransit" },
+                  { image: sprinterImage, label: "Sprinter Vans" },
+                  { image: busImage, label: "Buses / Motorcoaches" },
                   { image: taxiImage, label: "Taxis" },
                 ].map((item, idx) => (
                   <div key={idx} className="bg-white/10 border border-white/20 rounded-xl overflow-hidden hover:bg-white/20 transition-colors">
+                    <div className="text-center py-2 px-2 bg-white/5">
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </div>
                     <div className="h-20 bg-gradient-to-b from-slate-700/50 to-slate-800/50">
                       <img 
                         src={item.image} 
@@ -382,9 +385,6 @@ export default function LandingPage() {
                         className="w-full h-full object-contain object-center p-1"
                         loading="lazy"
                       />
-                    </div>
-                    <div className="text-center py-2 px-2">
-                      <span className="text-sm font-medium">{item.label}</span>
                     </div>
                   </div>
                 ))}
