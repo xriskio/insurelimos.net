@@ -3,10 +3,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Car, Bus, Smartphone, Truck, Ambulance, ArrowRight, Shield, Clock, Lock } from "lucide-react";
+import { ArrowRight, Shield, Clock, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation } from "wouter";
+
+import limoImage from "@assets/stock_images/black_luxury_limousi_29e84c55.jpg";
+import taxiImage from "@assets/stock_images/yellow_taxi_cab_car_f92b7558.jpg";
+import tncImage from "@assets/stock_images/rideshare_uber_lyft__50763fa4.jpg";
+import nemtImage from "@assets/stock_images/medical_transport_wh_50120488.jpg";
+import busImage from "@assets/stock_images/charter_bus_motorcoa_85877992.jpg";
+import sprinterImage from "@assets/stock_images/sprinter_van_passeng_98001a11.jpg";
 import {
   Form,
   FormControl,
@@ -28,37 +35,37 @@ const services = [
   {
     title: "Limousine Insurance",
     description: "Comprehensive coverage for luxury transportation services including sedans, stretch limos, and SUVs.",
-    icon: Car,
+    image: limoImage,
     href: "/quote/limousine",
   },
   {
     title: "Taxi & Cab Insurance",
     description: "Specialized protection for taxi fleets and individual owner-operators with competitive rates.",
-    icon: Car,
+    image: taxiImage,
     href: "/quote/public-auto",
   },
   {
     title: "TNC & Mobility",
     description: "Tailored solutions for Transportation Network Companies like Uber/Lyft fleets and mobility services.",
-    icon: Smartphone,
+    image: tncImage,
     href: "/quote/tnc",
   },
   {
     title: "NEMT Insurance",
     description: "Specialized coverage for Non-Emergency Medical Transportation vehicles and liability needs.",
-    icon: Ambulance,
+    image: nemtImage,
     href: "/quote/nemt",
   },
   {
     title: "Bus & Motorcoach",
     description: "Protection for charter buses, tour buses, and motorcoach operators of all fleet sizes.",
-    icon: Bus,
+    image: busImage,
     href: "/quote/public-auto",
   },
   {
     title: "Sprinter & Van",
     description: "Commercial auto insurance for Sprinter vans, cargo vans, and passenger shuttle services.",
-    icon: Truck,
+    image: sprinterImage,
     href: "/quote/public-auto",
   },
 ];
@@ -168,8 +175,13 @@ export function ServicesGrid() {
               <Card key={index} className="group relative overflow-hidden border-border/60 bg-white transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
                 <div className="absolute top-0 left-0 h-1 w-full bg-transparent group-hover:bg-accent transition-colors duration-300" />
                 <CardHeader className="pb-4">
-                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/5 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                    <service.icon className="h-6 w-6" />
+                  <div className="mb-4 h-24 w-full rounded-lg overflow-hidden bg-primary/5">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
                   </div>
                   <CardTitle className="text-xl font-bold text-foreground">{service.title}</CardTitle>
                 </CardHeader>
