@@ -368,7 +368,7 @@ export default function LandingPage() {
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { image: limoImage, label: "Limousines" },
-                  { image: rideshareImage, label: "Uber / Lyft" },
+                  { image: rideshareImage, label: "TNC Fleets" },
                   { image: nemtImage, label: "NEMT / Paratransit" },
                   { image: sprinterImage, label: "Sprinter Vans" },
                   { image: busImage, label: "Buses / Motorcoaches" },
