@@ -123,11 +123,11 @@ export default function Services() {
             {services.map((service) => (
               <Card key={service.id} className="flex flex-col h-full hover:shadow-lg transition-shadow border-border/60 group overflow-hidden">
                 <CardHeader>
-                  <div className="h-40 w-full rounded-lg overflow-hidden mb-4 bg-primary/5">
+                  <div className="h-48 w-full rounded-lg overflow-hidden mb-4 bg-slate-100">
                     <img 
                       src={service.image} 
                       alt={service.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />
                   </div>
