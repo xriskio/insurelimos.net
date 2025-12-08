@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRoute, useLocation } from "wouter";
+import { useRoute, useLocation, Link } from "wouter";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { TransportQuoteForm } from "@/components/forms/TransportQuoteForm";
@@ -9,6 +9,7 @@ import { CyberLiabilityForm } from "@/components/forms/CyberLiabilityForm";
 import { AmbulanceForm } from "@/components/forms/AmbulanceForm";
 import { CaptiveForm } from "@/components/forms/CaptiveForm";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -16,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Clock, ArrowRight } from "lucide-react";
 import { Seo } from "@/components/seo/Seo";
 
 const COVERAGE_TYPES = [
@@ -126,6 +127,27 @@ export default function QuotePage() {
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Fill out the form below and one of our transportation insurance specialists will get back to you within 24 hours.
               </p>
+            </div>
+
+            {/* Quick Quote Option for users in a hurry */}
+            <div className="mb-8 bg-gradient-to-r from-accent to-accent/80 rounded-lg p-4 md:p-6 text-white shadow-lg">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <Clock className="h-8 w-8 shrink-0" aria-hidden="true" />
+                  <div>
+                    <h2 className="text-lg md:text-xl font-bold">In a Hurry?</h2>
+                    <p className="text-white/90 text-sm md:text-base">Get a quick quote in just 2 minutes with our simplified form</p>
+                  </div>
+                </div>
+                <Link href="/get-quote">
+                  <Button 
+                    className="bg-white text-accent hover:bg-gray-100 font-bold px-6 py-3 shadow-md whitespace-nowrap"
+                    data-testid="button-quick-quote"
+                  >
+                    Quick Quote Form <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </Button>
+                </Link>
+              </div>
             </div>
 
             <div className="grid gap-8 xl:grid-cols-[1fr_300px]">
