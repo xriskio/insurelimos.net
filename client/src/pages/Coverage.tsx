@@ -1,16 +1,25 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, Smartphone, ArrowRight, Accessibility, Car, Bus, Gem, Building2, Ambulance, HeartHandshake } from "lucide-react";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Seo } from "@/components/seo/Seo";
+
+import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
+import nemtImage from "@assets/generated_images/medical_transport_van.png";
+import taxiImage from "@assets/generated_images/modern_yellow_taxi_cab.png";
+import schoolBusImage from "@assets/generated_images/modern_school_bus.png";
+import limoImage from "@assets/generated_images/modern_luxury_suv_limo.png";
+import captiveImage from "@assets/generated_images/modern_charter_bus.png";
+import ambulanceImage from "@assets/generated_images/modern_ambulance_ems.png";
+import paratransitImage from "@assets/generated_images/paratransit_accessible_van.png";
 
 const coverages = [
   {
     id: "tnc-mobility",
     title: "TNC & Mobility",
-    icon: Smartphone,
+    image: tncImage,
     description: "Specialized insurance solutions for transportation network companies (TNCs), rideshare platforms, and modern mobility services.",
     details: "Coverage for Uber, Lyft, delivery services, micro-mobility, and on-demand transportation. Period-specific protection for all operational phases.",
     hasPage: true,
@@ -19,7 +28,7 @@ const coverages = [
   {
     id: "nemt",
     title: "NEMT Insurance",
-    icon: Accessibility,
+    image: nemtImage,
     description: "Specialized insurance solutions for Non-Emergency Medical Transportation providers, ensuring your patients and business are protected.",
     details: "Coverage for wheelchair lifts, ramps, patient loading/unloading, and medical equipment transport. Policies that meet healthcare facility contract requirements.",
     hasPage: true,
@@ -28,7 +37,7 @@ const coverages = [
   {
     id: "taxi",
     title: "Taxi Insurance",
-    icon: Car,
+    image: taxiImage,
     description: "Comprehensive insurance coverage for taxi operators, from independent drivers to large fleet owners.",
     details: "Coverage meeting state and municipal requirements. Hybrid policies available for drivers who operate both taxi and rideshare services.",
     hasPage: true,
@@ -37,7 +46,7 @@ const coverages = [
   {
     id: "school-bus",
     title: "School Bus Insurance",
-    icon: Bus,
+    image: schoolBusImage,
     description: "Specialized insurance solutions for school bus operators and contractors. Protection for your business and the students you serve.",
     details: "Coverage for school district fleets, independent contractors, private schools, and special needs transportation. Risk management focused on student safety.",
     hasPage: true,
@@ -46,7 +55,7 @@ const coverages = [
   {
     id: "limo",
     title: "Limousine & Chauffeured",
-    icon: Gem,
+    image: limoImage,
     description: "Specialized insurance for limousine fleets, luxury transportation, and chauffeured services.",
     details: "Coverage for luxury sedans, Mercedes Sprinters, stretch limousines, party buses, and executive transportation. Partnership with PHLY and other A-rated carriers.",
     hasPage: true,
@@ -55,7 +64,7 @@ const coverages = [
   {
     id: "captive",
     title: "Captive Insurance Programs",
-    icon: Building2,
+    image: captiveImage,
     description: "Alternative risk solutions for larger transportation fleets seeking greater control, cost savings, and risk retention.",
     details: "Group captives, large deductible programs, and single-parent captive formation. Ideal for operations with $250K+ annual premiums and strong risk management practices.",
     hasPage: true,
@@ -64,7 +73,7 @@ const coverages = [
   {
     id: "ambulance",
     title: "Ambulance & EMS",
-    icon: Ambulance,
+    image: ambulanceImage,
     description: "Comprehensive insurance solutions for ambulance services, EMS providers, and emergency medical transportation operations.",
     details: "Coverage for BLS, ALS, and critical care transport. Auto liability, professional liability, inland marine for medical equipment, workers' compensation, and umbrella policies.",
     hasPage: true,
@@ -73,7 +82,7 @@ const coverages = [
   {
     id: "paratransit",
     title: "Paratransit Insurance",
-    icon: HeartHandshake,
+    image: paratransitImage,
     description: "Specialized insurance for paratransit companies transporting passengers with disabilities and special needs.",
     details: "Coverage for wheelchair-accessible vehicles, medicars, ambulettes, and demand-response transportation. Liability up to $5M CSL with excess up to $20M available.",
     hasPage: true,
@@ -157,11 +166,22 @@ export default function Coverage() {
         <section className="py-16 container mx-auto px-4">
           <div className="grid gap-8 max-w-5xl mx-auto">
             {coverages.map((item) => (
-              <div key={item.id} className="flex flex-col md:flex-row gap-6 bg-white p-8 rounded-xl border border-border/60 shadow-sm hover:shadow-md transition-shadow">
+              <div key={item.id} className="flex flex-col md:flex-row gap-6 bg-white p-8 rounded-xl border border-border/60 shadow-sm hover:shadow-md transition-shadow group">
                 <div className="shrink-0">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                    <item.icon className="h-8 w-8" />
-                  </div>
+                  {'image' in item && item.image ? (
+                    <div className="w-48 h-32 rounded-lg overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-contain object-center p-1"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                      {'icon' in item && item.icon && <item.icon className="h-8 w-8" />}
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-primary mb-3">{item.title}</h3>
