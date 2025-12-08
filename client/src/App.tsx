@@ -43,6 +43,8 @@ import RemoveVehicle from "@/pages/support/RemoveVehicle";
 import PolicyChange from "@/pages/support/PolicyChange";
 import RenewalReview from "@/pages/support/RenewalReview";
 import LandingPage from "@/pages/LandingPage";
+import Locations from "@/pages/Locations";
+import LocationDetail from "@/pages/LocationDetail";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -97,6 +99,9 @@ function Router() {
       <Route path="/client-support/remove-vehicle" component={RemoveVehicle} />
       <Route path="/client-support/policy-change" component={PolicyChange} />
       <Route path="/client-support/renewal-review" component={RenewalReview} />
+      
+      <Route path="/locations" component={Locations} />
+      <Route path="/location/:city/:type" component={LocationDetail} />
       
       <Route component={NotFound} />
     </Switch>

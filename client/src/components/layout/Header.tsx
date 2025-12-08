@@ -12,6 +12,7 @@ export function Header() {
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Coverage", href: "/coverage" },
+    { label: "Locations", href: "/locations" },
     { label: "Client Support", href: "/client-support" },
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
