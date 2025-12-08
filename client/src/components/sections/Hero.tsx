@@ -6,13 +6,18 @@ import { Link } from "wouter";
 
 export function Hero() {
   return (
-    <section className="relative h-[600px] w-full overflow-hidden">
-      {/* Background Image with Overlay */}
+    <section className="relative h-[600px] w-full overflow-hidden hero-section" aria-labelledby="hero-heading">
+      {/* Background Image with Overlay - Prioritized for LCP */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroImage} 
-          alt="Luxury Limousine Fleet" 
+          alt="Luxury limousine fleet representing InsureLimos transportation insurance services" 
           className="h-full w-full object-cover object-center"
+          width={1920}
+          height={600}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent" />
       </div>
@@ -28,7 +33,7 @@ export function Hero() {
           <span className="mb-4 inline-block rounded-full bg-accent/20 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm border border-accent/30">
             The Public Auto Specialists
           </span>
-          <h1 className="mb-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl drop-shadow-lg">
+          <h1 id="hero-heading" className="mb-6 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl drop-shadow-lg">
             Specialized Insurance for <span className="text-accent-foreground/90">Transportation</span> Companies
           </h1>
           <p className="mb-8 text-lg text-gray-100 sm:text-xl max-w-xl leading-relaxed drop-shadow-md">
