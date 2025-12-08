@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Seo } from "@/components/seo/Seo";
+import { Seo, FAQSchema, InsuranceServiceSchema, BreadcrumbSchema } from "@/components/seo/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Shield, 
@@ -28,14 +28,46 @@ import {
 } from "@/components/ui/accordion";
 import taxiHeroImage from "@assets/stock_images/taxi_cab_yellow_city_0c5cc1d3.jpg";
 
+const taxiFaqs = [
+  {
+    question: "What insurance limits do I need for my taxi business?",
+    answer: "Insurance limits depend on your state and local requirements. Most areas require a minimum of $300,000 combined single limit, but many municipalities and airports require $500,000 to $1,000,000 CSL. We can help you determine the right limits for your operation."
+  },
+  {
+    question: "What types of vehicles are eligible for taxi insurance?",
+    answer: "We insure a wide variety of taxi vehicles including traditional sedans, SUVs, minivans, wheelchair-accessible vehicles, and even hybrid or electric taxis. Our program covers most makes and models commonly used in taxi service."
+  },
+  {
+    question: "Can I get insurance if I'm just starting my taxi business?",
+    answer: "Yes! We specialize in new venture taxi insurance programs. We understand that everyone has to start somewhere, and we offer competitive rates for new taxi operators with less than 3 years of business history."
+  },
+  {
+    question: "Do I need a medallion to get taxi insurance?",
+    answer: "Not in all areas. Requirements vary by city and state. Some jurisdictions require medallions or permits, while others use different licensing systems. We can write policies for both medallion and non-medallion taxi operations depending on local regulations."
+  }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Coverage", url: "/coverage" },
+  { name: "Taxi Insurance", url: "/coverage/taxi" },
+];
+
 export default function TaxiCoverage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
-        title="Taxi & Cab Insurance - Coverage for Taxi Operators | InsureLimos"
-        description="Specialized taxi cab insurance for independent drivers and fleets. Comprehensive auto liability, physical damage, and general liability coverage for taxi operations."
-        canonical="https://insurelimos.net/coverage/taxi"
+        title="Taxi Insurance - Coverage for Cab Operators & Fleets"
+        description="Get specialized taxi cab insurance for independent drivers and fleets. Comprehensive auto liability, physical damage, and general liability coverage. New ventures welcome. Free quote from InsureLimos."
       />
+      <FAQSchema faqs={taxiFaqs} />
+      <InsuranceServiceSchema
+        serviceName="Taxi and Cab Insurance"
+        serviceDescription="Comprehensive insurance coverage for taxi operators, from independent drivers to large fleet owners."
+        url="/coverage/taxi"
+        areaServed={["California", "Arizona", "Colorado", "Idaho", "Illinois", "Kansas", "Kentucky", "Minnesota", "Missouri", "Nevada", "Ohio", "Oklahoma", "Pennsylvania", "Tennessee", "Texas", "Utah", "Virginia", "Wisconsin"]}
+      />
+      <BreadcrumbSchema items={breadcrumbs} />
       <Header />
       
       <main className="flex-1" id="main-content" role="main">

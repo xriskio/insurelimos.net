@@ -175,6 +175,27 @@ The codebase follows a monorepo structure with three main directories:
 - Both APIs are called simultaneously via `submitToAllSearchEngines()` in `server/indexnow.ts`
 - Sitemap available at `/sitemap.xml`, robots.txt at `/robots.txt`
 
+**Google SEO Implementation (Following Google Search Central Guidelines):**
+- Structured data using JSON-LD format (recommended by Google)
+- Schema types implemented:
+  - `WebSite` - Site name, search action, alternate names
+  - `InsuranceAgency` - Business info, contact points, service catalog
+  - `LocalBusiness` - Address, hours, geo coordinates
+  - `BreadcrumbList` - Navigation breadcrumbs for all pages
+  - `ItemList` - Carousel-style listings for services and blog posts
+  - `Article` - Full article schema for blog/news posts
+  - `FAQPage` - FAQ structured data for coverage pages
+  - `Service` - Individual insurance service schemas
+- Core Web Vitals optimizations in CSS:
+  - LCP: Font preloading, image prioritization, content-visibility
+  - CLS: Aspect ratios, image dimensions, layout containment
+  - INP: GPU-accelerated transitions, will-change hints
+- Page experience optimizations:
+  - Mobile-friendly with 44px touch targets
+  - Reduced motion support for accessibility
+  - High contrast mode support
+  - HTTPS-ready configuration
+
 **PostgreSQL Database:**
 - Primary data store via `DATABASE_URL` environment variable
 - Connection pooling via `pg` library

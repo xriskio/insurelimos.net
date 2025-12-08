@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Seo } from "@/components/seo/Seo";
+import { Seo, FAQSchema, InsuranceServiceSchema, BreadcrumbSchema } from "@/components/seo/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Shield, 
@@ -28,14 +28,50 @@ import {
 } from "@/components/ui/accordion";
 import nemtHeroImage from "@assets/stock_images/medical_transportati_bedcf76d.jpg";
 
+const nemtFaqs = [
+  {
+    question: "What insurance limits do I need for my NEMT business?",
+    answer: "Insurance limits for NEMT providers typically depend on several factors, including state requirements, contractual obligations with healthcare facilities, and the size of your operation. Most NEMT providers need at least $1,000,000 in auto liability coverage, though many contracts with healthcare facilities may require higher limits. We offer excess liability up to $20,000,000 for larger operations."
+  },
+  {
+    question: "Does my NEMT insurance cover the specialized equipment in my vehicles?",
+    answer: "Yes, our NEMT insurance packages include coverage for specialized equipment such as wheelchair lifts, ramps, stretchers, and other accessibility modifications. We also cover medical equipment securement devices and other accessibility features essential to your operations."
+  },
+  {
+    question: "What is SAM coverage and why do I need it?",
+    answer: "Sexual Abuse and Molestation (SAM) coverage protects your business against allegations of sexual misconduct. Given the vulnerable populations served by NEMT providers, this critical coverage protects your business against serious allegations that could otherwise be financially devastating. Our policies include this important protection."
+  },
+  {
+    question: "Are my drivers covered when assisting patients in and out of vehicles?",
+    answer: "Yes, our NEMT coverage includes protection for patient loading, unloading, and assistance. This covers your drivers and patient assistance personnel during all phases of patient transport, including helping patients in and out of vehicles and securing wheelchairs and medical equipment."
+  },
+  {
+    question: "Does your insurance meet Medicaid and Medicare requirements?",
+    answer: "Yes, our NEMT insurance programs are designed to comply with Medicaid, Medicare, and healthcare facility contract requirements. We understand the specific insurance requirements for government contracts and can provide the certificates and endorsements needed to meet these obligations."
+  }
+];
+
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Coverage", url: "/coverage" },
+  { name: "NEMT Insurance", url: "/coverage/nemt" },
+];
+
 export default function NemtCoverage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
-        title="NEMT and Paratransit Insurance - Non-Emergency Medical Transportation Coverage"
-        description="Specialized insurance coverage for Non-Emergency Medical Transportation and Paratransit operators. Protect your patients and business."
-        canonical="https://insurelimos.net/coverage/nemt"
+        title="NEMT Insurance - Non-Emergency Medical Transportation Coverage"
+        description="Get specialized NEMT and paratransit insurance for medical transportation providers. Coverage includes wheelchair vans, ambulettes, and patient transport vehicles. Meets Medicaid and Medicare requirements. Free quote from InsureLimos."
       />
+      <FAQSchema faqs={nemtFaqs} />
+      <InsuranceServiceSchema
+        serviceName="NEMT and Paratransit Insurance"
+        serviceDescription="Specialized insurance coverage for Non-Emergency Medical Transportation and Paratransit operators serving patients with medical needs."
+        url="/coverage/nemt"
+        areaServed={["California", "Arizona", "Colorado", "Idaho", "Illinois", "Kansas", "Kentucky", "Minnesota", "Missouri", "Nevada", "Ohio", "Oklahoma", "Pennsylvania", "Tennessee", "Texas", "Utah", "Virginia", "Wisconsin"]}
+      />
+      <BreadcrumbSchema items={breadcrumbs} />
       <Header />
       
       <main className="flex-1" id="main-content" role="main">
