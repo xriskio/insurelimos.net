@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Footer() {
@@ -14,17 +14,6 @@ export function Footer() {
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               A Casurance Company. We are an Independent Insurance Agency dedicated to finding the best rates for transportation companies in California and beyond.
             </p>
-            <div className="flex gap-4" role="group" aria-label="Social media links">
-              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors" aria-label="Visit our Facebook page">
-                <Facebook className="h-5 w-5" aria-hidden="true" />
-              </a>
-              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors" aria-label="Visit our Twitter page">
-                <Twitter className="h-5 w-5" aria-hidden="true" />
-              </a>
-              <a href="#" className="p-2 bg-primary-foreground/10 rounded-full hover:bg-accent transition-colors" aria-label="Visit our Instagram page">
-                <Instagram className="h-5 w-5" aria-hidden="true" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
