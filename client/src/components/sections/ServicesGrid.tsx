@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useLocation } from "wouter";
 
-import limoImage from "@assets/stock_images/modern_luxury_black__553acbba.jpg";
-import taxiImage from "@assets/stock_images/modern_yellow_taxi_c_0c05de67.jpg";
-import tncImage from "@assets/stock_images/modern_tesla_model_3_1d1d34d1.jpg";
-import nemtImage from "@assets/stock_images/modern_white_wheelch_7343ef67.jpg";
-import busImage from "@assets/stock_images/modern_luxury_coach__11fb30ab.jpg";
-import sprinterImage from "@assets/stock_images/modern_mercedes_spri_94f57e53.jpg";
+import limoImage from "@assets/generated_images/modern_luxury_suv_limo.png";
+import taxiImage from "@assets/generated_images/modern_yellow_taxi_cab.png";
+import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
+import nemtImage from "@assets/generated_images/medical_transport_van.png";
+import busImage from "@assets/generated_images/modern_charter_bus.png";
+import sprinterImage from "@assets/generated_images/mercedes_sprinter_van.png";
 import {
   Form,
   FormControl,
