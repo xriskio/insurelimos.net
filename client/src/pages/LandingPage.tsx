@@ -28,15 +28,18 @@ import {
   Clock, 
   Award, 
   Users,
-  Truck,
-  Car,
-  Bus,
-  Ambulance,
   Star,
   ArrowRight,
   BadgeCheck
 } from "lucide-react";
 import { motion } from "framer-motion";
+
+import limoImage from "@assets/generated_images/modern_luxury_suv_limo.png";
+import taxiImage from "@assets/generated_images/modern_yellow_taxi_cab.png";
+import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
+import nemtImage from "@assets/generated_images/medical_transport_van.png";
+import busImage from "@assets/generated_images/modern_charter_bus.png";
+import sprinterImage from "@assets/generated_images/black_luxury_sprinter_van.png";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
@@ -362,18 +365,27 @@ export default function LandingPage() {
 
             <div className="hidden lg:block">
               <h3 className="text-lg font-semibold mb-4 text-gray-300">We Insure:</h3>
-              <div className="flex flex-wrap gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 {[
-                  { icon: Car, label: "Limousines" },
-                  { icon: Car, label: "Rideshare" },
-                  { icon: Ambulance, label: "NEMT" },
-                  { icon: Truck, label: "TNC Fleets" },
-                  { icon: Bus, label: "Buses" },
-                  { icon: Car, label: "Taxis" },
+                  { image: limoImage, label: "Limousines" },
+                  { image: tncImage, label: "Rideshare" },
+                  { image: nemtImage, label: "NEMT" },
+                  { image: sprinterImage, label: "TNC Fleets" },
+                  { image: busImage, label: "Buses" },
+                  { image: taxiImage, label: "Taxis" },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2 bg-white/5 border border-white/20 rounded-full px-4 py-2">
-                    <item.icon className="w-4 h-4" />
-                    <span className="text-sm">{item.label}</span>
+                  <div key={idx} className="bg-white/10 border border-white/20 rounded-xl overflow-hidden hover:bg-white/20 transition-colors">
+                    <div className="h-20 bg-gradient-to-b from-slate-700/50 to-slate-800/50">
+                      <img 
+                        src={item.image} 
+                        alt={item.label}
+                        className="w-full h-full object-contain object-center p-1"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="text-center py-2 px-2">
+                      <span className="text-sm font-medium">{item.label}</span>
+                    </div>
                   </div>
                 ))}
               </div>
