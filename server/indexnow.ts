@@ -106,31 +106,42 @@ export async function submitAllSitePages(): Promise<{ indexNow: boolean; bing: b
     "/",
     "/services",
     "/coverage",
+    "/locations",
     "/about",
     "/contact",
     "/blog",
     "/news",
+    "/client-support",
     "/get-quote",
-    "/quote/limo",
+    "/quote",
+    "/quote/limousine",
     "/quote/tnc",
     "/quote/nemt",
-    "/quote/taxi",
-    "/quote/paratransit",
+    "/quote/rideshare",
     "/quote/public-auto",
     "/quote/ambulance",
+    "/quote/workers-comp",
+    "/quote/excess-liability",
+    "/quote/cyber-liability",
+    "/quote/captive",
     "/coverage/limo",
     "/coverage/tnc",
     "/coverage/nemt",
     "/coverage/taxi",
     "/coverage/paratransit",
-    "/coverage/public-auto",
-    "/coverage/workers-comp",
-    "/coverage/excess-liability",
-    "/coverage/cyber-liability",
+    "/coverage/school-bus",
+    "/coverage/ambulance",
+    "/coverage/captive",
     "/privacy",
     "/terms",
   ];
 
   const fullUrls = allPages.map(page => `https://${SITE_HOST}${page}`);
   return submitToAllSearchEngines(fullUrls);
+}
+
+export async function submitLocationPages(citySlug: string): Promise<{ indexNow: boolean; bing: boolean }> {
+  const transportTypes = ["limo", "nemt", "paratransit", "bus", "ambulance", "taxi", "tnc"];
+  const urls = transportTypes.map(type => `https://${SITE_HOST}/location/${citySlug}/${type}`);
+  return submitToAllSearchEngines(urls);
 }
