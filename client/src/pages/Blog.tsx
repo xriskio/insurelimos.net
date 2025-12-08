@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Seo } from "@/components/seo/Seo";
+import { Seo, ArticleListSchema, BreadcrumbSchema } from "@/components/seo/Seo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -52,12 +52,28 @@ export default function Blog() {
     ? posts 
     : posts.filter(post => post.category === selectedCategory);
 
+  const articleSchemaData = posts.map(post => ({
+    headline: post.title,
+    description: post.excerpt,
+    url: `/blog/${post.slug}`,
+    image: post.imageUrl || defaultImage,
+    datePublished: post.createdAt,
+    author: post.author,
+  }));
+
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Seo 
-        title="Insurance Blog"
-        description="Read the latest insights on transportation insurance, including tips for limousine, TNC, NEMT, taxi, and commercial auto coverage. Expert advice from InsureLimos."
+        title="Transportation Insurance Blog - Expert Insights & Industry News"
+        description="Stay informed with InsureLimos blog. Read expert articles on limousine insurance, TNC/rideshare coverage, NEMT regulations, taxi fleet protection, and commercial auto tips. Updated weekly."
       />
+      <BreadcrumbSchema items={breadcrumbs} />
+      {posts.length > 0 && <ArticleListSchema articles={articleSchemaData} listName="InsureLimos Blog Posts" />}
       <Header />
       <main id="main-content" role="main" className="flex-1">
         {/* Hero Section */}

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Car, Bus, Smartphone, Truck, Ambulance, ShieldCheck, GraduationCap, Stethoscope, Check } from "lucide-react";
 import { Link } from "wouter";
-import { Seo } from "@/components/seo/Seo";
+import { Seo, ServiceListSchema, BreadcrumbSchema } from "@/components/seo/Seo";
 
 const services = [
   {
@@ -72,14 +72,26 @@ const services = [
   }
 ];
 
+const serviceSchemaData = services.map(s => ({
+  name: s.title,
+  description: s.description,
+  url: `/quote/${s.id === 'limo' ? 'limousine' : s.id}`,
+}));
+
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Services", url: "/services" },
+];
+
 export default function Services() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
-        title="Transportation Insurance Services - Limo, Taxi, NEMT, Trucking"
-        description="Explore our specialized insurance services for limousines, taxis, rideshare, NEMT, buses, and more. Tailored coverage for your fleet."
-        canonical="https://insurelimos.net/services"
+        title="Commercial Transportation Insurance Services"
+        description="InsureLimos offers specialized commercial auto insurance for limousines, taxis, TNC/rideshare (Uber, Lyft), NEMT, buses, school buses, and paratransit. Compare coverage options and get a free quote. Licensed in 18 states."
       />
+      <ServiceListSchema services={serviceSchemaData} />
+      <BreadcrumbSchema items={breadcrumbs} />
       <Header />
       
       <main className="flex-1" id="main-content" role="main">

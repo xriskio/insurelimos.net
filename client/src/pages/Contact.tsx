@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { Seo } from "@/components/seo/Seo";
+import { Seo, BreadcrumbSchema } from "@/components/seo/Seo";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -72,9 +72,8 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
-        title="Contact InsureLimos - Los Angeles Transportation Insurance"
-        description="Get in touch with our specialized insurance agents. Located in Los Angeles, serving the entire nation."
-        canonical="https://insurelimos.net/contact"
+        title="Contact InsureLimos - Get a Free Transportation Insurance Quote"
+        description="Contact InsureLimos for commercial auto insurance quotes. Call 888-254-0089 or fill out our form. Our Los Angeles-based team serves limousine, taxi, TNC, NEMT, and bus operators in 18 states. Open Monday-Friday 8AM-6PM PST."
       />
       <Header />
       

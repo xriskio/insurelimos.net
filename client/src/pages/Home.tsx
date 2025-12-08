@@ -10,9 +10,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
-        title="Specialized Insurance for Transportation Companies"
-        description="Comprehensive coverage solutions for limousines, taxis, TNC, buses, and more. Serving CA, AZ, CO, ID, IL, KS, KY, MN, MO, NV, OH, OK, PA, TN, TX, UT, VA, WI."
-        canonical="https://insurelimos.net/"
+        title="Commercial Transportation Insurance - Limo, Taxi, TNC, NEMT, Bus"
+        description="InsureLimos provides specialized commercial auto insurance for limousines, taxis, Uber/Lyft drivers, NEMT providers, buses, and paratransit operators. Get a free quote in minutes. Licensed in CA, AZ, CO, IL, TX, and 13 more states. Call 888-254-0089."
       />
       <Header />
       <main className="flex-1" id="main-content" role="main">

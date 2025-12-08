@@ -10,9 +10,8 @@ export default function About() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Seo 
-        title="About Us - Specialized Transportation Insurance"
-        description="InsureLimos is a Casurance Company specializing in public auto insurance across California, Nevada, Arizona, Texas, and more."
-        canonical="https://insurelimos.net/about"
+        title="About InsureLimos - Your Transportation Insurance Experts"
+        description="InsureLimos is an independent insurance agency specializing in commercial transportation coverage. We serve limousine, taxi, TNC, NEMT, and bus operators across 18 states including CA, TX, AZ, NV, and more. Get personalized service from industry experts."
       />
       <Header />
       

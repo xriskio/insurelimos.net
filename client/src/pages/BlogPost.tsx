@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, ArrowLeft, User } from "lucide-react";
 import { format } from "date-fns";
+import { Seo, ArticleSchema, BreadcrumbSchema } from "@/components/seo/Seo";
 
 interface BlogPost {
   id: string;
@@ -84,8 +85,31 @@ export default function BlogPost() {
     );
   }
 
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: post.title, url: `/blog/${post.slug}` },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
+      <Seo 
+        title={post.title}
+        description={post.excerpt}
+        ogType="article"
+        ogImage={post.imageUrl || defaultImage}
+        articlePublishedTime={post.createdAt}
+        articleAuthor={post.author}
+      />
+      <ArticleSchema 
+        headline={post.title}
+        description={post.excerpt}
+        image={post.imageUrl || defaultImage}
+        datePublished={post.createdAt}
+        author={post.author}
+        url={`/blog/${post.slug}`}
+      />
+      <BreadcrumbSchema items={breadcrumbs} />
       <Header />
       <main id="main-content" role="main" className="flex-1">
         {/* Hero Image */}
