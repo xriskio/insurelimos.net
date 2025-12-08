@@ -378,11 +378,11 @@ export default function LandingPage() {
                     <div className="text-center py-2 px-2 bg-white/5">
                       <span className="text-sm font-medium">{item.label}</span>
                     </div>
-                    <div className="h-20 bg-gradient-to-b from-slate-700/50 to-slate-800/50">
+                    <div className="h-24 bg-gradient-to-b from-slate-100 to-slate-200">
                       <img 
                         src={item.image} 
                         alt={item.label}
-                        className="w-full h-full object-contain object-center p-1"
+                        className="w-full h-full object-contain object-center"
                         loading="lazy"
                       />
                     </div>
