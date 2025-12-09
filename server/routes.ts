@@ -138,6 +138,49 @@ export async function registerRoutes(
     });
   });
 
+  // ============== LEGACY URL REDIRECTS ==============
+  // Redirect old .html URLs to new routes for SEO continuity
+  
+  app.get("/uber-black-california.html", (req, res) => {
+    res.redirect(301, "/services/commercial-auto/uber-black-california");
+  });
+  
+  app.get("/services/commercial-auto/uber-black-california.html", (req, res) => {
+    res.redirect(301, "/services/commercial-auto/uber-black-california");
+  });
+  
+  app.get("/services/tnc-provider-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/tnc");
+  });
+  
+  app.get("/services/school-bus-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/school-bus");
+  });
+  
+  app.get("/services/taxi-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/taxi");
+  });
+  
+  app.get("/services.html", (req, res) => {
+    res.redirect(301, "/services");
+  });
+  
+  app.get("/services/bus-motorcoach-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/limo");
+  });
+  
+  app.get("/contact.html", (req, res) => {
+    res.redirect(301, "/contact");
+  });
+  
+  app.get("/services/sprinter-van-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/limo");
+  });
+  
+  app.get("/public-transportation.html", (req, res) => {
+    res.redirect(301, "/coverage/paratransit");
+  });
+
   // Check admin auth status
   app.get("/api/admin/status", (req, res) => {
     const isAdmin = req.session && (req.session as any).isAdmin;

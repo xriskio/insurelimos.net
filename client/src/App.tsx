@@ -45,6 +45,7 @@ import RenewalReview from "@/pages/support/RenewalReview";
 import LandingPage from "@/pages/LandingPage";
 import Locations from "@/pages/Locations";
 import LocationDetail from "@/pages/LocationDetail";
+import UberBlackCalifornia from "@/pages/UberBlackCalifornia";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -102,6 +103,9 @@ function Router() {
       
       <Route path="/locations" component={Locations} />
       <Route path="/location/:city/:type" component={LocationDetail} />
+      
+      <Route path="/services/commercial-auto/uber-black-california" component={UberBlackCalifornia} />
+      <Route path="/uber-black-california" component={UberBlackCalifornia} />
       
       <Route component={NotFound} />
     </Switch>
