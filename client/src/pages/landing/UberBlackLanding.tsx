@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -25,7 +25,10 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Shield, CheckCircle, Phone, Clock, Award, Star } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@assets/generated_images/black_cadillac_escalade_luxury_suv.png";
+import teslaModelXImage from "@assets/modelX_1765270818916.png";
+import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
+import cadillacEscaladeImage from "@assets/25Cadillac-EscaladeESV-Sport-BlackRaven-Jellybean_1765270818916.avif";
+import lincolnNavigatorImage from "@assets/image_(1)_1765270818915.avif";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
@@ -51,11 +54,26 @@ const STATES = [
   "OH", "OK", "PA", "TN", "TX", "UT", "VA", "WI"
 ];
 
+const rotatingImages = [
+  { src: teslaModelXImage, alt: "Black Tesla Model X electric SUV" },
+  { src: cadillacEscaladeImage, alt: "Black Cadillac Escalade ESV luxury SUV" },
+  { src: lincolnNavigatorImage, alt: "Black Lincoln Navigator luxury SUV" },
+  { src: teslaModelSImage, alt: "Black Tesla Model S electric sedan" }
+];
+
 export default function UberBlackLanding() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [referenceNumber, setReferenceNumber] = useState("");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % rotatingImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -217,12 +235,31 @@ export default function UberBlackLanding() {
               </div>
             </div>
 
-            <div className="hidden lg:block">
-              <img 
-                src={heroImage} 
-                alt="Black Cadillac Escalade ESV" 
-                className="rounded-xl shadow-2xl"
-              />
+            <div className="hidden lg:block relative">
+              <div className="rounded-xl overflow-hidden shadow-2xl bg-black aspect-video">
+                {rotatingImages.map((img, idx) => (
+                  <img 
+                    key={idx}
+                    src={img.src} 
+                    alt={img.alt}
+                    className={`absolute inset-0 w-full h-full object-contain bg-black transition-opacity duration-700 ${
+                      idx === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-center gap-2 mt-4">
+                {rotatingImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentImageIndex(idx)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      idx === currentImageIndex ? 'bg-amber-500' : 'bg-white/30'
+                    }`}
+                    aria-label={`View image ${idx + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </motion.div>
 
