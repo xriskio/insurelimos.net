@@ -71,12 +71,34 @@ export default function UberBlackCalifornia() {
     "NV", "OH", "OK", "PA", "TN", "TX", "UT", "VA", "WI"
   ];
 
-  const uberBlackRequirements = [
-    "Must hold commercial auto insurance (personal auto does not qualify)",
-    "Vehicle must meet luxury standards (black exterior, leather interior)",
-    "Vehicle must be no more than 5 years old",
-    "Drivers must maintain a high star rating (typically 4.85+)",
-    "Vehicle must pass Uber's inspection requirements"
+  const uberBlackRequirements = {
+    vehicles: {
+      title: "Vehicles",
+      description: "Only specific vehicle makes and models qualify for Uber Black and/or Uber Black SUV trips. The vehicle's model year must be no older than 5 years ago. The vehicle must also have a black exterior and a black leather or vegan leather interior."
+    },
+    ratings: {
+      title: "Ratings",
+      description: "All drivers using Uber Black must maintain a 4.85 rating or above. Star ratings are based on drivers' most recent 500 rated trips."
+    },
+    documents: {
+      title: "Documents",
+      description: "Drivers using Uber Black must be professional drivers with commercial auto insurance (personal auto insurance does not qualify) and have all permits required by their city to operate a commercial livery vehicle in their area."
+    }
+  };
+
+  const howToQualify = [
+    {
+      title: "Meet Uber Black criteria",
+      description: "In addition to meeting the vehicle, trip, and rating criteria, you must also possess the required documentation to receive Uber Black trips in your city. To receive Uber Black trip requests, you must have a qualifying Uber Black vehicle and must maintain a 4.85+ rating."
+    },
+    {
+      title: "Drive when you want",
+      description: "When you're online, you can choose to receive only Uber Black trip requests. Or you can also accept UberX and/or UberXL trips."
+    },
+    {
+      title: "Maintain a 4.85 rating",
+      description: "To be able to continue to drive with Uber Black, drivers will need to maintain a 4.85 or above rating. If your rating falls below 4.85, it will be reassessed after your next 50 trips for requalification."
+    }
   ];
 
   const insuranceCoverages = [
@@ -171,15 +193,47 @@ export default function UberBlackCalifornia() {
                 </p>
                 
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 mb-6">
-                  <h3 className="font-bold text-amber-800 mb-3">Uber Black Requirements</h3>
-                  <ul className="space-y-2">
-                    {uberBlackRequirements.map((req, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-amber-700">
-                        <CheckCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-                        <span>{req}</span>
-                      </li>
+                  <h3 className="font-bold text-amber-800 mb-4">Uber Black Requirements</h3>
+                  <div className="grid gap-4">
+                    <div className="flex items-start gap-3">
+                      <Car className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-amber-800">{uberBlackRequirements.vehicles.title}</p>
+                        <p className="text-sm text-amber-700">{uberBlackRequirements.vehicles.description}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Award className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-amber-800">{uberBlackRequirements.ratings.title}</p>
+                        <p className="text-sm text-amber-700">{uberBlackRequirements.ratings.description}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <FileText className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-amber-800">{uberBlackRequirements.documents.title}</p>
+                        <p className="text-sm text-amber-700">{uberBlackRequirements.documents.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gray-100 rounded-lg p-5">
+                  <h3 className="font-bold text-gray-800 mb-4">How to Qualify</h3>
+                  <div className="space-y-4">
+                    {howToQualify.map((item, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <div className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">
+                          {idx + 1}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-800">{item.title}</p>
+                          <p className="text-sm text-gray-600">{item.description}</p>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
               <div className="bg-gray-50 rounded-2xl p-8">
