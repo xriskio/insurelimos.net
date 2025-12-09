@@ -25,18 +25,12 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Shield, CheckCircle, Phone, Clock, Award, Gem } from "lucide-react";
 import { motion } from "framer-motion";
-import luxurySedanImage from "@assets/stock_images/black_luxury_sedan_l_a43edb1d.jpg";
-import sprinterVanImage from "@assets/stock_images/black_mercedes_sprin_2778d9b9.jpg";
-import cadillacSedanImage from "@assets/stock_images/black_cadillac_sedan_236f9e2f.jpg";
-import luxurySuvImage from "@assets/stock_images/black_suv_luxury_esc_f02056ca.jpg";
-import partyBusImage from "@assets/stock_images/black_party_bus_limo_c48f4aac.jpg";
-
 const LIMO_VEHICLES = [
-  { name: "Luxury Sedan", image: luxurySedanImage },
-  { name: "Mercedes Sprinter", image: sprinterVanImage },
-  { name: "Cadillac Sedan", image: cadillacSedanImage },
-  { name: "Luxury SUV", image: luxurySuvImage },
-  { name: "Party Bus", image: partyBusImage },
+  { name: "Black Sedans", examples: "Lincoln Continental, Cadillac CT6, Mercedes S-Class" },
+  { name: "Luxury SUVs", examples: "Cadillac Escalade, Lincoln Navigator, BMW X7" },
+  { name: "Executive Sedans", examples: "BMW 7 Series, Audi A8, Genesis G90" },
+  { name: "Premium Electric", examples: "Tesla Model S, Tesla Model X, Lucid Air" },
+  { name: "Sprinter Vans", examples: "Mercedes Sprinter Executive, Luxury Sprinter" },
 ];
 
 const formSchema = z.object({
@@ -227,15 +221,9 @@ export default function LimoLanding() {
               <div className="hidden lg:block mt-8">
                 <div className="grid grid-cols-3 gap-3">
                   {LIMO_VEHICLES.map((vehicle, idx) => (
-                    <div key={idx} className="rounded-xl overflow-hidden shadow-lg">
-                      <img 
-                        src={vehicle.image} 
-                        alt={vehicle.name} 
-                        className="w-full h-24 object-cover"
-                      />
-                      <div className="bg-white/90 p-2 text-center">
-                        <p className="text-xs text-gray-800 font-medium">{vehicle.name}</p>
-                      </div>
+                    <div key={idx} className="bg-white/10 backdrop-blur rounded-lg p-3">
+                      <p className="text-sm font-semibold text-white">{vehicle.name}</p>
+                      <p className="text-xs text-gray-300">{vehicle.examples}</p>
                     </div>
                   ))}
                 </div>

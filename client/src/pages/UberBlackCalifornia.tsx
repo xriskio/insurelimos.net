@@ -21,11 +21,6 @@ import {
   Building
 } from "lucide-react";
 
-import luxurySedanImage from "@assets/stock_images/black_luxury_sedan_l_a43edb1d.jpg";
-import sprinterVanImage from "@assets/stock_images/black_mercedes_sprin_2778d9b9.jpg";
-import cadillacSedanImage from "@assets/stock_images/black_cadillac_sedan_236f9e2f.jpg";
-import luxurySuvImage from "@assets/stock_images/black_suv_luxury_esc_f02056ca.jpg";
-import partyBusImage from "@assets/stock_images/black_party_bus_limo_c48f4aac.jpg";
 
 export default function UberBlackCalifornia() {
   const coverageFeatures = [
@@ -224,39 +219,6 @@ export default function UberBlackCalifornia() {
                   <p className="text-sm text-muted-foreground">{vehicle.examples}</p>
                 </div>
               ))}
-            </div>
-            
-            <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <img src={luxurySedanImage} alt="Black luxury sedan" className="w-full h-48 object-cover" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Luxury Sedan</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <img src={sprinterVanImage} alt="Black Mercedes Sprinter" className="w-full h-48 object-cover" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Mercedes Sprinter</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <img src={cadillacSedanImage} alt="Black Cadillac sedan" className="w-full h-48 object-cover" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Cadillac Sedan</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <img src={luxurySuvImage} alt="Black luxury SUV" className="w-full h-48 object-cover" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Luxury SUV</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <img src={partyBusImage} alt="Black party bus" className="w-full h-48 object-cover" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Party Bus</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
