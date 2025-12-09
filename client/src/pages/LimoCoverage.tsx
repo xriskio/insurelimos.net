@@ -19,11 +19,6 @@ import {
   Wine
 } from "lucide-react";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
-import luxurySedanImage from "@assets/stock_images/black_luxury_sedan_l_a43edb1d.jpg";
-import sprinterVanImage from "@assets/stock_images/black_mercedes_sprin_2778d9b9.jpg";
-import cadillacSedanImage from "@assets/stock_images/black_cadillac_sedan_236f9e2f.jpg";
-import luxurySuvImage from "@assets/stock_images/black_suv_luxury_esc_f02056ca.jpg";
-import partyBusImage from "@assets/stock_images/black_party_bus_limo_c48f4aac.jpg";
 
 export default function LimoCoverage() {
   return (
@@ -75,60 +70,50 @@ export default function LimoCoverage() {
           </div>
         </section>
 
-        {/* Fleet Gallery */}
+        {/* Vehicle Types */}
         <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-6">
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={luxurySedanImage} 
-                    alt="Black luxury sedan" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Luxury Sedan</span>
-                  </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">Black Sedans</h3>
+                  <p className="text-sm text-muted-foreground">Lincoln Continental, Cadillac CT6, Mercedes S-Class</p>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={sprinterVanImage} 
-                    alt="Black Mercedes Sprinter" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Mercedes Sprinter</span>
-                  </div>
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">Luxury SUVs</h3>
+                  <p className="text-sm text-muted-foreground">Cadillac Escalade, Lincoln Navigator, BMW X7</p>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={cadillacSedanImage} 
-                    alt="Black Cadillac sedan" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Cadillac Sedan</span>
-                  </div>
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">Executive Sedans</h3>
+                  <p className="text-sm text-muted-foreground">BMW 7 Series, Audi A8, Genesis G90</p>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={luxurySuvImage} 
-                    alt="Black luxury SUV" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Luxury SUV</span>
-                  </div>
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">Premium Electric</h3>
+                  <p className="text-sm text-muted-foreground">Tesla Model S, Tesla Model X, Lucid Air</p>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={partyBusImage} 
-                    alt="Black party bus" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Party Bus</span>
-                  </div>
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">Stretch Limousines</h3>
+                  <p className="text-sm text-muted-foreground">Lincoln MKT Stretch, Cadillac Stretch</p>
+                </div>
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">Sprinter Vans</h3>
+                  <p className="text-sm text-muted-foreground">Mercedes Sprinter Executive, Luxury Sprinter</p>
+                </div>
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">High-Value Imports</h3>
+                  <p className="text-sm text-muted-foreground">Bentley, Rolls-Royce, Maybach</p>
+                </div>
+                <div className="bg-white border rounded-lg p-5 hover:shadow-md transition-shadow">
+                  <Car className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-bold text-foreground mb-1">Airport Black Cars</h3>
+                  <p className="text-sm text-muted-foreground">Town Cars, Executive Sedans, Chauffeur Vehicles</p>
                 </div>
               </div>
             </div>
