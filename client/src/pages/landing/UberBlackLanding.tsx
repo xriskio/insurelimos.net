@@ -218,7 +218,7 @@ export default function UberBlackLanding() {
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <p className="font-semibold">Auto Liability (AL)</p>
-                  <p className="text-white/80">$1M - $1.5M CSL</p>
+                  <p className="text-white/80">$750K / $1M / $1.5M CSL</p>
                 </div>
                 <div>
                   <p className="font-semibold">Physical Damage (APD)</p>
