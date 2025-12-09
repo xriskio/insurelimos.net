@@ -23,18 +23,20 @@ import {
 } from "lucide-react";
 
 import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267410610.png";
-import teslaModelXImage from "@assets/modelX_1765268679288.png";
+import teslaModelXImage from "@assets/modelX_1765269534582.png";
 import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
-import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267410610.png";
+import cadillacEscaladeImage from "@assets/25Cadillac-EscaladeESV-Sport-BlackRaven-Jellybean_1765269534582.avif";
+import lincolnNavigatorImage from "@assets/image_(1)_1765269534582.avif";
 
 export default function UberBlackCalifornia() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const requirementImages = [
-    { src: mercedesS500Image, alt: "Black Mercedes S-Class luxury sedan" },
     { src: teslaModelXImage, alt: "Black Tesla Model X electric SUV" },
-    { src: teslaModelSImage, alt: "Black Tesla Model S electric sedan" },
-    { src: chevySuburbanImage, alt: "Black Chevrolet Suburban SUV" }
+    { src: cadillacEscaladeImage, alt: "Black Cadillac Escalade ESV luxury SUV" },
+    { src: lincolnNavigatorImage, alt: "Black Lincoln Navigator luxury SUV" },
+    { src: mercedesS500Image, alt: "Black Mercedes S-Class luxury sedan" },
+    { src: teslaModelSImage, alt: "Black Tesla Model S electric sedan" }
   ];
 
   useEffect(() => {
@@ -294,27 +296,27 @@ export default function UberBlackCalifornia() {
             
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
               <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={mercedesS500Image} alt="Black Mercedes S-Class" className="w-full h-48 object-contain bg-black" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Mercedes S-Class</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
                 <img src={teslaModelXImage} alt="Black Tesla Model X" className="w-full h-48 object-contain bg-black" />
                 <div className="p-3 text-center bg-white">
                   <span className="font-semibold text-foreground">Tesla Model X</span>
                 </div>
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={teslaModelSImage} alt="Black Tesla Model S" className="w-full h-48 object-contain bg-black" />
+                <img src={cadillacEscaladeImage} alt="Black Cadillac Escalade ESV" className="w-full h-48 object-contain bg-black" />
                 <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Tesla Model S</span>
+                  <span className="font-semibold text-foreground">Cadillac Escalade ESV</span>
                 </div>
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={chevySuburbanImage} alt="Black Chevrolet Suburban" className="w-full h-48 object-contain bg-black" />
+                <img src={lincolnNavigatorImage} alt="Black Lincoln Navigator" className="w-full h-48 object-contain bg-black" />
                 <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Chevrolet Suburban</span>
+                  <span className="font-semibold text-foreground">Lincoln Navigator</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <img src={mercedesS500Image} alt="Black Mercedes S-Class" className="w-full h-48 object-contain bg-black" />
+                <div className="p-3 text-center bg-white">
+                  <span className="font-semibold text-foreground">Mercedes S-Class</span>
                 </div>
               </div>
             </div>
