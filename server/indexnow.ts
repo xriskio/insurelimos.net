@@ -124,14 +124,24 @@ export async function submitAllSitePages(): Promise<{ indexNow: boolean; bing: b
     "/quote/excess-liability",
     "/quote/cyber-liability",
     "/quote/captive",
+    "/coverage/uber-black",
     "/coverage/limo",
     "/coverage/tnc",
     "/coverage/nemt",
     "/coverage/taxi",
-    "/coverage/paratransit",
+    "/coverage/motorcoach",
     "/coverage/school-bus",
+    "/coverage/paratransit",
     "/coverage/ambulance",
     "/coverage/captive",
+    "/lp/uber-black",
+    "/lp/nemt",
+    "/lp/limousine",
+    "/lp/motorcoach",
+    "/lp/taxi",
+    "/lp/school-bus",
+    "/lp/tnc",
+    "/services/commercial-auto/uber-black-california",
     "/privacy",
     "/terms",
   ];
@@ -141,7 +151,7 @@ export async function submitAllSitePages(): Promise<{ indexNow: boolean; bing: b
 }
 
 export async function submitLocationPages(citySlug: string): Promise<{ indexNow: boolean; bing: boolean }> {
-  const transportTypes = ["limo", "nemt", "paratransit", "bus", "ambulance", "taxi", "tnc"];
+  const transportTypes = ["uber-black", "nemt", "limo", "motorcoach", "taxi", "school-bus", "tnc"];
   const urls = transportTypes.map(type => `https://${SITE_HOST}/location/${citySlug}/${type}`);
   return submitToAllSearchEngines(urls);
 }
