@@ -25,12 +25,16 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Shield, CheckCircle, Phone, Clock, Award, Gem } from "lucide-react";
 import { motion } from "framer-motion";
+import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267410610.png";
+import teslaModelXImage from "@assets/modelX_1765268679288.png";
+import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
+import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267410610.png";
+
 const LIMO_VEHICLES = [
-  { name: "Black Sedans", examples: "Lincoln Continental, Cadillac CT6, Mercedes S-Class" },
-  { name: "Luxury SUVs", examples: "Cadillac Escalade, Lincoln Navigator, BMW X7" },
-  { name: "Executive Sedans", examples: "BMW 7 Series, Audi A8, Genesis G90" },
-  { name: "Premium Electric", examples: "Tesla Model S, Tesla Model X, Lucid Air" },
-  { name: "Sprinter Vans", examples: "Mercedes Sprinter Executive, Luxury Sprinter" },
+  { name: "Mercedes S-Class", image: mercedesS500Image },
+  { name: "Tesla Model X", image: teslaModelXImage },
+  { name: "Tesla Model S", image: teslaModelSImage },
+  { name: "Chevrolet Suburban", image: chevySuburbanImage },
 ];
 
 const formSchema = z.object({
@@ -219,11 +223,15 @@ export default function LimoLanding() {
               </div>
 
               <div className="hidden lg:block mt-8">
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 gap-4">
                   {LIMO_VEHICLES.map((vehicle, idx) => (
-                    <div key={idx} className="bg-white/10 backdrop-blur rounded-lg p-3">
-                      <p className="text-sm font-semibold text-white">{vehicle.name}</p>
-                      <p className="text-xs text-gray-300">{vehicle.examples}</p>
+                    <div key={idx} className="bg-black/40 rounded-xl p-3 text-center">
+                      <img 
+                        src={vehicle.image} 
+                        alt={vehicle.name} 
+                        className="w-full h-auto object-contain mb-2"
+                      />
+                      <p className="text-sm text-gray-300">{vehicle.name}</p>
                     </div>
                   ))}
                 </div>

@@ -21,6 +21,10 @@ import {
   Building
 } from "lucide-react";
 
+import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267410610.png";
+import teslaModelXImage from "@assets/modelX_1765268679288.png";
+import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
+import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267410610.png";
 
 export default function UberBlackCalifornia() {
   const coverageFeatures = [
@@ -219,6 +223,33 @@ export default function UberBlackCalifornia() {
                   <p className="text-sm text-muted-foreground">{vehicle.examples}</p>
                 </div>
               ))}
+            </div>
+            
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <img src={mercedesS500Image} alt="Black Mercedes S-Class" className="w-full h-48 object-contain bg-black" />
+                <div className="p-3 text-center bg-white">
+                  <span className="font-semibold text-foreground">Mercedes S-Class</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <img src={teslaModelXImage} alt="Black Tesla Model X" className="w-full h-48 object-contain bg-black" />
+                <div className="p-3 text-center bg-white">
+                  <span className="font-semibold text-foreground">Tesla Model X</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <img src={teslaModelSImage} alt="Black Tesla Model S" className="w-full h-48 object-contain bg-black" />
+                <div className="p-3 text-center bg-white">
+                  <span className="font-semibold text-foreground">Tesla Model S</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <img src={chevySuburbanImage} alt="Black Chevrolet Suburban" className="w-full h-48 object-contain bg-black" />
+                <div className="p-3 text-center bg-white">
+                  <span className="font-semibold text-foreground">Chevrolet Suburban</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
