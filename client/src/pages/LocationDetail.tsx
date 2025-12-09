@@ -24,7 +24,8 @@ import {
   Users,
   DollarSign,
   FileText,
-  Building
+  Building,
+  GraduationCap
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -32,10 +33,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 function getIconForType(slug: string) {
   switch (slug) {
+    case "uber-black": return <Car className="h-5 w-5" aria-hidden="true" />;
     case "limo": return <Car className="h-5 w-5" aria-hidden="true" />;
     case "nemt": return <Heart className="h-5 w-5" aria-hidden="true" />;
     case "paratransit": return <Accessibility className="h-5 w-5" aria-hidden="true" />;
-    case "bus": return <Bus className="h-5 w-5" aria-hidden="true" />;
+    case "motorcoach": return <Bus className="h-5 w-5" aria-hidden="true" />;
+    case "school-bus": return <GraduationCap className="h-5 w-5" aria-hidden="true" />;
     case "ambulance": return <Ambulance className="h-5 w-5" aria-hidden="true" />;
     case "taxi": return <Car className="h-5 w-5" aria-hidden="true" />;
     case "tnc": return <Car className="h-5 w-5" aria-hidden="true" />;

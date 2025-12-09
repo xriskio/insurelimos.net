@@ -3,9 +3,25 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Seo } from "@/components/seo/Seo";
 import { STATE_DATA, TRANSPORT_INSURANCE_TYPES, CityLocation } from "@/data/locations";
-import { MapPin, ArrowRight, Bus, Car, Heart, Ambulance, Accessibility, Phone, Building } from "lucide-react";
+import { MapPin, ArrowRight, Bus, Car, Heart, Ambulance, Accessibility, Phone, Building, GraduationCap } from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+
+function getIconForType(slug: string) {
+  switch (slug) {
+    case "uber-black": return <Car className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "nemt": return <Heart className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "limo": return <Car className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "motorcoach": return <Bus className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "taxi": return <Car className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "school-bus": return <GraduationCap className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "tnc": return <Car className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "paratransit": return <Accessibility className="h-6 w-6 text-primary" aria-hidden="true" />;
+    case "ambulance": return <Ambulance className="h-6 w-6 text-primary" aria-hidden="true" />;
+    default: return <Car className="h-6 w-6 text-primary" aria-hidden="true" />;
+  }
+}
 
 function StateSection({ name, abbr, cities, bgClass = "bg-white" }: { name: string; abbr: string; cities: CityLocation[]; bgClass?: string }) {
   const sectionId = `${abbr.toLowerCase()}-locations`;
@@ -120,13 +136,7 @@ export default function Locations() {
                 >
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-primary/10 rounded-lg shrink-0">
-                      {type.slug === "limo" && <Car className="h-6 w-6 text-primary" aria-hidden="true" />}
-                      {type.slug === "nemt" && <Heart className="h-6 w-6 text-primary" aria-hidden="true" />}
-                      {type.slug === "paratransit" && <Accessibility className="h-6 w-6 text-primary" aria-hidden="true" />}
-                      {type.slug === "bus" && <Bus className="h-6 w-6 text-primary" aria-hidden="true" />}
-                      {type.slug === "ambulance" && <Ambulance className="h-6 w-6 text-primary" aria-hidden="true" />}
-                      {type.slug === "taxi" && <Car className="h-6 w-6 text-primary" aria-hidden="true" />}
-                      {type.slug === "tnc" && <Car className="h-6 w-6 text-primary" aria-hidden="true" />}
+                      {getIconForType(type.slug)}
                     </div>
                     <div>
                       <h3 className="font-bold text-lg text-foreground mb-2">{type.name}</h3>
