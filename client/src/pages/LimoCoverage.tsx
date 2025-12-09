@@ -19,8 +19,9 @@ import {
   Wine
 } from "lucide-react";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
-import limoImage1 from "@assets/stock_images/luxury_black_limousi_326f150e.jpg";
-import limoImage2 from "@assets/stock_images/luxury_black_limousi_49ae3e27.jpg";
+import limoImage1 from "@assets/generated_images/black_cadillac_escalade_luxury_suv.png";
+import limoImage2 from "@assets/generated_images/black_lincoln_navigator_suv.png";
+import limoImage3 from "@assets/generated_images/black_chevy_suburban_suv.png";
 import busImage1 from "@assets/generated_images/luxury_charter_motorcoach_bus.png";
 import busImage2 from "@assets/generated_images/white_tour_bus_motorcoach.png";
 import partyBusImage from "@assets/generated_images/black_luxury_party_bus_shuttle.png";
@@ -86,11 +87,11 @@ export default function LimoCoverage() {
                 <div className="rounded-xl overflow-hidden shadow-lg">
                   <img 
                     src={limoImage1} 
-                    alt="Luxury black limousine sedan" 
+                    alt="Black Cadillac Escalade ESV" 
                     className="w-full h-48 object-cover"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Luxury Sedans & Limos</span>
+                    <span className="font-medium text-foreground">Cadillac Escalade ESV</span>
                   </div>
                 </div>
                 <div className="rounded-xl overflow-hidden shadow-lg">
@@ -118,11 +119,11 @@ export default function LimoCoverage() {
                 <div className="rounded-xl overflow-hidden shadow-lg">
                   <img 
                     src={limoImage2} 
-                    alt="Executive black car service" 
+                    alt="Black Lincoln Navigator L" 
                     className="w-full h-48 object-cover"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Black Car Service</span>
+                    <span className="font-medium text-foreground">Lincoln Navigator L</span>
                   </div>
                 </div>
                 <div className="rounded-xl overflow-hidden shadow-lg">
