@@ -21,11 +21,10 @@ import {
   Building
 } from "lucide-react";
 
-import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267126797.png";
-import teslaModelXImage from "@assets/modelX_1765267126798.png";
+import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267410610.png";
+import teslaModelXImage from "@assets/modelX_1765267410610.png";
 import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
-import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267126798.png";
-import cadillacXT6Image from "@assets/58bbbbe226940a1e3ced938e16d9665d_1765267362079.jpg";
+import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267410610.png";
 
 export default function UberBlackCalifornia() {
   const coverageFeatures = [
@@ -227,7 +226,7 @@ export default function UberBlackCalifornia() {
             </div>
             
             <h3 className="text-2xl font-bold text-primary mb-6 text-center">Featured Uber Black Vehicles</h3>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
               <div className="rounded-xl overflow-hidden shadow-lg bg-black">
                 <img src={mercedesS500Image} alt="Black Mercedes S-Class" className="w-full h-48 object-contain bg-black" />
                 <div className="p-3 text-center bg-white">
@@ -250,12 +249,6 @@ export default function UberBlackCalifornia() {
                 <img src={chevySuburbanImage} alt="Black Chevrolet Suburban" className="w-full h-48 object-contain bg-black" />
                 <div className="p-3 text-center bg-white">
                   <span className="font-semibold text-foreground">Chevrolet Suburban</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
-                <img src={cadillacXT6Image} alt="Black Cadillac XT6" className="w-full h-48 object-contain" />
-                <div className="p-3 text-center">
-                  <span className="font-semibold text-foreground">Cadillac XT6</span>
                 </div>
               </div>
             </div>
