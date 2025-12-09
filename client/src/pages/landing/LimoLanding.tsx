@@ -25,7 +25,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Shield, CheckCircle, Phone, Clock, Award, Gem } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@assets/generated_images/black_lincoln_navigator_suv.png";
+import heroImage from "@assets/image_1765266807505.png";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
