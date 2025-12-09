@@ -5,6 +5,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Seo } from "@/components/seo/Seo";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import {
   Form,
   FormControl,
@@ -53,6 +55,7 @@ export default function UberBlackLanding() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -92,10 +95,11 @@ export default function UberBlackLanding() {
       const result = await response.json();
 
       if (response.ok && result.success) {
+        setReferenceNumber(result.quote?.referenceNumber || "");
         setSubmitted(true);
         toast({
           title: "Quote Request Received!",
-          description: "We'll contact you within 24 hours with your quote.",
+          description: "Check your email for confirmation.",
         });
       } else {
         throw new Error(result.error || "Submission failed");
@@ -113,38 +117,50 @@ export default function UberBlackLanding() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl p-8 max-w-md text-center"
-        >
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-green-600" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Quote Request Received!</h2>
-          <p className="text-gray-600 mb-6">
-            Thank you! Our Uber Black insurance specialist will contact you within 24 hours with your personalized quote.
-          </p>
-          <a href="tel:888-254-0089" className="inline-block">
-            <Button size="lg" className="bg-primary">
-              <Phone className="w-4 h-4 mr-2" />
-              Call Now: 888-254-0089
-            </Button>
-          </a>
-        </motion.div>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <div className="flex-1 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-2xl p-8 max-w-md text-center"
+          >
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-8 h-8 text-green-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Quote Request Received!</h2>
+            {referenceNumber && (
+              <div className="bg-primary/10 rounded-lg p-4 mb-4">
+                <p className="text-sm text-gray-600 mb-1">Your Reference Number</p>
+                <p className="text-2xl font-bold text-primary tracking-wide">{referenceNumber}</p>
+              </div>
+            )}
+            <p className="text-gray-600 mb-6">
+              A confirmation email has been sent to your inbox. Our Uber Black insurance specialist will contact you within 24 hours with your personalized quote.
+            </p>
+            <a href="tel:888-254-0089" className="inline-block">
+              <Button size="lg" className="bg-primary">
+                <Phone className="w-4 h-4 mr-2" />
+                Call Now: 888-254-0089
+              </Button>
+            </a>
+          </motion.div>
+        </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen flex flex-col">
       <Seo 
         title="Uber Black Insurance - Get a Free Quote in Minutes"
         description="TCP insurance for Uber Black drivers. Next Day CPUC Filings. Competitive rates for luxury rideshare vehicles. Get your free quote now!"
       />
+      <Header />
       
-      <div className="container mx-auto px-4 py-8 lg:py-12">
+      <main className="flex-1 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="container mx-auto px-4 py-8 lg:py-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -368,6 +384,8 @@ export default function UberBlackLanding() {
           </motion.div>
         </div>
       </div>
+      </main>
+      <Footer />
     </div>
   );
 }
