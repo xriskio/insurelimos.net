@@ -229,6 +229,216 @@ export async function registerRoutes(
     res.redirect(301, "/coverage");
   });
 
+  // Legacy sitemap URL redirects (insurelimos.com migration)
+  // City/Location pages
+  app.get("/bakersfield-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/bakersfield");
+  });
+  
+  app.get("/insurance-city-pages", (req, res) => {
+    res.redirect(301, "/locations");
+  });
+  
+  app.get("/insurance-city-pages/lodi-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/lodi");
+  });
+  
+  app.get("/insurance-city-pages/oakland-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/oakland");
+  });
+  
+  app.get("/insurance-city-pages/berkeley-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/berkeley");
+  });
+  
+  app.get("/insurance-city-pages/alameda-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/alameda");
+  });
+  
+  app.get("/insurance-city-pages/san-jose-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/san-jose");
+  });
+  
+  app.get("/insurance-city-pages/modesto-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/modesto");
+  });
+  
+  app.get("/insurance-city-pages/anaheim-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/anaheim");
+  });
+  
+  app.get("/insurance-city-pages/malibu-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/malibu");
+  });
+  
+  app.get("/insurance-city-pages/tracy-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/tracy");
+  });
+  
+  app.get("/insurance-city-pages/san-francisco-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/san-francisco");
+  });
+  
+  app.get("/insurance-city-pages/santa-rosa-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/santa-rosa");
+  });
+  
+  app.get("/insurance-city-pages/santa-clarita-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/santa-clarita");
+  });
+  
+  app.get("/insurance-city-pages/stockton-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/stockton");
+  });
+  
+  app.get("/insurance-city-pages/fremont-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/fremont");
+  });
+  
+  app.get("/insurance-city-pages/thousand-oaks-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/thousand-oaks");
+  });
+  
+  app.get("/insurance-city-pages/long-beach-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/long-beach");
+  });
+  
+  app.get("/insurance-city-pages/irvine-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/irvine");
+  });
+  
+  app.get("/insurance-city-pages/san-bernardino-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/san-bernardino");
+  });
+  
+  app.get("/insurance-city-pages/santa-monica-commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/locations/california/santa-monica");
+  });
+
+  // Public Auto Insurance pages
+  app.get("/Public-Auto-insurance", (req, res) => {
+    res.redirect(301, "/services");
+  });
+  
+  app.get("/Public-Auto-insurance/cyber-liability-insurance", (req, res) => {
+    res.redirect(301, "/services/cyber-liability");
+  });
+  
+  app.get("/Public-Auto-insurance/epli-insurance", (req, res) => {
+    res.redirect(301, "/services");
+  });
+  
+  app.get("/Public-Auto-insurance/commercial-umbrella-insurance", (req, res) => {
+    res.redirect(301, "/services/excess-liability");
+  });
+  
+  app.get("/Public-Auto-insurance/directors-officers-insurance", (req, res) => {
+    res.redirect(301, "/services");
+  });
+  
+  app.get("/Public-Auto-insurance/california-airport-transit-insurance", (req, res) => {
+    res.redirect(301, "/coverage/limo");
+  });
+  
+  app.get("/Public-Auto-insurance/california-motor-coach-insurance", (req, res) => {
+    res.redirect(301, "/coverage/limo");
+  });
+  
+  app.get("/Public-Auto-insurance/California-limo-insurance", (req, res) => {
+    res.redirect(301, "/coverage/limo");
+  });
+  
+  app.get("/Public-Auto-insurance/california-paratransit-insurance", (req, res) => {
+    res.redirect(301, "/coverage/paratransit");
+  });
+  
+  app.get("/Public-Auto-insurance/California-taxi-cab-insurance", (req, res) => {
+    res.redirect(301, "/coverage/taxi");
+  });
+
+  // Public Auto Coverages pages
+  app.get("/public-auto-coverages", (req, res) => {
+    res.redirect(301, "/coverage");
+  });
+  
+  app.get("/public-auto-coverages/commercial-auto-insurance", (req, res) => {
+    res.redirect(301, "/coverage");
+  });
+  
+  app.get("/public-auto-coverages/business-owners-policy", (req, res) => {
+    res.redirect(301, "/services");
+  });
+  
+  app.get("/public-auto-coverages/excess-liability", (req, res) => {
+    res.redirect(301, "/services/excess-liability");
+  });
+  
+  app.get("/public-auto-coverages/liability-insurance", (req, res) => {
+    res.redirect(301, "/coverage");
+  });
+  
+  app.get("/public-auto-coverages/workers-comp-insurance", (req, res) => {
+    res.redirect(301, "/services/workers-compensation");
+  });
+
+  // Quote and other pages
+  app.get("/online-insurance-quotes", (req, res) => {
+    res.redirect(301, "/quote");
+  });
+  
+  app.get("/archive", (req, res) => {
+    res.redirect(301, "/news");
+  });
+
+  // Customer support and resources pages
+  app.get("/customer-support", (req, res) => {
+    res.redirect(301, "/client-support");
+  });
+  
+  app.get("/customer-support/payments-and-claims", (req, res) => {
+    res.redirect(301, "/client-support/claims");
+  });
+  
+  app.get("/customer-resources", (req, res) => {
+    res.redirect(301, "/client-support");
+  });
+  
+  app.get("/customer-resources/partners", (req, res) => {
+    res.redirect(301, "/about");
+  });
+  
+  app.get("/customer-resources/insurance-companies", (req, res) => {
+    res.redirect(301, "/about");
+  });
+  
+  app.get("/customer-resources/blog", (req, res) => {
+    res.redirect(301, "/news");
+  });
+  
+  app.get("/customer-resources/links", (req, res) => {
+    res.redirect(301, "/about");
+  });
+  
+  app.get("/customer-resources/glossary", (req, res) => {
+    res.redirect(301, "/client-support");
+  });
+  
+  app.get("/customer-resources/privacy", (req, res) => {
+    res.redirect(301, "/privacy");
+  });
+  
+  app.get("/customer-resources/sitemap", (req, res) => {
+    res.redirect(301, "/");
+  });
+  
+  app.get("/customer-resources/faq", (req, res) => {
+    res.redirect(301, "/client-support/faq");
+  });
+  
+  app.get("/customer-resources/testimonials", (req, res) => {
+    res.redirect(301, "/about");
+  });
+
   // Check admin auth status
   app.get("/api/admin/status", (req, res) => {
     const isAdmin = req.session && (req.session as any).isAdmin;
