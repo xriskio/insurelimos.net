@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -27,6 +28,22 @@ import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681
 import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267410610.png";
 
 export default function UberBlackCalifornia() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  const requirementImages = [
+    { src: mercedesS500Image, alt: "Black Mercedes S-Class luxury sedan" },
+    { src: teslaModelXImage, alt: "Black Tesla Model X electric SUV" },
+    { src: teslaModelSImage, alt: "Black Tesla Model S electric sedan" },
+    { src: chevySuburbanImage, alt: "Black Chevrolet Suburban SUV" }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % requirementImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   const coverageFeatures = [
     "Commercial Auto Liability up to $1.5M CSL",
     "Uninsured/Underinsured Motorist Coverage",
@@ -71,33 +88,21 @@ export default function UberBlackCalifornia() {
     "NV", "OH", "OK", "PA", "TN", "TX", "UT", "VA", "WI"
   ];
 
-  const uberBlackRequirements = {
-    vehicles: {
+  const uberBlackRequirements = [
+    {
+      icon: Car,
       title: "Vehicles",
       description: "Only specific vehicle makes and models qualify for Uber Black and/or Uber Black SUV trips. The vehicle's model year must be no older than 5 years ago. The vehicle must also have a black exterior and a black leather or vegan leather interior."
     },
-    ratings: {
+    {
+      icon: Award,
       title: "Ratings",
       description: "All drivers using Uber Black must maintain a 4.85 rating or above. Star ratings are based on drivers' most recent 500 rated trips."
     },
-    documents: {
+    {
+      icon: FileText,
       title: "Documents",
       description: "Drivers using Uber Black must be professional drivers with commercial auto insurance (personal auto insurance does not qualify) and have all permits required by their city to operate a commercial livery vehicle in their area."
-    }
-  };
-
-  const howToQualify = [
-    {
-      title: "Meet Uber Black criteria",
-      description: "In addition to meeting the vehicle, trip, and rating criteria, you must also possess the required documentation to receive Uber Black trips in your city. To receive Uber Black trip requests, you must have a qualifying Uber Black vehicle and must maintain a 4.85+ rating."
-    },
-    {
-      title: "Drive when you want",
-      description: "When you're online, you can choose to receive only Uber Black trip requests. Or you can also accept UberX and/or UberXL trips."
-    },
-    {
-      title: "Maintain a 4.85 rating",
-      description: "To be able to continue to drive with Uber Black, drivers will need to maintain a 4.85 or above rating. If your rating falls below 4.85, it will be reassessed after your next 50 trips for requalification."
     }
   ];
 
@@ -175,7 +180,59 @@ export default function UberBlackCalifornia() {
           </div>
         </section>
 
-        <section className="py-16 bg-white" aria-labelledby="what-is-heading">
+        <section className="py-16 bg-white" aria-labelledby="requirements-heading">
+          <div className="container mx-auto px-4">
+            <h2 id="requirements-heading" className="text-3xl font-bold text-primary mb-4 text-center">
+              Uber Black Requirements
+            </h2>
+            <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+              To drive for Uber Black, you must meet specific vehicle, rating, and documentation requirements. We provide the commercial auto insurance you need to qualify.
+            </p>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="relative">
+                <div className="rounded-2xl overflow-hidden shadow-xl bg-black aspect-video">
+                  {requirementImages.map((img, idx) => (
+                    <img 
+                      key={idx}
+                      src={img.src} 
+                      alt={img.alt}
+                      className={`absolute inset-0 w-full h-full object-contain bg-black transition-opacity duration-700 ${
+                        idx === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <div className="flex justify-center gap-2 mt-4">
+                  {requirementImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentImageIndex(idx)}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        idx === currentImageIndex ? 'bg-primary' : 'bg-gray-300'
+                      }`}
+                      aria-label={`View image ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-6">
+                {uberBlackRequirements.map((req, idx) => (
+                  <div key={idx} className="flex items-start gap-4 p-5 bg-gray-50 rounded-xl">
+                    <div className="p-3 bg-primary/10 rounded-lg shrink-0">
+                      <req.icon className="h-6 w-6 text-primary" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-foreground mb-1">{req.title}</h3>
+                      <p className="text-muted-foreground text-sm">{req.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 bg-gray-50" aria-labelledby="what-is-heading">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               <div>
@@ -188,55 +245,11 @@ export default function UberBlackCalifornia() {
                 <p className="text-muted-foreground mb-4">
                   Personal auto insurance policies typically exclude coverage for commercial livery operations. This creates a dangerous gap that could leave you personally liable for accidents, vehicle damage, and passenger injuries while working.
                 </p>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground">
                   Our Uber Black insurance bridges this gap completely. From the moment you turn on the app until the ride is complete, you're fully protected against third-party claims, vehicle damage, and liability—even if you're at fault.
                 </p>
-                
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 mb-6">
-                  <h3 className="font-bold text-amber-800 mb-4">Uber Black Requirements</h3>
-                  <div className="grid gap-4">
-                    <div className="flex items-start gap-3">
-                      <Car className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-amber-800">{uberBlackRequirements.vehicles.title}</p>
-                        <p className="text-sm text-amber-700">{uberBlackRequirements.vehicles.description}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Award className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-amber-800">{uberBlackRequirements.ratings.title}</p>
-                        <p className="text-sm text-amber-700">{uberBlackRequirements.ratings.description}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <FileText className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-amber-800">{uberBlackRequirements.documents.title}</p>
-                        <p className="text-sm text-amber-700">{uberBlackRequirements.documents.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gray-100 rounded-lg p-5">
-                  <h3 className="font-bold text-gray-800 mb-4">How to Qualify</h3>
-                  <div className="space-y-4">
-                    {howToQualify.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <div className="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">
-                          {idx + 1}
-                        </div>
-                        <div>
-                          <p className="font-semibold text-gray-800">{item.title}</p>
-                          <p className="text-sm text-gray-600">{item.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
-              <div className="bg-gray-50 rounded-2xl p-8">
+              <div className="bg-white rounded-2xl p-8 shadow-md">
                 <h3 className="text-xl font-bold text-primary mb-6">Coverage Includes</h3>
                 <div className="grid gap-3">
                   {coverageFeatures.map((feature, idx) => (
