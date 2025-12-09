@@ -180,6 +180,54 @@ export async function registerRoutes(
   app.get("/public-transportation.html", (req, res) => {
     res.redirect(301, "/coverage/paratransit");
   });
+  
+  app.get("/captive-programs.html", (req, res) => {
+    res.redirect(301, "/coverage/captive");
+  });
+  
+  app.get("/services/nemt-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/nemt");
+  });
+  
+  app.get("/services/tcp-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/tnc");
+  });
+  
+  app.get("/about.html", (req, res) => {
+    res.redirect(301, "/about");
+  });
+  
+  app.get("/submit-general-liability.html", (req, res) => {
+    res.redirect(301, "/quote/excess-liability");
+  });
+  
+  app.get("/services/limousine-insurance.html", (req, res) => {
+    res.redirect(301, "/coverage/limo");
+  });
+  
+  app.get("/app-quote.html", (req, res) => {
+    res.redirect(301, "/quote");
+  });
+  
+  app.get("/quote-request.html", (req, res) => {
+    res.redirect(301, "/quote");
+  });
+  
+  app.get("/coverage/general-liability.html", (req, res) => {
+    res.redirect(301, "/coverage");
+  });
+  
+  app.get("/cyber-quote-form.html", (req, res) => {
+    res.redirect(301, "/quote/cyber");
+  });
+  
+  app.get("/client-login.html", (req, res) => {
+    res.redirect(301, "/client-support");
+  });
+  
+  app.get("/coverage.html", (req, res) => {
+    res.redirect(301, "/coverage");
+  });
 
   // Check admin auth status
   app.get("/api/admin/status", (req, res) => {
