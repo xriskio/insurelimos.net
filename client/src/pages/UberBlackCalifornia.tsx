@@ -22,7 +22,6 @@ import {
   Building
 } from "lucide-react";
 
-import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267410610.png";
 import teslaModelXImage from "@assets/modelX_1765269534582.png";
 import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
 import cadillacEscaladeImage from "@assets/25Cadillac-EscaladeESV-Sport-BlackRaven-Jellybean_1765269534582.avif";
@@ -35,7 +34,6 @@ export default function UberBlackCalifornia() {
     { src: teslaModelXImage, alt: "Black Tesla Model X electric SUV" },
     { src: cadillacEscaladeImage, alt: "Black Cadillac Escalade ESV luxury SUV" },
     { src: lincolnNavigatorImage, alt: "Black Lincoln Navigator luxury SUV" },
-    { src: mercedesS500Image, alt: "Black Mercedes S-Class luxury sedan" },
     { src: teslaModelSImage, alt: "Black Tesla Model S electric sedan" }
   ];
 
@@ -182,6 +180,166 @@ export default function UberBlackCalifornia() {
           </div>
         </section>
 
+        <section className="py-12 bg-gray-50" aria-labelledby="quote-form-heading">
+          <div className="container mx-auto px-4">
+            <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+              <h2 id="quote-form-heading" className="text-2xl font-bold text-primary text-center mb-2">
+                Get Your Free Quote
+              </h2>
+              <p className="text-muted-foreground text-center mb-6">Quick response within 24 hours</p>
+              
+              <form className="space-y-4">
+                <div>
+                  <label htmlFor="businessName" className="block text-sm font-semibold text-primary mb-1">Business Name</label>
+                  <input 
+                    type="text" 
+                    id="businessName"
+                    placeholder="Your company name" 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    data-testid="input-business-name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="yourName" className="block text-sm font-semibold text-primary mb-1">Your Name</label>
+                  <input 
+                    type="text" 
+                    id="yourName"
+                    placeholder="Full name" 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                    data-testid="input-your-name"
+                  />
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-primary mb-1">Email</label>
+                    <input 
+                      type="email" 
+                      id="email"
+                      placeholder="email@example.com" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                      data-testid="input-email"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-primary mb-1">Phone</label>
+                    <input 
+                      type="tel" 
+                      id="phone"
+                      placeholder="(555) 555-5555" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                      data-testid="input-phone"
+                    />
+                  </div>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="state" className="block text-sm font-semibold text-primary mb-1">State</label>
+                    <select 
+                      id="state"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white"
+                      data-testid="select-state"
+                    >
+                      <option value="">Select</option>
+                      <option value="CA">California</option>
+                      <option value="AZ">Arizona</option>
+                      <option value="CO">Colorado</option>
+                      <option value="ID">Idaho</option>
+                      <option value="IL">Illinois</option>
+                      <option value="KS">Kansas</option>
+                      <option value="KY">Kentucky</option>
+                      <option value="MN">Minnesota</option>
+                      <option value="MO">Missouri</option>
+                      <option value="NV">Nevada</option>
+                      <option value="OH">Ohio</option>
+                      <option value="OK">Oklahoma</option>
+                      <option value="PA">Pennsylvania</option>
+                      <option value="TN">Tennessee</option>
+                      <option value="TX">Texas</option>
+                      <option value="UT">Utah</option>
+                      <option value="VA">Virginia</option>
+                      <option value="WI">Wisconsin</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="vehicles" className="block text-sm font-semibold text-primary mb-1">Vehicles</label>
+                    <select 
+                      id="vehicles"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white"
+                      data-testid="select-vehicles"
+                    >
+                      <option value="">Select</option>
+                      <option value="1">1 Vehicle</option>
+                      <option value="2-5">2-5 Vehicles</option>
+                      <option value="6-10">6-10 Vehicles</option>
+                      <option value="11-25">11-25 Vehicles</option>
+                      <option value="26+">26+ Vehicles</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="tcpNumber" className="block text-sm font-semibold text-primary mb-1">
+                      TCP Number <span className="text-muted-foreground font-normal">(Optional)</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      id="tcpNumber"
+                      placeholder="TCP-XXXXX" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                      data-testid="input-tcp-number"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="dotNumber" className="block text-sm font-semibold text-primary mb-1">
+                      DOT Number <span className="text-muted-foreground font-normal">(Optional)</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      id="dotNumber"
+                      placeholder="DOT-XXXXXXX" 
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                      data-testid="input-dot-number"
+                    />
+                  </div>
+                </div>
+                
+                <Link href="/quote/tnc">
+                  <Button 
+                    type="button"
+                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-4 text-lg rounded-lg"
+                    data-testid="button-get-free-quote"
+                  >
+                    Get My Free Quote
+                  </Button>
+                </Link>
+                
+                <p className="text-center text-muted-foreground">
+                  Or call us now: <a href="tel:888-254-0089" className="text-primary font-semibold hover:underline">888-254-0089</a>
+                </p>
+              </form>
+              
+              <div className="flex justify-center gap-8 mt-8 pt-6 border-t">
+                <div className="flex flex-col items-center">
+                  <Clock className="h-6 w-6 text-primary mb-1" />
+                  <span className="text-sm text-muted-foreground">24hr Response</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <Shield className="h-6 w-6 text-primary mb-1" />
+                  <span className="text-sm text-muted-foreground">A-Rated Carriers</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <Users className="h-6 w-6 text-primary mb-1" />
+                  <span className="text-sm text-muted-foreground">18 States</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="py-16 bg-white" aria-labelledby="requirements-heading">
           <div className="container mx-auto px-4">
             <h2 id="requirements-heading" className="text-3xl font-bold text-primary mb-4 text-center">
@@ -314,9 +472,9 @@ export default function UberBlackCalifornia() {
                 </div>
               </div>
               <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={mercedesS500Image} alt="Black Mercedes S-Class" className="w-full h-48 object-contain bg-black" />
+                <img src={teslaModelSImage} alt="Black Tesla Model S" className="w-full h-48 object-contain bg-black" />
                 <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Mercedes S-Class</span>
+                  <span className="font-semibold text-foreground">Tesla Model S</span>
                 </div>
               </div>
             </div>
