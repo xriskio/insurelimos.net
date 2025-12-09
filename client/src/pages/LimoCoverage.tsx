@@ -23,8 +23,8 @@ import limoImage1 from "@assets/stock_images/luxury_black_limousi_326f150e.jpg";
 import limoImage2 from "@assets/stock_images/luxury_black_limousi_49ae3e27.jpg";
 import busImage1 from "@assets/stock_images/charter_bus_motorcoa_4fef8087.jpg";
 import busImage2 from "@assets/stock_images/charter_bus_motorcoa_3c20d2ab.jpg";
-import sprinterImage1 from "@assets/stock_images/mercedes_sprinter_va_b49f892e.jpg";
-import sprinterImage2 from "@assets/stock_images/mercedes_sprinter_va_da22d03d.jpg";
+import sprinterImage1 from "@assets/stock_images/black_mercedes_sprin_867ab356.jpg";
+import sprinterImage2 from "@assets/stock_images/executive_black_spri_a282713b.jpg";
 
 export default function LimoCoverage() {
   return (
