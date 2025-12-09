@@ -23,6 +23,7 @@ import limoImage1 from "@assets/stock_images/luxury_black_limousi_326f150e.jpg";
 import limoImage2 from "@assets/stock_images/luxury_black_limousi_49ae3e27.jpg";
 import busImage1 from "@assets/generated_images/luxury_charter_motorcoach_bus.png";
 import busImage2 from "@assets/generated_images/white_tour_bus_motorcoach.png";
+import partyBusImage from "@assets/generated_images/black_luxury_party_bus_shuttle.png";
 import sprinterImage1 from "@assets/generated_images/black_luxury_sprinter_van.png";
 import sprinterImage2 from "@assets/generated_images/executive_sprinter_interior_view.png";
 
@@ -136,8 +137,8 @@ export default function LimoCoverage() {
                 </div>
                 <div className="rounded-xl overflow-hidden shadow-lg">
                   <img 
-                    src={busImage2} 
-                    alt="Party bus and tour bus" 
+                    src={partyBusImage} 
+                    alt="Party bus shuttle" 
                     className="w-full h-48 object-cover"
                   />
                   <div className="bg-white p-3 text-center">
