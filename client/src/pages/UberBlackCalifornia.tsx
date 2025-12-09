@@ -21,13 +21,13 @@ import {
   Building
 } from "lucide-react";
 
-import teslaModelXImage from "@assets/stock_images/black_tesla_model_x__dee246b2.jpg";
-import teslaModelSImage from "@assets/stock_images/black_tesla_model_s__636b954b.jpg";
-import lincolnAviatorImage from "@assets/stock_images/black_lincoln_aviato_7443fc1b.jpg";
-import chevySuburbanImage from "@assets/stock_images/black_chevrolet_subu_56068562.jpg";
-import escaladeImage from "@assets/stock_images/black_cadillac_escal_8d2af37d.jpg";
-import mercedesS580Image from "@assets/stock_images/black_mercedes_s_cla_44809cf4.jpg";
-import cadillacCT5Image from "@assets/stock_images/black_cadillac_ct5_s_890f6bf8.jpg";
+import teslaModelXImage from "@assets/stock_images/black_tesla_model_x__9cf98afb.jpg";
+import teslaModelSImage from "@assets/stock_images/black_tesla_model_s__9fb38562.jpg";
+import lincolnAviatorImage from "@assets/stock_images/black_lincoln_aviato_7ed927eb.jpg";
+import chevySuburbanImage from "@assets/stock_images/black_chevrolet_subu_58a2d5c9.jpg";
+import escaladeImage from "@assets/stock_images/black_cadillac_escal_b8aa6da4.jpg";
+import mercedesS580Image from "@assets/stock_images/black_mercedes_s-cla_47240d5b.jpg";
+import cadillacCT5Image from "@assets/stock_images/black_cadillac_ct5_l_b971f996.jpg";
 
 export default function UberBlackCalifornia() {
   const coverageFeatures = [
