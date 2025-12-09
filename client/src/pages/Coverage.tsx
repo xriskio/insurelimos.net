@@ -17,6 +17,15 @@ import paratransitImage from "@assets/generated_images/paratransit_accessible_va
 
 const coverages = [
   {
+    id: "uber-black-california",
+    title: "Uber Black California",
+    image: limoImage,
+    description: "Specialized TCP insurance for Uber Black and Uber Black SUV drivers throughout California.",
+    details: "Coverage for black sedans, luxury SUVs, and executive vehicles. Next day CPUC filings once bound. Meet and exceed CPUC requirements for rideshare operators.",
+    hasPage: true,
+    pageUrl: "/services/commercial-auto/uber-black-california"
+  },
+  {
     id: "tnc-mobility",
     title: "TNC & Mobility",
     image: tncImage,

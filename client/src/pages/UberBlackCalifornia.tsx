@@ -47,6 +47,7 @@ export default function UberBlackCalifornia() {
     { icon: Clock, title: "Fast Quotes", description: "Get quoted within 24 hours with quick policy binding" },
     { icon: Users, title: "Fleet Discounts", description: "Multi-vehicle discounts for operators with 2+ vehicles" },
     { icon: FileText, title: "COI Same Day", description: "Certificates of Insurance issued same day for TCP compliance" },
+    { icon: FileText, title: "Next Day CPUC Filings", description: "CPUC filings submitted next day once your policy is bound" },
     { icon: Award, title: "A-Rated Carriers", description: "Coverage through top-rated insurance carriers" }
   ];
 
