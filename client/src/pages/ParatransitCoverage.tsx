@@ -29,8 +29,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import paratransitHeroImage from "@assets/stock_images/wheelchair_accessibl_1c26c45e.jpg";
-import paratransitImage1 from "@assets/stock_images/paratransit_wheelcha_227e4195.jpg";
-import paratransitImage2 from "@assets/stock_images/paratransit_wheelcha_608d4ece.jpg";
+import paratransitImage1 from "@assets/generated_images/white_nemt_wheelchair_van.png";
+import paratransitImage2 from "@assets/generated_images/paratransit_wheelchair_lift_van.png";
 
 export default function ParatransitCoverage() {
   return (

@@ -27,8 +27,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import nemtHeroImage from "@assets/stock_images/medical_transportati_bedcf76d.jpg";
-import nemtImage1 from "@assets/stock_images/wheelchair_accessibl_7a9c6c6b.jpg";
-import nemtImage2 from "@assets/stock_images/wheelchair_accessibl_a1c2c395.jpg";
+import nemtImage1 from "@assets/generated_images/white_nemt_wheelchair_van.png";
+import nemtImage2 from "@assets/generated_images/paratransit_wheelchair_lift_van.png";
 
 const nemtFaqs = [
   {
