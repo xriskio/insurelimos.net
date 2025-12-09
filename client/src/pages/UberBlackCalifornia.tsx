@@ -134,206 +134,204 @@ export default function UberBlackCalifornia() {
       <Header />
       
       <main className="flex-1" id="main-content" role="main">
-        <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-16 md:py-24" aria-labelledby="hero-heading">
+        <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-12 md:py-16" aria-labelledby="hero-heading">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl">
-              <div className="flex items-center gap-2 text-amber-400 mb-4">
-                <Car className="h-5 w-5" aria-hidden="true" />
-                <span className="text-sm font-semibold uppercase tracking-wide">Premium Commercial Auto Coverage</span>
-              </div>
-              <h1 id="hero-heading" className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Uber Black Insurance<br />
-                <span className="text-amber-400">For Professional Drivers</span>
-              </h1>
-              <p className="text-xl text-gray-300 mb-6 max-w-2xl">
-                Drive with confidence knowing your luxury vehicle and livelihood are protected. Our commercial auto insurance is specifically designed for Uber Black, Uber Black SUV, and premium rideshare operators.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {stateAbbreviations.map((state, idx) => (
-                  <span key={idx} className="bg-white/10 px-3 py-1 rounded-full text-sm font-medium">
-                    {state}
-                  </span>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/quote/tnc">
-                  <Button 
-                    size="lg" 
-                    className="bg-amber-500 hover:bg-amber-600 text-black font-bold"
-                    data-testid="button-uber-quote"
-                  >
-                    Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <a href="tel:888-254-0089">
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-white text-white hover:bg-white hover:text-black font-bold"
-                    data-testid="button-uber-call"
-                  >
-                    <Phone className="h-4 w-4 mr-2" /> Call 888-254-0089
-                  </Button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-12 bg-gray-50" aria-labelledby="quote-form-heading">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-              <h2 id="quote-form-heading" className="text-2xl font-bold text-primary text-center mb-2">
-                Get Your Free Quote
-              </h2>
-              <p className="text-muted-foreground text-center mb-6">Quick response within 24 hours</p>
-              
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="businessName" className="block text-sm font-semibold text-primary mb-1">Business Name</label>
-                  <input 
-                    type="text" 
-                    id="businessName"
-                    placeholder="Your company name" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    data-testid="input-business-name"
-                  />
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <div>
+                <div className="flex items-center gap-2 text-amber-400 mb-4">
+                  <Car className="h-5 w-5" aria-hidden="true" />
+                  <span className="text-sm font-semibold uppercase tracking-wide">Premium Commercial Auto Coverage</span>
                 </div>
-                
-                <div>
-                  <label htmlFor="yourName" className="block text-sm font-semibold text-primary mb-1">Your Name</label>
-                  <input 
-                    type="text" 
-                    id="yourName"
-                    placeholder="Full name" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    data-testid="input-your-name"
-                  />
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-primary mb-1">Email</label>
-                    <input 
-                      type="email" 
-                      id="email"
-                      placeholder="email@example.com" 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      data-testid="input-email"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-semibold text-primary mb-1">Phone</label>
-                    <input 
-                      type="tel" 
-                      id="phone"
-                      placeholder="(555) 555-5555" 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      data-testid="input-phone"
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="state" className="block text-sm font-semibold text-primary mb-1">State</label>
-                    <select 
-                      id="state"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white"
-                      data-testid="select-state"
-                    >
-                      <option value="">Select</option>
-                      <option value="CA">California</option>
-                      <option value="AZ">Arizona</option>
-                      <option value="CO">Colorado</option>
-                      <option value="ID">Idaho</option>
-                      <option value="IL">Illinois</option>
-                      <option value="KS">Kansas</option>
-                      <option value="KY">Kentucky</option>
-                      <option value="MN">Minnesota</option>
-                      <option value="MO">Missouri</option>
-                      <option value="NV">Nevada</option>
-                      <option value="OH">Ohio</option>
-                      <option value="OK">Oklahoma</option>
-                      <option value="PA">Pennsylvania</option>
-                      <option value="TN">Tennessee</option>
-                      <option value="TX">Texas</option>
-                      <option value="UT">Utah</option>
-                      <option value="VA">Virginia</option>
-                      <option value="WI">Wisconsin</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="vehicles" className="block text-sm font-semibold text-primary mb-1">Vehicles</label>
-                    <select 
-                      id="vehicles"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white"
-                      data-testid="select-vehicles"
-                    >
-                      <option value="">Select</option>
-                      <option value="1">1 Vehicle</option>
-                      <option value="2-5">2-5 Vehicles</option>
-                      <option value="6-10">6-10 Vehicles</option>
-                      <option value="11-25">11-25 Vehicles</option>
-                      <option value="26+">26+ Vehicles</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="tcpNumber" className="block text-sm font-semibold text-primary mb-1">
-                      TCP Number <span className="text-muted-foreground font-normal">(Optional)</span>
-                    </label>
-                    <input 
-                      type="text" 
-                      id="tcpNumber"
-                      placeholder="TCP-XXXXX" 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      data-testid="input-tcp-number"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="dotNumber" className="block text-sm font-semibold text-primary mb-1">
-                      DOT Number <span className="text-muted-foreground font-normal">(Optional)</span>
-                    </label>
-                    <input 
-                      type="text" 
-                      id="dotNumber"
-                      placeholder="DOT-XXXXXXX" 
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      data-testid="input-dot-number"
-                    />
-                  </div>
-                </div>
-                
-                <Link href="/quote/tnc">
-                  <Button 
-                    type="button"
-                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-4 text-lg rounded-lg"
-                    data-testid="button-get-free-quote"
-                  >
-                    Get My Free Quote
-                  </Button>
-                </Link>
-                
-                <p className="text-center text-muted-foreground">
-                  Or call us now: <a href="tel:888-254-0089" className="text-primary font-semibold hover:underline">888-254-0089</a>
+                <h1 id="hero-heading" className="text-4xl md:text-5xl font-bold mb-6">
+                  Uber Black Insurance<br />
+                  <span className="text-amber-400">For Professional Drivers</span>
+                </h1>
+                <p className="text-lg text-gray-300 mb-6">
+                  Drive with confidence knowing your luxury vehicle and livelihood are protected. Our commercial auto insurance is specifically designed for Uber Black, Uber Black SUV, and premium rideshare operators.
                 </p>
-              </form>
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {stateAbbreviations.map((state, idx) => (
+                    <span key={idx} className="bg-white/10 px-3 py-1 rounded-full text-sm font-medium">
+                      {state}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Link href="/quote/tnc">
+                    <Button 
+                      size="lg" 
+                      className="bg-amber-500 hover:bg-amber-600 text-black font-bold"
+                      data-testid="button-uber-quote"
+                    >
+                      Get Your Free Quote <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                  <a href="tel:888-254-0089">
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      className="border-white text-white hover:bg-white hover:text-black font-bold"
+                      data-testid="button-uber-call"
+                    >
+                      <Phone className="h-4 w-4 mr-2" /> Call 888-254-0089
+                    </Button>
+                  </a>
+                </div>
+              </div>
               
-              <div className="flex justify-center gap-8 mt-8 pt-6 border-t">
-                <div className="flex flex-col items-center">
-                  <Clock className="h-6 w-6 text-primary mb-1" />
-                  <span className="text-sm text-muted-foreground">24hr Response</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <Shield className="h-6 w-6 text-primary mb-1" />
-                  <span className="text-sm text-muted-foreground">A-Rated Carriers</span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <Users className="h-6 w-6 text-primary mb-1" />
-                  <span className="text-sm text-muted-foreground">18 States</span>
+              <div className="bg-white rounded-2xl shadow-2xl p-6 lg:p-8">
+                <h2 className="text-xl font-bold text-primary text-center mb-1">
+                  Get Your Free Quote
+                </h2>
+                <p className="text-muted-foreground text-center text-sm mb-4">Quick response within 24 hours</p>
+                
+                <form className="space-y-3">
+                  <div>
+                    <label htmlFor="businessName" className="block text-xs font-semibold text-primary mb-1">Business Name</label>
+                    <input 
+                      type="text" 
+                      id="businessName"
+                      placeholder="Your company name" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+                      data-testid="input-business-name"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="yourName" className="block text-xs font-semibold text-primary mb-1">Your Name</label>
+                    <input 
+                      type="text" 
+                      id="yourName"
+                      placeholder="Full name" 
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+                      data-testid="input-your-name"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="email" className="block text-xs font-semibold text-primary mb-1">Email</label>
+                      <input 
+                        type="email" 
+                        id="email"
+                        placeholder="email@example.com" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+                        data-testid="input-email"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-xs font-semibold text-primary mb-1">Phone</label>
+                      <input 
+                        type="tel" 
+                        id="phone"
+                        placeholder="(555) 555-5555" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+                        data-testid="input-phone"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="state" className="block text-xs font-semibold text-primary mb-1">State</label>
+                      <select 
+                        id="state"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white text-sm"
+                        data-testid="select-state"
+                      >
+                        <option value="">Select</option>
+                        <option value="CA">California</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="CO">Colorado</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MO">Missouri</option>
+                        <option value="NV">Nevada</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="vehicles" className="block text-xs font-semibold text-primary mb-1">Vehicles</label>
+                      <select 
+                        id="vehicles"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-white text-sm"
+                        data-testid="select-vehicles"
+                      >
+                        <option value="">Select</option>
+                        <option value="1">1 Vehicle</option>
+                        <option value="2-5">2-5 Vehicles</option>
+                        <option value="6-10">6-10 Vehicles</option>
+                        <option value="11-25">11-25 Vehicles</option>
+                        <option value="26+">26+ Vehicles</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="tcpNumber" className="block text-xs font-semibold text-primary mb-1">
+                        TCP Number <span className="text-muted-foreground font-normal">(Optional)</span>
+                      </label>
+                      <input 
+                        type="text" 
+                        id="tcpNumber"
+                        placeholder="TCP-XXXXX" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+                        data-testid="input-tcp-number"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="dotNumber" className="block text-xs font-semibold text-primary mb-1">
+                        DOT Number <span className="text-muted-foreground font-normal">(Optional)</span>
+                      </label>
+                      <input 
+                        type="text" 
+                        id="dotNumber"
+                        placeholder="DOT-XXXXXXX" 
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm"
+                        data-testid="input-dot-number"
+                      />
+                    </div>
+                  </div>
+                  
+                  <Link href="/quote/tnc">
+                    <Button 
+                      type="button"
+                      className="w-full bg-amber-500 hover:bg-amber-600 text-black font-bold py-3 text-base rounded-lg"
+                      data-testid="button-get-free-quote"
+                    >
+                      Get My Free Quote
+                    </Button>
+                  </Link>
+                  
+                  <p className="text-center text-muted-foreground text-sm">
+                    Or call us now: <a href="tel:888-254-0089" className="text-primary font-semibold hover:underline">888-254-0089</a>
+                  </p>
+                </form>
+                
+                <div className="flex justify-center gap-6 mt-4 pt-4 border-t">
+                  <div className="flex flex-col items-center">
+                    <Clock className="h-5 w-5 text-primary mb-1" />
+                    <span className="text-xs text-muted-foreground">24hr Response</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <Shield className="h-5 w-5 text-primary mb-1" />
+                    <span className="text-xs text-muted-foreground">A-Rated Carriers</span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <Users className="h-5 w-5 text-primary mb-1" />
+                    <span className="text-xs text-muted-foreground">18 States</span>
+                  </div>
                 </div>
               </div>
             </div>
