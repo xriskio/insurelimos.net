@@ -19,10 +19,11 @@ import {
   Wine
 } from "lucide-react";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
-import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267410610.png";
-import teslaModelXImage from "@assets/modelX_1765267410610.png";
-import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
-import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267410610.png";
+import luxurySedanImage from "@assets/stock_images/black_luxury_sedan_l_a43edb1d.jpg";
+import sprinterVanImage from "@assets/stock_images/black_mercedes_sprin_2778d9b9.jpg";
+import cadillacSedanImage from "@assets/stock_images/black_cadillac_sedan_236f9e2f.jpg";
+import luxurySuvImage from "@assets/stock_images/black_suv_luxury_esc_f02056ca.jpg";
+import partyBusImage from "@assets/stock_images/black_party_bus_limo_c48f4aac.jpg";
 
 export default function LimoCoverage() {
   return (
@@ -78,46 +79,55 @@ export default function LimoCoverage() {
         <section className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h3 className="text-2xl font-bold text-primary mb-6 text-center">Vehicles We Insure</h3>
-              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+              <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-lg">
                   <img 
-                    src={mercedesS500Image} 
-                    alt="Black Mercedes S-Class" 
-                    className="w-full h-48 object-contain bg-black"
+                    src={luxurySedanImage} 
+                    alt="Black luxury sedan" 
+                    className="w-full h-48 object-cover"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Mercedes S-Class</span>
+                    <span className="font-medium text-foreground">Luxury Sedan</span>
                   </div>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <div className="rounded-xl overflow-hidden shadow-lg">
                   <img 
-                    src={teslaModelXImage} 
-                    alt="Black Tesla Model X" 
-                    className="w-full h-48 object-contain bg-black"
+                    src={sprinterVanImage} 
+                    alt="Black Mercedes Sprinter" 
+                    className="w-full h-48 object-cover"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Tesla Model X</span>
+                    <span className="font-medium text-foreground">Mercedes Sprinter</span>
                   </div>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <div className="rounded-xl overflow-hidden shadow-lg">
                   <img 
-                    src={teslaModelSImage} 
-                    alt="Black Tesla Model S" 
-                    className="w-full h-48 object-contain bg-black"
+                    src={cadillacSedanImage} 
+                    alt="Black Cadillac sedan" 
+                    className="w-full h-48 object-cover"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Tesla Model S</span>
+                    <span className="font-medium text-foreground">Cadillac Sedan</span>
                   </div>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                <div className="rounded-xl overflow-hidden shadow-lg">
                   <img 
-                    src={chevySuburbanImage} 
-                    alt="Black Chevrolet Suburban" 
-                    className="w-full h-48 object-contain bg-black"
+                    src={luxurySuvImage} 
+                    alt="Black luxury SUV" 
+                    className="w-full h-48 object-cover"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Chevrolet Suburban</span>
+                    <span className="font-medium text-foreground">Luxury SUV</span>
+                  </div>
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={partyBusImage} 
+                    alt="Black party bus" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="bg-white p-3 text-center">
+                    <span className="font-medium text-foreground">Party Bus</span>
                   </div>
                 </div>
               </div>

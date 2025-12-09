@@ -25,16 +25,18 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Shield, CheckCircle, Phone, Clock, Award, Gem } from "lucide-react";
 import { motion } from "framer-motion";
-import mercedesS500 from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267039508.png";
-import teslaModelX from "@assets/modelX_1765267039508.png";
-import teslaModelS from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267039508.png";
-import chevySuburban from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267039509.png";
+import luxurySedanImage from "@assets/stock_images/black_luxury_sedan_l_a43edb1d.jpg";
+import sprinterVanImage from "@assets/stock_images/black_mercedes_sprin_2778d9b9.jpg";
+import cadillacSedanImage from "@assets/stock_images/black_cadillac_sedan_236f9e2f.jpg";
+import luxurySuvImage from "@assets/stock_images/black_suv_luxury_esc_f02056ca.jpg";
+import partyBusImage from "@assets/stock_images/black_party_bus_limo_c48f4aac.jpg";
 
 const LIMO_VEHICLES = [
-  { name: "Mercedes S-Class", image: mercedesS500 },
-  { name: "Tesla Model X", image: teslaModelX },
-  { name: "Tesla Model S", image: teslaModelS },
-  { name: "Chevrolet Suburban", image: chevySuburban },
+  { name: "Luxury Sedan", image: luxurySedanImage },
+  { name: "Mercedes Sprinter", image: sprinterVanImage },
+  { name: "Cadillac Sedan", image: cadillacSedanImage },
+  { name: "Luxury SUV", image: luxurySuvImage },
+  { name: "Party Bus", image: partyBusImage },
 ];
 
 const formSchema = z.object({
@@ -223,16 +225,17 @@ export default function LimoLanding() {
               </div>
 
               <div className="hidden lg:block mt-8">
-                <h3 className="text-lg font-bold mb-4">Vehicles We Insure</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-3">
                   {LIMO_VEHICLES.map((vehicle, idx) => (
-                    <div key={idx} className="bg-black/40 rounded-xl p-3 text-center">
+                    <div key={idx} className="rounded-xl overflow-hidden shadow-lg">
                       <img 
                         src={vehicle.image} 
                         alt={vehicle.name} 
-                        className="w-full h-auto object-contain mb-2"
+                        className="w-full h-24 object-cover"
                       />
-                      <p className="text-sm text-gray-300">{vehicle.name}</p>
+                      <div className="bg-white/90 p-2 text-center">
+                        <p className="text-xs text-gray-800 font-medium">{vehicle.name}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
