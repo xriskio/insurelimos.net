@@ -25,7 +25,17 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Shield, CheckCircle, Phone, Clock, Award, Gem } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@assets/image_1765266807505.png";
+import mercedesS500 from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267039508.png";
+import teslaModelX from "@assets/modelX_1765267039508.png";
+import teslaModelS from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267039508.png";
+import chevySuburban from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267039509.png";
+
+const LIMO_VEHICLES = [
+  { name: "Mercedes S-Class", image: mercedesS500 },
+  { name: "Tesla Model X", image: teslaModelX },
+  { name: "Tesla Model S", image: teslaModelS },
+  { name: "Chevrolet Suburban", image: chevySuburban },
+];
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
@@ -212,12 +222,20 @@ export default function LimoLanding() {
                 </div>
               </div>
 
-              <div className="hidden lg:block">
-                <img 
-                  src={heroImage} 
-                  alt="Lincoln Navigator luxury SUV" 
-                  className="rounded-xl shadow-2xl"
-                />
+              <div className="hidden lg:block mt-8">
+                <h3 className="text-lg font-bold mb-4">Vehicles We Insure</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {LIMO_VEHICLES.map((vehicle, idx) => (
+                    <div key={idx} className="bg-black/40 rounded-xl p-3 text-center">
+                      <img 
+                        src={vehicle.image} 
+                        alt={vehicle.name} 
+                        className="w-full h-auto object-contain mb-2"
+                      />
+                      <p className="text-sm text-gray-300">{vehicle.name}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
 
