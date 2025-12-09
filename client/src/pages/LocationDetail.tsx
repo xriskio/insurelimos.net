@@ -311,6 +311,63 @@ export default function LocationDetail() {
                     ))}
                   </CardContent>
                 </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Special Programs</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <Link 
+                      href="/lp/uber-black"
+                      className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-secondary text-muted-foreground"
+                    >
+                      <Car className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-sm">Uber Black Insurance</span>
+                    </Link>
+                    <Link 
+                      href="/lp/nemt"
+                      className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-secondary text-muted-foreground"
+                    >
+                      <Heart className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-sm">NEMT Insurance</span>
+                    </Link>
+                    <Link 
+                      href="/lp/limousine"
+                      className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-secondary text-muted-foreground"
+                    >
+                      <Car className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-sm">Limousine Insurance</span>
+                    </Link>
+                    <Link 
+                      href="/lp/motorcoach"
+                      className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-secondary text-muted-foreground"
+                    >
+                      <Bus className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-sm">Motorcoach Insurance</span>
+                    </Link>
+                    <Link 
+                      href="/lp/taxi"
+                      className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-secondary text-muted-foreground"
+                    >
+                      <Car className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-sm">Taxi Insurance</span>
+                    </Link>
+                    <Link 
+                      href="/lp/school-bus"
+                      className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-secondary text-muted-foreground"
+                    >
+                      <Bus className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-sm">School Bus Insurance</span>
+                    </Link>
+                    <Link 
+                      href="/lp/tnc"
+                      className="flex items-center gap-2 p-2 rounded-lg transition-colors hover:bg-secondary text-muted-foreground"
+                    >
+                      <Car className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-sm">TNC Insurance</span>
+                    </Link>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
