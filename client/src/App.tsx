@@ -46,6 +46,13 @@ import LandingPage from "@/pages/LandingPage";
 import Locations from "@/pages/Locations";
 import LocationDetail from "@/pages/LocationDetail";
 import UberBlackCalifornia from "@/pages/UberBlackCalifornia";
+import UberBlackLanding from "@/pages/landing/UberBlackLanding";
+import NemtLanding from "@/pages/landing/NemtLanding";
+import LimoLanding from "@/pages/landing/LimoLanding";
+import MotorcoachLanding from "@/pages/landing/MotorcoachLanding";
+import TaxiLanding from "@/pages/landing/TaxiLanding";
+import SchoolBusLanding from "@/pages/landing/SchoolBusLanding";
+import TncLanding from "@/pages/landing/TncLanding";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -106,6 +113,18 @@ function Router() {
       
       <Route path="/services/commercial-auto/uber-black-california" component={UberBlackCalifornia} />
       <Route path="/uber-black-california" component={UberBlackCalifornia} />
+      
+      {/* Ad Landing Pages */}
+      <Route path="/lp/uber-black" component={UberBlackLanding} />
+      <Route path="/lp/nemt" component={NemtLanding} />
+      <Route path="/lp/limo" component={LimoLanding} />
+      <Route path="/lp/limousine" component={LimoLanding} />
+      <Route path="/lp/motorcoach" component={MotorcoachLanding} />
+      <Route path="/lp/bus" component={MotorcoachLanding} />
+      <Route path="/lp/taxi" component={TaxiLanding} />
+      <Route path="/lp/school-bus" component={SchoolBusLanding} />
+      <Route path="/lp/tnc" component={TncLanding} />
+      <Route path="/lp/rideshare" component={TncLanding} />
       
       <Route component={NotFound} />
     </Switch>
