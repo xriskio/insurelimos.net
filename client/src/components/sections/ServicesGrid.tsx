@@ -14,6 +14,8 @@ import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
 import nemtImage from "@assets/generated_images/medical_transport_van.png";
 import busImage from "@assets/generated_images/modern_charter_bus.png";
 import sprinterImage from "@assets/generated_images/black_luxury_sprinter_van.png";
+import suburbanImage from "@assets/stock_images/black_chevrolet_subu_56068562.jpg";
+import aviatorImage from "@assets/stock_images/black_lincoln_aviato_7443fc1b.jpg";
 import {
   Form,
   FormControl,
@@ -41,7 +43,7 @@ const services = [
   {
     title: "Uber Black Insurance",
     description: "Specialized TCP insurance for Uber Black and luxury rideshare drivers. Available in 18 states.",
-    image: limoImage,
+    image: suburbanImage,
     href: "/services/commercial-auto/uber-black-california",
   },
   {

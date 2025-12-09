@@ -21,6 +21,14 @@ import {
   Building
 } from "lucide-react";
 
+import teslaModelXImage from "@assets/stock_images/black_tesla_model_x__dee246b2.jpg";
+import teslaModelSImage from "@assets/stock_images/black_tesla_model_s__636b954b.jpg";
+import lincolnAviatorImage from "@assets/stock_images/black_lincoln_aviato_7443fc1b.jpg";
+import chevySuburbanImage from "@assets/stock_images/black_chevrolet_subu_56068562.jpg";
+import escaladeImage from "@assets/stock_images/black_cadillac_escal_8d2af37d.jpg";
+import mercedesS580Image from "@assets/stock_images/black_mercedes_s_cla_44809cf4.jpg";
+import cadillacCT5Image from "@assets/stock_images/black_cadillac_ct5_s_890f6bf8.jpg";
+
 export default function UberBlackCalifornia() {
   const coverageFeatures = [
     "Commercial Auto Liability up to $1.5M CSL",
@@ -207,7 +215,7 @@ export default function UberBlackCalifornia() {
             <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
               We specialize in insuring premium vehicles that meet Uber Black and Uber Black SUV platform requirements. Our policies cover a wide range of luxury and executive transportation vehicles.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
               {vehicleTypes.map((vehicle, idx) => (
                 <div 
                   key={idx}
@@ -218,6 +226,52 @@ export default function UberBlackCalifornia() {
                   <p className="text-sm text-muted-foreground">{vehicle.examples}</p>
                 </div>
               ))}
+            </div>
+            
+            <h3 className="text-2xl font-bold text-primary mb-6 text-center">Featured Uber Black Vehicles</h3>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
+                <img src={chevySuburbanImage} alt="Black Chevrolet Suburban" className="w-full h-48 object-cover" />
+                <div className="p-3 text-center">
+                  <span className="font-semibold text-foreground">Chevrolet Suburban</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
+                <img src={lincolnAviatorImage} alt="Black Lincoln Aviator" className="w-full h-48 object-cover" />
+                <div className="p-3 text-center">
+                  <span className="font-semibold text-foreground">Lincoln Aviator</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
+                <img src={escaladeImage} alt="Black Cadillac Escalade ESV" className="w-full h-48 object-cover" />
+                <div className="p-3 text-center">
+                  <span className="font-semibold text-foreground">Cadillac Escalade ESV</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
+                <img src={teslaModelXImage} alt="Black Tesla Model X SUV" className="w-full h-48 object-cover" />
+                <div className="p-3 text-center">
+                  <span className="font-semibold text-foreground">Tesla Model X</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
+                <img src={teslaModelSImage} alt="Black Tesla Model S Sedan" className="w-full h-48 object-cover" />
+                <div className="p-3 text-center">
+                  <span className="font-semibold text-foreground">Tesla Model S</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
+                <img src={mercedesS580Image} alt="Black Mercedes S580 Sedan" className="w-full h-48 object-cover" />
+                <div className="p-3 text-center">
+                  <span className="font-semibold text-foreground">Mercedes S580</span>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
+                <img src={cadillacCT5Image} alt="Black Cadillac CT5 Sedan" className="w-full h-48 object-cover" />
+                <div className="p-3 text-center">
+                  <span className="font-semibold text-foreground">Cadillac CT5</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
