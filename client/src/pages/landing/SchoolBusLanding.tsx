@@ -25,6 +25,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { Shield, CheckCircle, Phone, Clock, Award, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
+import heroImage from "@assets/stock_images/yellow_school_bus_tr_d575846d.jpg";
 
 const formSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
@@ -186,6 +187,37 @@ export default function SchoolBusLanding() {
                     <span className="text-white/90">{feature}</span>
                   </div>
                 ))}
+              </div>
+
+              <div className="hidden lg:block">
+                <img 
+                  src={heroImage} 
+                  alt="Yellow school bus for student transportation" 
+                  className="rounded-xl shadow-2xl"
+                />
+              </div>
+
+              {/* Coverage Summary */}
+              <div className="mt-8 bg-white/10 backdrop-blur rounded-xl p-6">
+                <h3 className="text-lg font-bold mb-4">Coverage Available</h3>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="font-semibold">Auto Liability (AL)</p>
+                    <p className="text-white/80">$1M - $5M CSL</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Physical Damage (APD)</p>
+                    <p className="text-white/80">Comp & Collision</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">General Liability</p>
+                    <p className="text-white/80">$1M/$2M Occurrence</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Workers Comp</p>
+                    <p className="text-white/80">Statutory Limits</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
 

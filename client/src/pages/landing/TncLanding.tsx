@@ -189,6 +189,29 @@ export default function TncLanding() {
                 ))}
               </div>
 
+              {/* Coverage Summary */}
+              <div className="mt-8 bg-white/10 backdrop-blur rounded-xl p-6">
+                <h3 className="text-lg font-bold mb-4">Coverage Available</h3>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="font-semibold">Auto Liability (AL)</p>
+                    <p className="text-white/80">$750K - $1.5M CSL</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Physical Damage (APD)</p>
+                    <p className="text-white/80">Comp & Collision</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Gap Coverage</p>
+                    <p className="text-white/80">Period 1, 2 & 3</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">TCP/CPUC Filings</p>
+                    <p className="text-white/80">Next Day Filing</p>
+                  </div>
+                </div>
+              </div>
+
               <div className="hidden lg:block">
                 <img 
                   src={tncImage} 
