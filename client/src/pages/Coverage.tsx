@@ -17,11 +17,11 @@ import paratransitImage from "@assets/generated_images/paratransit_accessible_va
 
 const coverages = [
   {
-    id: "uber-black-california",
-    title: "Uber Black California",
+    id: "uber-black",
+    title: "Uber Black Insurance",
     image: limoImage,
-    description: "Specialized TCP insurance for Uber Black and Uber Black SUV drivers throughout California.",
-    details: "Coverage for black sedans, luxury SUVs, and executive vehicles. Next day CPUC filings once bound. Meet and exceed CPUC requirements for rideshare operators.",
+    description: "Specialized commercial auto insurance for Uber Black and Uber Black SUV drivers in 18 states.",
+    details: "Coverage for black sedans, luxury SUVs, and executive vehicles. Next day CPUC and DOT filings once bound. Available in CA, AZ, CO, ID, IL, KS, KY, MN, MO, NV, OH, OK, PA, TN, TX, UT, VA, WI.",
     hasPage: true,
     pageUrl: "/services/commercial-auto/uber-black-california"
   },
