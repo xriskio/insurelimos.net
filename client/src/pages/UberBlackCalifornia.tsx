@@ -42,11 +42,11 @@ export default function UberBlackCalifornia() {
   ];
 
   const benefits = [
-    { icon: Shield, title: "TNC Gap Coverage", description: "Covers periods when the app is on but no ride is in progress" },
+    { icon: Shield, title: "TCP Gap Coverage", description: "Covers periods when the app is on but no ride is in progress" },
     { icon: DollarSign, title: "Competitive Rates", description: "Specialized pricing for Uber Black and luxury rideshare operators" },
     { icon: Clock, title: "Fast Quotes", description: "Get quoted within 24 hours with quick policy binding" },
     { icon: Users, title: "Fleet Discounts", description: "Multi-vehicle discounts for operators with 2+ vehicles" },
-    { icon: FileText, title: "COI Same Day", description: "Certificates of Insurance issued same day for TNC compliance" },
+    { icon: FileText, title: "COI Same Day", description: "Certificates of Insurance issued same day for TCP compliance" },
     { icon: Award, title: "A-Rated Carriers", description: "Coverage through top-rated insurance carriers" }
   ];
 
@@ -71,7 +71,7 @@ export default function UberBlackCalifornia() {
             <div className="max-w-4xl">
               <div className="flex items-center gap-2 text-amber-400 mb-4">
                 <Car className="h-5 w-5" aria-hidden="true" />
-                <span className="text-sm font-semibold uppercase tracking-wide">Premium TNC Coverage</span>
+                <span className="text-sm font-semibold uppercase tracking-wide">Premium TCP Coverage</span>
               </div>
               <h1 id="hero-heading" className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 Uber Black Insurance<br />
@@ -116,12 +116,12 @@ export default function UberBlackCalifornia() {
                   As an Uber Black or Uber Black SUV driver in California, your personal auto insurance doesn't cover you while you're driving for the platform. Uber's commercial insurance only provides limited coverage, leaving gaps that could put your luxury vehicle and livelihood at risk.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  Our specialized TNC insurance for Uber Black drivers provides comprehensive coverage from the moment you turn on the app until the ride is complete—protecting your high-value vehicle, your passengers, and your income.
+                  Our specialized TCP insurance for Uber Black drivers provides comprehensive coverage from the moment you turn on the app until the ride is complete—protecting your high-value vehicle, your passengers, and your income.
                 </p>
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                  <h3 className="font-bold text-amber-800 mb-2">California TNC Requirements</h3>
+                  <h3 className="font-bold text-amber-800 mb-2">California TCP Requirements</h3>
                   <p className="text-sm text-amber-700">
-                    California requires all TNC drivers to maintain commercial auto liability coverage. Our policies meet and exceed CPUC requirements for rideshare operators.
+                    California requires all TCP drivers to maintain commercial auto liability coverage. Our policies meet and exceed CPUC requirements for rideshare operators.
                   </p>
                 </div>
               </div>
@@ -229,7 +229,7 @@ export default function UberBlackCalifornia() {
               <div className="bg-white rounded-lg p-6 shadow-sm">
                 <h3 className="font-bold text-foreground mb-2">Do I need special insurance for Uber Black?</h3>
                 <p className="text-muted-foreground">
-                  Yes. Your personal auto insurance typically excludes commercial use, and Uber's insurance has coverage gaps. Commercial TNC insurance ensures you're fully protected from app-on to ride complete.
+                  Yes. Your personal auto insurance typically excludes commercial use, and Uber's insurance has coverage gaps. Commercial TCP insurance ensures you're fully protected from app-on to ride complete.
                 </p>
               </div>
               <div className="bg-white rounded-lg p-6 shadow-sm">
@@ -247,7 +247,7 @@ export default function UberBlackCalifornia() {
               <div className="bg-white rounded-lg p-6 shadow-sm">
                 <h3 className="font-bold text-foreground mb-2">Can I also drive for Uber Black SUV with this insurance?</h3>
                 <p className="text-muted-foreground">
-                  Yes! Our TNC insurance covers both Uber Black and Uber Black SUV services. Just ensure your vehicle meets the platform requirements for each service tier.
+                  Yes! Our TCP insurance covers both Uber Black and Uber Black SUV services. Just ensure your vehicle meets the platform requirements for each service tier.
                 </p>
               </div>
             </div>
@@ -260,7 +260,7 @@ export default function UberBlackCalifornia() {
               Ready to Protect Your Uber Black Business?
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-              Get a free, no-obligation quote for your Uber Black or luxury rideshare vehicle. Our specialists understand the unique needs of premium TNC operators in California.
+              Get a free, no-obligation quote for your Uber Black or luxury rideshare vehicle. Our specialists understand the unique needs of premium TCP operators in California.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/quote/tnc">
