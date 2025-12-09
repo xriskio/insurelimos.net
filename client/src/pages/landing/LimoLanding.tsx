@@ -5,6 +5,8 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Seo } from "@/components/seo/Seo";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import {
   Form,
   FormControl,
@@ -51,6 +53,7 @@ export default function LimoLanding() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -87,10 +90,11 @@ export default function LimoLanding() {
       const result = await response.json();
 
       if (response.ok && result.success) {
+        setReferenceNumber(result.quote?.referenceNumber || "");
         setSubmitted(true);
         toast({
           title: "Quote Request Received!",
-          description: "We'll contact you within 24 hours with your quote.",
+          description: "Check your email for confirmation.",
         });
       } else {
         throw new Error(result.error || "Submission failed");
@@ -108,129 +112,112 @@ export default function LimoLanding() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl p-8 max-w-md text-center"
-        >
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-green-600" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Quote Request Received!</h2>
-          <p className="text-gray-600 mb-6">
-            Thank you! Our limousine insurance specialist will contact you within 24 hours with your personalized quote.
-          </p>
-          <a href="tel:888-254-0089" className="inline-block">
-            <Button size="lg" className="bg-primary">
-              <Phone className="w-4 h-4 mr-2" />
-              Call Now: 888-254-0089
-            </Button>
-          </a>
-        </motion.div>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <div className="flex-1 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-2xl p-8 max-w-md text-center"
+          >
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-8 h-8 text-green-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Quote Request Received!</h2>
+            {referenceNumber && (
+              <div className="bg-primary/10 rounded-lg p-4 mb-4">
+                <p className="text-sm text-gray-600 mb-1">Your Reference Number</p>
+                <p className="text-2xl font-bold text-primary tracking-wide">{referenceNumber}</p>
+              </div>
+            )}
+            <p className="text-gray-600 mb-6">
+              A confirmation email has been sent to your inbox. Our limousine insurance specialist will contact you within 24 hours with your personalized quote.
+            </p>
+            <a href="tel:888-254-0089" className="inline-block">
+              <Button size="lg" className="bg-primary">
+                <Phone className="w-4 h-4 mr-2" />
+                Call Now: 888-254-0089
+              </Button>
+            </a>
+          </motion.div>
+        </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen flex flex-col">
       <Seo 
         title="Limousine Insurance - Coverage for Luxury Transportation Fleets"
         description="Specialized insurance for limousines, sedans, SUVs, and Sprinter vans. Competitive rates for chauffeured transportation. Get your free quote today!"
       />
+      <Header />
       
-      <div className="container mx-auto px-4 py-8 lg:py-12">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-white"
-          >
-            <div className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Gem className="w-4 h-4" />
-              Limousine Specialists
-            </div>
-            
-            <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-              Limousine Insurance
-            </h1>
-            <p className="text-xl text-gray-300 mb-6">
-              Premium coverage for luxury ground transportation. Sedans, SUVs, Stretch Limos, Sprinters & Party Buses.
-            </p>
-            
-            <div className="space-y-4 mb-8">
-              {[
-                "Sedans & Town Cars",
-                "SUVs (Escalade, Navigator, Suburban)",
-                "Mercedes Sprinter Vans",
-                "Stretch Limousines",
-                "Party Buses & Shuttles",
-              ].map((feature, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-accent shrink-0" />
-                  <span className="text-gray-200">{feature}</span>
-                </div>
-              ))}
-            </div>
+      <main className="flex-1 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="container mx-auto px-4 py-8 lg:py-12">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="text-white"
+            >
+              <div className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <Gem className="w-4 h-4" />
+                Limousine Specialists
+              </div>
+              
+              <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+                Limousine Insurance
+              </h1>
+              <p className="text-xl text-gray-300 mb-6">
+                Premium coverage for luxury ground transportation. Sedans, SUVs, Stretch Limos, Sprinters & Party Buses.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                {[
+                  "Sedans & Town Cars",
+                  "SUVs (Escalade, Navigator, Suburban)",
+                  "Mercedes Sprinter Vans",
+                  "Stretch Limousines",
+                  "Party Buses & Shuttles",
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-accent shrink-0" />
+                    <span className="text-gray-200">{feature}</span>
+                  </div>
+                ))}
+              </div>
 
-            <div className="hidden lg:block">
-              <img 
-                src={heroImage} 
-                alt="Lincoln Navigator luxury SUV" 
-                className="rounded-xl shadow-2xl"
-              />
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-2xl p-6 lg:p-8 shadow-2xl"
-          >
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">Get Your Free Quote</h2>
-              <p className="text-gray-600">Quick response within 24 hours</p>
-            </div>
-
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="businessName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Business Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your company name" {...field} data-testid="input-business-name" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+              <div className="hidden lg:block">
+                <img 
+                  src={heroImage} 
+                  alt="Lincoln Navigator luxury SUV" 
+                  className="rounded-xl shadow-2xl"
                 />
+              </div>
+            </motion.div>
 
-                <FormField
-                  control={form.control}
-                  name="contactName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Full name" {...field} data-testid="input-contact-name" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="bg-white rounded-2xl p-6 lg:p-8 shadow-2xl"
+            >
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">Get Your Free Quote</h2>
+                <p className="text-gray-600">Quick response within 24 hours</p>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4">
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="businessName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>Business Name</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="email@example.com" {...field} data-testid="input-email" />
+                          <Input placeholder="Your company name" {...field} data-testid="input-business-name" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -239,100 +226,131 @@ export default function LimoLanding() {
 
                   <FormField
                     control={form.control}
-                    name="phone"
+                    name="contactName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Phone</FormLabel>
+                        <FormLabel>Your Name</FormLabel>
                         <FormControl>
-                          <Input type="tel" placeholder="(555) 555-5555" {...field} data-testid="input-phone" />
+                          <Input placeholder="Full name" {...field} data-testid="input-contact-name" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={form.control}
-                    name="state"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>State</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <SelectTrigger data-testid="select-state">
-                              <SelectValue placeholder="Select" />
-                            </SelectTrigger>
+                            <Input type="email" placeholder="email@example.com" {...field} data-testid="input-email" />
                           </FormControl>
-                          <SelectContent>
-                            {STATES.map((state) => (
-                              <SelectItem key={state} value={state}>{state}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                  <FormField
-                    control={form.control}
-                    name="vehicleCount"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Vehicles</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone</FormLabel>
                           <FormControl>
-                            <SelectTrigger data-testid="select-vehicles">
-                              <SelectValue placeholder="Select" />
-                            </SelectTrigger>
+                            <Input type="tel" placeholder="(555) 555-5555" {...field} data-testid="input-phone" />
                           </FormControl>
-                          <SelectContent>
-                            {VEHICLE_COUNTS.map((count) => (
-                              <SelectItem key={count.value} value={count.value}>{count.label}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="state"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>State</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid="select-state">
+                                <SelectValue placeholder="Select" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {STATES.map((state) => (
+                                <SelectItem key={state} value={state}>{state}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="vehicleCount"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Vehicles</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid="select-vehicles">
+                                <SelectValue placeholder="Select" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {VEHICLE_COUNTS.map((count) => (
+                                <SelectItem key={count.value} value={count.value}>{count.label}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-accent hover:bg-accent/90 text-white font-bold text-lg py-6"
+                    disabled={isSubmitting}
+                    data-testid="button-submit-quote"
+                  >
+                    {isSubmitting ? "Submitting..." : "Get My Free Quote"}
+                  </Button>
+
+                  <p className="text-center text-sm text-gray-500">
+                    Or call us now: <a href="tel:888-254-0089" className="text-primary font-semibold">888-254-0089</a>
+                  </p>
+                </form>
+              </Form>
+
+              <div className="mt-6 pt-6 border-t grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <Clock className="w-6 h-6 text-primary mx-auto mb-1" />
+                  <p className="text-xs text-gray-600">24hr Response</p>
                 </div>
-
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  className="w-full bg-accent hover:bg-accent/90 text-white font-bold text-lg py-6"
-                  disabled={isSubmitting}
-                  data-testid="button-submit-quote"
-                >
-                  {isSubmitting ? "Submitting..." : "Get My Free Quote"}
-                </Button>
-
-                <p className="text-center text-sm text-gray-500">
-                  Or call us now: <a href="tel:888-254-0089" className="text-primary font-semibold">888-254-0089</a>
-                </p>
-              </form>
-            </Form>
-
-            <div className="mt-6 pt-6 border-t grid grid-cols-3 gap-4 text-center">
-              <div>
-                <Clock className="w-6 h-6 text-primary mx-auto mb-1" />
-                <p className="text-xs text-gray-600">24hr Response</p>
+                <div>
+                  <Shield className="w-6 h-6 text-primary mx-auto mb-1" />
+                  <p className="text-xs text-gray-600">A-Rated Carriers</p>
+                </div>
+                <div>
+                  <Award className="w-6 h-6 text-primary mx-auto mb-1" />
+                  <p className="text-xs text-gray-600">18 States</p>
+                </div>
               </div>
-              <div>
-                <Shield className="w-6 h-6 text-primary mx-auto mb-1" />
-                <p className="text-xs text-gray-600">A-Rated Carriers</p>
-              </div>
-              <div>
-                <Award className="w-6 h-6 text-primary mx-auto mb-1" />
-                <p className="text-xs text-gray-600">18 States</p>
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </main>
+      <Footer />
     </div>
   );
 }

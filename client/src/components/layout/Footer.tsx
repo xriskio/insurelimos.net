@@ -103,6 +103,44 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
+            <h4 className="font-bold text-lg mt-6 mb-4">Special Programs</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/lp/uber-black" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Uber Black Insurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/lp/nemt" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  NEMT Insurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/lp/limousine" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Limousine Insurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/lp/motorcoach" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Motorcoach Insurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/lp/taxi" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Taxi Insurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/lp/school-bus" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  School Bus Insurance
+                </Link>
+              </li>
+              <li>
+                <Link href="/lp/tnc" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  TNC Insurance
+                </Link>
+              </li>
+            </ul>
           </nav>
 
           {/* Contact */}
