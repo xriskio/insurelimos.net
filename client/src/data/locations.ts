@@ -152,7 +152,188 @@ export const NEVADA_CITIES: CityLocation[] = [
   { slug: "pahrump", name: "Pahrump", county: "Nye County", state: "Nevada", stateAbbr: "NV", industries: ["Retail", "Healthcare"], transportTypes: ["nemt", "paratransit", "ambulance"] }
 ];
 
-export const ALL_CITIES = [...CALIFORNIA_CITIES, ...NEVADA_CITIES];
+export const ARIZONA_CITIES: CityLocation[] = [
+  { slug: "phoenix", name: "Phoenix", county: "Maricopa County", state: "Arizona", stateAbbr: "AZ", industries: ["Healthcare", "Technology"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc"] },
+  { slug: "tucson", name: "Tucson", county: "Pima County", state: "Arizona", stateAbbr: "AZ", industries: ["Education", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] },
+  { slug: "mesa", name: "Mesa", county: "Maricopa County", state: "Arizona", stateAbbr: "AZ", industries: ["Aerospace", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "scottsdale", name: "Scottsdale", county: "Maricopa County", state: "Arizona", stateAbbr: "AZ", industries: ["Tourism", "Technology"], transportTypes: ["limo", "nemt", "taxi", "tnc"] },
+  { slug: "chandler", name: "Chandler", county: "Maricopa County", state: "Arizona", stateAbbr: "AZ", industries: ["Technology", "Manufacturing"], transportTypes: ["nemt", "paratransit", "tnc"] },
+  { slug: "tempe", name: "Tempe", county: "Maricopa County", state: "Arizona", stateAbbr: "AZ", industries: ["Education", "Technology"], transportTypes: ["nemt", "paratransit", "tnc"] },
+  { slug: "glendale-az", name: "Glendale", county: "Maricopa County", state: "Arizona", stateAbbr: "AZ", industries: ["Sports", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "peoria-az", name: "Peoria", county: "Maricopa County", state: "Arizona", stateAbbr: "AZ", industries: ["Healthcare", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const COLORADO_CITIES: CityLocation[] = [
+  { slug: "denver", name: "Denver", county: "Denver County", state: "Colorado", stateAbbr: "CO", industries: ["Technology", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus"] },
+  { slug: "colorado-springs", name: "Colorado Springs", county: "El Paso County", state: "Colorado", stateAbbr: "CO", industries: ["Military", "Tourism"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] },
+  { slug: "aurora-co", name: "Aurora", county: "Arapahoe County", state: "Colorado", stateAbbr: "CO", industries: ["Healthcare", "Aerospace"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "fort-collins", name: "Fort Collins", county: "Larimer County", state: "Colorado", stateAbbr: "CO", industries: ["Education", "Technology"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "lakewood-co", name: "Lakewood", county: "Jefferson County", state: "Colorado", stateAbbr: "CO", industries: ["Government", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "boulder", name: "Boulder", county: "Boulder County", state: "Colorado", stateAbbr: "CO", industries: ["Technology", "Education"], transportTypes: ["limo", "nemt", "tnc"] }
+];
+
+export const IDAHO_CITIES: CityLocation[] = [
+  { slug: "boise", name: "Boise", county: "Ada County", state: "Idaho", stateAbbr: "ID", industries: ["Technology", "Government"], transportTypes: ["nemt", "paratransit", "taxi", "tnc", "bus"] },
+  { slug: "meridian", name: "Meridian", county: "Ada County", state: "Idaho", stateAbbr: "ID", industries: ["Retail", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "nampa", name: "Nampa", county: "Canyon County", state: "Idaho", stateAbbr: "ID", industries: ["Agriculture", "Manufacturing"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "idaho-falls", name: "Idaho Falls", county: "Bonneville County", state: "Idaho", stateAbbr: "ID", industries: ["Nuclear Energy", "Healthcare"], transportTypes: ["nemt", "paratransit", "ambulance"] },
+  { slug: "pocatello", name: "Pocatello", county: "Bannock County", state: "Idaho", stateAbbr: "ID", industries: ["Education", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const ILLINOIS_CITIES: CityLocation[] = [
+  { slug: "chicago", name: "Chicago", county: "Cook County", state: "Illinois", stateAbbr: "IL", industries: ["Finance", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "aurora-il", name: "Aurora", county: "Kane County", state: "Illinois", stateAbbr: "IL", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "naperville", name: "Naperville", county: "DuPage County", state: "Illinois", stateAbbr: "IL", industries: ["Technology", "Healthcare"], transportTypes: ["limo", "nemt", "tnc"] },
+  { slug: "joliet", name: "Joliet", county: "Will County", state: "Illinois", stateAbbr: "IL", industries: ["Distribution", "Manufacturing"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "rockford", name: "Rockford", county: "Winnebago County", state: "Illinois", stateAbbr: "IL", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] },
+  { slug: "springfield-il", name: "Springfield", county: "Sangamon County", state: "Illinois", stateAbbr: "IL", industries: ["Government", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const KANSAS_CITIES: CityLocation[] = [
+  { slug: "wichita", name: "Wichita", county: "Sedgwick County", state: "Kansas", stateAbbr: "KS", industries: ["Aerospace", "Healthcare"], transportTypes: ["nemt", "paratransit", "taxi", "bus", "ambulance"] },
+  { slug: "overland-park", name: "Overland Park", county: "Johnson County", state: "Kansas", stateAbbr: "KS", industries: ["Technology", "Healthcare"], transportTypes: ["limo", "nemt", "tnc"] },
+  { slug: "kansas-city-ks", name: "Kansas City", county: "Wyandotte County", state: "Kansas", stateAbbr: "KS", industries: ["Healthcare", "Distribution"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "olathe", name: "Olathe", county: "Johnson County", state: "Kansas", stateAbbr: "KS", industries: ["Technology", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "topeka", name: "Topeka", county: "Shawnee County", state: "Kansas", stateAbbr: "KS", industries: ["Government", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const KENTUCKY_CITIES: CityLocation[] = [
+  { slug: "louisville", name: "Louisville", county: "Jefferson County", state: "Kentucky", stateAbbr: "KY", industries: ["Healthcare", "Manufacturing"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "lexington", name: "Lexington", county: "Fayette County", state: "Kentucky", stateAbbr: "KY", industries: ["Education", "Healthcare"], transportTypes: ["nemt", "paratransit", "taxi", "bus"] },
+  { slug: "bowling-green-ky", name: "Bowling Green", county: "Warren County", state: "Kentucky", stateAbbr: "KY", industries: ["Manufacturing", "Education"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "owensboro", name: "Owensboro", county: "Daviess County", state: "Kentucky", stateAbbr: "KY", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "ambulance"] },
+  { slug: "covington-ky", name: "Covington", county: "Kenton County", state: "Kentucky", stateAbbr: "KY", industries: ["Healthcare", "Finance"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const MINNESOTA_CITIES: CityLocation[] = [
+  { slug: "minneapolis", name: "Minneapolis", county: "Hennepin County", state: "Minnesota", stateAbbr: "MN", industries: ["Healthcare", "Finance"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "saint-paul", name: "Saint Paul", county: "Ramsey County", state: "Minnesota", stateAbbr: "MN", industries: ["Government", "Healthcare"], transportTypes: ["nemt", "paratransit", "taxi", "bus"] },
+  { slug: "rochester-mn", name: "Rochester", county: "Olmsted County", state: "Minnesota", stateAbbr: "MN", industries: ["Healthcare", "Technology"], transportTypes: ["nemt", "paratransit", "ambulance"] },
+  { slug: "duluth", name: "Duluth", county: "St. Louis County", state: "Minnesota", stateAbbr: "MN", industries: ["Healthcare", "Shipping"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "bloomington-mn", name: "Bloomington", county: "Hennepin County", state: "Minnesota", stateAbbr: "MN", industries: ["Retail", "Healthcare"], transportTypes: ["limo", "nemt", "tnc"] }
+];
+
+export const MISSOURI_CITIES: CityLocation[] = [
+  { slug: "kansas-city-mo", name: "Kansas City", county: "Jackson County", state: "Missouri", stateAbbr: "MO", industries: ["Healthcare", "Finance"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "st-louis", name: "St. Louis", county: "St. Louis City", state: "Missouri", stateAbbr: "MO", industries: ["Healthcare", "Manufacturing"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "springfield-mo", name: "Springfield", county: "Greene County", state: "Missouri", stateAbbr: "MO", industries: ["Healthcare", "Education"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] },
+  { slug: "columbia-mo", name: "Columbia", county: "Boone County", state: "Missouri", stateAbbr: "MO", industries: ["Education", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "independence-mo", name: "Independence", county: "Jackson County", state: "Missouri", stateAbbr: "MO", industries: ["Healthcare", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const OHIO_CITIES: CityLocation[] = [
+  { slug: "columbus-oh", name: "Columbus", county: "Franklin County", state: "Ohio", stateAbbr: "OH", industries: ["Government", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "cleveland", name: "Cleveland", county: "Cuyahoga County", state: "Ohio", stateAbbr: "OH", industries: ["Healthcare", "Manufacturing"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "bus", "ambulance"] },
+  { slug: "cincinnati", name: "Cincinnati", county: "Hamilton County", state: "Ohio", stateAbbr: "OH", industries: ["Healthcare", "Finance"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus"] },
+  { slug: "toledo", name: "Toledo", county: "Lucas County", state: "Ohio", stateAbbr: "OH", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] },
+  { slug: "akron", name: "Akron", county: "Summit County", state: "Ohio", stateAbbr: "OH", industries: ["Polymer", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "dayton", name: "Dayton", county: "Montgomery County", state: "Ohio", stateAbbr: "OH", industries: ["Aerospace", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] }
+];
+
+export const OKLAHOMA_CITIES: CityLocation[] = [
+  { slug: "oklahoma-city", name: "Oklahoma City", county: "Oklahoma County", state: "Oklahoma", stateAbbr: "OK", industries: ["Energy", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "tulsa", name: "Tulsa", county: "Tulsa County", state: "Oklahoma", stateAbbr: "OK", industries: ["Energy", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "bus", "ambulance"] },
+  { slug: "norman", name: "Norman", county: "Cleveland County", state: "Oklahoma", stateAbbr: "OK", industries: ["Education", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "broken-arrow", name: "Broken Arrow", county: "Tulsa County", state: "Oklahoma", stateAbbr: "OK", industries: ["Manufacturing", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "edmond", name: "Edmond", county: "Oklahoma County", state: "Oklahoma", stateAbbr: "OK", industries: ["Education", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const PENNSYLVANIA_CITIES: CityLocation[] = [
+  { slug: "philadelphia", name: "Philadelphia", county: "Philadelphia County", state: "Pennsylvania", stateAbbr: "PA", industries: ["Healthcare", "Education"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "pittsburgh", name: "Pittsburgh", county: "Allegheny County", state: "Pennsylvania", stateAbbr: "PA", industries: ["Healthcare", "Technology"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "allentown", name: "Allentown", county: "Lehigh County", state: "Pennsylvania", stateAbbr: "PA", industries: ["Healthcare", "Manufacturing"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] },
+  { slug: "reading-pa", name: "Reading", county: "Berks County", state: "Pennsylvania", stateAbbr: "PA", industries: ["Healthcare", "Manufacturing"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "scranton", name: "Scranton", county: "Lackawanna County", state: "Pennsylvania", stateAbbr: "PA", industries: ["Healthcare", "Education"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "erie", name: "Erie", county: "Erie County", state: "Pennsylvania", stateAbbr: "PA", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] }
+];
+
+export const TENNESSEE_CITIES: CityLocation[] = [
+  { slug: "nashville", name: "Nashville", county: "Davidson County", state: "Tennessee", stateAbbr: "TN", industries: ["Healthcare", "Music"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "memphis", name: "Memphis", county: "Shelby County", state: "Tennessee", stateAbbr: "TN", industries: ["Distribution", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "bus", "ambulance"] },
+  { slug: "knoxville", name: "Knoxville", county: "Knox County", state: "Tennessee", stateAbbr: "TN", industries: ["Education", "Healthcare"], transportTypes: ["nemt", "paratransit", "taxi", "bus"] },
+  { slug: "chattanooga", name: "Chattanooga", county: "Hamilton County", state: "Tennessee", stateAbbr: "TN", industries: ["Manufacturing", "Technology"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "clarksville", name: "Clarksville", county: "Montgomery County", state: "Tennessee", stateAbbr: "TN", industries: ["Military", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] }
+];
+
+export const TEXAS_CITIES: CityLocation[] = [
+  { slug: "houston", name: "Houston", county: "Harris County", state: "Texas", stateAbbr: "TX", industries: ["Energy", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "dallas", name: "Dallas", county: "Dallas County", state: "Texas", stateAbbr: "TX", industries: ["Technology", "Finance"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "san-antonio", name: "San Antonio", county: "Bexar County", state: "Texas", stateAbbr: "TX", industries: ["Military", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "austin", name: "Austin", county: "Travis County", state: "Texas", stateAbbr: "TX", industries: ["Technology", "Government"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus"] },
+  { slug: "fort-worth", name: "Fort Worth", county: "Tarrant County", state: "Texas", stateAbbr: "TX", industries: ["Aerospace", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "bus"] },
+  { slug: "el-paso", name: "El Paso", county: "El Paso County", state: "Texas", stateAbbr: "TX", industries: ["Military", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus", "ambulance"] },
+  { slug: "arlington-tx", name: "Arlington", county: "Tarrant County", state: "Texas", stateAbbr: "TX", industries: ["Entertainment", "Manufacturing"], transportTypes: ["limo", "nemt", "bus"] },
+  { slug: "plano", name: "Plano", county: "Collin County", state: "Texas", stateAbbr: "TX", industries: ["Technology", "Healthcare"], transportTypes: ["limo", "nemt", "tnc"] }
+];
+
+export const UTAH_CITIES: CityLocation[] = [
+  { slug: "salt-lake-city", name: "Salt Lake City", county: "Salt Lake County", state: "Utah", stateAbbr: "UT", industries: ["Technology", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "west-valley-city", name: "West Valley City", county: "Salt Lake County", state: "Utah", stateAbbr: "UT", industries: ["Manufacturing", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "provo", name: "Provo", county: "Utah County", state: "Utah", stateAbbr: "UT", industries: ["Education", "Technology"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "west-jordan", name: "West Jordan", county: "Salt Lake County", state: "Utah", stateAbbr: "UT", industries: ["Retail", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "orem", name: "Orem", county: "Utah County", state: "Utah", stateAbbr: "UT", industries: ["Technology", "Education"], transportTypes: ["nemt", "paratransit", "tnc"] },
+  { slug: "ogden", name: "Ogden", county: "Weber County", state: "Utah", stateAbbr: "UT", industries: ["Aerospace", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const VIRGINIA_CITIES: CityLocation[] = [
+  { slug: "virginia-beach", name: "Virginia Beach", county: "Virginia Beach City", state: "Virginia", stateAbbr: "VA", industries: ["Military", "Tourism"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "bus"] },
+  { slug: "norfolk", name: "Norfolk", county: "Norfolk City", state: "Virginia", stateAbbr: "VA", industries: ["Military", "Shipping"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "bus", "ambulance"] },
+  { slug: "chesapeake", name: "Chesapeake", county: "Chesapeake City", state: "Virginia", stateAbbr: "VA", industries: ["Healthcare", "Retail"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "richmond-va", name: "Richmond", county: "Richmond City", state: "Virginia", stateAbbr: "VA", industries: ["Government", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus"] },
+  { slug: "arlington-va", name: "Arlington", county: "Arlington County", state: "Virginia", stateAbbr: "VA", industries: ["Government", "Technology"], transportTypes: ["limo", "nemt", "taxi", "tnc"] },
+  { slug: "alexandria", name: "Alexandria", county: "Alexandria City", state: "Virginia", stateAbbr: "VA", industries: ["Government", "Technology"], transportTypes: ["limo", "nemt", "taxi", "tnc"] }
+];
+
+export const WISCONSIN_CITIES: CityLocation[] = [
+  { slug: "milwaukee", name: "Milwaukee", county: "Milwaukee County", state: "Wisconsin", stateAbbr: "WI", industries: ["Manufacturing", "Healthcare"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "tnc", "bus", "ambulance"] },
+  { slug: "madison-wi", name: "Madison", county: "Dane County", state: "Wisconsin", stateAbbr: "WI", industries: ["Government", "Education"], transportTypes: ["limo", "nemt", "paratransit", "taxi", "bus"] },
+  { slug: "green-bay", name: "Green Bay", county: "Brown County", state: "Wisconsin", stateAbbr: "WI", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "kenosha", name: "Kenosha", county: "Kenosha County", state: "Wisconsin", stateAbbr: "WI", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "racine", name: "Racine", county: "Racine County", state: "Wisconsin", stateAbbr: "WI", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] },
+  { slug: "appleton", name: "Appleton", county: "Outagamie County", state: "Wisconsin", stateAbbr: "WI", industries: ["Manufacturing", "Healthcare"], transportTypes: ["nemt", "paratransit", "bus"] }
+];
+
+export const ALL_CITIES = [
+  ...CALIFORNIA_CITIES, 
+  ...NEVADA_CITIES,
+  ...ARIZONA_CITIES,
+  ...COLORADO_CITIES,
+  ...IDAHO_CITIES,
+  ...ILLINOIS_CITIES,
+  ...KANSAS_CITIES,
+  ...KENTUCKY_CITIES,
+  ...MINNESOTA_CITIES,
+  ...MISSOURI_CITIES,
+  ...OHIO_CITIES,
+  ...OKLAHOMA_CITIES,
+  ...PENNSYLVANIA_CITIES,
+  ...TENNESSEE_CITIES,
+  ...TEXAS_CITIES,
+  ...UTAH_CITIES,
+  ...VIRGINIA_CITIES,
+  ...WISCONSIN_CITIES
+];
+
+export const STATE_DATA = [
+  { abbr: "CA", name: "California", cities: CALIFORNIA_CITIES },
+  { abbr: "NV", name: "Nevada", cities: NEVADA_CITIES },
+  { abbr: "AZ", name: "Arizona", cities: ARIZONA_CITIES },
+  { abbr: "CO", name: "Colorado", cities: COLORADO_CITIES },
+  { abbr: "ID", name: "Idaho", cities: IDAHO_CITIES },
+  { abbr: "IL", name: "Illinois", cities: ILLINOIS_CITIES },
+  { abbr: "KS", name: "Kansas", cities: KANSAS_CITIES },
+  { abbr: "KY", name: "Kentucky", cities: KENTUCKY_CITIES },
+  { abbr: "MN", name: "Minnesota", cities: MINNESOTA_CITIES },
+  { abbr: "MO", name: "Missouri", cities: MISSOURI_CITIES },
+  { abbr: "OH", name: "Ohio", cities: OHIO_CITIES },
+  { abbr: "OK", name: "Oklahoma", cities: OKLAHOMA_CITIES },
+  { abbr: "PA", name: "Pennsylvania", cities: PENNSYLVANIA_CITIES },
+  { abbr: "TN", name: "Tennessee", cities: TENNESSEE_CITIES },
+  { abbr: "TX", name: "Texas", cities: TEXAS_CITIES },
+  { abbr: "UT", name: "Utah", cities: UTAH_CITIES },
+  { abbr: "VA", name: "Virginia", cities: VIRGINIA_CITIES },
+  { abbr: "WI", name: "Wisconsin", cities: WISCONSIN_CITIES }
+];
 
 export function getCityBySlug(slug: string): CityLocation | undefined {
   return ALL_CITIES.find(city => city.slug === slug);
