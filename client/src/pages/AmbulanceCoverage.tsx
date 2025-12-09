@@ -30,6 +30,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import ambulanceHeroImage from "@assets/image_1764901940245.png";
+import ambulanceImage1 from "@assets/stock_images/ambulance_emergency__8d2140b6.jpg";
+import ambulanceImage2 from "@assets/stock_images/ambulance_emergency__1a83ac51.jpg";
+import ambulanceImage3 from "@assets/stock_images/ambulance_emergency__a1ffe157.jpg";
 
 export default function AmbulanceCoverage() {
   return (
@@ -69,14 +72,49 @@ export default function AmbulanceCoverage() {
         {/* Overview */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-primary mb-6">Overview</h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Ambulance and Emergency Medical Services (EMS) providers face unique risks that require specialized insurance coverage. From responding to emergencies at high speeds to providing life-saving medical care, your operations demand comprehensive protection that understands the critical nature of your work.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our ambulance insurance program provides tailored coverage for BLS (Basic Life Support), ALS (Advanced Life Support), critical care transport, and air ambulance operations. We work with A-rated carriers who understand EMS operations and provide the specialized coverage you need.
-              </p>
+            <div className="max-w-5xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h2 className="text-3xl font-bold text-primary mb-6">Overview</h2>
+                  <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                    Ambulance and Emergency Medical Services (EMS) providers face unique risks that require specialized insurance coverage. From responding to emergencies at high speeds to providing life-saving medical care, your operations demand comprehensive protection that understands the critical nature of your work.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    Our ambulance insurance program provides tailored coverage for BLS (Basic Life Support), ALS (Advanced Life Support), critical care transport, and air ambulance operations. We work with A-rated carriers who understand EMS operations and provide the specialized coverage you need.
+                  </p>
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={ambulanceImage1} 
+                    alt="Ambulance emergency medical services" 
+                    className="w-full h-80 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Ambulance Fleet Gallery */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={ambulanceImage2} 
+                    alt="EMS ambulance responding to emergency" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={ambulanceImage3} 
+                    alt="Emergency medical transport vehicle" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
