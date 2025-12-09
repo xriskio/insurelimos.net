@@ -449,33 +449,6 @@ export default function UberBlackCalifornia() {
                 </div>
               ))}
             </div>
-            
-            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={teslaModelXImage} alt="Black Tesla Model X" className="w-full h-48 object-contain bg-black" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Tesla Model X</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={cadillacEscaladeImage} alt="Black Cadillac Escalade ESV" className="w-full h-48 object-contain bg-black" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Cadillac Escalade ESV</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={lincolnNavigatorImage} alt="Black Lincoln Navigator" className="w-full h-48 object-contain bg-black" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Lincoln Navigator</span>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <img src={teslaModelSImage} alt="Black Tesla Model S" className="w-full h-48 object-contain bg-black" />
-                <div className="p-3 text-center bg-white">
-                  <span className="font-semibold text-foreground">Tesla Model S</span>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
