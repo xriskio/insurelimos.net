@@ -32,6 +32,8 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number is required"),
   state: z.string().min(2, "State is required"),
   vehicleCount: z.string().min(1, "Please select vehicle count"),
+  tcpNumber: z.string().optional(),
+  dotNumber: z.string().optional(),
 });
 
 const VEHICLE_COUNTS = [
@@ -61,6 +63,8 @@ export default function UberBlackLanding() {
       phone: "",
       state: "",
       vehicleCount: "",
+      tcpNumber: "",
+      dotNumber: "",
     },
   });
 
@@ -80,7 +84,8 @@ export default function UberBlackLanding() {
           mailingAddress: "From Uber Black Landing Page",
           city: "TBD",
           zipCode: "00000",
-          additionalInfo: `Vehicle Count: ${data.vehicleCount} - Uber Black Insurance Lead`,
+          tcpNumber: data.tcpNumber || "",
+          additionalInfo: `Vehicle Count: ${data.vehicleCount}${data.tcpNumber ? ` | TCP#: ${data.tcpNumber}` : ""}${data.dotNumber ? ` | DOT#: ${data.dotNumber}` : ""} - Uber Black Insurance Lead`,
         }),
       });
 
@@ -294,6 +299,36 @@ export default function UberBlackLanding() {
                             ))}
                           </SelectContent>
                         </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="tcpNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>TCP Number <span className="text-xs text-gray-400">(Optional)</span></FormLabel>
+                        <FormControl>
+                          <Input placeholder="TCP-XXXXX" {...field} data-testid="input-tcp-number" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="dotNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>DOT Number <span className="text-xs text-gray-400">(Optional)</span></FormLabel>
+                        <FormControl>
+                          <Input placeholder="DOT-XXXXXXX" {...field} data-testid="input-dot-number" />
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
