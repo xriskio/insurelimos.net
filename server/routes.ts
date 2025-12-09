@@ -70,6 +70,97 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
 
+  // ============== LEGACY URL REDIRECTS ==============
+  // Redirect old .html URLs to new React routes
+  
+  app.get('/services/commercial-auto/uber-black-california.html', (req, res) => {
+    res.redirect(301, '/uber-black-california');
+  });
+  
+  app.get('/captive-programs.html', (req, res) => {
+    res.redirect(301, '/coverage/captive');
+  });
+  
+  app.get('/services/tnc-provider-insurance.html', (req, res) => {
+    res.redirect(301, '/coverage/tnc');
+  });
+  
+  app.get('/services/nemt-insurance.html', (req, res) => {
+    res.redirect(301, '/coverage/nemt');
+  });
+  
+  app.get('/services/school-bus-insurance.html', (req, res) => {
+    res.redirect(301, '/coverage/bus');
+  });
+  
+  app.get('/services/taxi-insurance.html', (req, res) => {
+    res.redirect(301, '/coverage/taxi');
+  });
+  
+  app.get('/contact.html', (req, res) => {
+    res.redirect(301, '/contact');
+  });
+  
+  app.get('/services.html', (req, res) => {
+    res.redirect(301, '/services');
+  });
+  
+  app.get('/services/bus-motorcoach-insurance.html', (req, res) => {
+    res.redirect(301, '/coverage/bus');
+  });
+  
+  app.get('/services/tcp-insurance.html', (req, res) => {
+    res.redirect(301, '/uber-black-california');
+  });
+  
+  app.get('/public-transportation.html', (req, res) => {
+    res.redirect(301, '/services');
+  });
+  
+  app.get('/get-quote', (req, res) => {
+    res.redirect(301, '/quote');
+  });
+  
+  app.get('/about.html', (req, res) => {
+    res.redirect(301, '/about');
+  });
+  
+  app.get('/submit-general-liability.html', (req, res) => {
+    res.redirect(301, '/quote');
+  });
+  
+  app.get('/services/limousine-insurance.html', (req, res) => {
+    res.redirect(301, '/coverage/limo');
+  });
+  
+  app.get('/app-quote.html', (req, res) => {
+    res.redirect(301, '/quote');
+  });
+  
+  app.get('/quote-request.html', (req, res) => {
+    res.redirect(301, '/quote');
+  });
+  
+  app.get('/coverage/general-liability.html', (req, res) => {
+    res.redirect(301, '/coverage');
+  });
+  
+  app.get('/cyber-quote-form.html', (req, res) => {
+    res.redirect(301, '/quote/cyber');
+  });
+  
+  app.get('/client-login.html', (req, res) => {
+    res.redirect(301, '/client');
+  });
+  
+  app.get('/coverage.html', (req, res) => {
+    res.redirect(301, '/coverage');
+  });
+  
+  app.get('/services/sprinter-van-insurance.html', (req, res) => {
+    res.redirect(301, '/coverage/limo');
+  });
+
   // ============== ADMIN AUTHENTICATION ==============
 
   // Admin login
