@@ -19,14 +19,10 @@ import {
   Wine
 } from "lucide-react";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
-import limoImage1 from "@assets/generated_images/black_cadillac_escalade_luxury_suv.png";
-import limoImage2 from "@assets/generated_images/black_lincoln_navigator_suv.png";
-import limoImage3 from "@assets/generated_images/black_chevy_suburban_suv.png";
-import busImage1 from "@assets/generated_images/luxury_charter_motorcoach_bus.png";
-import busImage2 from "@assets/generated_images/white_tour_bus_motorcoach.png";
-import partyBusImage from "@assets/generated_images/black_luxury_party_bus_shuttle.png";
-import sprinterImage1 from "@assets/generated_images/black_luxury_sprinter_van.png";
-import sprinterImage2 from "@assets/generated_images/executive_sprinter_interior_view.png";
+import mercedesS500Image from "@assets/2018-Mercedes-S500-Hybrid-Review_1765267410610.png";
+import teslaModelXImage from "@assets/modelX_1765267410610.png";
+import teslaModelSImage from "@assets/Black-Model-S-P90D-Arachnid-Wheel-e1464681843999-1000x600-1_1765267126798.png";
+import chevySuburbanImage from "@assets/2017-Chevrolet-Suburban-COLOR-Black_1765267410610.png";
 
 export default function LimoCoverage() {
   return (
@@ -83,67 +79,45 @@ export default function LimoCoverage() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h3 className="text-2xl font-bold text-primary mb-6 text-center">Vehicles We Insure</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="rounded-xl overflow-hidden shadow-lg">
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
                   <img 
-                    src={limoImage1} 
-                    alt="Black Cadillac Escalade ESV" 
-                    className="w-full h-48 object-cover"
+                    src={mercedesS500Image} 
+                    alt="Black Mercedes S-Class" 
+                    className="w-full h-48 object-contain bg-black"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Cadillac Escalade ESV</span>
+                    <span className="font-medium text-foreground">Mercedes S-Class</span>
                   </div>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
+                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
                   <img 
-                    src={sprinterImage1} 
-                    alt="Mercedes Sprinter executive van" 
-                    className="w-full h-48 object-cover"
+                    src={teslaModelXImage} 
+                    alt="Black Tesla Model X" 
+                    className="w-full h-48 object-contain bg-black"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Sprinter Vans</span>
+                    <span className="font-medium text-foreground">Tesla Model X</span>
                   </div>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
+                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
                   <img 
-                    src={busImage1} 
-                    alt="Charter bus motorcoach" 
-                    className="w-full h-48 object-cover"
+                    src={teslaModelSImage} 
+                    alt="Black Tesla Model S" 
+                    className="w-full h-48 object-contain bg-black"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Buses & Motorcoaches</span>
+                    <span className="font-medium text-foreground">Tesla Model S</span>
                   </div>
                 </div>
-              </div>
-              <div className="grid md:grid-cols-3 gap-6 mt-6">
-                <div className="rounded-xl overflow-hidden shadow-lg">
+                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
                   <img 
-                    src={limoImage2} 
-                    alt="Black Lincoln Navigator L" 
-                    className="w-full h-48 object-cover"
+                    src={chevySuburbanImage} 
+                    alt="Black Chevrolet Suburban" 
+                    className="w-full h-48 object-contain bg-black"
                   />
                   <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Lincoln Navigator L</span>
-                  </div>
-                </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={sprinterImage2} 
-                    alt="Luxury passenger Sprinter" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Executive Sprinters</span>
-                  </div>
-                </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={partyBusImage} 
-                    alt="Party bus shuttle" 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="bg-white p-3 text-center">
-                    <span className="font-medium text-foreground">Party & Tour Buses</span>
+                    <span className="font-medium text-foreground">Chevrolet Suburban</span>
                   </div>
                 </div>
               </div>
