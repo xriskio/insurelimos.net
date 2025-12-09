@@ -21,8 +21,8 @@ import {
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
 import limoImage1 from "@assets/stock_images/luxury_black_limousi_326f150e.jpg";
 import limoImage2 from "@assets/stock_images/luxury_black_limousi_49ae3e27.jpg";
-import busImage1 from "@assets/stock_images/charter_bus_motorcoa_4fef8087.jpg";
-import busImage2 from "@assets/stock_images/charter_bus_motorcoa_3c20d2ab.jpg";
+import busImage1 from "@assets/generated_images/luxury_charter_motorcoach_bus.png";
+import busImage2 from "@assets/generated_images/white_tour_bus_motorcoach.png";
 import sprinterImage1 from "@assets/generated_images/black_luxury_sprinter_van.png";
 import sprinterImage2 from "@assets/generated_images/executive_sprinter_interior_view.png";
 
