@@ -29,6 +29,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import paratransitHeroImage from "@assets/stock_images/wheelchair_accessibl_1c26c45e.jpg";
+import paratransitImage1 from "@assets/stock_images/paratransit_wheelcha_227e4195.jpg";
+import paratransitImage2 from "@assets/stock_images/paratransit_wheelcha_608d4ece.jpg";
 
 export default function ParatransitCoverage() {
   return (
@@ -89,6 +91,30 @@ export default function ParatransitCoverage() {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 You also need to determine how much coverage is enough. There are a number of factors involved: how many drivers you have, the number of customers and the length of your routes. Our team is made up of experts in transportation insurance who can help you evaluate the special risks you face running a paratransit company so you have the right insurance, the right company and the right amount.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Fleet Gallery */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={paratransitImage1} 
+                    alt="Wheelchair accessible paratransit van" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={paratransitImage2} 
+                    alt="Paratransit vehicle for special needs transportation" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>

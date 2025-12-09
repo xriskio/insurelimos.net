@@ -27,6 +27,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import nemtHeroImage from "@assets/stock_images/medical_transportati_bedcf76d.jpg";
+import nemtImage1 from "@assets/stock_images/medical_transport_va_7d0632f5.jpg";
+import nemtImage2 from "@assets/stock_images/medical_transport_va_3286d49d.jpg";
 
 const nemtFaqs = [
   {
@@ -110,6 +112,30 @@ export default function NemtCoverage() {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Our specialized program addresses the unique risks associated with transporting passengers with disabilities, special needs, and medical conditions. Whether you operate a small fleet or a large-scale operation, we have the coverage you need.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Fleet Gallery */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={nemtImage1} 
+                    alt="NEMT medical transport vehicle" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={nemtImage2} 
+                    alt="Non-emergency medical transportation van" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>

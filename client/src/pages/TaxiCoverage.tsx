@@ -27,6 +27,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import taxiHeroImage from "@assets/stock_images/taxi_cab_yellow_city_0c5cc1d3.jpg";
+import taxiImage1 from "@assets/stock_images/yellow_taxi_cab_city_fda98f2a.jpg";
+import taxiImage2 from "@assets/stock_images/yellow_taxi_cab_city_173b09cc.jpg";
 
 const taxiFaqs = [
   {
@@ -113,6 +115,30 @@ export default function TaxiCoverage() {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Anyone who's owned this type of business can tell you that it's very competitive and complex. We can help. You will want to talk to an insurance professional who can help evaluate all of the moving parts and not only help you cover the necessary risks but also find where the discounts are.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Fleet Gallery */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={taxiImage1} 
+                    alt="Yellow taxi cab in city" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={taxiImage2} 
+                    alt="Taxi fleet transportation service" 
+                    className="w-full h-64 object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>

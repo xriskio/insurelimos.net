@@ -19,6 +19,12 @@ import {
   Wine
 } from "lucide-react";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
+import limoImage1 from "@assets/stock_images/luxury_black_limousi_326f150e.jpg";
+import limoImage2 from "@assets/stock_images/luxury_black_limousi_49ae3e27.jpg";
+import busImage1 from "@assets/stock_images/charter_bus_motorcoa_4fef8087.jpg";
+import busImage2 from "@assets/stock_images/charter_bus_motorcoa_3c20d2ab.jpg";
+import sprinterImage1 from "@assets/stock_images/mercedes_sprinter_va_b49f892e.jpg";
+import sprinterImage2 from "@assets/stock_images/mercedes_sprinter_va_da22d03d.jpg";
 
 export default function LimoCoverage() {
   return (
@@ -66,6 +72,79 @@ export default function LimoCoverage() {
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Our partnerships include Philadelphia Insurance Companies (PHLY), National Interstate Insurance, Texas Insurance Company, Berkshire Hathaway, and other A-rated carriers specializing in chauffeured transportation.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Fleet Gallery */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h3 className="text-2xl font-bold text-primary mb-6 text-center">Vehicles We Insure</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={limoImage1} 
+                    alt="Luxury black limousine sedan" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="bg-white p-3 text-center">
+                    <span className="font-medium text-foreground">Luxury Sedans & Limos</span>
+                  </div>
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={sprinterImage1} 
+                    alt="Mercedes Sprinter executive van" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="bg-white p-3 text-center">
+                    <span className="font-medium text-foreground">Sprinter Vans</span>
+                  </div>
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={busImage1} 
+                    alt="Charter bus motorcoach" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="bg-white p-3 text-center">
+                    <span className="font-medium text-foreground">Buses & Motorcoaches</span>
+                  </div>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-3 gap-6 mt-6">
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={limoImage2} 
+                    alt="Executive black car service" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="bg-white p-3 text-center">
+                    <span className="font-medium text-foreground">Black Car Service</span>
+                  </div>
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={sprinterImage2} 
+                    alt="Luxury passenger Sprinter" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="bg-white p-3 text-center">
+                    <span className="font-medium text-foreground">Executive Sprinters</span>
+                  </div>
+                </div>
+                <div className="rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={busImage2} 
+                    alt="Party bus and tour bus" 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="bg-white p-3 text-center">
+                    <span className="font-medium text-foreground">Party & Tour Buses</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -39,6 +39,12 @@ const services = [
     href: "/quote/limousine",
   },
   {
+    title: "Uber Black Insurance",
+    description: "Specialized TCP insurance for Uber Black and luxury rideshare drivers. Available in 18 states.",
+    image: limoImage,
+    href: "/services/commercial-auto/uber-black-california",
+  },
+  {
     title: "Taxi & Cab Insurance",
     description: "Specialized protection for taxi fleets and individual owner-operators with competitive rates.",
     image: taxiImage,
