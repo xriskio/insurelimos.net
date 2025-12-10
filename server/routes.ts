@@ -1472,7 +1472,11 @@ export async function registerRoutes(
   // Create news release (protected)
   app.post("/api/news", requireAdminAuth, async (req, res) => {
     try {
-      const validatedData = insertNewsReleaseSchema.parse(req.body);
+      const body = { ...req.body };
+      if (body.publishDate && typeof body.publishDate === 'string') {
+        body.publishDate = new Date(body.publishDate);
+      }
+      const validatedData = insertNewsReleaseSchema.parse(body);
       const release = await storage.createNewsRelease(validatedData);
       
       // Submit to IndexNow if published
