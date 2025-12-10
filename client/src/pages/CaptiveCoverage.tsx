@@ -22,6 +22,8 @@ import {
   LineChart,
   Layers
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { captiveFaqs } from "@/data/faqs";
 import captiveHeroImage from "@assets/stock_images/corporate_business_m_6805a9ca.jpg";
 
 export default function CaptiveCoverage() {
@@ -410,6 +412,9 @@ export default function CaptiveCoverage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={captiveFaqs} title="Captive Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-20 bg-slate-900 text-white">

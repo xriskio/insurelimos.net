@@ -22,6 +22,8 @@ import {
   Wrench,
   AlertTriangle
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { tncMobilityFaqs } from "@/data/faqs";
 import tncHeroImage from "@assets/stock_images/rideshare_uber_lyft__8a562653.jpg";
 
 export default function TncCoverage() {
@@ -402,6 +404,9 @@ export default function TncCoverage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={tncMobilityFaqs} title="TNC & Rideshare Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-20 bg-accent text-white">

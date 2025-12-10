@@ -18,6 +18,8 @@ import {
   AlertTriangle,
   Camera
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { schoolBusFaqs } from "@/data/faqs";
 import schoolBusHeroImage from "@assets/stock_images/yellow_school_bus_st_e3009504.jpg";
 
 export default function SchoolBusCoverage() {
@@ -306,6 +308,9 @@ export default function SchoolBusCoverage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={schoolBusFaqs} title="School Bus Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-20 bg-amber-500 text-white">

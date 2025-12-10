@@ -209,6 +209,75 @@ export const tcpFaqs = [
   }
 ];
 
+export const ambulanceFaqs = [
+  {
+    question: "What insurance do ambulance companies need?",
+    answer: "Ambulance companies need commercial auto liability, professional liability (medical malpractice), general liability, workers compensation, and inland marine coverage for medical equipment. Coverage limits typically range from $1M to $5M depending on service type."
+  },
+  {
+    question: "How much does ambulance insurance cost?",
+    answer: "Ambulance insurance costs vary significantly based on service type (BLS vs ALS vs Critical Care), fleet size, call volume, and geographic area. Expect to pay $3,000-$15,000+ per unit annually for comprehensive coverage."
+  },
+  {
+    question: "What is the difference between BLS and ALS ambulance insurance?",
+    answer: "Basic Life Support (BLS) ambulance insurance typically costs less because the service involves lower-risk patient care. Advanced Life Support (ALS) and Critical Care Transport require higher limits due to more complex medical interventions and higher liability exposure."
+  },
+  {
+    question: "Does ambulance insurance cover medical equipment?",
+    answer: "Yes, inland marine coverage protects your medical equipment including stretchers, monitors, defibrillators, and medication. This coverage applies whether equipment is in the ambulance, at your station, or being transported."
+  },
+  {
+    question: "Do ambulance companies need professional liability insurance?",
+    answer: "Yes, professional liability (medical malpractice) insurance is essential for ambulance services. It protects against claims arising from patient care decisions, treatment errors, and medical negligence during transport."
+  }
+];
+
+export const captiveFaqs = [
+  {
+    question: "What is a captive insurance program for transportation companies?",
+    answer: "A captive insurance program allows transportation companies to form or join an insurance company they own. This provides greater control over coverage, potential cost savings, and the ability to retain underwriting profits."
+  },
+  {
+    question: "What size fleet qualifies for a captive insurance program?",
+    answer: "Captive programs typically require annual premiums of $250,000 or more, which usually means fleets of 20+ vehicles or substantial liability exposure. Smaller operations may join group captives to meet minimums."
+  },
+  {
+    question: "How do captive insurance programs save money?",
+    answer: "Captives can reduce costs by eliminating broker commissions on retained risk, investing premium dollars for the owner's benefit, returning underwriting profits to members, and providing more stable pricing over time."
+  },
+  {
+    question: "What is a group captive vs single-parent captive?",
+    answer: "A group captive is owned by multiple companies pooling their risks together. A single-parent captive is wholly owned by one company or group. Group captives have lower entry requirements while single-parent captives offer more control."
+  },
+  {
+    question: "What are the requirements to join a captive program?",
+    answer: "Requirements typically include strong safety records, established risk management practices, minimum premium volume, favorable loss history, and commitment to safety improvements. We help qualified operations find the right captive fit."
+  }
+];
+
+export const tncMobilityFaqs = [
+  {
+    question: "What is TNC insurance?",
+    answer: "TNC (Transportation Network Company) insurance covers rideshare drivers working for platforms like Uber and Lyft. It bridges the gap between personal auto insurance and platform-provided coverage during different driving periods."
+  },
+  {
+    question: "What are the three periods of TNC coverage?",
+    answer: "Period 1: App on, waiting for ride request. Period 2: Ride accepted, en route to pickup. Period 3: Passenger in vehicle until dropoff. Each period has different coverage requirements and limits."
+  },
+  {
+    question: "Do I need rideshare insurance if I drive for Uber or Lyft?",
+    answer: "While platforms provide some coverage during active periods, you should add a rideshare endorsement to your personal policy or get commercial TNC insurance. Personal policies exclude rideshare activity and may deny claims."
+  },
+  {
+    question: "How much does TNC rideshare insurance cost?",
+    answer: "A rideshare endorsement typically adds $15-30 per month to your personal policy. Full commercial TNC insurance costs $150-400 per month depending on coverage levels and driving frequency."
+  },
+  {
+    question: "What coverage does Uber/Lyft provide during rides?",
+    answer: "During Period 3 (passenger in vehicle), platforms typically provide $1M liability coverage. During Period 1 (app on, waiting), coverage is minimal. You need your own coverage to fill gaps, especially for vehicle damage."
+  }
+];
+
 export const paratransitFaqs = [
   {
     question: "What is paratransit insurance?",
