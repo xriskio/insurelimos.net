@@ -15,6 +15,8 @@ import {
   Clock,
   Star
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { uberBlackFaqs } from "@/data/faqs";
 
 export default function UberBlackCoverage() {
   return (
@@ -251,6 +253,9 @@ export default function UberBlackCoverage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={uberBlackFaqs} title="Uber Black Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-16 bg-amber-500 text-white">

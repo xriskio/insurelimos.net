@@ -14,6 +14,8 @@ import {
   FileText,
   TrendingUp
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { excessLiabilityFaqs } from "@/data/faqs";
 
 export default function ExcessLiabilityCoverage() {
   return (
@@ -246,6 +248,9 @@ export default function ExcessLiabilityCoverage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={excessLiabilityFaqs} title="Excess Liability Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-16 bg-primary text-white">

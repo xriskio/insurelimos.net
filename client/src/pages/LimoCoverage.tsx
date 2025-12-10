@@ -18,6 +18,8 @@ import {
   Layers,
   Wine
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { limoFaqs } from "@/data/faqs";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
 
 export default function LimoCoverage() {
@@ -380,6 +382,9 @@ export default function LimoCoverage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={limoFaqs} title="Limousine Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-20 bg-slate-900 text-white">

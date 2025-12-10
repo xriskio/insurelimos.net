@@ -17,6 +17,8 @@ import {
   Building,
   Zap
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { tcpFaqs } from "@/data/faqs";
 
 export default function CaliforniaTcpInsurance() {
   return (
@@ -466,6 +468,9 @@ export default function CaliforniaTcpInsurance() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={tcpFaqs} title="California TCP Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-16 bg-primary text-white">

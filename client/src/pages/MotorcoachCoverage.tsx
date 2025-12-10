@@ -18,6 +18,8 @@ import {
   AlertTriangle,
   Briefcase
 } from "lucide-react";
+import { FaqSchema } from "@/components/seo/FaqSchema";
+import { motorcoachFaqs } from "@/data/faqs";
 
 export default function MotorcoachCoverage() {
   return (
@@ -297,6 +299,9 @@ export default function MotorcoachCoverage() {
             </div>
           </div>
         </section>
+
+        {/* FAQ Section */}
+        <FaqSchema faqs={motorcoachFaqs} title="Motorcoach Insurance FAQs" />
 
         {/* CTA Section */}
         <section className="py-16 bg-primary text-white">
