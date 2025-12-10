@@ -23,6 +23,7 @@ import ParatransitCoverage from "@/pages/ParatransitCoverage";
 import MotorcoachCoverage from "@/pages/MotorcoachCoverage";
 import UberBlackCoverage from "@/pages/UberBlackCoverage";
 import ExcessLiabilityCoverage from "@/pages/ExcessLiabilityCoverage";
+import CaliforniaTcpInsurance from "@/pages/CaliforniaTcpInsurance";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Admin from "@/pages/Admin";
@@ -91,6 +92,8 @@ function Router() {
       <Route path="/coverage/excess-liability" component={ExcessLiabilityCoverage} />
       <Route path="/coverage/excess-insurance.html" component={ExcessLiabilityCoverage} />
       <Route path="/client" component={Home} />
+      <Route path="/california-tcp-insurance" component={CaliforniaTcpInsurance} />
+      <Route path="/tcp-insurance" component={CaliforniaTcpInsurance} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/admin" component={Admin} />
