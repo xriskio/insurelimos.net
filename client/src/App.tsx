@@ -20,6 +20,7 @@ import LimoCoverage from "@/pages/LimoCoverage";
 import CaptiveCoverage from "@/pages/CaptiveCoverage";
 import AmbulanceCoverage from "@/pages/AmbulanceCoverage";
 import ParatransitCoverage from "@/pages/ParatransitCoverage";
+import MotorcoachCoverage from "@/pages/MotorcoachCoverage";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Admin from "@/pages/Admin";
@@ -82,6 +83,8 @@ function Router() {
       <Route path="/coverage/captive" component={CaptiveCoverage} />
       <Route path="/coverage/ambulance" component={AmbulanceCoverage} />
       <Route path="/coverage/paratransit" component={ParatransitCoverage} />
+      <Route path="/coverage/motorcoach" component={MotorcoachCoverage} />
+      <Route path="/coverage/bus" component={MotorcoachCoverage} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/admin" component={Admin} />
