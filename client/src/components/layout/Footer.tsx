@@ -60,6 +60,11 @@ export function Footer() {
                   Quick Quote
                 </Link>
               </li>
+              <li>
+                <Link href="/industry-links" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                  Industry Links
+                </Link>
+              </li>
             </ul>
           </nav>
 
