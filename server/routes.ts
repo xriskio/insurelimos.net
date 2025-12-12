@@ -1498,7 +1498,11 @@ export async function registerRoutes(
   // Update news release (protected)
   app.patch("/api/news/:id", requireAdminAuth, async (req, res) => {
     try {
-      const release = await storage.updateNewsRelease(req.params.id, req.body);
+      const body = { ...req.body };
+      if (body.publishDate && typeof body.publishDate === 'string') {
+        body.publishDate = new Date(body.publishDate);
+      }
+      const release = await storage.updateNewsRelease(req.params.id, body);
       if (!release) {
         return res.status(404).json({ success: false, error: "Release not found" });
       }
