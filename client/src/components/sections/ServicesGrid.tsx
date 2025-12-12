@@ -38,48 +38,56 @@ const services = [
   {
     title: "Limousine Insurance",
     description: "Comprehensive coverage for luxury transportation services including sedans, stretch limos, and SUVs.",
+    details: "Coverage for luxury sedans, Mercedes Sprinters, stretch limousines, party buses, and executive transportation. Partnership with PHLY and other A-rated carriers.",
     image: limoImage,
-    href: "/quote/limousine",
+    href: "/coverage/limo",
   },
   {
     title: "Uber Black Insurance",
     description: "Specialized TCP insurance for Uber Black and luxury rideshare drivers. Available in 18 states.",
+    details: "Coverage for black sedans, luxury SUVs, and executive vehicles. Next day CPUC and DOT filings once bound.",
     image: suburbanImage,
     href: "/services/commercial-auto/uber-black-california",
   },
   {
     title: "Taxi & Cab Insurance",
     description: "Specialized protection for taxi fleets and individual owner-operators with competitive rates.",
+    details: "Coverage meeting state and municipal requirements. Hybrid policies available for drivers who operate both taxi and rideshare services.",
     image: taxiImage,
-    href: "/quote/public-auto",
+    href: "/coverage/taxi",
   },
   {
     title: "TNC & Mobility",
     description: "Tailored solutions for Transportation Network Companies like Uber/Lyft fleets and mobility services.",
+    details: "Coverage for Uber, Lyft, delivery services, micro-mobility, and on-demand transportation. Period-specific protection for all operational phases.",
     image: tncImage,
-    href: "/quote/tnc",
+    href: "/coverage/tnc",
   },
   {
     title: "NEMT Insurance",
     description: "Specialized coverage for Non-Emergency Medical Transportation vehicles and liability needs.",
+    details: "Coverage for wheelchair lifts, ramps, patient loading/unloading, and medical equipment transport. Policies that meet healthcare facility contract requirements.",
     image: nemtImage,
-    href: "/quote/nemt",
+    href: "/coverage/nemt",
   },
   {
     title: "Bus & Motorcoach",
     description: "Protection for charter buses, tour buses, and motorcoach operators of all fleet sizes.",
+    details: "Coverage for school district fleets, charter operators, tour companies, and private transportation. Limits up to $5M CSL with excess available.",
     image: busImage,
-    href: "/quote/public-auto",
+    href: "/coverage/bus",
   },
   {
     title: "Sprinter & Van",
     description: "Commercial auto insurance for Sprinter vans, cargo vans, and passenger shuttle services.",
+    details: "Coverage for Mercedes Sprinter Executive, luxury Sprinters, cargo vans, and passenger shuttles. Fleet and single-vehicle policies.",
     image: sprinterImage,
-    href: "/quote/public-auto",
+    href: "/coverage/sprinter",
   },
   {
     title: "Specialty Lines",
     description: "E-scooters, e-bikes, delivery robots, and emerging mobility services. Municipal permit compliant.",
+    details: "General Liability, Auto Liability, Workers' Comp, Excess Liability, Cyber Liability, and Performance Bonds. City of LA compliant.",
     image: specialtyLinesImage,
     href: "/coverage/dockless-mobility",
   },
@@ -201,12 +209,15 @@ export function ServicesGrid() {
                   <CardTitle className="text-xl font-bold text-foreground">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base text-muted-foreground mb-6 leading-relaxed">
+                  <CardDescription className="text-base text-muted-foreground mb-2 leading-relaxed">
                     {service.description}
                   </CardDescription>
+                  <p className="text-sm text-muted-foreground/80 mb-4">
+                    {service.details}
+                  </p>
                   <Link href={service.href}>
-                    <Button variant="link" className="p-0 h-auto text-primary font-semibold group-hover:text-accent transition-colors">
-                      Get a Quote <ArrowRight className="ml-1 h-4 w-4" />
+                    <Button variant="outline" className="group-hover:border-accent group-hover:text-accent transition-colors">
+                      Learn More <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </CardContent>
