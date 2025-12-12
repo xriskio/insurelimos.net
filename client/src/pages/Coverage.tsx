@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, ArrowRight } from "lucide-react";
+import { Shield, AlertTriangle, Users, Briefcase, Layers, Lock, Building, ArrowRight, Bike, Zap, Car, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Seo } from "@/components/seo/Seo";
@@ -102,49 +102,102 @@ const coverages = [
     title: "Auto Liability",
     icon: Shield,
     description: "The foundation of any commercial auto policy. It protects against financial loss if you or your drivers are found at fault for an accident that injures others or damages their property.",
-    details: "Required by law for all commercial vehicles. Limits typically range from $750,000 to $5 Million depending on vehicle capacity and regulatory requirements (PUC/DOT)."
+    details: "Required by law for all commercial vehicles. Limits typically range from $750,000 to $5 Million depending on vehicle capacity and regulatory requirements (PUC/DOT).",
+    hasPage: true,
+    pageUrl: "/coverage/auto-liability"
   },
   {
     id: "physical-damage",
     title: "Auto Physical Damage",
     icon: AlertTriangle,
     description: "Covers the cost to repair or replace your vehicle if it's damaged in an accident, stolen, vandalized, or damaged by fire or weather.",
-    details: "Includes Collision (accidents) and Comprehensive (theft, fire, glass, etc.) coverage. Essential for protecting your fleet investment."
+    details: "Includes Collision (accidents) and Comprehensive (theft, fire, glass, etc.) coverage. Essential for protecting your fleet investment.",
+    hasPage: true,
+    pageUrl: "/coverage/physical-damage"
   },
   {
     id: "workers-comp",
     title: "Workers' Compensation",
     icon: Users,
     description: "Provides medical benefits and wage replacement to employees injured on the job. Mandatory for businesses with employees in California.",
-    details: "Protects your business from lawsuits related to workplace injuries. Covers medical bills, rehabilitation costs, and lost wages."
+    details: "Protects your business from lawsuits related to workplace injuries. Covers medical bills, rehabilitation costs, and lost wages.",
+    hasPage: true,
+    pageUrl: "/coverage/workers-comp"
   },
   {
     id: "general-liability",
     title: "General Liability",
     icon: Briefcase,
     description: "Protects your business from third-party claims of bodily injury or property damage that occur on your premises or as a result of your business operations (non-driving).",
-    details: "Crucial for slip-and-fall accidents at your office, advertising injury, or customer property damage not involving the vehicle itself."
+    details: "Crucial for slip-and-fall accidents at your office, advertising injury, or customer property damage not involving the vehicle itself.",
+    hasPage: true,
+    pageUrl: "/coverage/general-liability"
   },
   {
     id: "excess",
     title: "Excess Insurance",
     icon: Layers,
     description: "Provides higher liability limits beyond your primary policy. Often required for high-profile contracts, airports, or municipal bids.",
-    details: "Can extend coverage limits to $10 Million, $20 Million or more. Acts as a safety net for catastrophic claims."
+    details: "Can extend coverage limits to $10 Million, $20 Million or more. Acts as a safety net for catastrophic claims.",
+    hasPage: true,
+    pageUrl: "/coverage/excess-liability"
   },
   {
     id: "property",
     title: "Commercial Property",
     icon: Building,
     description: "Protects your physical business assets, including your office building, furniture, computers, and tools.",
-    details: "Can be bundled with General Liability in a Business Owners Policy (BOP) for cost savings."
+    details: "Can be bundled with General Liability in a Business Owners Policy (BOP) for cost savings.",
+    hasPage: true,
+    pageUrl: "/coverage/commercial-property"
   },
   {
     id: "cyber",
     title: "Cyber Liability",
     icon: Lock,
     description: "Protection against data breaches and cyber attacks. Essential for transportation companies handling sensitive client data and payment information.",
-    details: "Covers notification costs, credit monitoring, legal fees, and fines associated with data breaches."
+    details: "Covers notification costs, credit monitoring, legal fees, and fines associated with data breaches.",
+    hasPage: true,
+    pageUrl: "/coverage/cyber-liability"
+  }
+];
+
+const specialtyLines = [
+  {
+    id: "dockless-mobility",
+    title: "Dockless Mobility",
+    icon: Bike,
+    description: "Insurance programs for e-scooter, e-bike, and shared micro-mobility operators. Municipal permit compliant coverage.",
+    details: "General Liability, Auto Liability, Workers' Comp, Excess Liability, Cyber Liability, and Performance Bonds ($100/vehicle). City of LA compliant.",
+    hasPage: true,
+    pageUrl: "/coverage/dockless-mobility"
+  },
+  {
+    id: "mobility",
+    title: "Mobility",
+    icon: Zap,
+    description: "Coverage for shared mobility services, car-sharing, electric vehicle programs, and mobility-as-a-service platforms.",
+    details: "Comprehensive programs including liability, hired & non-owned auto, workers' comp, excess, cyber, and performance bonds.",
+    hasPage: true,
+    pageUrl: "/coverage/mobility"
+  },
+  {
+    id: "public-transit-for-hire",
+    title: "Public Transit For Hire",
+    icon: Car,
+    description: "Insurance for autonomous vehicles, micro-transit services, and emerging public transportation options.",
+    details: "Full coverage suite meeting municipal requirements: $1M GL, $1M Auto, statutory WC, $1M excess, cyber liability, performance bonds.",
+    hasPage: true,
+    pageUrl: "/coverage/public-transit-for-hire"
+  },
+  {
+    id: "personal-delivery-devices",
+    title: "Personal Delivery Devices",
+    icon: Package,
+    description: "Insurance for autonomous delivery robots and personal delivery device operators. Sidewalk navigation coverage.",
+    details: "Device liability, general liability, hired & non-owned auto, workers' comp, cyber liability, and municipal performance bonds.",
+    hasPage: true,
+    pageUrl: "/coverage/personal-delivery-devices"
   }
 ];
 
@@ -211,6 +264,46 @@ export default function Coverage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Specialty Lines Section */}
+        <section className="py-16 bg-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Specialty Lines</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Emerging transportation sectors with specialized insurance programs designed to meet municipal requirements.
+              </p>
+            </div>
+            <div className="grid gap-8 max-w-5xl mx-auto">
+              {specialtyLines.map((item) => (
+                <div key={item.id} className="flex flex-col md:flex-row gap-6 bg-white p-8 rounded-xl border border-border/60 shadow-sm hover:shadow-md transition-shadow group">
+                  <div className="shrink-0">
+                    <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center text-accent">
+                      <item.icon className="h-8 w-8" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold text-primary mb-3">{item.title}</h3>
+                    <p className="text-lg text-foreground/90 mb-4 font-medium">
+                      {item.description}
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      {item.details}
+                    </p>
+                    {item.hasPage && item.pageUrl && (
+                      <Link href={item.pageUrl}>
+                        <Button variant="outline" className="group">
+                          Learn More
+                          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
