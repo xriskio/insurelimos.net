@@ -14,6 +14,7 @@ import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
 import nemtImage from "@assets/generated_images/medical_transport_van.png";
 import busImage from "@assets/generated_images/modern_charter_bus.png";
 import sprinterImage from "@assets/generated_images/black_luxury_sprinter_van.png";
+import specialtyLinesImage from "@assets/generated_images/specialty_lines_mobility_devices.png";
 import suburbanImage from "@assets/stock_images/black_chevrolet_subu_56068562.jpg";
 import aviatorImage from "@assets/stock_images/black_lincoln_aviato_7443fc1b.jpg";
 import {
@@ -75,6 +76,12 @@ const services = [
     description: "Commercial auto insurance for Sprinter vans, cargo vans, and passenger shuttle services.",
     image: sprinterImage,
     href: "/quote/public-auto",
+  },
+  {
+    title: "Specialty Lines",
+    description: "E-scooters, e-bikes, delivery robots, and emerging mobility services. Municipal permit compliant.",
+    image: specialtyLinesImage,
+    href: "/coverage/dockless-mobility",
   },
 ];
 
