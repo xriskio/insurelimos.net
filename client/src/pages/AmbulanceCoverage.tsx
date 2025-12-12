@@ -34,6 +34,7 @@ import ambulanceImage1 from "@assets/stock_images/ambulance_emergency__8d2140b6.
 import ambulanceImage2 from "@assets/stock_images/ambulance_emergency__1a83ac51.jpg";
 import ambulanceImage3 from "@assets/stock_images/ambulance_emergency__a1ffe157.jpg";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function AmbulanceCoverage() {
   return (
@@ -472,6 +473,9 @@ export default function AmbulanceCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <section className="py-8 bg-secondary/20 rounded-lg">

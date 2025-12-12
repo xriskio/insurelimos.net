@@ -22,6 +22,7 @@ import { FaqSchema } from "@/components/seo/FaqSchema";
 import { schoolBusFaqs } from "@/data/faqs";
 import schoolBusHeroImage from "@assets/stock_images/yellow_school_bus_st_e3009504.jpg";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function SchoolBusCoverage() {
   return (
@@ -303,6 +304,9 @@ export default function SchoolBusCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <FaqSchema faqs={schoolBusFaqs} title="School Bus Insurance FAQs" />

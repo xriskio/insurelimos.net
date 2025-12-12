@@ -22,6 +22,7 @@ import { FaqSchema } from "@/components/seo/FaqSchema";
 import { limoFaqs } from "@/data/faqs";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function LimoCoverage() {
   return (
@@ -373,6 +374,9 @@ export default function LimoCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <FaqSchema faqs={limoFaqs} title="Limousine Insurance FAQs" />

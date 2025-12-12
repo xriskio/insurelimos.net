@@ -18,6 +18,7 @@ import {
 import { FaqSchema } from "@/components/seo/FaqSchema";
 import { uberBlackFaqs } from "@/data/faqs";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function UberBlackCoverage() {
   return (
@@ -248,6 +249,9 @@ export default function UberBlackCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <FaqSchema faqs={uberBlackFaqs} title="Uber Black Insurance FAQs" />

@@ -32,6 +32,7 @@ import paratransitHeroImage from "@assets/stock_images/wheelchair_accessibl_1c26
 import paratransitImage1 from "@assets/generated_images/wheelchair_accessible_minivan.png";
 import paratransitImage2 from "@assets/generated_images/ford_transit_wheelchair_ramp_van.png";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function ParatransitCoverage() {
   return (
@@ -120,37 +121,8 @@ export default function ParatransitCoverage() {
                 </div>
               </section>
 
-              {/* Lines of Business */}
-              <section className="py-8 bg-secondary/20 rounded-lg mb-8">
-                <div className="px-6">
-                  <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-primary mb-4">Lines of Business</h2>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      Comprehensive protection designed specifically for paratransit operations.
-                    </p>
-                  </div>
-                  
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[
-                      { icon: Building, label: "General Liability" },
-                      { icon: Car, label: "Auto Liability (Commercial)" },
-                      { icon: Shield, label: "One Way Coverage for Accidents" },
-                      { icon: Users, label: "Worker's Compensation" },
-                      { icon: Wrench, label: "Property Damage" },
-                      { icon: Briefcase, label: "Professional Liability With Retroactive Coverage" },
-                      { icon: AlertTriangle, label: "Sexual Abuse and Molestation Coverages" },
-                      { icon: Layers, label: "Excess Liability Up to $20,000,000" },
-                      { icon: Scale, label: "Director and Officers Liability" },
-                      { icon: FileText, label: "Crime Coverage" },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm border">
-                        <item.icon className="h-6 w-6 text-primary shrink-0" />
-                        <span className="font-medium">{item.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* Coverage Details */}
               <section className="py-8 bg-white rounded-lg mb-8">

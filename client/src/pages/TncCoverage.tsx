@@ -26,6 +26,7 @@ import { FaqSchema } from "@/components/seo/FaqSchema";
 import { tncMobilityFaqs } from "@/data/faqs";
 import tncHeroImage from "@assets/stock_images/rideshare_uber_lyft__8a562653.jpg";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function TncCoverage() {
   return (
@@ -391,6 +392,9 @@ export default function TncCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <FaqSchema faqs={tncMobilityFaqs} title="TNC & Rideshare Insurance FAQs" />

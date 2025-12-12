@@ -17,6 +17,7 @@ import {
 import { FaqSchema } from "@/components/seo/FaqSchema";
 import { excessLiabilityFaqs } from "@/data/faqs";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function ExcessLiabilityCoverage() {
   return (
@@ -243,6 +244,9 @@ export default function ExcessLiabilityCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <FaqSchema faqs={excessLiabilityFaqs} title="Excess Liability Insurance FAQs" />

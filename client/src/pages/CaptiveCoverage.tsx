@@ -26,6 +26,7 @@ import { FaqSchema } from "@/components/seo/FaqSchema";
 import { captiveFaqs } from "@/data/faqs";
 import captiveHeroImage from "@assets/stock_images/corporate_business_m_6805a9ca.jpg";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function CaptiveCoverage() {
   return (
@@ -401,6 +402,9 @@ export default function CaptiveCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <FaqSchema faqs={captiveFaqs} title="Captive Insurance FAQs" />

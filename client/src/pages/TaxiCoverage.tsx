@@ -144,36 +144,209 @@ export default function TaxiCoverage() {
                 </div>
               </section>
 
-              {/* Lines of Business */}
-              <section className="py-8 bg-secondary/20 rounded-lg mb-8">
+              {/* Coverage Types with Learn More */}
+              <section className="py-8 bg-white rounded-lg mb-8">
                 <div className="px-6">
                   <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-primary mb-4">Lines of Business</h2>
+                    <h2 className="text-3xl font-bold text-primary mb-4">Coverage Options</h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                      Comprehensive protection designed specifically for taxi and cab operations.
+                      Comprehensive insurance protection designed specifically for taxi and cab operations.
                     </p>
                   </div>
                   
-                  <div className="grid md:grid-cols-3 gap-4">
-                    {[
-                      { icon: Shield, label: "Automobile Liability" },
-                      { icon: Car, label: "Physical Damage" },
-                      { icon: Building, label: "General Liability" },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 p-5 bg-white rounded-lg shadow-sm border">
-                        <item.icon className="h-8 w-8 text-primary shrink-0" />
-                        <span className="text-lg font-medium">{item.label}</span>
+                  <div className="space-y-6">
+                    {/* Auto Liability */}
+                    <div className="border-b border-gray-200 pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <Shield className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">Auto Liability</h3>
+                          <p className="text-muted-foreground mb-3">
+                            The foundation of any commercial auto policy. It protects against financial loss if you or your drivers are found at fault for an accident that injures others or damages their property.
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Liability limits: <strong>$750,000, $1,000,000, $1,500,000, or $5,000,000</strong> Combined Single Limit. Higher limits available upon request. Coverage includes PIP, UM, UIM, and medical payments depending on state requirements.
+                          </p>
+                          <Link href="/coverage/auto-liability">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
-                    ))}
+                    </div>
+
+                    {/* Auto Physical Damage */}
+                    <div className="border-b border-gray-200 pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <Car className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">Auto Physical Damage</h3>
+                          <p className="text-muted-foreground mb-3">
+                            Covers the cost to repair or replace your vehicle if it's damaged in an accident, stolen, vandalized, or damaged by fire or weather.
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Deductibles starting as low as <strong>$1,000</strong> for specified perils and collision coverage. Includes Collision (accident) and Comprehensive (theft, fire, glass, etc.) coverage. Roadside Coverage subject to $300.00 aggregate per covered auto per policy period. <strong>Windshield Replacement</strong> covered at $100 deductible. Windshield chip repair without deductible.
+                          </p>
+                          <Link href="/coverage/physical-damage">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Workers' Compensation */}
+                    <div className="border-b border-gray-200 pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <Users className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">Workers' Compensation</h3>
+                          <p className="text-muted-foreground mb-3">
+                            Provides medical benefits and wage replacement to employees injured on the job. Mandatory for businesses with employees in California.
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Protects your business from lawsuits related to workplace injuries. Covers medical bills, rehabilitation costs, and lost wages.
+                          </p>
+                          <Link href="/coverage/workers-comp">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* General Liability */}
+                    <div className="border-b border-gray-200 pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <Building className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">General Liability</h3>
+                          <p className="text-muted-foreground mb-3">
+                            Protects your business from third-party claims of bodily injury or property damage that occur as a result of your business operations (non-driving).
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Limits up to <strong>$5 million</strong>. Higher liability limits available upon request. Crucial for the non-auto exposures at your office, advertising injury, or accidental property damage not involving the vehicle itself.
+                          </p>
+                          <Link href="/coverage/general-liability">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Garage Liability */}
+                    <div className="border-b border-gray-200 pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <Wrench className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">Garage Liability</h3>
+                          <p className="text-muted-foreground mb-3">
+                            Essential for transportation companies that maintain their own fleet. Covers liability arising from garage operations including vehicle maintenance and repair.
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Includes Garagekeepers Legal Liability to protect customer vehicles in your care, custody, and control. Hired & non-owned coverage also available.
+                          </p>
+                          <Link href="/coverage/garage-liability">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Excess Liability */}
+                    <div className="border-b border-gray-200 pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <Layers className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">Excess Insurance</h3>
+                          <p className="text-muted-foreground mb-3">
+                            Provides higher liability limits beyond your primary policy. Often required for high-profile contracts, airports, or managed care.
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Following form excess liability available up to <strong>$10 million x $5 million</strong>. Excess coverage limits available up to <strong>$20,000,000</strong>. Acts as a safety net for catastrophic claims.
+                          </p>
+                          <Link href="/coverage/excess-liability">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Commercial Property */}
+                    <div className="border-b border-gray-200 pb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <Building className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">Commercial Property</h3>
+                          <p className="text-muted-foreground mb-3">
+                            Protects your physical business assets, including your office building, furniture, computers, and tools.
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Can be bundled with General Liability in a Business Owners Policy (BOP) for cost savings.
+                          </p>
+                          <Link href="/coverage/commercial-property">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Cyber Liability */}
+                    <div className="pb-2">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                          <AlertTriangle className="h-6 w-6 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-primary mb-2">Cyber Liability</h3>
+                          <p className="text-muted-foreground mb-3">
+                            Protection against data breaches and cyber attacks. Essential for transportation companies handling sensitive client data and payment information.
+                          </p>
+                          <p className="text-muted-foreground mb-4">
+                            Covers notification costs, credit monitoring, legal fees, and fines associated with data breaches.
+                          </p>
+                          <Link href="/coverage/cyber-liability">
+                            <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
+                              Learn More <span className="ml-2">→</span>
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
 
-              {/* Coverage Details */}
-              <section className="py-8 bg-white rounded-lg mb-8">
+              {/* Coverage Limits Quick Reference */}
+              <section className="py-8 bg-secondary/20 rounded-lg mb-8">
                 <div className="px-6">
                   <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-primary mb-4">Coverage Details</h2>
+                    <h2 className="text-3xl font-bold text-primary mb-4">Coverage Limits at a Glance</h2>
                   </div>
                   
                   <div className="grid md:grid-cols-2 gap-6">
@@ -181,18 +354,26 @@ export default function TaxiCoverage() {
                       <CardHeader>
                         <CardTitle className="flex items-center gap-3">
                           <Shield className="h-6 w-6 text-primary" />
-                          Liability Coverage/Limits
+                          Auto Liability
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <ul className="space-y-3">
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Up to <strong>$1,000,000 CSL</strong></span>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>$750,000 / $1M / $1.5M / $5M CSL</span>
                           </li>
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Higher limits available at Underwriter's discretion</span>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Medical Payments: $5,000 or $10,000</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>PIP where applicable</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>UM/UIM up to $1M available</span>
                           </li>
                         </ul>
                       </CardContent>
@@ -206,43 +387,22 @@ export default function TaxiCoverage() {
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <ul className="space-y-3">
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Minimum <strong>$500 deductible</strong> for comp/collision</span>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Deductibles from $1,000</span>
                           </li>
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Minimum stated value: <strong>$3,000</strong></span>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Roadside: $300 aggregate/vehicle</span>
                           </li>
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Units older than 10 years require Underwriting approval</span>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Windshield: $100 deductible</span>
                           </li>
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Mechanic's statement and photograph may be required</span>
-                          </li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="border-2 hover:border-primary/30 transition-colors">
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-3">
-                          <Car className="h-6 w-6 text-primary" />
-                          Eligible Vehicles
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-3">
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Sedans and minivans</span>
-                          </li>
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Capacity up to <strong>7 passengers</strong> (excluding driver)</span>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Chip repair: No deductible</span>
                           </li>
                         </ul>
                       </CardContent>
@@ -251,23 +411,40 @@ export default function TaxiCoverage() {
                     <Card className="border-2 hover:border-primary/30 transition-colors">
                       <CardHeader>
                         <CardTitle className="flex items-center gap-3">
-                          <UserCheck className="h-6 w-6 text-accent" />
-                          Eligible Operations
+                          <Building className="h-6 w-6 text-primary" />
+                          General Liability
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <ul className="space-y-3">
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>For-Hire passenger transportation</span>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Limits up to $5 million</span>
                           </li>
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Must be dispatched from a radio group/association or possess a medallion</span>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Higher limits available on request</span>
                           </li>
-                          <li className="flex items-start gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                            <span>Demand-response units with less than 24-hour prearranged pickups</span>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-3">
+                          <Layers className="h-6 w-6 text-primary" />
+                          Excess Liability
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-2">
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Up to $20,000,000 available</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Following form: $10M x $5M</span>
                           </li>
                         </ul>
                       </CardContent>

@@ -21,6 +21,7 @@ import {
 import { FaqSchema } from "@/components/seo/FaqSchema";
 import { motorcoachFaqs } from "@/data/faqs";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 export default function MotorcoachCoverage() {
   return (
@@ -294,6 +295,9 @@ export default function MotorcoachCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <FaqSchema faqs={motorcoachFaqs} title="Motorcoach Insurance FAQs" />

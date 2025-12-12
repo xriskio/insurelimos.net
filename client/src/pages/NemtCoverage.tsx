@@ -30,6 +30,7 @@ import nemtHeroImage from "@assets/stock_images/medical_transportati_bedcf76d.jp
 import nemtImage1 from "@assets/generated_images/ford_transit_wheelchair_ramp_van.png";
 import nemtImage2 from "@assets/generated_images/ram_promaster_wheelchair_van.png";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
+import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
 const nemtFaqs = [
   {
@@ -421,6 +422,9 @@ export default function NemtCoverage() {
                   </div>
                 </div>
               </section>
+
+              {/* Coverage Options Section */}
+              <CoverageOptionsSection />
 
               {/* FAQ Section */}
               <section className="py-8 bg-secondary/20 rounded-lg mb-8">
