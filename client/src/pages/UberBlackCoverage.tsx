@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { FaqSchema } from "@/components/seo/FaqSchema";
 import { uberBlackFaqs } from "@/data/faqs";
+import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 
 export default function UberBlackCoverage() {
   return (
@@ -51,211 +52,215 @@ export default function UberBlackCoverage() {
           </div>
         </section>
 
-        {/* Introduction */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-start gap-6 mb-8">
-                <div className="hidden md:block shrink-0">
-                  <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center">
-                    <Car className="h-10 w-10 text-amber-400" />
+        {/* Main Content with Sidebar */}
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              {/* Introduction */}
+              <section className="py-8 bg-white rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="flex items-start gap-6 mb-8">
+                    <div className="hidden md:block shrink-0">
+                      <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center">
+                        <Car className="h-10 w-10 text-amber-400" />
+                      </div>
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold text-primary mb-4">TCP Coverage for Uber Black Drivers</h2>
+                      <p className="text-lg text-muted-foreground leading-relaxed">
+                        At InsureLimos.net, we specialize in TCP (Transportation Charter-Party) insurance for Uber Black and luxury rideshare drivers. Whether you drive a Tesla Model X, Cadillac Escalade ESV, Lincoln Navigator, or Mercedes-Benz, we have the coverage you need to operate legally and protect your investment.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-primary mb-4">TCP Coverage for Uber Black Drivers</h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    At InsureLimos.net, we specialize in TCP (Transportation Charter-Party) insurance for Uber Black and luxury rideshare drivers. Whether you drive a Tesla Model X, Cadillac Escalade ESV, Lincoln Navigator, or Mercedes-Benz, we have the coverage you need to operate legally and protect your investment.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
-                {[
-                  "Uber Black drivers",
-                  "Uber Black SUV drivers",
-                  "Uber Premier drivers",
-                  "Uber Comfort drivers",
-                  "Lyft Lux drivers",
-                  "Private executive car service",
-                  "Airport sedan service",
-                  "Corporate transportation",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                    <CheckCircle2 className="h-5 w-5 text-amber-500 shrink-0" />
-                    <span className="text-sm font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us */}
-        <section className="py-16 bg-gray-900 text-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Our Uber Black Insurance?</h2>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  "Next-day CPUC filings for California drivers",
-                  "Competitive rates for luxury vehicles",
-                  "Coverage for Tesla, Cadillac, Lincoln, Mercedes",
-                  "TCP Gap coverage for all periods",
-                  "Licensed in 18 states",
-                  "Experienced claims handling with 24/7 support",
-                ].map((benefit, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-amber-400 shrink-0 mt-0.5" />
-                    <p className="text-white/90">{benefit}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Coverage Options */}
-        <section className="py-16 bg-secondary/20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">Coverage Options</h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Comprehensive insurance solutions designed specifically for Uber Black and luxury rideshare drivers.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <Card className="border-2 hover:border-amber-300 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
-                      <Shield className="h-7 w-7 text-amber-400" />
-                    </div>
-                    <CardTitle className="text-xl">Auto Liability (AL)</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Coverage options from $750K to $1.5M CSL. Meets CPUC requirements for TCP carriers in California and regulatory requirements in all 18 states we serve.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-amber-300 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
-                      <Car className="h-7 w-7 text-amber-400" />
-                    </div>
-                    <CardTitle className="text-xl">Physical Damage (APD)</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Comprehensive and collision coverage for your luxury vehicle. Protection against theft, vandalism, weather damage, and accidents.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-amber-300 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
-                      <Layers className="h-7 w-7 text-amber-400" />
-                    </div>
-                    <CardTitle className="text-xl">TCP Gap Coverage</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Coverage for all periods - from app-on waiting for rides to passenger drop-off. Fill the gaps left by Uber's commercial policy.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-amber-300 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
-                      <FileText className="h-7 w-7 text-amber-400" />
-                    </div>
-                    <CardTitle className="text-xl">CPUC/DOT Filings</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Next-day CPUC filings for California TCP carriers. DOT filings available for interstate operations. We handle the paperwork so you can focus on driving.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Vehicles We Cover */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">Vehicles We Cover</h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  We specialize in coverage for luxury vehicles that meet Uber Black requirements.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  { name: "Tesla Model X", type: "Electric SUV" },
-                  { name: "Tesla Model S", type: "Electric Sedan" },
-                  { name: "Cadillac Escalade ESV", type: "Luxury SUV" },
-                  { name: "Lincoln Navigator", type: "Luxury SUV" },
-                  { name: "Mercedes-Benz S-Class", type: "Luxury Sedan" },
-                  { name: "BMW 7 Series", type: "Luxury Sedan" },
-                  { name: "Audi A8", type: "Luxury Sedan" },
-                  { name: "Genesis G90", type: "Luxury Sedan" },
-                ].map((vehicle, i) => (
-                  <div key={i} className="p-6 bg-gray-50 rounded-xl text-center hover:bg-gray-100 transition-colors">
-                    <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Car className="h-6 w-6 text-amber-400" />
-                    </div>
-                    <h3 className="font-bold text-lg mb-1">{vehicle.name}</h3>
-                    <p className="text-muted-foreground text-sm">{vehicle.type}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Fast Filing */}
-        <section className="py-16 bg-gray-900 text-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="w-24 h-24 bg-amber-500 rounded-full flex items-center justify-center shrink-0">
-                  <Clock className="h-12 w-12 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold mb-4">Next-Day CPUC Filings</h2>
-                  <p className="text-xl text-white/90 mb-4">
-                    Don't wait weeks to start driving. Our expedited filing service gets your CPUC paperwork processed the next business day, so you can start earning sooner.
-                  </p>
-                  <ul className="space-y-2">
+                  
+                  <div className="grid md:grid-cols-2 gap-4 mt-10">
                     {[
-                      "CPUC TCP-A filings for California",
-                      "DOT filings for interstate operations",
-                      "Certificate of insurance same-day",
-                      "ID cards delivered electronically",
+                      "Uber Black drivers",
+                      "Uber Black SUV drivers",
+                      "Uber Premier drivers",
+                      "Uber Comfort drivers",
+                      "Lyft Lux drivers",
+                      "Private executive car service",
+                      "Airport sedan service",
+                      "Corporate transportation",
                     ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-amber-400 shrink-0" />
-                        <span>{item}</span>
-                      </li>
+                      <div key={i} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+                        <CheckCircle2 className="h-5 w-5 text-amber-500 shrink-0" />
+                        <span className="text-sm font-medium">{item}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
+              </section>
+
+              {/* Why Choose Us */}
+              <section className="py-8 bg-gray-900 text-white rounded-lg mb-8">
+                <div className="px-6">
+                  <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Our Uber Black Insurance?</h2>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[
+                      "Next-day CPUC filings for California drivers",
+                      "Competitive rates for luxury vehicles",
+                      "Coverage for Tesla, Cadillac, Lincoln, Mercedes",
+                      "TCP Gap coverage for all periods",
+                      "Licensed in 18 states",
+                      "Experienced claims handling with 24/7 support",
+                    ].map((benefit, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <CheckCircle2 className="h-6 w-6 text-amber-400 shrink-0 mt-0.5" />
+                        <p className="text-white/90">{benefit}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* Coverage Options */}
+              <section className="py-8 bg-secondary/20 rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-primary mb-4">Coverage Options</h2>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                      Comprehensive insurance solutions designed specifically for Uber Black and luxury rideshare drivers.
+                    </p>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Card className="border-2 hover:border-amber-300 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
+                          <Shield className="h-7 w-7 text-amber-400" />
+                        </div>
+                        <CardTitle className="text-xl">Auto Liability (AL)</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Coverage options from $750K to $1.5M CSL. Meets CPUC requirements for TCP carriers in California and regulatory requirements in all 18 states we serve.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-amber-300 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
+                          <Car className="h-7 w-7 text-amber-400" />
+                        </div>
+                        <CardTitle className="text-xl">Physical Damage (APD)</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Comprehensive and collision coverage for your luxury vehicle. Protection against theft, vandalism, weather damage, and accidents.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-amber-300 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
+                          <Layers className="h-7 w-7 text-amber-400" />
+                        </div>
+                        <CardTitle className="text-xl">TCP Gap Coverage</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Coverage for all periods - from app-on waiting for rides to passenger drop-off. Fill the gaps left by Uber's commercial policy.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-amber-300 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center mb-4">
+                          <FileText className="h-7 w-7 text-amber-400" />
+                        </div>
+                        <CardTitle className="text-xl">CPUC/DOT Filings</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Next-day CPUC filings for California TCP carriers. DOT filings available for interstate operations. We handle the paperwork so you can focus on driving.
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* Vehicles We Cover */}
+              <section className="py-8 bg-white rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-primary mb-4">Vehicles We Cover</h2>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                      We specialize in coverage for luxury vehicles that meet Uber Black requirements.
+                    </p>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[
+                      { name: "Tesla Model X", type: "Electric SUV" },
+                      { name: "Tesla Model S", type: "Electric Sedan" },
+                      { name: "Cadillac Escalade ESV", type: "Luxury SUV" },
+                      { name: "Lincoln Navigator", type: "Luxury SUV" },
+                      { name: "Mercedes-Benz S-Class", type: "Luxury Sedan" },
+                      { name: "BMW 7 Series", type: "Luxury Sedan" },
+                      { name: "Audi A8", type: "Luxury Sedan" },
+                      { name: "Genesis G90", type: "Luxury Sedan" },
+                    ].map((vehicle, i) => (
+                      <div key={i} className="p-6 bg-gray-50 rounded-xl text-center hover:bg-gray-100 transition-colors">
+                        <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <Car className="h-6 w-6 text-amber-400" />
+                        </div>
+                        <h3 className="font-bold text-lg mb-1">{vehicle.name}</h3>
+                        <p className="text-muted-foreground text-sm">{vehicle.type}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* Fast Filing */}
+              <section className="py-8 bg-gray-900 text-white rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="flex flex-col md:flex-row items-center gap-8">
+                    <div className="w-24 h-24 bg-amber-500 rounded-full flex items-center justify-center shrink-0">
+                      <Clock className="h-12 w-12 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold mb-4">Next-Day CPUC Filings</h2>
+                      <p className="text-xl text-white/90 mb-4">
+                        Don't wait weeks to start driving. Our expedited filing service gets your CPUC paperwork processed the next business day, so you can start earning sooner.
+                      </p>
+                      <ul className="space-y-2">
+                        {[
+                          "CPUC TCP-A filings for California",
+                          "DOT filings for interstate operations",
+                          "Certificate of insurance same-day",
+                          "ID cards delivered electronically",
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-center gap-2">
+                            <CheckCircle2 className="h-5 w-5 text-amber-400 shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* FAQ Section */}
+              <FaqSchema faqs={uberBlackFaqs} title="Uber Black Insurance FAQs" />
+            </div>
+
+            {/* Sidebar with QuickQuoteForm */}
+            <div className="hidden lg:block lg:col-span-1">
+              <div className="sticky top-4">
+                <QuickQuoteForm />
               </div>
             </div>
           </div>
-        </section>
-
-        {/* FAQ Section */}
-        <FaqSchema faqs={uberBlackFaqs} title="Uber Black Insurance FAQs" />
+        </div>
 
         {/* CTA Section */}
         <section className="py-16 bg-amber-500 text-white">

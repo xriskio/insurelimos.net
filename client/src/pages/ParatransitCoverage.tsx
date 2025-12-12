@@ -31,6 +31,7 @@ import {
 import paratransitHeroImage from "@assets/stock_images/wheelchair_accessibl_1c26c45e.jpg";
 import paratransitImage1 from "@assets/generated_images/wheelchair_accessible_minivan.png";
 import paratransitImage2 from "@assets/generated_images/ford_transit_wheelchair_ramp_van.png";
+import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 
 export default function ParatransitCoverage() {
   return (
@@ -80,384 +81,383 @@ export default function ParatransitCoverage() {
           </div>
         </section>
 
-        {/* Overview */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-primary mb-6">Overview</h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Running a paratransit company comes with its share of risks. You are in the business of helping people but you have to prepare for the unexpected. Your passengers are handicapped or have special needs which creates additional risks and responsibilities.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                You also need to determine how much coverage is enough. There are a number of factors involved: how many drivers you have, the number of customers and the length of your routes. Our team is made up of experts in transportation insurance who can help you evaluate the special risks you face running a paratransit company so you have the right insurance, the right company and the right amount.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Fleet Gallery */}
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={paratransitImage1} 
-                    alt="Wheelchair accessible paratransit van" 
-                    className="w-full h-64 object-cover"
-                  />
+        {/* Main Content with Sidebar */}
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              {/* Overview */}
+              <section className="py-8 bg-white rounded-lg mb-8">
+                <div className="px-6">
+                  <h2 className="text-3xl font-bold text-primary mb-6">Overview</h2>
+                  <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                    Running a paratransit company comes with its share of risks. You are in the business of helping people but you have to prepare for the unexpected. Your passengers are handicapped or have special needs which creates additional risks and responsibilities.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    You also need to determine how much coverage is enough. There are a number of factors involved: how many drivers you have, the number of customers and the length of your routes. Our team is made up of experts in transportation insurance who can help you evaluate the special risks you face running a paratransit company so you have the right insurance, the right company and the right amount.
+                  </p>
                 </div>
-                <div className="rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={paratransitImage2} 
-                    alt="Paratransit vehicle for special needs transportation" 
-                    className="w-full h-64 object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+              </section>
 
-        {/* Lines of Business */}
-        <section className="py-16 bg-secondary/20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">Lines of Business</h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Comprehensive protection designed specifically for paratransit operations.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                  { icon: Building, label: "General Liability" },
-                  { icon: Car, label: "Auto Liability (Commercial)" },
-                  { icon: Shield, label: "One Way Coverage for Accidents" },
-                  { icon: Users, label: "Worker's Compensation" },
-                  { icon: Wrench, label: "Property Damage" },
-                  { icon: Briefcase, label: "Professional Liability With Retroactive Coverage" },
-                  { icon: AlertTriangle, label: "Sexual Abuse and Molestation Coverages" },
-                  { icon: Layers, label: "Excess Liability Up to $20,000,000" },
-                  { icon: Scale, label: "Director and Officers Liability" },
-                  { icon: FileText, label: "Crime Coverage" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm border">
-                    <item.icon className="h-6 w-6 text-primary shrink-0" />
-                    <span className="font-medium">{item.label}</span>
+              {/* Fleet Gallery */}
+              <section className="py-8 bg-gray-50 rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="rounded-xl overflow-hidden shadow-lg">
+                      <img 
+                        src={paratransitImage1} 
+                        alt="Wheelchair accessible paratransit van" 
+                        className="w-full h-64 object-cover"
+                      />
+                    </div>
+                    <div className="rounded-xl overflow-hidden shadow-lg">
+                      <img 
+                        src={paratransitImage2} 
+                        alt="Paratransit vehicle for special needs transportation" 
+                        className="w-full h-64 object-cover"
+                      />
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Coverage Details */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">Coverage Details</h2>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <Shield className="h-6 w-6 text-primary" />
-                      Liability Coverage/Limits
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Up to <strong>$5,000,000 CSL</strong></span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Higher limits available at Underwriter's discretion</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Excess coverage up to <strong>$20,000,000</strong></span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <Car className="h-6 w-6 text-primary" />
-                      Physical Damage
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Minimum $500 deductible for comp/collision</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Minimum stated value: $10,000</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Values over $250,000 must be reinsured</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Units older than 10 years require Underwriting approval</span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <Bus className="h-6 w-6 text-primary" />
-                      Eligible Vehicles
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Sedans and vans with seating capacity up to 14 passengers</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Units may be equipped with wheelchair ramps or lifts</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Vehicles must have proper tie-downs for wheelchairs</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Written procedures for loading/unloading passengers required</span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <Accessibility className="h-6 w-6 text-accent" />
-                      Eligible Operations
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>For-Hire transportation of patients (contract or demand-response)</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Medicars & Ambulettes</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Social service organizations & medical facilities transport</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span>Minimum 85% revenue from NEMT operations required</span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Operations Requirements */}
-        <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-primary mb-8 text-center">Operations Requirements</h2>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                    <CheckCircle2 className="h-6 w-6 text-accent" />
-                    Standard Requirements
-                  </h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Insured must conform to all laws regarding matrons/aides on vehicles",
-                      "Patients must be belted in and strapped securely",
-                      "Contracts and/or financials may be requested for verification",
-                      "Not more than 15% revenue can come from taxi exposure",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 p-3 bg-white rounded-lg shadow-sm">
-                        <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
+              </section>
 
-                <div>
-                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                    <AlertTriangle className="h-6 w-6 text-amber-500" />
-                    Operations Requiring In-Depth Approval
-                  </h3>
-                  <ul className="space-y-3">
+              {/* Lines of Business */}
+              <section className="py-8 bg-secondary/20 rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-primary mb-4">Lines of Business</h2>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                      Comprehensive protection designed specifically for paratransit operations.
+                    </p>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                      "Ambulances or emergency vehicles equipped with lights and sirens",
-                      "Risks that provide any medical, paramedical or first-aid service",
-                      "Risks that transport oxygen",
+                      { icon: Building, label: "General Liability" },
+                      { icon: Car, label: "Auto Liability (Commercial)" },
+                      { icon: Shield, label: "One Way Coverage for Accidents" },
+                      { icon: Users, label: "Worker's Compensation" },
+                      { icon: Wrench, label: "Property Damage" },
+                      { icon: Briefcase, label: "Professional Liability With Retroactive Coverage" },
+                      { icon: AlertTriangle, label: "Sexual Abuse and Molestation Coverages" },
+                      { icon: Layers, label: "Excess Liability Up to $20,000,000" },
+                      { icon: Scale, label: "Director and Officers Liability" },
+                      { icon: FileText, label: "Crime Coverage" },
                     ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 p-3 bg-amber-50 rounded-lg border border-amber-200">
-                        <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground">{item}</span>
-                      </li>
+                      <div key={i} className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-sm border">
+                        <item.icon className="h-6 w-6 text-primary shrink-0" />
+                        <span className="font-medium">{item.label}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
+              </section>
+
+              {/* Coverage Details */}
+              <section className="py-8 bg-white rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-primary mb-4">Coverage Details</h2>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-3">
+                          <Shield className="h-6 w-6 text-primary" />
+                          Liability Coverage/Limits
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-3">
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Up to <strong>$5,000,000 CSL</strong></span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Higher limits available at Underwriter's discretion</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Excess coverage up to <strong>$20,000,000</strong></span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-3">
+                          <Car className="h-6 w-6 text-primary" />
+                          Physical Damage
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-3">
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Minimum $500 deductible for comp/collision</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Minimum stated value: $10,000</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Values over $250,000 must be reinsured</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Units older than 10 years require Underwriting approval</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-3">
+                          <Bus className="h-6 w-6 text-primary" />
+                          Eligible Vehicles
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-3">
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Sedans and vans with seating capacity up to 14 passengers</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Units may be equipped with wheelchair ramps or lifts</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Vehicles must have proper tie-downs for wheelchairs</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Written procedures for loading/unloading passengers required</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-3">
+                          <Accessibility className="h-6 w-6 text-accent" />
+                          Eligible Operations
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-3">
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>For-Hire transportation of patients (contract or demand-response)</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Medicars & Ambulettes</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Social service organizations & medical facilities transport</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span>Minimum 85% revenue from NEMT operations required</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* Operations Requirements */}
+              <section className="py-8 bg-muted/30 rounded-lg mb-8">
+                <div className="px-6">
+                  <h2 className="text-3xl font-bold text-primary mb-8 text-center">Operations Requirements</h2>
+                  
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                        <CheckCircle2 className="h-6 w-6 text-accent" />
+                        Standard Requirements
+                      </h3>
+                      <ul className="space-y-3">
+                        {[
+                          "Insured must conform to all laws regarding matrons/aides on vehicles",
+                          "Patients must be belted in and strapped securely",
+                          "Contracts and/or financials may be requested for verification",
+                          "Not more than 15% revenue can come from taxi exposure",
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-start gap-2 p-3 bg-white rounded-lg shadow-sm">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                            <span className="text-muted-foreground">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                        <AlertTriangle className="h-6 w-6 text-amber-500" />
+                        Operations Requiring In-Depth Approval
+                      </h3>
+                      <ul className="space-y-3">
+                        {[
+                          "Ambulances or emergency vehicles equipped with lights and sirens",
+                          "Risks that provide any medical, paramedical or first-aid service",
+                          "Risks that transport oxygen",
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-start gap-2 p-3 bg-amber-50 rounded-lg border border-amber-200">
+                            <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+                            <span className="text-muted-foreground">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Key Benefits */}
+              <section className="py-8 bg-primary text-white rounded-lg mb-8">
+                <div className="px-6">
+                  <h2 className="text-3xl font-bold mb-8 text-center">Key Benefits</h2>
+                  
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <Card className="bg-white/10 border-white/20">
+                      <CardContent className="pt-6">
+                        <Accessibility className="h-10 w-10 text-accent mb-4" />
+                        <h3 className="font-bold text-white mb-2">Specialized Coverage</h3>
+                        <p className="text-white/80 text-sm">
+                          Designed specifically for paratransit and NEMT operations with wheelchair accessibility
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-white/10 border-white/20">
+                      <CardContent className="pt-6">
+                        <DollarSign className="h-10 w-10 text-accent mb-4" />
+                        <h3 className="font-bold text-white mb-2">High Liability Limits</h3>
+                        <p className="text-white/80 text-sm">
+                          Up to $5,000,000 CSL with excess liability available up to $20,000,000
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-white/10 border-white/20">
+                      <CardContent className="pt-6">
+                        <AlertTriangle className="h-10 w-10 text-accent mb-4" />
+                        <h3 className="font-bold text-white mb-2">SAM Coverage</h3>
+                        <p className="text-white/80 text-sm">
+                          Sexual Abuse and Molestation coverage to protect against serious allegations
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-white/10 border-white/20">
+                      <CardContent className="pt-6">
+                        <Heart className="h-10 w-10 text-accent mb-4" />
+                        <h3 className="font-bold text-white mb-2">Patient Protection</h3>
+                        <p className="text-white/80 text-sm">
+                          Comprehensive coverage for vulnerable populations with special needs
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-white/10 border-white/20">
+                      <CardContent className="pt-6">
+                        <FileText className="h-10 w-10 text-accent mb-4" />
+                        <h3 className="font-bold text-white mb-2">D&O Liability</h3>
+                        <p className="text-white/80 text-sm">
+                          Directors and Officers liability coverage for business management protection
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-white/10 border-white/20">
+                      <CardContent className="pt-6">
+                        <Briefcase className="h-10 w-10 text-accent mb-4" />
+                        <h3 className="font-bold text-white mb-2">Professional Liability</h3>
+                        <p className="text-white/80 text-sm">
+                          Professional liability with retroactive coverage for comprehensive protection
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* FAQ Section */}
+              <section className="py-8 bg-secondary/20 rounded-lg">
+                <div className="px-6">
+                  <div className="text-center mb-10">
+                    <HelpCircle className="h-12 w-12 text-primary mx-auto mb-4" />
+                    <h2 className="text-3xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
+                    <p className="text-muted-foreground">Common questions about paratransit insurance coverage.</p>
+                  </div>
+                  
+                  <Accordion type="single" collapsible className="space-y-4">
+                    <AccordionItem value="limits" className="border rounded-lg px-6 bg-white">
+                      <AccordionTrigger className="text-left font-semibold">
+                        What liability limits are available for paratransit insurance?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        We offer liability coverage up to $5,000,000 CSL (Combined Single Limit). Higher limits are available at the Underwriter's discretion, and we can provide excess liability coverage up to $20,000,000 for larger operations that need additional protection.
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="vehicles" className="border rounded-lg px-6 bg-white">
+                      <AccordionTrigger className="text-left font-semibold">
+                        What types of vehicles are eligible for paratransit insurance?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        We cover sedans and vans with seating capacity up to 14 passengers. Vehicles may be equipped with wheelchair ramps or lifts. All vehicles must have proper tie-downs for wheelchairs during transport and must display written procedures for loading and unloading passengers in wheelchairs.
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="requirements" className="border rounded-lg px-6 bg-white">
+                      <AccordionTrigger className="text-left font-semibold">
+                        What are the eligibility requirements for coverage?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        To qualify for our paratransit insurance, your business must generate a minimum of 85% revenue from NEMT-type operations. Not more than 15% of your revenue can come from taxi-type exposures. We may request contracts and/or financials for verification.
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="sam" className="border rounded-lg px-6 bg-white">
+                      <AccordionTrigger className="text-left font-semibold">
+                        What is Sexual Abuse and Molestation (SAM) coverage?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        SAM coverage protects your business against allegations of sexual misconduct. Given the vulnerable populations served by paratransit providers, this critical coverage protects your business against serious allegations that could otherwise be financially devastating. Our policies include this important protection.
+                      </AccordionContent>
+                    </AccordionItem>
+
+                    <AccordionItem value="older-vehicles" className="border rounded-lg px-6 bg-white">
+                      <AccordionTrigger className="text-left font-semibold">
+                        Can I insure vehicles older than 10 years?
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground">
+                        Vehicles older than 10 years require Underwriting approval. A current mechanic's statement and photograph may be required at the Underwriter's discretion to verify the vehicle's condition and roadworthiness.
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
+              </section>
+            </div>
+
+            <div className="lg:col-span-1 hidden lg:block">
+              <div className="sticky top-4">
+                <QuickQuoteForm />
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Key Benefits */}
-        <section className="py-16 bg-primary text-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8 text-center">Key Benefits</h2>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Card className="bg-white/10 border-white/20">
-                  <CardContent className="pt-6">
-                    <Accessibility className="h-10 w-10 text-accent mb-4" />
-                    <h3 className="font-bold text-white mb-2">Specialized Coverage</h3>
-                    <p className="text-white/80 text-sm">
-                      Designed specifically for paratransit and NEMT operations with wheelchair accessibility
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white/10 border-white/20">
-                  <CardContent className="pt-6">
-                    <DollarSign className="h-10 w-10 text-accent mb-4" />
-                    <h3 className="font-bold text-white mb-2">High Liability Limits</h3>
-                    <p className="text-white/80 text-sm">
-                      Up to $5,000,000 CSL with excess liability available up to $20,000,000
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white/10 border-white/20">
-                  <CardContent className="pt-6">
-                    <AlertTriangle className="h-10 w-10 text-accent mb-4" />
-                    <h3 className="font-bold text-white mb-2">SAM Coverage</h3>
-                    <p className="text-white/80 text-sm">
-                      Sexual Abuse and Molestation coverage to protect against serious allegations
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white/10 border-white/20">
-                  <CardContent className="pt-6">
-                    <Heart className="h-10 w-10 text-accent mb-4" />
-                    <h3 className="font-bold text-white mb-2">Patient Protection</h3>
-                    <p className="text-white/80 text-sm">
-                      Comprehensive coverage for vulnerable populations with special needs
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white/10 border-white/20">
-                  <CardContent className="pt-6">
-                    <FileText className="h-10 w-10 text-accent mb-4" />
-                    <h3 className="font-bold text-white mb-2">D&O Liability</h3>
-                    <p className="text-white/80 text-sm">
-                      Directors and Officers liability coverage for business management protection
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white/10 border-white/20">
-                  <CardContent className="pt-6">
-                    <Briefcase className="h-10 w-10 text-accent mb-4" />
-                    <h3 className="font-bold text-white mb-2">Professional Liability</h3>
-                    <p className="text-white/80 text-sm">
-                      Professional liability with retroactive coverage for comprehensive protection
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-16 bg-secondary/20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-10">
-                <HelpCircle className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h2 className="text-3xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
-                <p className="text-muted-foreground">Common questions about paratransit insurance coverage.</p>
-              </div>
-              
-              <Accordion type="single" collapsible className="space-y-4">
-                <AccordionItem value="limits" className="border rounded-lg px-6 bg-white">
-                  <AccordionTrigger className="text-left font-semibold">
-                    What liability limits are available for paratransit insurance?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    We offer liability coverage up to $5,000,000 CSL (Combined Single Limit). Higher limits are available at the Underwriter's discretion, and we can provide excess liability coverage up to $20,000,000 for larger operations that need additional protection.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="vehicles" className="border rounded-lg px-6 bg-white">
-                  <AccordionTrigger className="text-left font-semibold">
-                    What types of vehicles are eligible for paratransit insurance?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    We cover sedans and vans with seating capacity up to 14 passengers. Vehicles may be equipped with wheelchair ramps or lifts. All vehicles must have proper tie-downs for wheelchairs during transport and must display written procedures for loading and unloading passengers in wheelchairs.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="requirements" className="border rounded-lg px-6 bg-white">
-                  <AccordionTrigger className="text-left font-semibold">
-                    What are the eligibility requirements for coverage?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    To qualify for our paratransit insurance, your business must generate a minimum of 85% revenue from NEMT-type operations. Not more than 15% of your revenue can come from taxi-type exposures. We may request contracts and/or financials for verification.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="sam" className="border rounded-lg px-6 bg-white">
-                  <AccordionTrigger className="text-left font-semibold">
-                    What is Sexual Abuse and Molestation (SAM) coverage?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    SAM coverage protects your business against allegations of sexual misconduct. Given the vulnerable populations served by paratransit providers, this critical coverage protects your business against serious allegations that could otherwise be financially devastating. Our policies include this important protection.
-                  </AccordionContent>
-                </AccordionItem>
-
-                <AccordionItem value="older-vehicles" className="border rounded-lg px-6 bg-white">
-                  <AccordionTrigger className="text-left font-semibold">
-                    Can I insure vehicles older than 10 years?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    Vehicles older than 10 years require Underwriting approval. A current mechanic's statement and photograph may be required at the Underwriter's discretion to verify the vehicle's condition and roadworthiness.
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
-          </div>
-        </section>
+        </div>
 
         {/* CTA Section */}
         <section className="py-20 bg-accent text-white">

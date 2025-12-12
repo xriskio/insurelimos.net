@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { FaqSchema } from "@/components/seo/FaqSchema";
 import { motorcoachFaqs } from "@/data/faqs";
+import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 
 export default function MotorcoachCoverage() {
   return (
@@ -51,257 +52,261 @@ export default function MotorcoachCoverage() {
           </div>
         </section>
 
-        {/* Introduction */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-start gap-6 mb-8">
-                <div className="hidden md:block shrink-0">
-                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Bus className="h-10 w-10 text-primary" />
+        {/* Main Content with Sidebar */}
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              {/* Introduction */}
+              <section className="py-8 bg-white rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="flex items-start gap-6 mb-8">
+                    <div className="hidden md:block shrink-0">
+                      <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center">
+                        <Bus className="h-10 w-10 text-primary" />
+                      </div>
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold text-primary mb-4">Comprehensive Coverage for Motorcoach Operations</h2>
+                      <p className="text-lg text-muted-foreground leading-relaxed">
+                        At InsureLimos.net, we understand the unique challenges faced by motorcoach and bus operators. Our specialized insurance programs are designed to provide comprehensive protection for charter bus companies, tour operators, intercity bus services, and casino shuttle operations across 18 states.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-primary mb-4">Comprehensive Coverage for Motorcoach Operations</h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    At InsureLimos.net, we understand the unique challenges faced by motorcoach and bus operators. Our specialized insurance programs are designed to provide comprehensive protection for charter bus companies, tour operators, intercity bus services, and casino shuttle operations across 18 states.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
-                {[
-                  "Charter bus companies",
-                  "Tour and sightseeing operators",
-                  "Intercity bus services",
-                  "Casino shuttle operators",
-                  "Church and religious groups",
-                  "Corporate shuttle services",
-                  "Sports team transportation",
-                  "Convention and event transportation",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 p-3 bg-primary/5 rounded-lg">
-                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-                    <span className="text-sm font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us */}
-        <section className="py-16 bg-primary text-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Our Motorcoach Insurance?</h2>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  "Specialized underwriting for charter and tour bus operations",
-                  "Competitive rates with flexible payment options",
-                  "Coverage for luxury coaches and high-value equipment",
-                  "Experienced claims handling with 24/7 support",
-                  "DOT and FMCSA compliance assistance",
-                  "Multi-state operating authority support",
-                ].map((benefit, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="h-6 w-6 text-accent shrink-0 mt-0.5" />
-                    <p className="text-white/90">{benefit}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Coverage Options */}
-        <section className="py-16 bg-secondary/20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">Comprehensive Coverage Options</h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  We offer a wide range of coverage options to protect your motorcoach operation.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Shield className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">Auto Liability</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Coverage meets or exceeds FMCSA requirements for interstate passenger carriers. Limits from $1.5M to $10M available for charter and tour operations.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Car className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">Physical Damage</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Comprehensive protection including collision, theft, vandalism, and weather damage. Coverage for high-value coaches, entertainment systems, and onboard amenities.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Building className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">General Liability</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Protection from third-party claims for bodily injury, property damage, and personal injury that may occur on your premises or during tour operations.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Users className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">Passenger Accident</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Medical payments coverage for passengers injured while boarding, riding, or exiting your motorcoach, regardless of fault.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Layers className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">Hired & Non-Owned Auto</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Coverage for vehicles you rent, borrow, or use that aren't owned by your company. Essential for overflow capacity needs.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-2 hover:border-primary/30 transition-colors">
-                  <CardHeader>
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Briefcase className="h-7 w-7 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">Cargo & Baggage</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      Protection for passengers' personal belongings and luggage during transit. Essential coverage for tour and charter operations.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Bus Types We Cover */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">Types of Buses We Cover</h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  From luxury touring coaches to mini buses, we have coverage solutions for all types of motorcoach operations.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-3 gap-6">
-                {[
-                  { title: "Luxury Touring Coaches", desc: "Full-size 45-56 passenger coaches with premium amenities" },
-                  { title: "Charter Buses", desc: "Standard charter buses for group transportation" },
-                  { title: "Mini Coaches", desc: "24-35 passenger coaches for smaller groups" },
-                  { title: "Executive Coaches", desc: "VIP and executive transportation coaches" },
-                  { title: "Double-Decker Buses", desc: "Sightseeing and tour double-decker buses" },
-                  { title: "Shuttle Buses", desc: "Casino, hotel, and corporate shuttle buses" },
-                ].map((type, i) => (
-                  <div key={i} className="p-6 bg-secondary/10 rounded-xl hover:bg-secondary/20 transition-colors">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                      <Bus className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="font-bold text-lg mb-2">{type.title}</h3>
-                    <p className="text-muted-foreground text-sm">{type.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Regulatory Compliance */}
-        <section className="py-16 bg-secondary/20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-4">DOT & FMCSA Compliance</h2>
-                <p className="text-lg text-muted-foreground">
-                  We help you meet all federal and state regulatory requirements.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-white p-8 rounded-xl shadow-sm">
-                  <FileText className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-3">Federal Filings</h3>
-                  <ul className="space-y-2">
+                  
+                  <div className="grid md:grid-cols-2 gap-4 mt-10">
                     {[
-                      "FMCSA Form MCS-90 endorsement",
-                      "DOT operating authority assistance",
-                      "Interstate carrier compliance",
-                      "USDOT number registration support",
+                      "Charter bus companies",
+                      "Tour and sightseeing operators",
+                      "Intercity bus services",
+                      "Casino shuttle operators",
+                      "Church and religious groups",
+                      "Corporate shuttle services",
+                      "Sports team transportation",
+                      "Convention and event transportation",
                     ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
-                        <span>{item}</span>
-                      </li>
+                      <div key={i} className="flex items-center gap-2 p-3 bg-primary/5 rounded-lg">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+                        <span className="text-sm font-medium">{item}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-                
-                <div className="bg-white p-8 rounded-xl shadow-sm">
-                  <Map className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-3">State Requirements</h3>
-                  <ul className="space-y-2">
+              </section>
+
+              {/* Why Choose Us */}
+              <section className="py-8 bg-primary text-white rounded-lg mb-8">
+                <div className="px-6">
+                  <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Our Motorcoach Insurance?</h2>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
                     {[
-                      "Multi-state operating authority",
-                      "State-specific filing requirements",
-                      "PUC/PSC compliance assistance",
-                      "Certificate of insurance filing",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-muted-foreground">
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
-                        <span>{item}</span>
-                      </li>
+                      "Specialized underwriting for charter and tour bus operations",
+                      "Competitive rates with flexible payment options",
+                      "Coverage for luxury coaches and high-value equipment",
+                      "Experienced claims handling with 24/7 support",
+                      "DOT and FMCSA compliance assistance",
+                      "Multi-state operating authority support",
+                    ].map((benefit, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <CheckCircle2 className="h-6 w-6 text-accent shrink-0 mt-0.5" />
+                        <p className="text-white/90">{benefit}</p>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
+              </section>
+
+              {/* Coverage Options */}
+              <section className="py-8 bg-secondary/20 rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-primary mb-4">Comprehensive Coverage Options</h2>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                      We offer a wide range of coverage options to protect your motorcoach operation.
+                    </p>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                          <Shield className="h-7 w-7 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">Auto Liability</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Coverage meets or exceeds FMCSA requirements for interstate passenger carriers. Limits from $1.5M to $10M available for charter and tour operations.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                          <Car className="h-7 w-7 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">Physical Damage</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Comprehensive protection including collision, theft, vandalism, and weather damage. Coverage for high-value coaches, entertainment systems, and onboard amenities.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                          <Building className="h-7 w-7 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">General Liability</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Protection from third-party claims for bodily injury, property damage, and personal injury that may occur on your premises or during tour operations.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                          <Users className="h-7 w-7 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">Passenger Accident</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Medical payments coverage for passengers injured while boarding, riding, or exiting your motorcoach, regardless of fault.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                          <Layers className="h-7 w-7 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">Hired & Non-Owned Auto</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Coverage for vehicles you rent, borrow, or use that aren't owned by your company. Essential for overflow capacity needs.
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-2 hover:border-primary/30 transition-colors">
+                      <CardHeader>
+                        <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                          <Briefcase className="h-7 w-7 text-primary" />
+                        </div>
+                        <CardTitle className="text-xl">Cargo & Baggage</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">
+                          Protection for passengers' personal belongings and luggage during transit. Essential coverage for tour and charter operations.
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </section>
+
+              {/* Bus Types We Cover */}
+              <section className="py-8 bg-white rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-primary mb-4">Types of Buses We Cover</h2>
+                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                      From luxury touring coaches to mini buses, we have coverage solutions for all types of motorcoach operations.
+                    </p>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {[
+                      { title: "Luxury Touring Coaches", desc: "Full-size 45-56 passenger coaches with premium amenities" },
+                      { title: "Charter Buses", desc: "Standard charter buses for group transportation" },
+                      { title: "Mini Coaches", desc: "24-35 passenger coaches for smaller groups" },
+                      { title: "Executive Coaches", desc: "VIP and executive transportation coaches" },
+                      { title: "Double-Decker Buses", desc: "Sightseeing and tour double-decker buses" },
+                      { title: "Shuttle Buses", desc: "Casino, hotel, and corporate shuttle buses" },
+                    ].map((type, i) => (
+                      <div key={i} className="p-6 bg-secondary/10 rounded-xl hover:bg-secondary/20 transition-colors">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                          <Bus className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-bold text-lg mb-2">{type.title}</h3>
+                        <p className="text-muted-foreground text-sm">{type.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* Regulatory Compliance */}
+              <section className="py-8 bg-secondary/20 rounded-lg mb-8">
+                <div className="px-6">
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl font-bold text-primary mb-4">DOT & FMCSA Compliance</h2>
+                    <p className="text-lg text-muted-foreground">
+                      We help you meet all federal and state regulatory requirements.
+                    </p>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="bg-white p-8 rounded-xl shadow-sm">
+                      <FileText className="h-10 w-10 text-primary mb-4" />
+                      <h3 className="text-xl font-bold mb-3">Federal Filings</h3>
+                      <ul className="space-y-2">
+                        {[
+                          "FMCSA Form MCS-90 endorsement",
+                          "DOT operating authority assistance",
+                          "Interstate carrier compliance",
+                          "USDOT number registration support",
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-white p-8 rounded-xl shadow-sm">
+                      <Map className="h-10 w-10 text-primary mb-4" />
+                      <h3 className="text-xl font-bold mb-3">State Requirements</h3>
+                      <ul className="space-y-2">
+                        {[
+                          "Multi-state operating authority",
+                          "State-specific filing requirements",
+                          "PUC/PSC compliance assistance",
+                          "Certificate of insurance filing",
+                        ].map((item, i) => (
+                          <li key={i} className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* FAQ Section */}
+              <FaqSchema faqs={motorcoachFaqs} title="Motorcoach Insurance FAQs" />
+            </div>
+
+            {/* Sidebar with QuickQuoteForm */}
+            <div className="hidden lg:block lg:col-span-1">
+              <div className="sticky top-4">
+                <QuickQuoteForm />
               </div>
             </div>
           </div>
-        </section>
-
-        {/* FAQ Section */}
-        <FaqSchema faqs={motorcoachFaqs} title="Motorcoach Insurance FAQs" />
+        </div>
 
         {/* CTA Section */}
         <section className="py-16 bg-primary text-white">
