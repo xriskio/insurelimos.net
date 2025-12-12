@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/accordion";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 
+import escooterImage from "@assets/generated_images/electric_scooter_sharing_service.png";
+import ebikeImage from "@assets/generated_images/electric_bike_sharing_service.png";
+
 const faqs = [
   {
     question: "What is dockless mobility insurance?",
@@ -108,19 +111,98 @@ export default function DocklessMobilityCoverage() {
                 </p>
               </section>
 
-              {/* Municipal Requirements Alert */}
-              <section className="mb-12 bg-accent/10 rounded-lg p-6 border-2 border-accent">
-                <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
-                  <AlertTriangle className="h-6 w-6 text-accent" />
-                  City of Los Angeles Requirements
-                </h3>
-                <div className="space-y-3 text-muted-foreground">
-                  <p><strong>General Liability:</strong> Minimum $1,000,000 per occurrence, ISO Form CG 00 01</p>
-                  <p><strong>Auto Liability:</strong> Minimum $1,000,000 limits</p>
-                  <p><strong>Workers' Compensation:</strong> Statutory limits, $1,000,000 Employers' Liability</p>
-                  <p><strong>Umbrella/Excess:</strong> Minimum $1,000,000 per occurrence</p>
-                  <p><strong>Performance Bond:</strong> $100 per vehicle</p>
-                  <p className="text-sm italic">City of Los Angeles, its officers, agents and employees must be named as Primary additional insureds.</p>
+              {/* Images */}
+              <section className="mb-12">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="rounded-xl overflow-hidden shadow-lg">
+                    <img src={escooterImage} alt="Electric scooter sharing service" className="w-full h-48 object-cover" />
+                    <div className="p-4 bg-white">
+                      <h3 className="font-bold text-primary">E-Scooter Programs</h3>
+                      <p className="text-sm text-muted-foreground">Shared electric scooter fleet insurance</p>
+                    </div>
+                  </div>
+                  <div className="rounded-xl overflow-hidden shadow-lg">
+                    <img src={ebikeImage} alt="Electric bike sharing service" className="w-full h-48 object-cover" />
+                    <div className="p-4 bg-white">
+                      <h3 className="font-bold text-primary">E-Bike Programs</h3>
+                      <p className="text-sm text-muted-foreground">Shared electric bicycle fleet insurance</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Multi-City Requirements */}
+              <section className="mb-12">
+                <h2 className="text-3xl font-bold text-primary mb-6 flex items-center gap-2">
+                  <AlertTriangle className="h-8 w-8 text-accent" />
+                  Municipal Insurance Requirements
+                </h2>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Each city has specific insurance requirements for shared micro-mobility operators. We help you meet all municipal requirements across California and Nevada.
+                </p>
+
+                {/* San Francisco SFMTA */}
+                <div className="mb-6 bg-blue-50 rounded-lg p-6 border-2 border-blue-200">
+                  <h3 className="text-xl font-bold text-primary mb-4">San Francisco (SFMTA)</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>Commercial General Liability:</strong> $2,000,000 per occurrence, $5,000,000 general aggregate</p>
+                    <p><strong>Workers' Compensation:</strong> Statutory limits, $1,000,000 Employers' Liability</p>
+                    <p><strong>Auto Liability:</strong> $1,000,000 minimum</p>
+                    <p><strong>Umbrella/Excess:</strong> $1,000,000 per occurrence</p>
+                    <p className="text-sm italic">City and County of San Francisco must be named as additional insured.</p>
+                  </div>
+                </div>
+
+                {/* City of Los Angeles */}
+                <div className="mb-6 bg-accent/10 rounded-lg p-6 border-2 border-accent">
+                  <h3 className="text-xl font-bold text-primary mb-4">City of Los Angeles</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>General Liability:</strong> $1,000,000 per occurrence, ISO Form CG 00 01</p>
+                    <p><strong>Auto Liability:</strong> $1,000,000 limits</p>
+                    <p><strong>Workers' Compensation:</strong> Statutory limits, $1,000,000 Employers' Liability</p>
+                    <p><strong>Umbrella/Excess:</strong> $1,000,000 per occurrence</p>
+                    <p><strong>Performance Bond:</strong> $100 per vehicle</p>
+                    <p className="text-sm italic">City of Los Angeles, its officers, agents and employees must be named as Primary additional insureds.</p>
+                  </div>
+                </div>
+
+                {/* San Diego */}
+                <div className="mb-6 bg-green-50 rounded-lg p-6 border-2 border-green-200">
+                  <h3 className="text-xl font-bold text-primary mb-4">City of San Diego</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>General Liability:</strong> $2,000,000 per occurrence, $4,000,000 aggregate</p>
+                    <p><strong>Umbrella/Excess:</strong> $4,000,000 umbrella policy</p>
+                    <p><strong>Workers' Compensation:</strong> Statutory limits</p>
+                    <p><strong>Performance Bond:</strong> $65 per device</p>
+                    <p><strong>Permit Fee:</strong> $150 per device annually</p>
+                    <p className="text-sm italic">Must indemnify City of San Diego from all liability claims.</p>
+                  </div>
+                </div>
+
+                {/* San Jose */}
+                <div className="mb-6 bg-purple-50 rounded-lg p-6 border-2 border-purple-200">
+                  <h3 className="text-xl font-bold text-primary mb-4">City of San Jose</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>General Liability:</strong> $5,000,000 per occurrence (LA County standard)</p>
+                    <p><strong>Umbrella/Excess:</strong> $5,000,000+ umbrella policy</p>
+                    <p><strong>Workers' Compensation:</strong> Statutory limits</p>
+                    <p><strong>Application Fee:</strong> $3,351 annual permit fee</p>
+                    <p><strong>Device Fee:</strong> $139 per scooter annually</p>
+                    <p><strong>Deposit:</strong> $10,000 property repair deposit</p>
+                    <p className="text-sm italic">Proof of insurance required before permit issuance.</p>
+                  </div>
+                </div>
+
+                {/* Las Vegas */}
+                <div className="mb-6 bg-orange-50 rounded-lg p-6 border-2 border-orange-200">
+                  <h3 className="text-xl font-bold text-primary mb-4">City of Las Vegas</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>General Liability:</strong> $5,000,000 per occurrence (industry standard)</p>
+                    <p><strong>Umbrella/Excess:</strong> $5,000,000+ umbrella policy</p>
+                    <p><strong>Cyber/E&O Insurance:</strong> $2,000,000 minimum</p>
+                    <p><strong>Workers' Compensation:</strong> Statutory limits</p>
+                    <p className="text-sm italic">Higher limits recommended for faster permit approvals in Nevada.</p>
+                  </div>
                 </div>
               </section>
 
