@@ -23,7 +23,7 @@ const services = [
     description: "Comprehensive coverage for luxury transportation services. Whether you run a single stretch limo or a fleet of luxury sedans, we protect your high-value assets and liability.",
     image: limoImage,
     features: ["Liability & Physical Damage", "Chauffeur Coverage", "Loss of Use", "Personal Effects"],
-    href: "/coverage/limo"
+    quoteHref: "/quote/limo"
   },
   {
     id: "taxi",
@@ -31,7 +31,7 @@ const services = [
     description: "Specialized protection for taxi fleets and individual operators. We understand the unique risks of point-to-point transport in urban environments.",
     image: taxiImage,
     features: ["24/7 Claims Service", "Driver Protection", "Passenger Accident", "Competitive Fleet Rates"],
-    href: "/coverage/taxi"
+    quoteHref: "/quote/taxi"
   },
   {
     id: "tnc",
@@ -39,7 +39,7 @@ const services = [
     description: "Coverage solutions for Transportation Network Companies and rideshare drivers (Uber, Lyft, etc.). Bridging the gap between personal and commercial policies.",
     image: tncImage,
     features: ["Period 1, 2 & 3 Coverage", "Gap Insurance", "Deductible Reimbursement", "Regulatory Compliance"],
-    href: "/coverage/tnc"
+    quoteHref: "/quote/tnc"
   },
   {
     id: "nemt",
@@ -47,7 +47,7 @@ const services = [
     description: "Specialized coverage for Non-Emergency Medical Transportation. Essential for businesses transporting patients to appointments, dialysis, and therapy.",
     image: nemtImage,
     features: ["General & Professional Liability", "Abuse & Molestation", "Loading & Unloading", "Wheelchair Equipment"],
-    href: "/coverage/nemt"
+    quoteHref: "/quote/nemt"
   },
   {
     id: "tcp",
@@ -55,7 +55,7 @@ const services = [
     description: "Tailored insurance for Transportation Charter Party carriers in California. We ensure you meet all CPUC requirements for your permit.",
     image: tcpImage,
     features: ["PUC Filings", "PL & PD Limits", "Workers Compensation", "Certificate Management"],
-    href: "/california-tcp-insurance"
+    quoteHref: "/quote/tnc"
   },
   {
     id: "bus",
@@ -63,7 +63,7 @@ const services = [
     description: "Comprehensive protection for bus and motorcoach operators. From charter buses to tour operators, we handle fleets of all sizes.",
     image: busImage,
     features: ["Passenger Liability", "Medical Payments", "Emergency Evacuation", "Interstate Filings"],
-    href: "/coverage/bus"
+    quoteHref: "/quote/transport"
   },
   {
     id: "school-bus",
@@ -71,7 +71,7 @@ const services = [
     description: "Safety-first coverage for private school bus contractors. Protecting the most precious cargo with high-limit liability and specialized terms.",
     image: schoolBusImage,
     features: ["Student Accident", "Contract Liability", "Sexual Misconduct", "Auto Liability"],
-    href: "/coverage/school-bus"
+    quoteHref: "/quote/transport"
   },
   {
     id: "sprinter",
@@ -79,7 +79,7 @@ const services = [
     description: "Commercial auto insurance for Sprinter vans, cargo vans, and passenger shuttles. Perfect for last-mile delivery or executive transport.",
     image: sprinterImage,
     features: ["Cargo Insurance", "Non-Owned Auto", "Roadside Assistance", "Custom Equipment"],
-    href: "/coverage/sprinter"
+    quoteHref: "/quote/transport"
   },
   {
     id: "medical-daycare",
@@ -87,14 +87,14 @@ const services = [
     description: "Transport insurance for adult day care and medical facility shuttles. Reliable coverage for scheduled transport services.",
     image: medicalDaycareImage,
     features: ["Door-to-Door Liability", "Elderly Care Transport", "Scheduled Routes", "Fleet Safety Programs"],
-    href: "/coverage/nemt"
+    quoteHref: "/quote/nemt"
   }
 ];
 
 const serviceSchemaData = services.map(s => ({
   name: s.title,
   description: s.description,
-  url: s.href,
+  url: s.quoteHref,
 }));
 
 const breadcrumbs = [
@@ -153,10 +153,9 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                  <Link href={service.href}>
-                    <Button variant="outline" className="w-full group">
-                      Learn More
-                      <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  <Link href={service.quoteHref}>
+                    <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold">
+                      Get Quote
                     </Button>
                   </Link>
                 </CardContent>

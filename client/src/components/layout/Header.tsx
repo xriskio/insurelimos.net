@@ -66,13 +66,33 @@ export function Header() {
         { label: "Fleet Insurance", href: "/services/fleet-insurance" },
         { label: "Risk Management", href: "/services/risk-management" },
       ]
+    }
+  ];
+
+  const quotesColumns: DropdownColumn[] = [
+    {
+      title: "Commercial Auto",
+      items: [
+        { label: "Limousine Quote", href: "/quote/limo" },
+        { label: "Taxi Quote", href: "/quote/taxi" },
+        { label: "TNC / Rideshare Quote", href: "/quote/tnc" },
+        { label: "NEMT Quote", href: "/quote/nemt" },
+      ]
     },
     {
-      title: "Get a Quote",
+      title: "Specialty Vehicles",
       items: [
-        { label: "Uber Black Quote", href: "/quote/tnc" },
-        { label: "Limousine Quote", href: "/quote/limo" },
-        { label: "NEMT Quote", href: "/quote/nemt" },
+        { label: "Bus & Motorcoach Quote", href: "/quote/transport" },
+        { label: "School Bus Quote", href: "/quote/transport" },
+        { label: "Sprinter & Van Quote", href: "/quote/transport" },
+      ]
+    },
+    {
+      title: "Additional Coverage",
+      items: [
+        { label: "Workers' Comp Quote", href: "/quote/workers-comp" },
+        { label: "Excess Liability Quote", href: "/quote/excess-liability" },
+        { label: "Cyber Liability Quote", href: "/quote/cyber-liability" },
         { label: "All Quote Types", href: "/quote" },
       ]
     }
@@ -112,6 +132,7 @@ export function Header() {
     { label: "Home", href: "/" },
     { label: "Services", href: "/services", hasDropdown: true, columns: servicesColumns },
     { label: "Coverage", href: "/coverage", hasDropdown: true, columns: coverageColumns },
+    { label: "Quotes", href: "/quote", hasDropdown: true, columns: quotesColumns },
     { label: "Client Support", href: "/client-support", hasDropdown: true, columns: supportColumns },
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
