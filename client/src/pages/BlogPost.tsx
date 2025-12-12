@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, ArrowLeft, User } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, User, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
 import { format } from "date-fns";
 import { Seo, ArticleSchema, BreadcrumbSchema } from "@/components/seo/Seo";
 
@@ -51,6 +52,8 @@ export default function BlogPost() {
       setLoading(false);
     }
   };
+
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   if (loading) {
     return (
@@ -112,70 +115,104 @@ export default function BlogPost() {
       <BreadcrumbSchema items={breadcrumbs} />
       <Header />
       <main id="main-content" role="main" className="flex-1">
-        {/* Hero Image */}
-        <div className="relative h-64 md:h-96 overflow-hidden">
+        {/* Hero Banner */}
+        <div className="relative h-72 md:h-96 overflow-hidden">
           <img
             src={post.imageUrl || defaultImage}
             alt={post.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+            <div className="container mx-auto">
+              <Link href="/blog">
+                <Button variant="ghost" size="sm" className="mb-4 text-white hover:text-white hover:bg-white/20">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Blog
+                </Button>
+              </Link>
+              <Badge className="mb-3 bg-accent text-white">{post.category}</Badge>
+              <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 max-w-4xl">{post.title}</h1>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-white/80">
+                <span className="flex items-center gap-1">
+                  <User className="w-4 h-4" />
+                  {post.author}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  {format(new Date(post.createdAt), "MMMM d, yyyy")}
+                </span>
+                {post.readTime && (
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-4 h-4" />
+                    {post.readTime}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="container mx-auto px-4 -mt-20 relative z-10">
-          <Card className="max-w-4xl mx-auto">
-            <CardContent className="p-8">
-              {/* Article Header */}
-              <div className="mb-8">
-                <Link href="/blog">
-                  <Button variant="ghost" size="sm" className="mb-4">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Blog
-                  </Button>
-                </Link>
-                
-                <Badge className="mb-4">{post.category}</Badge>
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">{post.title}</h1>
-                
-                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <User className="w-4 h-4" />
-                    {post.author}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {format(new Date(post.createdAt), "MMMM d, yyyy")}
-                  </span>
-                  {post.readTime && (
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {post.readTime}
-                    </span>
-                  )}
-                </div>
-              </div>
+        {/* Content with Sidebar */}
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+              <Card>
+                <CardContent className="p-6 md:p-8">
+                  {/* Article Content */}
+                  <div 
+                    className="prose prose-slate max-w-none prose-headings:text-primary prose-a:text-primary"
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                  />
 
-              {/* Article Content */}
-              <div 
-                className="prose prose-slate max-w-none"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
+                  {/* Share Section */}
+                  <div className="mt-8 pt-6 border-t">
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm font-medium flex items-center gap-2">
+                        <Share2 className="w-4 h-4" /> Share this article:
+                      </span>
+                      <div className="flex gap-2">
+                        <a 
+                          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
+                          aria-label="Share on Facebook"
+                        >
+                          <Facebook className="w-4 h-4" />
+                        </a>
+                        <a 
+                          href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-sky-500 text-white hover:bg-sky-600 transition"
+                          aria-label="Share on Twitter"
+                        >
+                          <Twitter className="w-4 h-4" />
+                        </a>
+                        <a 
+                          href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(post.title)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-2 rounded-full bg-blue-700 text-white hover:bg-blue-800 transition"
+                          aria-label="Share on LinkedIn"
+                        >
+                          <Linkedin className="w-4 h-4" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
-              {/* CTA */}
-              <div className="mt-12 p-6 bg-primary/5 rounded-lg text-center">
-                <h3 className="text-xl font-bold mb-2">Ready to Get Protected?</h3>
-                <p className="text-muted-foreground mb-4">
-                  Get a customized insurance quote for your transportation business today.
-                </p>
-                <Link href="/quote">
-                  <Button size="lg">Get a Free Quote</Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              <QuickQuoteForm />
+            </div>
+          </div>
         </div>
-
-        <div className="py-16" />
       </main>
       <Footer />
     </div>
