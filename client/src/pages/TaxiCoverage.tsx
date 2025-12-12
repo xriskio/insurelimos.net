@@ -167,7 +167,7 @@ export default function TaxiCoverage() {
                             The foundation of any commercial auto policy. It protects against financial loss if you or your drivers are found at fault for an accident that injures others or damages their property.
                           </p>
                           <p className="text-muted-foreground mb-4">
-                            Liability limits: <strong>$750,000, $1,000,000, $1,500,000, or $5,000,000</strong> Combined Single Limit. Higher limits available upon request. Coverage includes PIP, UM, UIM, and medical payments depending on state requirements.
+                            Liability limits starting at <strong>$100,000/$300,000</strong> split limits up to <strong>$1,000,000</strong> Combined Single Limit. Higher limits available upon request. Coverage includes PIP, UM, UIM, and medical payments depending on state requirements.
                           </p>
                           <Link href="/coverage/auto-liability">
                             <Button variant="outline" className="border-primary text-primary hover:bg-primary/5">
@@ -361,7 +361,11 @@ export default function TaxiCoverage() {
                         <ul className="space-y-2">
                           <li className="flex items-center gap-2 text-muted-foreground">
                             <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
-                            <span>$750,000 / $1M / $1.5M / $5M CSL</span>
+                            <span>$100,000/$300,000 split limits</span>
+                          </li>
+                          <li className="flex items-center gap-2 text-muted-foreground">
+                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
+                            <span>Up to $1,000,000 CSL available</span>
                           </li>
                           <li className="flex items-center gap-2 text-muted-foreground">
                             <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
@@ -370,10 +374,6 @@ export default function TaxiCoverage() {
                           <li className="flex items-center gap-2 text-muted-foreground">
                             <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
                             <span>PIP where applicable</span>
-                          </li>
-                          <li className="flex items-center gap-2 text-muted-foreground">
-                            <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
-                            <span>UM/UIM up to $1M available</span>
                           </li>
                         </ul>
                       </CardContent>
