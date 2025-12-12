@@ -26,57 +26,57 @@ const defaultCoverageOptions: CoverageOption[] = [
     icon: Shield,
     title: "Auto Liability",
     description: "The foundation of any commercial auto policy. It protects against financial loss if you or your drivers are found at fault for an accident that injures others or damages their property.",
-    details: "Liability limits: $750,000, $1,000,000, $1,500,000, or $5,000,000 Combined Single Limit. Higher limits available upon request. Coverage includes PIP, UM, UIM, and medical payments depending on state requirements.",
-    link: "/quote/public-auto"
+    details: "Required by law for all commercial vehicles. Limits typically range from $750,000 to $5 Million depending on vehicle capacity and regulatory requirements (PUC/DOT).",
+    link: "/coverage/auto-liability"
   },
   {
     icon: Car,
     title: "Auto Physical Damage",
     description: "Covers the cost to repair or replace your vehicle if it's damaged in an accident, stolen, vandalized, or damaged by fire or weather.",
-    details: "Deductibles starting as low as $1,000 for specified perils and collision coverage. Includes Collision (accident) and Comprehensive (theft, fire, glass, etc.) coverage. Roadside Coverage subject to $300.00 aggregate per covered auto per policy period. Windshield Replacement covered at $100 deductible. Windshield chip repair without deductible.",
-    link: "/quote/public-auto"
+    details: "Includes Collision (accidents) and Comprehensive (theft, fire, glass, etc.) coverage. Essential for protecting your fleet investment.",
+    link: "/coverage/physical-damage"
   },
   {
     icon: Users,
     title: "Workers' Compensation",
     description: "Provides medical benefits and wage replacement to employees injured on the job. Mandatory for businesses with employees in California.",
     details: "Protects your business from lawsuits related to workplace injuries. Covers medical bills, rehabilitation costs, and lost wages.",
-    link: "/quote/workers-comp"
+    link: "/coverage/workers-comp"
   },
   {
     icon: Building,
     title: "General Liability",
-    description: "Protects your business from third-party claims of bodily injury or property damage that occur as a result of your business operations (non-driving).",
-    details: "Limits up to $5 million. Higher liability limits available upon request. Crucial for the non-auto exposures at your office, advertising injury, or accidental property damage not involving the vehicle itself.",
-    link: "/quote/public-auto"
+    description: "Protects your business from third-party claims of bodily injury or property damage that occur on your premises or as a result of your business operations (non-driving).",
+    details: "Crucial for slip-and-fall accidents at your office, advertising injury, or customer property damage not involving the vehicle itself.",
+    link: "/coverage/general-liability"
   },
   {
     icon: Wrench,
     title: "Garage Liability",
     description: "Essential for transportation companies that maintain their own fleet. Covers liability arising from garage operations including vehicle maintenance and repair.",
     details: "Includes Garagekeepers Legal Liability to protect customer vehicles in your care, custody, and control. Hired & non-owned coverage also available.",
-    link: "/quote/public-auto"
+    link: "/coverage/garage-liability"
   },
   {
     icon: Layers,
     title: "Excess Insurance",
-    description: "Provides higher liability limits beyond your primary policy. Often required for high-profile contracts, airports, or managed care.",
-    details: "Following form excess liability available up to $10 million x $5 million. Excess coverage limits available up to $20,000,000. Acts as a safety net for catastrophic claims.",
-    link: "/quote/excess-liability"
+    description: "Provides higher liability limits beyond your primary policy. Often required for high-profile contracts, airports, or municipal bids.",
+    details: "Can extend coverage limits to $10 Million, $20 Million or more. Acts as a safety net for catastrophic claims.",
+    link: "/coverage/excess-liability"
   },
   {
     icon: Home,
     title: "Commercial Property",
     description: "Protects your physical business assets, including your office building, furniture, computers, and tools.",
     details: "Can be bundled with General Liability in a Business Owners Policy (BOP) for cost savings.",
-    link: "/quote/public-auto"
+    link: "/coverage/commercial-property"
   },
   {
     icon: AlertTriangle,
     title: "Cyber Liability",
     description: "Protection against data breaches and cyber attacks. Essential for transportation companies handling sensitive client data and payment information.",
     details: "Covers notification costs, credit monitoring, legal fees, and fines associated with data breaches.",
-    link: "/quote/cyber-liability"
+    link: "/coverage/cyber-liability"
   }
 ];
 

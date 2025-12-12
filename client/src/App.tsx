@@ -58,6 +58,14 @@ import MotorcoachLanding from "@/pages/landing/MotorcoachLanding";
 import TaxiLanding from "@/pages/landing/TaxiLanding";
 import SchoolBusLanding from "@/pages/landing/SchoolBusLanding";
 import TncLanding from "@/pages/landing/TncLanding";
+import AutoLiabilityCoverage from "@/pages/AutoLiabilityCoverage";
+import PhysicalDamageCoverage from "@/pages/PhysicalDamageCoverage";
+import GeneralLiabilityCoverage from "@/pages/GeneralLiabilityCoverage";
+import GarageLiabilityCoverage from "@/pages/GarageLiabilityCoverage";
+import CommercialPropertyCoverage from "@/pages/CommercialPropertyCoverage";
+import HiredNonOwnedCoverage from "@/pages/HiredNonOwnedCoverage";
+import WorkersCompCoverage from "@/pages/WorkersCompCoverage";
+import CyberLiabilityCoverage from "@/pages/CyberLiabilityCoverage";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -92,6 +100,14 @@ function Router() {
       <Route path="/coverage/uber-black" component={UberBlackCoverage} />
       <Route path="/coverage/excess-liability" component={ExcessLiabilityCoverage} />
       <Route path="/coverage/excess-insurance.html" component={ExcessLiabilityCoverage} />
+      <Route path="/coverage/auto-liability" component={AutoLiabilityCoverage} />
+      <Route path="/coverage/physical-damage" component={PhysicalDamageCoverage} />
+      <Route path="/coverage/general-liability" component={GeneralLiabilityCoverage} />
+      <Route path="/coverage/garage-liability" component={GarageLiabilityCoverage} />
+      <Route path="/coverage/commercial-property" component={CommercialPropertyCoverage} />
+      <Route path="/coverage/hired-non-owned" component={HiredNonOwnedCoverage} />
+      <Route path="/coverage/workers-comp" component={WorkersCompCoverage} />
+      <Route path="/coverage/cyber-liability" component={CyberLiabilityCoverage} />
       <Route path="/client" component={Home} />
       <Route path="/california-tcp-insurance" component={CaliforniaTcpInsurance} />
       <Route path="/tcp-insurance" component={CaliforniaTcpInsurance} />
