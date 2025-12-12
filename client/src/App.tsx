@@ -66,6 +66,10 @@ import CommercialPropertyCoverage from "@/pages/CommercialPropertyCoverage";
 import HiredNonOwnedCoverage from "@/pages/HiredNonOwnedCoverage";
 import WorkersCompCoverage from "@/pages/WorkersCompCoverage";
 import CyberLiabilityCoverage from "@/pages/CyberLiabilityCoverage";
+import DocklessMobilityCoverage from "@/pages/DocklessMobilityCoverage";
+import MobilityCoverage from "@/pages/MobilityCoverage";
+import PublicTransitForHireCoverage from "@/pages/PublicTransitForHireCoverage";
+import PersonalDeliveryDevicesCoverage from "@/pages/PersonalDeliveryDevicesCoverage";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -108,6 +112,10 @@ function Router() {
       <Route path="/coverage/hired-non-owned" component={HiredNonOwnedCoverage} />
       <Route path="/coverage/workers-comp" component={WorkersCompCoverage} />
       <Route path="/coverage/cyber-liability" component={CyberLiabilityCoverage} />
+      <Route path="/coverage/dockless-mobility" component={DocklessMobilityCoverage} />
+      <Route path="/coverage/mobility" component={MobilityCoverage} />
+      <Route path="/coverage/public-transit-for-hire" component={PublicTransitForHireCoverage} />
+      <Route path="/coverage/personal-delivery-devices" component={PersonalDeliveryDevicesCoverage} />
       <Route path="/client" component={Home} />
       <Route path="/california-tcp-insurance" component={CaliforniaTcpInsurance} />
       <Route path="/tcp-insurance" component={CaliforniaTcpInsurance} />
