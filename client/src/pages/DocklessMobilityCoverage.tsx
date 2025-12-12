@@ -204,6 +204,44 @@ export default function DocklessMobilityCoverage() {
                     <p className="text-sm italic">Higher limits recommended for faster permit approvals in Nevada.</p>
                   </div>
                 </div>
+
+                {/* Santa Monica */}
+                <div className="mb-6 bg-teal-50 rounded-lg p-6 border-2 border-teal-200">
+                  <h3 className="text-xl font-bold text-primary mb-4">City of Santa Monica</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>General Liability:</strong> $5,000,000 per occurrence (occurrence basis)</p>
+                    <p><strong>Workers' Compensation:</strong> California statutory limits, $1,000,000 Employers' Liability</p>
+                    <p><strong>Coverage Must Include:</strong> Products/completed operations, property damage, bodily injury, personal/advertising injury</p>
+                    <p><strong>Permit Fee:</strong> $20,000/year operator fee + $130/year per device + $1/device/day PROW fee</p>
+                    <p className="text-sm italic">City of Santa Monica must be named as additional insured. 30-day cancellation notice required.</p>
+                  </div>
+                </div>
+
+                {/* Long Beach */}
+                <div className="mb-6 bg-cyan-50 rounded-lg p-6 border-2 border-cyan-200">
+                  <h3 className="text-xl font-bold text-primary mb-4">City of Long Beach</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>General Liability:</strong> Commercial liability insurance required per CA AB 371</p>
+                    <p><strong>State Requirement:</strong> $10,000+ per person for personal injury or death (CA AB 371)</p>
+                    <p><strong>Indemnification:</strong> Must indemnify City of Long Beach</p>
+                    <p><strong>Liability Waiver:</strong> City waiver must be included in app sign-up process</p>
+                    <p><strong>Fleet Size:</strong> 500-1,000 e-scooters per operator (4 operators max)</p>
+                    <p className="text-sm italic">Contact GoActiveLB@longbeach.gov for current permit requirements.</p>
+                  </div>
+                </div>
+
+                {/* South Bay Beach Cities */}
+                <div className="mb-6 bg-slate-50 rounded-lg p-6 border-2 border-slate-200">
+                  <h3 className="text-xl font-bold text-primary mb-4">South Bay Beach Cities</h3>
+                  <p className="text-muted-foreground mb-3">Hermosa Beach, Manhattan Beach, Huntington Beach</p>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p><strong>Status:</strong> Limited or no formal shared scooter/e-bike programs</p>
+                    <p><strong>Recommended Coverage:</strong> $1,000,000+ GL per occurrence, $5,000,000 aggregate</p>
+                    <p><strong>Workers' Compensation:</strong> California statutory limits</p>
+                    <p><strong>Business License:</strong> Required for any commercial operation</p>
+                    <p className="text-sm italic">Contact individual city Community Development departments for current permit availability and requirements.</p>
+                  </div>
+                </div>
               </section>
 
               {/* Coverage Options */}
