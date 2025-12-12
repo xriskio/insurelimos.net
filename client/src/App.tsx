@@ -71,6 +71,8 @@ import MobilityCoverage from "@/pages/MobilityCoverage";
 import PublicTransitForHireCoverage from "@/pages/PublicTransitForHireCoverage";
 import PersonalDeliveryDevicesCoverage from "@/pages/PersonalDeliveryDevicesCoverage";
 import SprinterCoverage from "@/pages/SprinterCoverage";
+import RiskManagement from "@/pages/RiskManagement";
+import FleetInsurance from "@/pages/FleetInsurance";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -118,6 +120,9 @@ function Router() {
       <Route path="/coverage/public-transit-for-hire" component={PublicTransitForHireCoverage} />
       <Route path="/coverage/personal-delivery-devices" component={PersonalDeliveryDevicesCoverage} />
       <Route path="/coverage/sprinter" component={SprinterCoverage} />
+      <Route path="/services/risk-management" component={RiskManagement} />
+      <Route path="/services/fleet-insurance" component={FleetInsurance} />
+      <Route path="/services/commercial-auto" component={Services} />
       <Route path="/client" component={Home} />
       <Route path="/california-tcp-insurance" component={CaliforniaTcpInsurance} />
       <Route path="/tcp-insurance" component={CaliforniaTcpInsurance} />

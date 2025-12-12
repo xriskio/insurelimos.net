@@ -50,9 +50,9 @@ export function Header() {
     {
       title: "Additional Coverage",
       items: [
-        { label: "Workers' Compensation", href: "/quote/workers-comp" },
-        { label: "Excess Liability", href: "/quote/excess-liability" },
-        { label: "Cyber Liability", href: "/quote/cyber" },
+        { label: "Workers' Compensation", href: "/coverage/workers-comp" },
+        { label: "Excess Liability", href: "/coverage/excess-liability" },
+        { label: "Cyber Liability", href: "/coverage/cyber-liability" },
         { label: "View All Coverage", href: "/coverage" },
       ]
     }
@@ -62,9 +62,9 @@ export function Header() {
     {
       title: "Insurance Services",
       items: [
-        { label: "Commercial Auto", href: "/services" },
-        { label: "Fleet Insurance", href: "/services" },
-        { label: "Risk Management", href: "/services" },
+        { label: "Commercial Auto", href: "/services/commercial-auto" },
+        { label: "Fleet Insurance", href: "/services/fleet-insurance" },
+        { label: "Risk Management", href: "/services/risk-management" },
       ]
     },
     {
