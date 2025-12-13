@@ -9,6 +9,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import QuotePage from "@/pages/Quote";
+import QuoteSelection from "@/pages/QuoteSelection";
 import QuoteConfirmation from "@/pages/QuoteConfirmation";
 import Services from "@/pages/Services";
 import Coverage from "@/pages/Coverage";
@@ -90,7 +91,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/quote" component={QuotePage} />
+      <Route path="/quote" component={QuoteSelection} />
       <Route path="/quote/:type" component={QuotePage} />
       <Route path="/quote-confirmation" component={QuoteConfirmation} />
       
