@@ -22,6 +22,8 @@ import { FaqSchema } from "@/components/seo/FaqSchema";
 import { motorcoachFaqs } from "@/data/faqs";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
+import busExteriorImage from "@assets/J3500_night-2_1765592058762.jpg";
+import busInteriorImage from "@assets/Livery_1765592058762.jpg";
 
 export default function MotorcoachCoverage() {
   return (
@@ -90,6 +92,31 @@ export default function MotorcoachCoverage() {
                         <span className="text-sm font-medium">{item}</span>
                       </div>
                     ))}
+                  </div>
+                </div>
+              </section>
+
+              {/* Fleet Coverage Images */}
+              <section className="py-10 bg-white rounded-2xl mb-8 overflow-hidden border shadow-sm">
+                <div className="px-6">
+                  <h2 className="text-2xl font-bold text-primary mb-8 text-center">Our Fleet Coverage</h2>
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                    <div className="relative w-full md:w-1/2 bg-white rounded-xl p-4">
+                      <img 
+                        src={busExteriorImage} 
+                        alt="Luxury Charter Bus - Exterior Night View"
+                        className="w-full h-auto rounded-lg shadow-lg"
+                      />
+                      <p className="text-center text-sm text-muted-foreground mt-3">Luxury Charter Coach</p>
+                    </div>
+                    <div className="relative w-full md:w-1/2 bg-white rounded-xl p-4">
+                      <img 
+                        src={busInteriorImage} 
+                        alt="Luxury Bus Interior - Premium Seating"
+                        className="w-full h-auto rounded-lg shadow-lg"
+                      />
+                      <p className="text-center text-sm text-muted-foreground mt-3">Premium Interior</p>
+                    </div>
                   </div>
                 </div>
               </section>
