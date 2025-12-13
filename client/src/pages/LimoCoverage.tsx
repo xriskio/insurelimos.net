@@ -21,8 +21,8 @@ import {
 import { FaqSchema } from "@/components/seo/FaqSchema";
 import { limoFaqs } from "@/data/faqs";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
-import escaladeImage from "@assets/stock_images/black_cadillac_escal_01093286.jpg";
-import sprinterImage from "@assets/stock_images/black_mercedes_sprin_f8b49982.jpg";
+import escaladeImage from "@assets/image_1765591483112.png";
+import sprinterImage from "@assets/Black-van_1765591606048.png";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
@@ -79,32 +79,30 @@ export default function LimoCoverage() {
               </section>
 
               {/* Featured Vehicles Showcase */}
-              <section className="py-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl mb-8 overflow-hidden">
+              <section className="py-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl mb-8 overflow-hidden">
                 <div className="px-6">
-                  <h2 className="text-2xl font-bold text-white mb-6 text-center">Our Fleet Coverage</h2>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="relative overflow-hidden rounded-xl shadow-2xl group border border-white/10">
+                  <h2 className="text-2xl font-bold text-white mb-8 text-center">Our Fleet Coverage</h2>
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:-space-x-8">
+                    <div className="relative z-10 w-full md:w-1/2">
                       <img 
                         src={escaladeImage} 
                         alt="Black Cadillac Escalade ESV - Executive SUV" 
-                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-auto object-contain drop-shadow-2xl"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <h3 className="text-white font-bold text-xl mb-1">Cadillac Escalade ESV</h3>
-                        <p className="text-white/80 text-sm">Executive luxury SUV fleet coverage</p>
+                      <div className="text-center mt-3">
+                        <h3 className="text-white font-bold text-lg">Cadillac Escalade ESV</h3>
+                        <p className="text-white/70 text-sm">Executive luxury SUV</p>
                       </div>
                     </div>
-                    <div className="relative overflow-hidden rounded-xl shadow-2xl group border border-white/10">
+                    <div className="relative z-0 w-full md:w-1/2">
                       <img 
                         src={sprinterImage} 
                         alt="Black Mercedes Sprinter - Luxury Van" 
-                        className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-auto object-contain drop-shadow-2xl scale-x-[-1]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <h3 className="text-white font-bold text-xl mb-1">Mercedes Sprinter</h3>
-                        <p className="text-white/80 text-sm">Executive van and shuttle coverage</p>
+                      <div className="text-center mt-3">
+                        <h3 className="text-white font-bold text-lg">Mercedes Sprinter</h3>
+                        <p className="text-white/70 text-sm">Executive van and shuttle</p>
                       </div>
                     </div>
                   </div>
