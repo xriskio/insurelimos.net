@@ -185,15 +185,11 @@ const dashcamPartners = [
 const articles = [
   {
     title: "Wheelchair & Passenger Handling Best Practices for Drivers",
-    description: "This white paper was co-authored by the experts at Driverge Vehicle Innovations and Vanliner Insurance."
+    description: "Essential information for NEMT & paratransit drivers, including common incident types, securement policies, manual wheelchair handling, ramp guidance, and communication best practices."
   },
   {
     title: "Seatbelt Safety Tips for NEMT & Paratransit Operators",
     description: "Essential information on common loss types, implementing securement policies, handling best practices, and guidance for when passengers refuse securement."
-  },
-  {
-    title: "Tips to Improve Workers' Compensation Outcomes",
-    description: "You rely on your employees to perform challenging and often strenuous jobs. Your employees are the backbone of the industry."
   }
 ];
 
