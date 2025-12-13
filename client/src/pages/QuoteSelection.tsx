@@ -7,6 +7,15 @@ import { Button } from "@/components/ui/button";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 import { ChevronRight, Phone, Clock, Shield, CheckCircle2 } from "lucide-react";
 
+import limoImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
+import uberBlackImage from "@assets/stock_images/black_tesla_model_s__37cb734c.jpg";
+import taxiImage from "@assets/generated_images/modern_yellow_taxi_cab.png";
+import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
+import nemtImage from "@assets/generated_images/ford_transit_wheelchair_ramp_van.png";
+import busImage from "@assets/generated_images/modern_charter_bus.png";
+import sprinterImage from "@assets/generated_images/black_luxury_sprinter_van.png";
+import specialtyImage from "@assets/generated_images/specialty_lines_mobility_devices.png";
+
 const businessTypes = [
   {
     id: "limousine",
@@ -14,7 +23,7 @@ const businessTypes = [
     description: "Comprehensive coverage for luxury transportation services including sedans, stretch limos, and SUVs.",
     details: "Coverage for luxury sedans, Mercedes Sprinters, stretch limousines, party buses, and executive transportation. Relationship with MN-1 and other A-rated carriers.",
     href: "/quote/limousine",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=250&fit=crop"
+    image: limoImage
   },
   {
     id: "uber-black",
@@ -22,7 +31,7 @@ const businessTypes = [
     description: "Specialized TCP insurance for Uber Black and luxury rideshare drivers. Available in 18 states.",
     details: "Coverage for black sedans, luxury SUVs, and executive vehicles. Next Day DMV and DOT filings plus clearance.",
     href: "/quote/rideshare",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=250&fit=crop"
+    image: uberBlackImage
   },
   {
     id: "taxi",
@@ -30,7 +39,7 @@ const businessTypes = [
     description: "Specialized protection for taxi fleets and individual owner-operators with competitive rates.",
     details: "Coverage meeting state and municipal requirements. Hybrid policies available for drivers who operate both taxi and rideshare services.",
     href: "/quote/public-auto",
-    image: "https://images.unsplash.com/photo-1559829604-f2d7dc4f1e5c?w=400&h=250&fit=crop"
+    image: taxiImage
   },
   {
     id: "tnc",
@@ -38,7 +47,7 @@ const businessTypes = [
     description: "Tailored solutions for Transportation Network Companies like Uber/Lyft fleets and mobility services.",
     details: "Coverage for Uber, Lyft, delivery services, micro-mobility, and on-demand transportation. Period-specific protection for all operational phases.",
     href: "/quote/tnc",
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&h=250&fit=crop"
+    image: tncImage
   },
   {
     id: "nemt",
@@ -46,7 +55,7 @@ const businessTypes = [
     description: "Specialized coverage for Non-Emergency Medical Transportation vehicles and liability needs.",
     details: "Coverage for wheelchair lifts, ramps, patient loading/unloading, and medical equipment transport. Policies that meet healthcare facility contract requirements.",
     href: "/quote/nemt",
-    image: "https://images.unsplash.com/photo-1587745416684-47953f16f02f?w=400&h=250&fit=crop"
+    image: nemtImage
   },
   {
     id: "bus",
@@ -54,7 +63,7 @@ const businessTypes = [
     description: "Protection for charter buses, tour buses, and motorcoach operators of all fleet sizes.",
     details: "Coverage for school district fleets, charter operators, tour companies, and private transportation. Limits up to $5M CSL with excess available.",
     href: "/quote/public-auto",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=250&fit=crop"
+    image: busImage
   },
   {
     id: "sprinter",
@@ -62,7 +71,7 @@ const businessTypes = [
     description: "Commercial auto insurance for Sprinter vans, cargo vans, and passenger shuttle services.",
     details: "Coverage for Mercedes Sprinter Executive, luxury Sprinters, cargo vans, and passenger shuttles. Fleet and single-vehicle policies.",
     href: "/quote/limousine",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop"
+    image: sprinterImage
   },
   {
     id: "specialty",
@@ -70,7 +79,7 @@ const businessTypes = [
     description: "E-scooters, e-bikes, delivery robots, and emerging mobility services. Municipal permit compliant.",
     details: "General Liability, Auto Liability, Workers Comp, Excess Liability, Cyber Liability, and Performance Bonds. City of LA compliant.",
     href: "/quote/tnc",
-    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=250&fit=crop"
+    image: specialtyImage
   }
 ];
 
