@@ -189,7 +189,7 @@ const articles = [
   },
   {
     title: "Seatbelt Safety Tips for NEMT & Paratransit Operators",
-    description: "Through our partnership with industry leaders, we've compiled essential seatbelt safety guidelines for specialized transport."
+    description: "Essential information on common loss types, implementing securement policies, handling best practices, and guidance for when passengers refuse securement."
   },
   {
     title: "Tips to Improve Workers' Compensation Outcomes",
