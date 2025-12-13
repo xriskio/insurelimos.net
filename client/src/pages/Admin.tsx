@@ -68,7 +68,11 @@ import {
   FileEdit,
   TrendingUp,
   ChevronRight,
-  Key
+  Key,
+  BarChart3,
+  Monitor,
+  Smartphone,
+  MapPin
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -198,6 +202,32 @@ interface DashboardStats {
   newContacts: number;
   totalServiceRequests: number;
   newServiceRequests: number;
+}
+
+interface AnalyticsStats {
+  totalViews: number;
+  uniqueVisitors: number;
+  todayViews: number;
+  todayVisitors: number;
+  topPages: { page: string; views: number }[];
+  topReferrers: { referrer: string; count: number }[];
+  locations: { country: string; count: number }[];
+  devices: { device: string; count: number }[];
+}
+
+interface VisitorSession {
+  id: string;
+  sessionId: string;
+  ipAddress: string;
+  userAgent: string;
+  country: string | null;
+  city: string | null;
+  referrer: string | null;
+  firstPage: string;
+  lastPage: string;
+  pageCount: number;
+  createdAt: string;
+  lastSeenAt: string;
 }
 
 const STATUS_OPTIONS = [
@@ -334,6 +364,11 @@ export default function Admin() {
   const [generating, setGenerating] = useState(false);
   const [aiTopic, setAiTopic] = useState("");
   const [aiCategory, setAiCategory] = useState("");
+
+  // Analytics state
+  const [analyticsStats, setAnalyticsStats] = useState<AnalyticsStats | null>(null);
+  const [recentSessions, setRecentSessions] = useState<VisitorSession[]>([]);
+  const [analyticsLoading, setAnalyticsLoading] = useState(false);
 
   // News form state
   const [newsDialogOpen, setNewsDialogOpen] = useState(false);
@@ -479,6 +514,44 @@ export default function Admin() {
       fetchData();
     }
   }, [isAuthenticated]);
+
+  // Fetch analytics data
+  const fetchAnalytics = async () => {
+    setAnalyticsLoading(true);
+    try {
+      const [statsRes, sessionsRes] = await Promise.all([
+        fetch("/api/analytics/stats"),
+        fetch("/api/analytics/sessions?limit=50"),
+      ]);
+      
+      if (statsRes.status === 401) {
+        setIsAuthenticated(false);
+        return;
+      }
+      
+      const statsData = await statsRes.json();
+      const sessionsData = await sessionsRes.json();
+      
+      if (statsData.success) setAnalyticsStats(statsData.stats);
+      if (sessionsData.success) setRecentSessions(sessionsData.sessions);
+    } catch (error) {
+      console.error("Failed to fetch analytics:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load analytics data",
+        variant: "destructive",
+      });
+    } finally {
+      setAnalyticsLoading(false);
+    }
+  };
+
+  // Fetch analytics when analytics section is active
+  useEffect(() => {
+    if (isAuthenticated && activeSection === "analytics") {
+      fetchAnalytics();
+    }
+  }, [isAuthenticated, activeSection]);
 
   const updateQuoteStatus = async (id: string, status: string, notes?: string) => {
     try {
@@ -893,6 +966,7 @@ export default function Admin() {
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
     { id: "leads", label: "Leads", icon: FileText },
     { id: "support", label: "Support", icon: Headphones },
+    { id: "analytics", label: "Analytics", icon: BarChart3 },
     { id: "cms", label: "CMS", icon: FileEdit },
     { id: "blog", label: "Blog", icon: BookOpen },
     { id: "press", label: "Press", icon: Newspaper },
@@ -1432,6 +1506,275 @@ export default function Admin() {
             </Card>
           </TabsContent>
             </Tabs>
+          </div>
+        )}
+
+        {/* Analytics Section */}
+        {activeSection === "analytics" && (
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">Website Analytics</h1>
+                <p className="text-muted-foreground">Track visitor activity and page performance</p>
+              </div>
+              <Button onClick={fetchAnalytics} variant="outline" data-testid="button-refresh-analytics">
+                <RefreshCw className={`w-4 h-4 mr-2 ${analyticsLoading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+            </div>
+
+            {/* Analytics Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Total Page Views</p>
+                      <p className="text-4xl font-bold text-gray-800" data-testid="text-total-views">
+                        {analyticsStats?.totalViews || 0}
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <Eye className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Unique Visitors</p>
+                      <p className="text-4xl font-bold text-gray-800" data-testid="text-unique-visitors">
+                        {analyticsStats?.uniqueVisitors || 0}
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                      <Users className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Today's Views</p>
+                      <p className="text-4xl font-bold text-gray-800" data-testid="text-today-views">
+                        {analyticsStats?.todayViews || 0}
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                      <TrendingUp className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-white border-0 shadow-sm">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500 mb-1">Today's Visitors</p>
+                      <p className="text-4xl font-bold text-gray-800" data-testid="text-today-visitors">
+                        {analyticsStats?.todayVisitors || 0}
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                      <User className="w-6 h-6 text-white" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Top Pages and Referrers */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              <Card className="bg-white border-0 shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold">Top Pages</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {analyticsStats?.topPages && analyticsStats.topPages.length > 0 ? (
+                    <div className="space-y-3">
+                      {analyticsStats.topPages.slice(0, 10).map((page, index) => (
+                        <div key={page.page} className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="text-sm text-gray-400 w-6">{index + 1}.</span>
+                            <span className="text-sm font-medium truncate max-w-[200px]" title={page.page}>
+                              {page.page}
+                            </span>
+                          </div>
+                          <Badge variant="secondary">{page.views} views</Badge>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-center text-muted-foreground py-4">No page view data yet</p>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white border-0 shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold">Top Referrers</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {analyticsStats?.topReferrers && analyticsStats.topReferrers.length > 0 ? (
+                    <div className="space-y-3">
+                      {analyticsStats.topReferrers.slice(0, 10).map((ref, index) => (
+                        <div key={ref.referrer} className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="text-sm text-gray-400 w-6">{index + 1}.</span>
+                            <span className="text-sm font-medium truncate max-w-[200px]" title={ref.referrer}>
+                              {ref.referrer || "Direct"}
+                            </span>
+                          </div>
+                          <Badge variant="secondary">{ref.count} visits</Badge>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-center text-muted-foreground py-4">No referrer data yet</p>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Locations and Devices */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              <Card className="bg-white border-0 shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                    <MapPin className="w-5 h-5" />
+                    Visitor Locations
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {analyticsStats?.locations && analyticsStats.locations.length > 0 ? (
+                    <div className="space-y-3">
+                      {analyticsStats.locations.slice(0, 10).map((loc, index) => (
+                        <div key={loc.country} className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="text-sm text-gray-400 w-6">{index + 1}.</span>
+                            <span className="text-sm font-medium">{loc.country || "Unknown"}</span>
+                          </div>
+                          <Badge variant="outline">{loc.count} visitors</Badge>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-center text-muted-foreground py-4">No location data yet</p>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white border-0 shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                    <Monitor className="w-5 h-5" />
+                    Device Types
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {analyticsStats?.devices && analyticsStats.devices.length > 0 ? (
+                    <div className="space-y-4">
+                      {analyticsStats.devices.map((device) => {
+                        const total = analyticsStats.devices.reduce((sum, d) => sum + d.count, 0);
+                        const percentage = total > 0 ? Math.round((device.count / total) * 100) : 0;
+                        return (
+                          <div key={device.device}>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-sm font-medium flex items-center gap-2">
+                                {device.device === "Mobile" ? (
+                                  <Smartphone className="w-4 h-4" />
+                                ) : (
+                                  <Monitor className="w-4 h-4" />
+                                )}
+                                {device.device}
+                              </span>
+                              <span className="text-sm text-gray-500">{device.count} ({percentage}%)</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div
+                                className={`h-2 rounded-full ${device.device === "Mobile" ? "bg-blue-500" : "bg-green-500"}`}
+                                style={{ width: `${percentage}%` }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p className="text-center text-muted-foreground py-4">No device data yet</p>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Recent Visitors */}
+            <Card className="bg-white border-0 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-lg font-semibold">Recent Visitors</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {recentSessions.length > 0 ? (
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Time</TableHead>
+                          <TableHead>Location</TableHead>
+                          <TableHead>Pages</TableHead>
+                          <TableHead>Entry Page</TableHead>
+                          <TableHead>Referrer</TableHead>
+                          <TableHead>Device</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {recentSessions.slice(0, 20).map((session) => {
+                          const isMobile = session.userAgent?.toLowerCase().includes("mobile");
+                          return (
+                            <TableRow key={session.id} data-testid={`row-session-${session.id}`}>
+                              <TableCell className="text-sm text-muted-foreground">
+                                {format(new Date(session.createdAt), "MMM d, h:mm a")}
+                              </TableCell>
+                              <TableCell>
+                                <div className="flex items-center gap-1">
+                                  <MapPin className="w-3 h-3 text-muted-foreground" />
+                                  <span className="text-sm">
+                                    {session.city && session.country
+                                      ? `${session.city}, ${session.country}`
+                                      : session.country || "Unknown"}
+                                  </span>
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge variant="outline">{session.pageCount}</Badge>
+                              </TableCell>
+                              <TableCell className="text-sm max-w-[150px] truncate" title={session.firstPage}>
+                                {session.firstPage}
+                              </TableCell>
+                              <TableCell className="text-sm max-w-[150px] truncate" title={session.referrer || "Direct"}>
+                                {session.referrer || "Direct"}
+                              </TableCell>
+                              <TableCell>
+                                {isMobile ? (
+                                  <Smartphone className="w-4 h-4 text-blue-500" />
+                                ) : (
+                                  <Monitor className="w-4 h-4 text-green-500" />
+                                )}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </div>
+                ) : (
+                  <p className="text-center text-muted-foreground py-8">No visitor sessions recorded yet</p>
+                )}
+              </CardContent>
+            </Card>
           </div>
         )}
 
