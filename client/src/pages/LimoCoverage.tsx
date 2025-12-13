@@ -21,6 +21,8 @@ import {
 import { FaqSchema } from "@/components/seo/FaqSchema";
 import { limoFaqs } from "@/data/faqs";
 import limoHeroImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
+import escaladeImage from "@assets/image_1765591177363.png";
+import sprinterImage from "@assets/image_1765591244682.png";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
 
@@ -73,6 +75,34 @@ export default function LimoCoverage() {
                   <p className="text-lg text-muted-foreground leading-relaxed">
                     Our partnerships include Philadelphia Insurance Companies (PHLY), National Interstate Insurance, Texas Insurance Company, Berkshire Hathaway, and other A-rated carriers specializing in chauffeured transportation.
                   </p>
+                </div>
+              </section>
+
+              {/* Featured Vehicles Showcase */}
+              <section className="py-8 mb-8">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="relative overflow-hidden rounded-xl shadow-lg group">
+                    <img 
+                      src={escaladeImage} 
+                      alt="Black Cadillac Escalade ESV - Executive SUV" 
+                      className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <h3 className="text-white font-bold text-lg">Cadillac Escalade ESV</h3>
+                      <p className="text-white/80 text-sm">Executive luxury SUV fleet coverage</p>
+                    </div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-xl shadow-lg group">
+                    <img 
+                      src={sprinterImage} 
+                      alt="Black Mercedes Sprinter - Luxury Van" 
+                      className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <h3 className="text-white font-bold text-lg">Mercedes Sprinter</h3>
+                      <p className="text-white/80 text-sm">Executive van and shuttle coverage</p>
+                    </div>
+                  </div>
                 </div>
               </section>
 
