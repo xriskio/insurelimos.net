@@ -469,3 +469,65 @@ export const insertAdminUserSchema = createInsertSchema(adminUsers).omit({
 
 export type InsertAdminUser = z.infer<typeof insertAdminUserSchema>;
 export type AdminUser = typeof adminUsers.$inferSelect;
+
+// Page Views / Visitor Tracking
+export const pageViews = pgTable("page_views", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: text("session_id").notNull(),
+  ipAddress: text("ip_address"),
+  city: text("city"),
+  region: text("region"),
+  country: text("country"),
+  pagePath: text("page_path").notNull(),
+  pageTitle: text("page_title"),
+  referrer: text("referrer"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  userAgent: text("user_agent"),
+  deviceType: text("device_type"),
+  browser: text("browser"),
+  os: text("os"),
+  screenWidth: text("screen_width"),
+  screenHeight: text("screen_height"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertPageViewSchema = createInsertSchema(pageViews).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertPageView = z.infer<typeof insertPageViewSchema>;
+export type PageView = typeof pageViews.$inferSelect;
+
+// Visitor Sessions (for unique visitor tracking)
+export const visitorSessions = pgTable("visitor_sessions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: text("session_id").notNull().unique(),
+  ipAddress: text("ip_address"),
+  city: text("city"),
+  region: text("region"),
+  country: text("country"),
+  userAgent: text("user_agent"),
+  deviceType: text("device_type"),
+  browser: text("browser"),
+  os: text("os"),
+  referrer: text("referrer"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  landingPage: text("landing_page"),
+  pageCount: text("page_count").default("1"),
+  firstVisit: timestamp("first_visit").defaultNow().notNull(),
+  lastVisit: timestamp("last_visit").defaultNow().notNull(),
+});
+
+export const insertVisitorSessionSchema = createInsertSchema(visitorSessions).omit({
+  id: true,
+  firstVisit: true,
+  lastVisit: true,
+});
+
+export type InsertVisitorSession = z.infer<typeof insertVisitorSessionSchema>;
+export type VisitorSession = typeof visitorSessions.$inferSelect;
