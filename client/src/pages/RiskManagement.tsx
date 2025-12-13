@@ -185,7 +185,7 @@ const dashcamPartners = [
 const articles = [
   {
     title: "Wheelchair & Passenger Handling Best Practices for Drivers",
-    description: "This white paper was co-authored by the experts at Driverge Vehicle Innovations, National Interstate, and Vanliner Insurance."
+    description: "This white paper was co-authored by the experts at Driverge Vehicle Innovations and Vanliner Insurance."
   },
   {
     title: "Seatbelt Safety Tips for NEMT & Paratransit Operators",
