@@ -282,25 +282,6 @@ export default function RiskManagement() {
                 </div>
               </section>
 
-              {/* Prioritizing Section */}
-              <section className="mb-12 bg-slate-900 text-white rounded-xl p-8">
-                <p className="text-white/60 mb-6 text-sm font-medium uppercase tracking-wider">Prioritizing:</p>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {priorities.map((item, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
-                        <item.icon className="h-5 w-5 text-accent" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-white mb-1">{item.title}</h3>
-                        <p className="text-white/70 text-sm">{item.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-
               {/* Auto Risk Management Solutions */}
               <section className="mb-12">
                 <h2 className="text-3xl font-bold text-primary mb-4">Auto Risk Management Solutions</h2>
@@ -368,6 +349,28 @@ export default function RiskManagement() {
                 </div>
               </section>
 
+              {/* Articles and Resources */}
+              <section className="mb-12">
+                <div className="mb-6">
+                  <p className="text-accent font-bold uppercase tracking-wider text-sm">Articles and Resources</p>
+                  <p className="text-muted-foreground text-sm">Read more from our team about best practices, industry insights and relevant program information.</p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {articles.map((article, index) => (
+                    <Link key={index} href={article.href}>
+                      <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full" data-testid={`card-article-${index}`}>
+                        <CardContent className="pt-6">
+                          <h4 className="font-bold text-primary mb-2 text-sm">{article.title}</h4>
+                          <p className="text-muted-foreground text-xs mb-3">{article.description}</p>
+                          <span className="text-accent font-medium text-xs inline-flex items-center gap-1 hover:underline">
+                            Learn More <ChevronRight className="h-3 w-3" />
+                          </span>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </section>
             </div>
 
             {/* Sidebar with QuickQuoteForm */}
