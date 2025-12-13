@@ -185,11 +185,13 @@ const dashcamPartners = [
 const articles = [
   {
     title: "Wheelchair & Passenger Handling Best Practices for Drivers",
-    description: "Essential information for NEMT & paratransit drivers, including common incident types, securement policies, manual wheelchair handling, ramp guidance, and communication best practices."
+    description: "Essential information for NEMT & paratransit drivers, including common incident types, securement policies, manual wheelchair handling, ramp guidance, and communication best practices.",
+    href: "/articles/wheelchair-handling"
   },
   {
     title: "Seatbelt Safety Tips for NEMT & Paratransit Operators",
-    description: "Essential information on common loss types, implementing securement policies, handling best practices, and guidance for when passengers refuse securement."
+    description: "Essential information on common loss types, implementing securement policies, handling best practices, and guidance for when passengers refuse securement.",
+    href: "/articles/seatbelt-safety"
   }
 ];
 
@@ -374,12 +376,17 @@ export default function RiskManagement() {
                 </div>
                 <div className="grid md:grid-cols-3 gap-6">
                   {articles.map((article, index) => (
-                    <Card key={index} className="hover:shadow-lg transition-shadow">
-                      <CardContent className="pt-6">
-                        <h4 className="font-bold text-primary mb-2 text-sm">{article.title}</h4>
-                        <p className="text-muted-foreground text-xs">{article.description}</p>
-                      </CardContent>
-                    </Card>
+                    <Link key={index} href={article.href}>
+                      <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full" data-testid={`card-article-${index}`}>
+                        <CardContent className="pt-6">
+                          <h4 className="font-bold text-primary mb-2 text-sm">{article.title}</h4>
+                          <p className="text-muted-foreground text-xs mb-3">{article.description}</p>
+                          <span className="text-accent font-medium text-xs inline-flex items-center gap-1 hover:underline">
+                            Learn More <ChevronRight className="h-3 w-3" />
+                          </span>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </section>

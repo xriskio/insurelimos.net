@@ -73,6 +73,8 @@ import PersonalDeliveryDevicesCoverage from "@/pages/PersonalDeliveryDevicesCove
 import SprinterCoverage from "@/pages/SprinterCoverage";
 import RiskManagement from "@/pages/RiskManagement";
 import FleetInsurance from "@/pages/FleetInsurance";
+import WheelchairHandling from "@/pages/articles/WheelchairHandling";
+import SeatbeltSafety from "@/pages/articles/SeatbeltSafety";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -122,6 +124,8 @@ function Router() {
       <Route path="/coverage/sprinter" component={SprinterCoverage} />
       <Route path="/services/risk-management" component={RiskManagement} />
       <Route path="/services/fleet-insurance" component={FleetInsurance} />
+      <Route path="/articles/wheelchair-handling" component={WheelchairHandling} />
+      <Route path="/articles/seatbelt-safety" component={SeatbeltSafety} />
       <Route path="/services/commercial-auto" component={Services} />
       <Route path="/client" component={Home} />
       <Route path="/california-tcp-insurance" component={CaliforniaTcpInsurance} />
