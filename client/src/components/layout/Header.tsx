@@ -60,11 +60,21 @@ export function Header() {
 
   const servicesColumns: DropdownColumn[] = [
     {
-      title: "Insurance Services",
+      title: "Our Services",
       items: [
-        { label: "Commercial Auto", href: "/services/commercial-auto" },
         { label: "Fleet Insurance", href: "/services/fleet-insurance" },
         { label: "Risk Management", href: "/services/risk-management" },
+      ]
+    },
+    {
+      title: "Commercial Auto",
+      items: [
+        { label: "Limousine Insurance", href: "/coverage/limo" },
+        { label: "NEMT Insurance", href: "/coverage/nemt" },
+        { label: "TNC & Rideshare", href: "/coverage/tnc" },
+        { label: "Taxi Insurance", href: "/coverage/taxi" },
+        { label: "Motorcoach Insurance", href: "/coverage/motorcoach" },
+        { label: "School Bus Insurance", href: "/coverage/school-bus" },
       ]
     }
   ];
