@@ -531,3 +531,142 @@ export const insertVisitorSessionSchema = createInsertSchema(visitorSessions).om
 
 export type InsertVisitorSession = z.infer<typeof insertVisitorSessionSchema>;
 export type VisitorSession = typeof visitorSessions.$inferSelect;
+
+// Motorcoach / Charter Bus Quote Submissions
+export const motorcoachQuotes = pgTable("motorcoach_quotes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  referenceNumber: text("reference_number").notNull(),
+  status: text("status").default("new").notNull(),
+  notes: text("notes"),
+  
+  // Business Information
+  insuredName: text("insured_name").notNull(),
+  dba: text("dba"),
+  mailingAddress: text("mailing_address").notNull(),
+  city: text("city").notNull(),
+  state: text("state").notNull(),
+  zipCode: text("zip_code").notNull(),
+  garagingAddress: text("garaging_address"),
+  garagingCity: text("garaging_city"),
+  garagingState: text("garaging_state"),
+  garagingZip: text("garaging_zip"),
+  phone: text("phone").notNull(),
+  fax: text("fax"),
+  website: text("website"),
+  email: text("email").notNull(),
+  
+  // Contacts
+  safetySurveyContact: text("safety_survey_contact"),
+  billingContact: text("billing_contact"),
+  claimsContact: text("claims_contact"),
+  generalContact: text("general_contact"),
+  
+  // Entity Information
+  entityType: text("entity_type"),
+  federalEmployeeId: text("federal_employee_id"),
+  yearEstablished: text("year_established"),
+  
+  // Operations Type
+  operationType: text("operation_type").notNull(),
+  operationDescription: text("operation_description"),
+  
+  // Fleet Breakdown by Vehicle Class (JSON)
+  fleetBreakdown: text("fleet_breakdown"),
+  totalVehicles: text("total_vehicles"),
+  annualMileage: text("annual_mileage"),
+  annualRevenue: text("annual_revenue"),
+  
+  // Operations Details
+  frequentDestinations: text("frequent_destinations"),
+  disabledRidershipPercent: text("disabled_ridership_percent"),
+  usesTNC: boolean("uses_tnc").default(false),
+  hasOwnerOperators: boolean("has_owner_operators").default(false),
+  ownerOperatorCount: text("owner_operator_count"),
+  driver1099Count: text("driver_1099_count"),
+  usesNonOwnedVehicles: boolean("uses_non_owned_vehicles").default(false),
+  leasesVehiclesToOthers: boolean("leases_vehicles_to_others").default(false),
+  
+  // Prior Loss Experience
+  currentCarrier: text("current_carrier"),
+  priorCarriers: text("prior_carriers"),
+  policyEffectiveDate: text("policy_effective_date"),
+  liabilityLimits: text("liability_limits"),
+  deductibleOrSIR: text("deductible_or_sir"),
+  annualPremium: text("annual_premium"),
+  hasBeenCancelled: boolean("has_been_cancelled").default(false),
+  cancelExplanation: text("cancel_explanation"),
+  
+  // Safety Information
+  safetyPersonName: text("safety_person_name"),
+  safetyPersonTitle: text("safety_person_title"),
+  safetyPersonExperience: text("safety_person_experience"),
+  safetyPercentage: text("safety_percentage"),
+  newDriverOrientation: text("new_driver_orientation"),
+  hasCameras: boolean("has_cameras").default(false),
+  cameraCount: text("camera_count"),
+  cameraSystem: text("camera_system"),
+  hasTelematics: boolean("has_telematics").default(false),
+  telematicsCount: text("telematics_count"),
+  telematicsSystem: text("telematics_system"),
+  hasGPS: boolean("has_gps").default(false),
+  gpsSystem: text("gps_system"),
+  
+  // Driver Information
+  driversReplaced: text("drivers_replaced"),
+  driversAdded: text("drivers_added"),
+  driversUnionStatus: text("drivers_union_status"),
+  driverPayType: text("driver_pay_type"),
+  overnightDrivingPercent: text("overnight_driving_percent"),
+  providesWorkersComp: boolean("provides_workers_comp").default(false),
+  
+  // Maintenance Information
+  hasMaintenanceProgram: boolean("has_maintenance_program").default(false),
+  vehicleServiceProvider: text("vehicle_service_provider"),
+  mechanicCount: text("mechanic_count"),
+  servicesOtherVehicles: boolean("services_other_vehicles").default(false),
+  
+  // Equipment / Vehicles (JSON array)
+  vehicles: text("vehicles"),
+  drivers: text("drivers"),
+  
+  // Desired Coverages
+  desiredAutoLiabilityLimit: text("desired_auto_liability_limit"),
+  desiredPhysicalDamageDeductible: text("desired_physical_damage_deductible"),
+  desiredGeneralLiabilityLimit: text("desired_general_liability_limit"),
+  desiredHiredAutoLimit: text("desired_hired_auto_limit"),
+  desiredNonOwnedAutoLimit: text("desired_non_owned_auto_limit"),
+  desiredUmLimit: text("desired_um_limit"),
+  desiredUimLimit: text("desired_uim_limit"),
+  desiredMedPayLimit: text("desired_med_pay_limit"),
+  desiredPipLimit: text("desired_pip_limit"),
+  desiredGarageLiabilityLimit: text("desired_garage_liability_limit"),
+  desiredGaragekeepersLimit: text("desired_garagekeepers_limit"),
+  
+  // Filings Information
+  usdotNumber: text("usdot_number"),
+  mcNumber: text("mc_number"),
+  filingsNeeded: text("filings_needed").array(),
+  statesVehiclesGaraged: text("states_vehicles_garaged").array(),
+  
+  // Loss History
+  lossHistory: text("loss_history"),
+  
+  // Uploaded Documents
+  uploadedDocuments: text("uploaded_documents").array(),
+  
+  // Additional Notes
+  additionalInfo: text("additional_info"),
+  
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertMotorcoachQuoteSchema = createInsertSchema(motorcoachQuotes).omit({
+  id: true,
+  referenceNumber: true,
+  createdAt: true,
+  status: true,
+  notes: true,
+});
+
+export type InsertMotorcoachQuote = z.infer<typeof insertMotorcoachQuoteSchema>;
+export type MotorcoachQuote = typeof motorcoachQuotes.$inferSelect;

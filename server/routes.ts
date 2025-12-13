@@ -18,6 +18,7 @@ import {
   insertTransportQuoteSchema,
   insertAmbulanceQuoteSchema,
   insertCaptiveQuoteSchema,
+  insertMotorcoachQuoteSchema,
 } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 import { ObjectStorageService, ObjectNotFoundError } from "./objectStorage";
@@ -1187,6 +1188,56 @@ export async function registerRoutes(
       res.json({ success: true, quotes });
     } catch (error) {
       console.error("Error fetching captive quotes:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch quotes" });
+    }
+  });
+
+  // Motorcoach Quote Submission
+  app.post("/api/quotes/motorcoach", async (req, res) => {
+    try {
+      const validatedData = insertMotorcoachQuoteSchema.parse(req.body);
+      const quote = await storage.createMotorcoachQuote(validatedData);
+      
+      // Send email notifications asynchronously
+      const emailData = {
+        referenceNumber: quote.referenceNumber,
+        quoteType: "Motorcoach/Charter Bus",
+        businessName: quote.insuredName,
+        contactName: quote.generalContact || quote.insuredName,
+        contactEmail: quote.email,
+        contactPhone: quote.phone,
+        state: quote.state,
+        allFields: quote,
+      };
+      
+      Promise.all([
+        sendQuoteNotificationToAdmin(emailData),
+        sendQuoteConfirmationToCustomer(emailData),
+      ]).catch(err => console.error("Email notification error:", err));
+      
+      res.status(201).json({ success: true, quote });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          success: false, 
+          error: validationError.message 
+        });
+      }
+      console.error("Error creating motorcoach quote:", error);
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to submit quote" 
+      });
+    }
+  });
+
+  app.get("/api/quotes/motorcoach", async (req, res) => {
+    try {
+      const quotes = await storage.getAllMotorcoachQuotes();
+      res.json({ success: true, quotes });
+    } catch (error) {
+      console.error("Error fetching motorcoach quotes:", error);
       res.status(500).json({ success: false, error: "Failed to fetch quotes" });
     }
   });

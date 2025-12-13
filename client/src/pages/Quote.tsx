@@ -8,6 +8,7 @@ import { ExcessLiabilityForm } from "@/components/forms/ExcessLiabilityForm";
 import { CyberLiabilityForm } from "@/components/forms/CyberLiabilityForm";
 import { AmbulanceForm } from "@/components/forms/AmbulanceForm";
 import { CaptiveForm } from "@/components/forms/CaptiveForm";
+import { MotorcoachForm } from "@/components/forms/MotorcoachForm";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +27,7 @@ const COVERAGE_TYPES = [
   { value: "tnc", label: "TNC" },
   { value: "nemt", label: "NEMT" },
   { value: "public-auto", label: "Public Auto" },
+  { value: "motorcoach", label: "Motorcoach/Charter Bus" },
   { value: "workers-comp", label: "Workers Comp" },
   { value: "excess-liability", label: "Excess Liability" },
   { value: "cyber-liability", label: "Cyber Liability" },
@@ -103,6 +105,16 @@ export default function QuotePage() {
               <p className="text-muted-foreground">Alternative risk solutions for larger fleets seeking greater control and cost savings.</p>
             </div>
             <CaptiveForm />
+          </div>
+        );
+      case "motorcoach":
+        return (
+          <div>
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-2">Motorcoach & Charter Bus Insurance</h2>
+              <p className="text-muted-foreground">Comprehensive coverage for charter buses, school buses, transit operations, and tour companies.</p>
+            </div>
+            <MotorcoachForm />
           </div>
         );
       default:

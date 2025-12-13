@@ -35,6 +35,8 @@ import {
   type InsertPageView,
   type VisitorSession,
   type InsertVisitorSession,
+  type MotorcoachQuote,
+  type InsertMotorcoachQuote,
   limoQuotes,
   tncQuotes,
   nemtQuotes,
@@ -53,6 +55,7 @@ import {
   adminUsers,
   pageViews,
   visitorSessions,
+  motorcoachQuotes,
 } from "@shared/schema";
 import { db } from "./db";
 import { desc, eq, sql } from "drizzle-orm";
@@ -149,6 +152,10 @@ export interface IStorage {
   updateAdminUser(id: string, data: Partial<InsertAdminUser>): Promise<AdminUser | null>;
   deleteAdminUser(id: string): Promise<boolean>;
   updateAdminUserLastLogin(id: string): Promise<void>;
+
+  // Motorcoach Quotes
+  createMotorcoachQuote(quote: InsertMotorcoachQuote): Promise<MotorcoachQuote>;
+  getAllMotorcoachQuotes(): Promise<MotorcoachQuote[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -560,6 +567,26 @@ export class DatabaseStorage implements IStorage {
       topLocations: topLocations.map(l => ({ country: l.country || 'Unknown', count: Number(l.count) })),
       deviceBreakdown: deviceBreakdown.map(d => ({ deviceType: d.deviceType || 'Unknown', count: Number(d.count) })),
     };
+  }
+
+  // Motorcoach Quotes
+  private generateMotorcoachReferenceNumber(): string {
+    const timestamp = Date.now().toString(36).toUpperCase();
+    const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return `IL-MCH-${timestamp}${random}`;
+  }
+
+  async createMotorcoachQuote(quote: InsertMotorcoachQuote): Promise<MotorcoachQuote> {
+    const referenceNumber = this.generateMotorcoachReferenceNumber();
+    const [result] = await db.insert(motorcoachQuotes).values({
+      ...quote,
+      referenceNumber,
+    }).returning();
+    return result;
+  }
+
+  async getAllMotorcoachQuotes(): Promise<MotorcoachQuote[]> {
+    return db.select().from(motorcoachQuotes).orderBy(desc(motorcoachQuotes.createdAt));
   }
 }
 
