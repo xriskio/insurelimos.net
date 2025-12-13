@@ -22,8 +22,8 @@ import { FaqSchema } from "@/components/seo/FaqSchema";
 import { motorcoachFaqs } from "@/data/faqs";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 import { CoverageOptionsSection } from "@/components/sections/CoverageOptionsSection";
-import busExteriorImage from "@assets/J3500_night-2_1765592058762.jpg";
-import busInteriorImage from "@assets/Livery_1765592058762.jpg";
+import busExteriorImage from "@assets/J3500_night-2_1765592301213.jpg";
+import busInteriorImage from "@assets/Livery_1765592301214.jpg";
 
 export default function MotorcoachCoverage() {
   return (
