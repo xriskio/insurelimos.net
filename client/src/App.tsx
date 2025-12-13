@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SkipLink } from "@/components/accessibility/SkipLink";
 import { CookieConsent } from "@/components/CookieConsent";
+import { PageTracker } from "@/components/PageTracker";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import QuotePage from "@/pages/Quote";
@@ -187,6 +188,7 @@ function App() {
       <TooltipProvider>
         <SkipLink />
         <ScrollToTop />
+        <PageTracker />
         <Toaster />
         <Router />
         <CookieConsent />
