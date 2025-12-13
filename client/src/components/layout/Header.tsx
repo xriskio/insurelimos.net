@@ -71,29 +71,15 @@ export function Header() {
 
   const quotesColumns: DropdownColumn[] = [
     {
-      title: "Commercial Auto",
+      title: "Special Programs",
       items: [
-        { label: "Limousine Quote", href: "/quote/limo" },
-        { label: "Taxi Quote", href: "/quote/taxi" },
-        { label: "TNC / Rideshare Quote", href: "/quote/tnc" },
-        { label: "NEMT Quote", href: "/quote/nemt" },
-      ]
-    },
-    {
-      title: "Specialty Vehicles",
-      items: [
-        { label: "Bus & Motorcoach Quote", href: "/quote/transport" },
-        { label: "School Bus Quote", href: "/quote/transport" },
-        { label: "Sprinter & Van Quote", href: "/quote/transport" },
-      ]
-    },
-    {
-      title: "Additional Coverage",
-      items: [
-        { label: "Workers' Comp Quote", href: "/quote/workers-comp" },
-        { label: "Excess Liability Quote", href: "/quote/excess-liability" },
-        { label: "Cyber Liability Quote", href: "/quote/cyber-liability" },
-        { label: "All Quote Types", href: "/quote" },
+        { label: "Uber Black Insurance", href: "/quote/tnc" },
+        { label: "NEMT Insurance", href: "/quote/nemt" },
+        { label: "Limousine Insurance", href: "/quote/limo" },
+        { label: "Motorcoach Insurance", href: "/quote/transport" },
+        { label: "Taxi Insurance", href: "/quote/taxi" },
+        { label: "School Bus Insurance", href: "/quote/transport" },
+        { label: "TNC Insurance", href: "/quote/tnc" },
       ]
     }
   ];
