@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { QuickQuoteForm } from "@/components/forms/QuickQuoteForm";
 import { ChevronRight, Phone, Clock, Shield, CheckCircle2 } from "lucide-react";
 
-import limoImage from "@assets/stock_images/luxury_black_limousi_30942c50.jpg";
-import uberBlackImage from "@assets/stock_images/black_tesla_model_s__37cb734c.jpg";
+import limoImage from "@assets/image_1765589181745.png";
+import uberBlackImage from "@assets/image_1765589227005.png";
 import taxiImage from "@assets/generated_images/modern_yellow_taxi_cab.png";
 import tncImage from "@assets/generated_images/modern_rideshare_tesla.png";
 import nemtImage from "@assets/generated_images/ford_transit_wheelchair_ramp_van.png";
