@@ -368,28 +368,6 @@ export default function RiskManagement() {
                 </div>
               </section>
 
-              {/* Articles and Resources */}
-              <section className="mb-12">
-                <div className="mb-6">
-                  <p className="text-accent font-bold uppercase tracking-wider text-sm">Articles and Resources</p>
-                  <p className="text-muted-foreground text-sm">Read more from our team about best practices, industry insights and relevant program information.</p>
-                </div>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {articles.map((article, index) => (
-                    <Link key={index} href={article.href}>
-                      <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full" data-testid={`card-article-${index}`}>
-                        <CardContent className="pt-6">
-                          <h4 className="font-bold text-primary mb-2 text-sm">{article.title}</h4>
-                          <p className="text-muted-foreground text-xs mb-3">{article.description}</p>
-                          <span className="text-accent font-medium text-xs inline-flex items-center gap-1 hover:underline">
-                            Learn More <ChevronRight className="h-3 w-3" />
-                          </span>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
-              </section>
             </div>
 
             {/* Sidebar with QuickQuoteForm */}
