@@ -79,30 +79,30 @@ export default function LimoCoverage() {
               </section>
 
               {/* Featured Vehicles Showcase */}
-              <section className="py-10 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl mb-8 overflow-hidden">
+              <section className="py-10 bg-white rounded-2xl mb-8 overflow-hidden border shadow-sm">
                 <div className="px-6">
-                  <h2 className="text-2xl font-bold text-white mb-8 text-center">Our Fleet Coverage</h2>
-                  <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:-space-x-8">
-                    <div className="relative z-10 w-full md:w-1/2">
+                  <h2 className="text-2xl font-bold text-primary mb-8 text-center">Our Fleet Coverage</h2>
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                    <div className="relative w-full md:w-1/2 bg-white rounded-xl p-4">
                       <img 
                         src={escaladeImage} 
                         alt="Black Cadillac Escalade ESV - Executive SUV" 
-                        className="w-full h-auto object-contain drop-shadow-2xl"
+                        className="w-full h-auto object-contain"
                       />
                       <div className="text-center mt-3">
-                        <h3 className="text-white font-bold text-lg">Cadillac Escalade ESV</h3>
-                        <p className="text-white/70 text-sm">Executive luxury SUV</p>
+                        <h3 className="text-foreground font-bold text-lg">Cadillac Escalade ESV</h3>
+                        <p className="text-muted-foreground text-sm">Executive luxury SUV</p>
                       </div>
                     </div>
-                    <div className="relative z-0 w-full md:w-1/2">
+                    <div className="relative w-full md:w-1/2 bg-white rounded-xl p-4">
                       <img 
                         src={sprinterImage} 
                         alt="Black Mercedes Sprinter - Luxury Van" 
-                        className="w-full h-auto object-contain drop-shadow-2xl scale-x-[-1]"
+                        className="w-full h-auto object-contain scale-x-[-1]"
                       />
                       <div className="text-center mt-3">
-                        <h3 className="text-white font-bold text-lg">Mercedes Sprinter</h3>
-                        <p className="text-white/70 text-sm">Executive van and shuttle</p>
+                        <h3 className="text-foreground font-bold text-lg">Mercedes Sprinter</h3>
+                        <p className="text-muted-foreground text-sm">Executive van and shuttle</p>
                       </div>
                     </div>
                   </div>
