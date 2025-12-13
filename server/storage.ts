@@ -31,6 +31,10 @@ import {
   type InsertCaptiveQuote,
   type AdminUser,
   type InsertAdminUser,
+  type PageView,
+  type InsertPageView,
+  type VisitorSession,
+  type InsertVisitorSession,
   limoQuotes,
   tncQuotes,
   nemtQuotes,
@@ -47,6 +51,8 @@ import {
   ambulanceQuotes,
   captiveQuotes,
   adminUsers,
+  pageViews,
+  visitorSessions,
 } from "@shared/schema";
 import { db } from "./db";
 import { desc, eq, sql } from "drizzle-orm";
@@ -453,6 +459,107 @@ export class DatabaseStorage implements IStorage {
 
   async updateAdminUserLastLogin(id: string): Promise<void> {
     await db.update(adminUsers).set({ lastLogin: new Date() }).where(eq(adminUsers.id, id));
+  }
+
+  // Page Views & Analytics
+  async createPageView(view: InsertPageView): Promise<PageView> {
+    const [result] = await db.insert(pageViews).values(view).returning();
+    return result;
+  }
+
+  async getPageViews(limit = 100): Promise<PageView[]> {
+    return db.select().from(pageViews).orderBy(desc(pageViews.createdAt)).limit(limit);
+  }
+
+  async getPageViewsByDateRange(startDate: Date, endDate: Date): Promise<PageView[]> {
+    return db.select().from(pageViews)
+      .where(sql`${pageViews.createdAt} >= ${startDate} AND ${pageViews.createdAt} <= ${endDate}`)
+      .orderBy(desc(pageViews.createdAt));
+  }
+
+  async createOrUpdateVisitorSession(sessionData: InsertVisitorSession): Promise<VisitorSession> {
+    const existing = await db.select().from(visitorSessions)
+      .where(eq(visitorSessions.sessionId, sessionData.sessionId));
+    
+    if (existing.length > 0) {
+      const currentPageCount = parseInt(existing[0].pageCount || "1");
+      const [result] = await db.update(visitorSessions)
+        .set({ 
+          lastVisit: new Date(),
+          pageCount: String(currentPageCount + 1)
+        })
+        .where(eq(visitorSessions.sessionId, sessionData.sessionId))
+        .returning();
+      return result;
+    } else {
+      const [result] = await db.insert(visitorSessions).values(sessionData).returning();
+      return result;
+    }
+  }
+
+  async getVisitorSessions(limit = 100): Promise<VisitorSession[]> {
+    return db.select().from(visitorSessions).orderBy(desc(visitorSessions.lastVisit)).limit(limit);
+  }
+
+  async getVisitorSessionsByDateRange(startDate: Date, endDate: Date): Promise<VisitorSession[]> {
+    return db.select().from(visitorSessions)
+      .where(sql`${visitorSessions.firstVisit} >= ${startDate} AND ${visitorSessions.firstVisit} <= ${endDate}`)
+      .orderBy(desc(visitorSessions.lastVisit));
+  }
+
+  async getAnalyticsStats(): Promise<{
+    totalPageViews: number;
+    uniqueVisitors: number;
+    todayPageViews: number;
+    todayVisitors: number;
+    topPages: { pagePath: string; count: number }[];
+    topReferrers: { referrer: string; count: number }[];
+    topLocations: { country: string; count: number }[];
+    deviceBreakdown: { deviceType: string; count: number }[];
+  }> {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const [totalViews] = await db.select({ count: sql<number>`count(*)` }).from(pageViews);
+    const [uniqueVisitors] = await db.select({ count: sql<number>`count(distinct ${pageViews.sessionId})` }).from(pageViews);
+    const [todayViews] = await db.select({ count: sql<number>`count(*)` }).from(pageViews)
+      .where(sql`${pageViews.createdAt} >= ${today}`);
+    const [todayUnique] = await db.select({ count: sql<number>`count(distinct ${pageViews.sessionId})` }).from(pageViews)
+      .where(sql`${pageViews.createdAt} >= ${today}`);
+
+    const topPages = await db.select({
+      pagePath: pageViews.pagePath,
+      count: sql<number>`count(*)`
+    }).from(pageViews).groupBy(pageViews.pagePath).orderBy(sql`count(*) desc`).limit(10);
+
+    const topReferrers = await db.select({
+      referrer: pageViews.referrer,
+      count: sql<number>`count(*)`
+    }).from(pageViews).where(sql`${pageViews.referrer} is not null AND ${pageViews.referrer} != ''`)
+      .groupBy(pageViews.referrer).orderBy(sql`count(*) desc`).limit(10);
+
+    const topLocations = await db.select({
+      country: pageViews.country,
+      count: sql<number>`count(*)`
+    }).from(pageViews).where(sql`${pageViews.country} is not null`)
+      .groupBy(pageViews.country).orderBy(sql`count(*) desc`).limit(10);
+
+    const deviceBreakdown = await db.select({
+      deviceType: pageViews.deviceType,
+      count: sql<number>`count(*)`
+    }).from(pageViews).where(sql`${pageViews.deviceType} is not null`)
+      .groupBy(pageViews.deviceType).orderBy(sql`count(*) desc`);
+
+    return {
+      totalPageViews: Number(totalViews?.count || 0),
+      uniqueVisitors: Number(uniqueVisitors?.count || 0),
+      todayPageViews: Number(todayViews?.count || 0),
+      todayVisitors: Number(todayUnique?.count || 0),
+      topPages: topPages.map(p => ({ pagePath: p.pagePath, count: Number(p.count) })),
+      topReferrers: topReferrers.map(r => ({ referrer: r.referrer || '', count: Number(r.count) })),
+      topLocations: topLocations.map(l => ({ country: l.country || 'Unknown', count: Number(l.count) })),
+      deviceBreakdown: deviceBreakdown.map(d => ({ deviceType: d.deviceType || 'Unknown', count: Number(d.count) })),
+    };
   }
 }
 

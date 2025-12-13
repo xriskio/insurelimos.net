@@ -1597,5 +1597,96 @@ export async function registerRoutes(
     }
   });
 
+  // ============== ANALYTICS / VISITOR TRACKING ==============
+  
+  // Track page view (public - called from frontend)
+  app.post("/api/track", async (req, res) => {
+    try {
+      const { sessionId, pagePath, pageTitle, referrer, utmSource, utmMedium, utmCampaign, 
+              userAgent, deviceType, browser, os, screenWidth, screenHeight } = req.body;
+      
+      if (!sessionId || !pagePath) {
+        return res.status(400).json({ success: false, error: "Session ID and page path required" });
+      }
+
+      // Get IP address from request
+      const ipAddress = req.headers['x-forwarded-for']?.toString().split(',')[0] || 
+                       req.socket.remoteAddress || 'unknown';
+
+      // Create page view
+      await storage.createPageView({
+        sessionId,
+        ipAddress,
+        pagePath,
+        pageTitle,
+        referrer,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        userAgent,
+        deviceType,
+        browser,
+        os,
+        screenWidth,
+        screenHeight,
+      });
+
+      // Update or create visitor session
+      await storage.createOrUpdateVisitorSession({
+        sessionId,
+        ipAddress,
+        userAgent,
+        deviceType,
+        browser,
+        os,
+        referrer,
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        landingPage: pagePath,
+      });
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error tracking page view:", error);
+      res.status(500).json({ success: false, error: "Failed to track" });
+    }
+  });
+
+  // Get analytics stats (protected)
+  app.get("/api/analytics/stats", requireAdminAuth, async (req, res) => {
+    try {
+      const stats = await storage.getAnalyticsStats();
+      res.json({ success: true, stats });
+    } catch (error) {
+      console.error("Error fetching analytics stats:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch analytics" });
+    }
+  });
+
+  // Get recent page views (protected)
+  app.get("/api/analytics/pageviews", requireAdminAuth, async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit as string) || 100;
+      const pageViews = await storage.getPageViews(limit);
+      res.json({ success: true, pageViews });
+    } catch (error) {
+      console.error("Error fetching page views:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch page views" });
+    }
+  });
+
+  // Get visitor sessions (protected)
+  app.get("/api/analytics/sessions", requireAdminAuth, async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit as string) || 100;
+      const sessions = await storage.getVisitorSessions(limit);
+      res.json({ success: true, sessions });
+    } catch (error) {
+      console.error("Error fetching sessions:", error);
+      res.status(500).json({ success: false, error: "Failed to fetch sessions" });
+    }
+  });
+
   return httpServer;
 }
