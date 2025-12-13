@@ -73,27 +73,27 @@ export function Footer() {
             <h4 className="font-bold text-lg mb-6" id="footer-programs">Insurance Programs</h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/services/limo" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                <Link href="/coverage/limo" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
                   Limousine Insurance
                 </Link>
               </li>
               <li>
-                <Link href="/services/taxi" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                <Link href="/coverage/taxi" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
                   Taxi Insurance
                 </Link>
               </li>
               <li>
-                <Link href="/services/tnc" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                <Link href="/coverage/tnc" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
                   TNC & Mobility
                 </Link>
               </li>
               <li>
-                <Link href="/services/nemt" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                <Link href="/coverage/nemt" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
                   NEMT Insurance
                 </Link>
               </li>
               <li>
-                <Link href="/services/bus" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
+                <Link href="/coverage/motorcoach" className="text-primary-foreground/70 hover:text-white transition-colors cursor-pointer">
                   Bus & Motorcoach
                 </Link>
               </li>
