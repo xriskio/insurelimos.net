@@ -145,6 +145,10 @@ export async function submitAllSitePages(): Promise<{ indexNow: boolean; bing: b
     "/lp/school-bus",
     "/lp/tnc",
     "/services/commercial-auto/uber-black-california",
+    "/services/risk-management",
+    "/services/fleet-insurance",
+    "/articles/wheelchair-handling",
+    "/articles/seatbelt-safety",
     "/privacy",
     "/terms",
   ];
