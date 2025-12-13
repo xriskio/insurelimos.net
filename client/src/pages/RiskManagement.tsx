@@ -69,23 +69,6 @@ const priorities = [
   }
 ];
 
-const pillars = [
-  {
-    title: "Accountability",
-    description: "Transparent standards, verified compliance, and consistent enforcement.",
-    icon: Eye
-  },
-  {
-    title: "Education",
-    description: "Continuous training in defensive driving, customer care, and security.",
-    icon: BookOpen
-  },
-  {
-    title: "Community",
-    description: "Partnering with associations, insurers, and regulators to raise the bar.",
-    icon: Handshake
-  }
-];
 
 const riskSolutions = [
   {
@@ -319,23 +302,6 @@ export default function RiskManagement() {
                 </div>
               </section>
 
-              {/* Three Pillars */}
-              <section className="mb-12">
-                <h2 className="text-3xl font-bold text-primary mb-8 text-center">Our Three Pillars</h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                  {pillars.map((pillar, index) => (
-                    <Card key={index} className="border-t-4 border-t-accent">
-                      <CardContent className="pt-6">
-                        <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-4">
-                          <pillar.icon className="h-6 w-6 text-accent" />
-                        </div>
-                        <h3 className="font-bold text-primary text-lg mb-2">{pillar.title}</h3>
-                        <p className="text-muted-foreground text-sm">{pillar.description}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </section>
 
               {/* Auto Risk Management Solutions */}
               <section className="mb-12">
