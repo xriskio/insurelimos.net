@@ -28,6 +28,10 @@ const formSchema = z.object({
   contactName: z.string().min(2, "Contact name is required"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number is required"),
+  streetAddress: z.string().min(3, "Street address is required"),
+  city: z.string().min(2, "City is required"),
+  state: z.string().min(2, "State is required"),
+  zipCode: z.string().min(5, "ZIP code is required"),
   annualRevenue: z.string().min(1, "Annual revenue is required"),
   numberOfRecords: z.string().min(1, "Number of records is required"),
   hasCurrentCoverage: z.boolean().default(false),
@@ -47,6 +51,10 @@ export function CyberLiabilityForm() {
       contactName: "",
       email: "",
       phone: "",
+      streetAddress: "",
+      city: "",
+      state: "",
+      zipCode: "",
       annualRevenue: "",
       numberOfRecords: "",
       hasCurrentCoverage: false,
@@ -138,6 +146,58 @@ export function CyberLiabilityForm() {
                     <FormLabel>Phone</FormLabel>
                     <FormControl>
                       <Input placeholder="(555) 123-4567" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="streetAddress"
+                render={({ field }) => (
+                  <FormItem className="md:col-span-2">
+                    <FormLabel>Street Address</FormLabel>
+                    <FormControl>
+                      <Input placeholder="123 Main St" {...field} data-testid="input-streetAddress" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Los Angeles" {...field} data-testid="input-city" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="state"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>State</FormLabel>
+                    <FormControl>
+                      <Input placeholder="CA" {...field} data-testid="input-state" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="zipCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>ZIP Code</FormLabel>
+                    <FormControl>
+                      <Input placeholder="90015" {...field} data-testid="input-zipCode" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

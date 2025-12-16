@@ -14,7 +14,10 @@ const quickQuoteSchema = z.object({
   contactName: z.string().min(2, "Your name is required"),
   phone: z.string().min(10, "Valid phone number required"),
   email: z.string().email("Valid email required"),
+  streetAddress: z.string().min(3, "Street address is required"),
+  city: z.string().min(2, "City is required"),
   state: z.string().min(1, "Please select a state"),
+  zipCode: z.string().min(5, "ZIP code is required"),
   vehicleCount: z.string().min(1, "Please select vehicle count"),
   insuranceType: z.string().min(1, "Please select insurance type"),
 });
@@ -60,7 +63,7 @@ export function QuickQuoteForm() {
           phone: data.phone,
           company: data.businessName,
           subject: `Quick Quote Request - ${data.insuranceType}`,
-          message: `State: ${data.state}\nVehicles: ${data.vehicleCount}\nInsurance Type: ${data.insuranceType}`,
+          message: `Address: ${data.streetAddress}, ${data.city}, ${data.state} ${data.zipCode}\nVehicles: ${data.vehicleCount}\nInsurance Type: ${data.insuranceType}`,
         }),
       });
       
@@ -136,6 +139,40 @@ export function QuickQuoteForm() {
             className={errors.email ? "border-red-500" : ""}
             data-testid="input-quick-email"
           />
+        </div>
+
+        <div>
+          <Label htmlFor="streetAddress">Street Address *</Label>
+          <Input
+            id="streetAddress"
+            placeholder="123 Main St"
+            {...register("streetAddress")}
+            className={errors.streetAddress ? "border-red-500" : ""}
+            data-testid="input-quick-street"
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="city">City *</Label>
+            <Input
+              id="city"
+              placeholder="Los Angeles"
+              {...register("city")}
+              className={errors.city ? "border-red-500" : ""}
+              data-testid="input-quick-city"
+            />
+          </div>
+          <div>
+            <Label htmlFor="zipCode">ZIP Code *</Label>
+            <Input
+              id="zipCode"
+              placeholder="90001"
+              {...register("zipCode")}
+              className={errors.zipCode ? "border-red-500" : ""}
+              data-testid="input-quick-zip"
+            />
+          </div>
         </div>
         
         <div className="grid grid-cols-2 gap-4">
