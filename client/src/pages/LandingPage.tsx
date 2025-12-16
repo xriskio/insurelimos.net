@@ -46,7 +46,10 @@ const formSchema = z.object({
   contactName: z.string().min(2, "Your name is required"),
   email: z.string().email("Valid email is required"),
   phone: z.string().min(10, "Phone number is required"),
+  streetAddress: z.string().min(3, "Street address is required"),
+  city: z.string().min(2, "City is required"),
   state: z.string().min(2, "State is required"),
+  zipCode: z.string().min(5, "ZIP code is required"),
   vehicleCount: z.string().min(1, "Please select vehicle count"),
   insuranceType: z.string().min(1, "Please select insurance type"),
 });
@@ -138,7 +141,10 @@ export default function LandingPage() {
       contactName: "",
       email: "",
       phone: "",
+      streetAddress: "",
+      city: "",
       state: "",
+      zipCode: "",
       vehicleCount: "",
       insuranceType: "",
     },
@@ -156,10 +162,10 @@ export default function LandingPage() {
           contactName: data.contactName,
           contactEmail: data.email,
           contactPhone: data.phone,
+          mailingAddress: data.streetAddress,
+          city: data.city,
           state: data.state,
-          mailingAddress: "From Landing Page",
-          city: "TBD",
-          zipCode: "00000",
+          zipCode: data.zipCode,
           additionalInfo: `Vehicle Count: ${data.vehicleCount} - Lead from advertising landing page`,
         }),
       });
@@ -483,6 +489,64 @@ export default function LandingPage() {
                     </FormItem>
                   )}
                 />
+
+                <FormField
+                  control={form.control}
+                  name="streetAddress"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Street Address *</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="123 Main St" 
+                          data-testid="landing-street"
+                          className="h-12"
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>City *</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Los Angeles" 
+                            data-testid="landing-city"
+                            className="h-12"
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="zipCode"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>ZIP Code *</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="90001" 
+                            data-testid="landing-zip"
+                            className="h-12"
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
