@@ -371,10 +371,19 @@ export function MotorcoachForm() {
   };
 
   const nextStep = async () => {
-    const isValid = await validateStep(currentStep);
-    if (isValid && currentStep < 4) {
-      setCurrentStep(currentStep + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+      const isValid = await validateStep(currentStep);
+      if (isValid && currentStep < 4) {
+        setCurrentStep(currentStep + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } catch (error) {
+      console.error('Form validation error:', error);
+      toast({
+        title: "Please check your form",
+        description: "Some required fields may be missing or incorrect.",
+        variant: "destructive",
+      });
     }
   };
 
