@@ -181,8 +181,10 @@ export function AmbulanceForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      const { streetAddress, city, state, zipCode, ...rest } = values;
       const submitData = {
-        ...values,
+        ...rest,
+        address: `${streetAddress}, ${city}, ${state} ${zipCode}`,
         vehicles: JSON.stringify(values.vehicles),
         drivers: JSON.stringify(values.drivers),
         uploadedDocuments: uploadedFiles.length > 0 ? uploadedFiles : null,

@@ -64,12 +64,17 @@ export function WorkersCompForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      const { streetAddress, city, state, zipCode, ...rest } = values;
+      const submitData = {
+        ...rest,
+        address: `${streetAddress}, ${city}, ${state} ${zipCode}`,
+      };
       const response = await fetch('/api/quotes/workers-comp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(submitData),
       });
 
       const data = await response.json();
