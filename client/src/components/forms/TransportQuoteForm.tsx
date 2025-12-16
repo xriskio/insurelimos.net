@@ -722,7 +722,7 @@ export function TransportQuoteForm({ quoteType, title, description }: TransportQ
               </div>
 
               <div>
-                <FormLabel className="text-base">Filings Needed</FormLabel>
+                <label className="text-base font-medium">Filings Needed</label>
                 <p className="text-sm text-muted-foreground mb-3">Select all applicable filings</p>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {["CA PUC", "DOT", "TNC", "MCS-90", "BMC-91", "ICC"].map((filing) => (
@@ -1031,7 +1031,7 @@ export function TransportQuoteForm({ quoteType, title, description }: TransportQ
                 />
 
                 <div>
-                  <FormLabel className="text-base">Upload Documents</FormLabel>
+                  <label className="text-base font-medium">Upload Documents</label>
                   <p className="text-sm text-muted-foreground mb-3">
                     Upload loss runs, vehicle schedules, driver lists, or other supporting documents
                   </p>
